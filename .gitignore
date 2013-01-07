@@ -1,0 +1,41 @@
+#binaries
+*.class
+*.dll
+*.exe
+*.jar
+*.o
+*.so
+
+#logs
+*.log
+
+#unnecessary backups
+*.bak*
+*.back*
+
+#synchronization files
+*.sync*
+
+#partial files
+*.part*
+
+#temporary files
+*.tmp*
+*.temp*
+*.cache*
+
+#TeX litter
+*.aux
+*.toc
+*.idx
+*.ind
+*.ilg
+
+#Windows litter
+[Dd]esktop.ini
+[Tt]humbs.db
+
+#OS X litter
+.DS_Store*
+
+/bin/

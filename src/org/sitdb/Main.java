@@ -18,7 +18,7 @@ public final class Main {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
-		catch (Exception exception) {}
+		catch (final Exception exception) {}
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {

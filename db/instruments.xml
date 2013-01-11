@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instruments>
+	<instrument id="1">
+		<name>Fender American Standard Stratocaster Electric Guitar</name>
+		<strings>
+			<string>
+				<density>0.2</density>
+				<length>64.8</length>
+			</string>
+			<!--...-->
+		</strings>
+	</instrument>
+	<instrument id="2">
+		<name>Fender American Standard Jazz Bass</name>
+		<strings>
+			<!--...-->
+		</strings>
+	</instrument>
+</instruments>

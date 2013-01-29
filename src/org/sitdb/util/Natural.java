@@ -1,4 +1,4 @@
-package org.sitdb;
+package org.sitdb.util;
 
 import java.io.Serializable;
 

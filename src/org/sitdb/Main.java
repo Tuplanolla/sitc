@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.UIManager;
 
+import org.sitdb.view.MainFrame;
+
 /**
 Sets the look and feel and creates the main window.
 

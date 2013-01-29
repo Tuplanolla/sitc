@@ -1,4 +1,4 @@
-package org.sitdb;
+package org.sitdb.util;
 
 /**
 This interface outlines basic symbolic arithmetic methods and is implemented by
@@ -17,35 +17,35 @@ The methods never throw exceptions, but instead overflow to
 public interface Scalar<Type extends Scalar<Type>> {
 	/**
 	Returns whether this number is indeterminate.
-	
+
 	@return True if this number is <i>NaN</i> and false otherwise.
 	**/
 	public boolean isNaN();
 
 	/**
 	Returns whether this number is infinite.
-	
+
 	@return True if this number is <i>&plusmn;&infin;</i> and false otherwise.
 	**/
 	public boolean isInfinite();
 
 	/**
 	Returns the opposite of this number <i>x</i>.
-	
+
 	@return The additive inverse <i>-x</i>.
 	**/
 	public Type opposite();
 
 	/**
 	Returns the reciprocal of this number.
-	
+
 	@return The multiplicative inverse <i><sup>1</sup>&frasl;<sub>x</sub></i>.
 	**/
 	public Type reciprocal();
 
 	/**
 	Returns the addition of this number <i>x</i> and another number <i>y</i>.
-	
+
 	@param number The number <i>y</i>.
 	@return The sum <i>x+y</i>.
 	**/
@@ -53,7 +53,7 @@ public interface Scalar<Type extends Scalar<Type>> {
 
 	/**
 	Returns the subtraction of this number <i>x</i> and another number <i>y</i>.
-	
+
 	@param number The number <i>y</i>.
 	@return The sum <i>x-y</i>.
 	**/
@@ -61,7 +61,7 @@ public interface Scalar<Type extends Scalar<Type>> {
 
 	/**
 	Returns the multiplication of this number <i>x</i> and another number <i>y</i>.
-	
+
 	@param number The number <i>y</i>.
 	@return The product <i>xy</i>.
 	**/
@@ -69,7 +69,7 @@ public interface Scalar<Type extends Scalar<Type>> {
 
 	/**
 	Returns the division of this number <i>x</i> and another number <i>y</i>.
-	
+
 	@param number The number <i>y</i>.
 	@return The product <i><sup>x</sup>&frasl;<sub>y</sub></i>.
 	**/
@@ -77,21 +77,21 @@ public interface Scalar<Type extends Scalar<Type>> {
 
 	/**
 	Returns the absolute value of this number <i>x</i>.
-	
+
 	@return The number <i>|x|</i>.
 	**/
 	public Type abs();
 
 	/**
 	Returns the square root of this number <i>x</i>.
-	
+
 	@return The number <i>&radic;<span style="text-decoration: overline;">x</span></i>.
 	**/
 	public Type sqrt();
 
 	/**
 	Returns the square of this number <i>x</i>.
-	
+
 	@return The number <i>x<sup>2</sup></i>.
 	**/
 	public Type square();
@@ -105,42 +105,42 @@ public interface Scalar<Type extends Scalar<Type>> {
 
 	/**
 	Returns the value of this number as a long integer primitive.
-	
+
 	@return The converted number.
 	**/
 	public long longValue();
 
 	/**
 	Returns the value of this number as an integer primitive.
-	
+
 	@return The converted number.
 	**/
 	public int intValue();
 
 	/**
 	Returns the value of this number as a short integer primitive.
-	
+
 	@return The converted number.
 	**/
 	public short shortValue();
 
 	/**
 	Returns the value of this number as a byte primitive.
-	
+
 	@return The converted number.
 	**/
 	public byte byteValue();
 
 	/**
 	Returns the value of this number as a double precision floating-point primitive.
-	
+
 	@return The converted number.
 	**/
 	public double doubleValue();
 
 	/**
 	Returns the value of this number as a floating-point primitive.
-	
+
 	@return The converted number.
 	**/
 	public float floatValue();

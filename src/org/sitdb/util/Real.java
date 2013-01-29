@@ -1,4 +1,4 @@
-package org.sitdb;
+package org.sitdb.util;
 
 import java.io.Serializable;
 
@@ -367,7 +367,7 @@ public class Real implements Scalar<Real>, Comparable<Real>, Serializable {
 	@Override
 	public int hashCode() {
 		final long result = Double.doubleToRawLongBits(value);
-		return (int )(result ^ (result >>> 32));
+		return (int )(result ^ result >>> 32);
 	}
 
 	/**

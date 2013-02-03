@@ -422,7 +422,6 @@ public class Rational implements Scalar<Rational>, Comparable<Rational>, Seriali
 	@return <i>-1</i> if the this rational is smaller than the other rational, <i>+1</i> if this rational is bigger than the other rational and <i>0</i> otherwise.
 	@throws NullPointerException If the other rational is <code>null</code>.
 	@throws ArithmeticException If either of the rationals is indeterminate.
-	@keywords comparator
 	**/
 	@Override
 	public int compareTo(final Rational rational) {

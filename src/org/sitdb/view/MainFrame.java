@@ -6,11 +6,9 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -98,12 +96,8 @@ public final class MainFrame extends JFrame {
 
 		{
 			final JButton testButton = new JButton("Test");
-			final Dimension preferredSize = testButton.getPreferredSize();
-			final int minimumSize = Math.min(preferredSize.width, preferredSize.height);
-			final Image image = Assets.RIGHT_ICON.getImage().getScaledInstance(minimumSize, minimumSize, Image.SCALE_SMOOTH);
-			testButton.setIcon(new ImageIcon(image));
-			testButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-			testButton.setHorizontalTextPosition(SwingConstants.CENTER);
+			//testButton.setPreferredSize(new Dimension(128, 128));
+			Helpers.setScaledIcon(testButton, Resources.RIGHT_ICON, SwingConstants.HORIZONTAL);
 			instrumentFilePanel.setLayout(new FlowLayout());
 			instrumentFilePanel.add(testButton);
 		}
@@ -184,6 +178,7 @@ public final class MainFrame extends JFrame {
 		{
 			setMinimumSize(new Dimension(800, 600));
 		}
+		setIconImages(Resources.ICON_IMAGES);
 		pack();
 		setMinimumSize(getSize());
 		setSize(new Dimension(800, 600));

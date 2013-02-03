@@ -23,8 +23,8 @@ public final class Resources {
 		}
 		ICON_IMAGES = Collections.unmodifiableList(images);
 	}
-	public static final ImageIcon RIGHT_ICON,
-			LEFT_ICON,
+	public static final ImageIcon LEFT_ICON,
+			RIGHT_ICON,
 			UP_ICON,
 			DOWN_ICON,
 			LEFT_RIGHT_ICON,
@@ -32,26 +32,28 @@ public final class Resources {
 			PLUS_ICON,
 			MINUS_ICON,
 			PLAY_ICON,
-			CALCULATE_ICON;
+			CALCULATE_ICON,
+			SEARCH_ICON,
+			BROWSE_ICON;
 	static {
 		URL url;
 
-		url = Resources.class.getResource("/right.png");
-		RIGHT_ICON = url != null ? new ImageIcon(url) : null;
-
-		url = Resources.class.getResource("/left.png");
+		url = Resources.class.getResource("/arrow_left.png");
 		LEFT_ICON = url != null ? new ImageIcon(url) : null;
 
-		url = Resources.class.getResource("/up.png");
+		url = Resources.class.getResource("/arrow_right.png");
+		RIGHT_ICON = url != null ? new ImageIcon(url) : null;
+
+		url = Resources.class.getResource("/arrow_up.png");
 		UP_ICON = url != null ? new ImageIcon(url) : null;
 
-		url = Resources.class.getResource("/down.png");
+		url = Resources.class.getResource("/arrow_down.png");
 		DOWN_ICON = url != null ? new ImageIcon(url) : null;
 
-		url = Resources.class.getResource("/leftright.png");
+		url = Resources.class.getResource("/arrow_left_right.png");
 		LEFT_RIGHT_ICON = url != null ? new ImageIcon(url) : null;
 
-		url = Resources.class.getResource("/updown.png");
+		url = Resources.class.getResource("/arrow_up_down.png");
 		UP_DOWN_ICON = url != null ? new ImageIcon(url) : null;
 
 		url = Resources.class.getResource("/plus.png");
@@ -60,11 +62,17 @@ public final class Resources {
 		url = Resources.class.getResource("/minus.png");
 		MINUS_ICON = url != null ? new ImageIcon(url) : null;
 
-		url = Resources.class.getResource("/play.png");
+		url = Resources.class.getResource("/triangle_right.png");
 		PLAY_ICON = url != null ? new ImageIcon(url) : null;
 
-		url = Resources.class.getResource("/calculate.png");
+		url = Resources.class.getResource("/gears.png");
 		CALCULATE_ICON = url != null ? new ImageIcon(url) : null;
+
+		url = Resources.class.getResource("/magnifier.png");
+		SEARCH_ICON = url != null ? new ImageIcon(url) : null;
+
+		url = Resources.class.getResource("/folder.png");
+		BROWSE_ICON = url != null ? new ImageIcon(url) : null;
 	}
 
 	private Resources() {

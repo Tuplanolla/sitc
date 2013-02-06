@@ -42,6 +42,8 @@ The classes have the following structural hierarchy:
 **/
 public final class Main {
 	/**
+	Creates the main window.
+
 	@param arguments The command line arguments.
 	**/
 	public static void main(final String[] arguments) {

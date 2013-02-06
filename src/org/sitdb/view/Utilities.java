@@ -1,23 +1,31 @@
 package org.sitdb.view;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
+Provides additional Swing utilities.
+
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Helpers {
-	private Helpers() {
+public final class Utilities {
+	private Utilities() {
 		throw new InstantiationError();
 	}
 
 	/**
-	Sets the icon of a button,
+	Sets the button's default icon,
 	 scales it to the button's preferred size and
 	 aligns it to the given orientation.
 
@@ -47,6 +55,37 @@ Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), Swin
 			break;
 		default:
 			throw new IllegalArgumentException();
+		}
+	}
+
+	/**
+	Gets all the components in a container recursively.
+
+	@param container The container.
+	@return The components.
+	**/
+	public static List<Component> getAllComponents(final Container container) {
+		final Component[] components = container.getComponents();
+		final List<Component> result = new ArrayList<Component>();
+		for (final Component component : components) {
+			result.add(component);
+			if (component instanceof Container) {
+				result.addAll(getAllComponents((Container )component));
+			}
+		}
+		return result;
+	}
+
+	/**
+	Invokes all the change listeners in a container recursively.
+
+	@param container The container.
+	**/
+	public static void allStatesChanged(final Container container) {
+		for (final Component component : getAllComponents(container)) {
+			for (final ChangeListener listener : component.getListeners(ChangeListener.class)) {
+				listener.stateChanged(new ChangeEvent(component));
+			}
 		}
 	}
 }

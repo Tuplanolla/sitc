@@ -34,12 +34,41 @@ import javax.swing.event.ChangeListener;
 /**
 Represents the main window.
 
+The window has the following structural hierarchy:
+
+<pre>
++-----------------------------------------------------------------------+
+| MainFrame                                                             |
++-----------------------------------------------------------------------+
+| MenuBar                                                               |
+|-----------------------------------------------------------------------|
+| SidePanel           | MainPanel                                       |
+| +-----------------+ | +----------+----------+----------+              |
+| | ManagementPanel | | |          |          |          |              |
+| |                 | | |          +----------+----------+------------+ |
+| |                 | | | +-----------------------------------------+ | |
+| +-----------------+ | | | EditorPanel                             | | |
+| +-----------------+ | | | +-----------------+ +-----------------+ | | |
+| | ManagementPanel | | | | | EditorSidePanel | | EditorMainPanel | | | |
+| |                 | | | | |                 | |                 | | | |
+| |                 | | | | |                 | |                 | | | |
+| +-----------------+ | | | |                 | |                 | | | |
+| +-----------------+ | | | |                 | |                 | | | |
+| | ManagementPanel | | | | |                 | |                 | | | |
+| |                 | | | | +-----------------+ +-----------------+ | | |
+| |                 | | | +-----------------------------------------+ | |
+| +-----------------+ | +---------------------------------------------+ |
+|-----------------------------------------------------------------------|
+| StatusBar                                                             |
++-----------------------------------------------------------------------+
+</pre>
+
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class MainFrame extends JFrame {
+public final class MainFrame extends JFrame {//TODO move the listeners into the controller
 	private static final long serialVersionUID = 1l;
 
-	JProgressBar progressBar;
+	private JProgressBar progressBar;
 
 	/**
 	Creates a panel that's used to

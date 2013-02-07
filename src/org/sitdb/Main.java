@@ -1,42 +1,11 @@
 package org.sitdb;
 
-import java.awt.EventQueue;
-
-import javax.swing.UIManager;
-
-import org.sitdb.view.MainFrame;
+import org.sitdb.controller.DefaultController;
+import org.sitdb.model.DefaultModel;
+import org.sitdb.view.DefaultView;
 
 /**
 Sets the look and feel and creates the main window.
-
-The classes have the following structural hierarchy:
-
-<pre>
-+---------------------------------------------------------------------+
-| MainFrame                                                           |
-+---------------------------------------------------------------------+
-| MenuBar                                                             |
-|---------------------------------------------------------------------|
-| SidePanel         | MainPanel                                       |
-| +---------------+ | +----------+----------+----------+              |
-| | DatabasePanel | | | TabPanel |          |          |              |
-| |               | | |          +----------+----------+------------+ |
-| |               | | | +-----------------------------------------+ | |
-| +---------------+ | | | EditorPanel                             | | |
-| +---------------+ | | | +-----------------+ +-----------------+ | | |
-| | DatabasePanel | | | | | EditorSidePanel | | EditorMainPanel | | | |
-| |               | | | | |                 | |                 | | | |
-| |               | | | | |                 | |                 | | | |
-| +---------------+ | | | |                 | |                 | | | |
-| +---------------+ | | | |                 | |                 | | | |
-| | DatabasePanel | | | | |                 | |                 | | | |
-| |               | | | | +-----------------+ +-----------------+ | | |
-| |               | | | +-----------------------------------------+ | |
-| +---------------+ | +---------------------------------------------+ |
-|---------------------------------------------------------------------|
-| StatusBar                                                           |
-+---------------------------------------------------------------------+
-</pre>
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
@@ -47,22 +16,11 @@ public final class Main {
 	@param arguments The command line arguments.
 	**/
 	public static void main(final String[] arguments) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		}
-		catch (final Exception exception) {
-			exception.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					new MainFrame();
-				}
-				catch (final Exception exception) {
-					exception.printStackTrace();
-				}
-			}
-		});
+		final Model model = new DefaultModel(arguments);
+		final View view = new DefaultView(model);
+		final Controller controller = new DefaultController(model, view);
+		model.activate();
+		controller.activate();
+		view.activate();
 	}
 }

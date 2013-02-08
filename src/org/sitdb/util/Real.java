@@ -3,10 +3,11 @@ package org.sitdb.util;
 import java.io.Serializable;
 
 /**
-This class represents an inexact immutable transfinite real.
+Represents an inexact immutable transfinite real.
 The name <code>Real</code> was chosen solely to
  avoid confusion with <code>java.lang.Float</code> and
  doesn't imply that the numbers are exact.
+
 @see Scalar
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

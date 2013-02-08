@@ -5,7 +5,7 @@ import org.sitdb.model.DefaultModel;
 import org.sitdb.view.DefaultView;
 
 /**
-Sets the look and feel and creates the main window.
+Serves as the main entry point.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

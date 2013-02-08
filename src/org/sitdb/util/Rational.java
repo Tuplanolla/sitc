@@ -3,7 +3,7 @@ package org.sitdb.util;
 import java.io.Serializable;
 
 /**
-This class represents an exact immutable transfinite rational.
+Represents an exact immutable transfinite rational.
 
 @see Scalar
 @author Sampsa "Tuplanolla" Kiiskinen

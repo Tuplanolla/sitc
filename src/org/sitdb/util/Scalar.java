@@ -1,9 +1,10 @@
 package org.sitdb.util;
 
 /**
-This interface outlines basic symbolic arithmetic methods and is implemented by
+Outlines basic symbolic arithmetic that is implemented by
  all numeric classes and
  their containers.
+
 The methods never throw exceptions, but instead overflow to
  infinite and
  indeterminate

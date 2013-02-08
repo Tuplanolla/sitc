@@ -17,7 +17,7 @@ public final class DefaultView extends View {
 	}
 
 	/**
-	Creates the main window.
+	Sets the look and feel and creates the main window.
 	**/
 	@Override
 	public void activate() {

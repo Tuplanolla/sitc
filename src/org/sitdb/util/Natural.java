@@ -3,10 +3,12 @@ package org.sitdb.util;
 import java.io.Serializable;
 
 /**
-This class represents an exact immutable transfinite integer.
+Represents an exact immutable transfinite integer.
+
 The name <code>Natural</code> was chosen solely to
  avoid confusion with <code>java.lang.Integer</code> and
  doesn't imply that the numbers can't be negative.
+
 @see Scalar
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

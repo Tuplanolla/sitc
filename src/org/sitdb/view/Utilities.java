@@ -36,13 +36,20 @@ Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), Swin
 	@param button The button.
 	@param icon The icon.
 	@param orientation Either <code>SwingConstants.HORIZONTAL</code> or <code>SwingConstants.VERTICAL</code>.
+	@param scale The scale of the icon.
 	**/
-	public static void setScaledIcon(final AbstractButton button, final ImageIcon icon, final int orientation) {
-		final Dimension size = button.getPreferredSize();
+	public static void setScaledIcon(final AbstractButton button, final ImageIcon icon, final int orientation, final double scale) {
+		final Dimension preferredSize = button.getPreferredSize();
 		final Insets margin = button.getMargin();
-		final int minimumSize = Math.min(size.width - margin.left - margin.right,
-				size.height - margin.top - margin.bottom);
-		final Image image = icon.getImage().getScaledInstance(minimumSize, minimumSize, Image.SCALE_SMOOTH);
+		final int minimumSize = Math.min(preferredSize.width - margin.left - margin.right,
+				preferredSize.height - margin.top - margin.bottom);
+		int size = minimumSize;
+		final double actualScale = Math.abs(scale);
+		if (actualScale != 1) {
+			final double scaledSize = actualScale * size;
+			if (scaledSize <= Integer.MAX_VALUE) size = (int )scaledSize;
+		}
+		final Image image = icon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH);
 		button.setIcon(new ImageIcon(image));
 		switch (orientation) {
 		case SwingConstants.HORIZONTAL:
@@ -56,6 +63,23 @@ Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), Swin
 		default:
 			throw new IllegalArgumentException();
 		}
+	}
+
+	/**
+	Sets the button's default icon,
+	 scales it to the button's preferred size and
+	 aligns it to the given orientation.
+
+	<pre>
+Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), SwingConstants.VERTICAL);
+</pre>
+
+	@param button The button.
+	@param icon The icon.
+	@param orientation Either <code>SwingConstants.HORIZONTAL</code> or <code>SwingConstants.VERTICAL</code>.
+	**/
+	public static void setScaledIcon(final AbstractButton button, final ImageIcon icon, final int orientation) {
+		setScaledIcon(button, icon, orientation, 1);
 	}
 
 	/**

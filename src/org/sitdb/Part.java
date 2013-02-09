@@ -9,5 +9,8 @@ Outlines the activities of a part that either contains
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public interface Part {
+	/**
+	Activates this part.
+	**/
 	public void activate();
 }

@@ -26,7 +26,7 @@ public final class Utilities {
 
 	/**
 	Sets the button's default icon,
-	 scales it to the button's preferred size and
+	 scales it to a given factor of the button's preferred size and
 	 aligns it to the given orientation.
 
 	<pre>

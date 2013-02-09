@@ -74,9 +74,9 @@ public final class ManagerPanel extends JPanel {
 		managerPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
 		managerPanel.add(filePanel, BorderLayout.NORTH);
 		managerPanel.add(somePanel, BorderLayout.CENTER);
-	
+
 		titledBorder = new TitledBorder((String )null);
-	
+
 		setBorder(titledBorder);
 		add(managerPanel, BorderLayout.CENTER);
 	}

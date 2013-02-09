@@ -9,12 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
-Is an alternative to the moving <code>ExtendedInterfacePanel</code>.
+Is an alternative to the dynamic <code>ExtendedInterfacePanel</code>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class FixedExtendedInterfacePanel extends JPanel {
-	private static final long serialVersionUID = 6930879354977115881l;
+public final class StaticExtendedInterfacePanel extends JPanel {
+	private static final long serialVersionUID = 1l;
 
 	private final JButton useButton,
 			discardButton;
@@ -26,7 +26,7 @@ public final class FixedExtendedInterfacePanel extends JPanel {
 	/**
 	Constructs a new panel.
 	**/
-	public FixedExtendedInterfacePanel() {
+	public StaticExtendedInterfacePanel() {
 		super(new GridBagLayout());
 
 		useButton = new JButton("Use Instrument");

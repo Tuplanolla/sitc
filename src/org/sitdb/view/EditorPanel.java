@@ -1,11 +1,8 @@
 package org.sitdb.view;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -18,21 +15,15 @@ Represents a panel that's used to
 The panel has the following structural hierarchy:
 
 <pre>
-+------------------------------------------+
-| EditorPanel<SideType, ContentType>       |
-| +--------------+ +---------------------+ |
-| | JPanel       | | JPanel              | |
-| |              | | +-----------------+ | |
-| |              | | | JPanel          | | |
-| |              | | | +-------------+ | | |
-| | +----------+ | | | | ContentType | | | |
-| | | SideType | | | | +-------------+ | | |
-| | +----------+ | | +-----------------+ | |
-| |              | | +-----------------+ | |
-| |              | | | JPanel          | | |
-| |              | | +-----------------+ | |
-| +--------------+ +---------------------+ |
-+------------------------------------------+
++--------------------------------------+
+| EditorPanel<SideType, ContentType>   |
+| +--------------+ +-----------------+ |
+| | JPanel       | | JPanel          | |
+| | +----------+ | | +-------------+ | |
+| | | SideType | | | | ContentType | | |
+| | +----------+ | | +-------------+ | |
+| +--------------+ +-----------------+ |
++--------------------------------------+
 </pre>
 
 @param <SideType> The type of the side panel.
@@ -44,8 +35,6 @@ public final class EditorPanel<SideType extends JPanel, ContentType extends JPan
 
 	private final JPanel sidePanelContainer;
 	private SideType sidePanel;
-	private final JButton importButton,
-			exportButton;
 	private final JPanel contentPanelContainer;
 	private ContentType contentPanel;
 	private final TitledBorder titledBorder;
@@ -58,32 +47,13 @@ public final class EditorPanel<SideType extends JPanel, ContentType extends JPan
 
 		sidePanelContainer = new JPanel(new BorderLayout());
 
-		importButton = new JButton("Import");
-		Utilities.setScaledIcon(importButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
-
-		exportButton = new JButton("Export");
-		Utilities.setScaledIcon(exportButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
-
 		contentPanelContainer = new JPanel(new BorderLayout());
-
-		final JPanel portPanel = new JPanel(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		portPanel.add(importButton);
-		portPanel.add(exportButton);
-
-		final JPanel mainPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		mainPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		mainPanel.add(contentPanelContainer, BorderLayout.CENTER);
-		mainPanel.add(portPanel, BorderLayout.SOUTH);
 
 		titledBorder = new TitledBorder((String )null);
 
-		final JPanel titledMainPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		titledMainPanel.setBorder(titledBorder);
-		titledMainPanel.add(mainPanel, BorderLayout.CENTER);
-
 		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
 		add(sidePanelContainer, BorderLayout.WEST);
-		add(titledMainPanel, BorderLayout.CENTER);
+		add(contentPanelContainer, BorderLayout.CENTER);
 	}
 
 	/**
@@ -100,20 +70,6 @@ public final class EditorPanel<SideType extends JPanel, ContentType extends JPan
 		sidePanelContainer.removeAll();
 		sidePanelContainer.add(sidePanel, BorderLayout.CENTER);
 		this.sidePanel = sidePanel;
-	}
-
-	/**
-	@return The import button.
-	**/
-	public JButton getImportButton() {
-		return importButton;
-	}
-
-	/**
-	@return The export button.
-	**/
-	public JButton getExportButton() {
-		return exportButton;
 	}
 
 	/**

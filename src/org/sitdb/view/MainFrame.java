@@ -88,18 +88,6 @@ public final class MainFrame extends JFrame {
 				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change applier goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
-		mainPanel.getInstrumentEditorPanel().getImportButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor importer goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentEditorPanel().getExportButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor exporter goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
 
 		menuPanel.getExitMenuItem().addActionListener(new ActionListener() {
 			@Override

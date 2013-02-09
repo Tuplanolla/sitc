@@ -75,21 +75,30 @@ public final class MainPanel extends JSplitPane {
 
 		final InterfacePanel instrumentInterfacePanel = new InterfacePanel();
 
+		final InstrumentEditorPanel instrumentEditor = new InstrumentEditorPanel();
+
 		instrumentEditorPanel = new EditorPanel<InterfacePanel, InstrumentEditorPanel>();
 		instrumentEditorPanel.setTitle("Instrument");
 		instrumentEditorPanel.setSidePanel(instrumentInterfacePanel);
+		instrumentEditorPanel.setContentPanel(instrumentEditor);
 
 		final InterfacePanel tuningInterfacePanel = new InterfacePanel();
+
+		final TuningEditorPanel tuningEditor = new TuningEditorPanel();
 
 		tuningEditorPanel = new EditorPanel<InterfacePanel, TuningEditorPanel>();
 		tuningEditorPanel.setTitle("Tuning");
 		tuningEditorPanel.setSidePanel(tuningInterfacePanel);
+		tuningEditorPanel.setContentPanel(tuningEditor);
 
 		final ExtendedInterfacePanel transitionInterfacePanel = new ExtendedInterfacePanel();
+
+		final TransitionEditorPanel transitionEditor = new TransitionEditorPanel();
 
 		transitionEditorPanel = new EditorPanel<ExtendedInterfacePanel, TransitionEditorPanel>();
 		transitionEditorPanel.setTitle("Transition");
 		transitionEditorPanel.setSidePanel(transitionInterfacePanel);
+		transitionEditorPanel.setContentPanel(transitionEditor);
 
 		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.addTab("Instrument Editor", null, instrumentEditorPanel);

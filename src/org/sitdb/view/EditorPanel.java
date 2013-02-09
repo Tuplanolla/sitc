@@ -1,10 +1,7 @@
 package org.sitdb.view;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -18,16 +15,39 @@ Represents a panel that's used to
  edit a local copy of the data and
  eventually export the data.
 
+The panel has the following structural hierarchy:
+
+<pre>
++------------------------------------------+
+| EditorPanel<SideType, ContentType>       |
+| +--------------+ +---------------------+ |
+| | JPanel       | | JPanel              | |
+| |              | | +-----------------+ | |
+| |              | | | JPanel          | | |
+| |              | | | +-------------+ | | |
+| | +----------+ | | | | ContentType | | | |
+| | | SideType | | | | +-------------+ | | |
+| | +----------+ | | +-----------------+ | |
+| |              | | +-----------------+ | |
+| |              | | | JPanel          | | |
+| |              | | +-----------------+ | |
+| +--------------+ +---------------------+ |
++------------------------------------------+
+</pre>
+
+@param <SideType> The type of the side panel.
+@param <ContentType> The type of the main panel.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class EditorPanel extends JPanel {
+public final class EditorPanel<SideType extends JPanel, ContentType extends JPanel> extends JPanel {
 	private static final long serialVersionUID = 1584690058857036971l;
 
-	private final JButton revertButton,
-			applyButton;
+	private final JPanel sidePanelContainer;
+	private SideType sidePanel;
 	private final JButton importButton,
 			exportButton;
-	private final JPanel contentPanel;
+	private final JPanel contentPanelContainer;
+	private ContentType contentPanel;
 	private final TitledBorder titledBorder;
 
 	/**
@@ -36,39 +56,15 @@ public final class EditorPanel extends JPanel {
 	public EditorPanel() {
 		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
-		revertButton = new JButton("Revert");
-		Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.ICON_SCALE);
-
-		applyButton = new JButton("Apply");
-		Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.ICON_SCALE);
-
-		final GridBagConstraints revertButtonConstraints = new GridBagConstraints();
-		revertButtonConstraints.gridx = 0;
-		revertButtonConstraints.gridy = 0;
-		revertButtonConstraints.weightx = 1;
-		revertButtonConstraints.weighty = 0;
-		revertButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
-		revertButtonConstraints.insets = new Insets(0, 0, Constants.MEDIUM_INSET / 2, 0);
-
-		final GridBagConstraints applyButtonConstraints = new GridBagConstraints();
-		applyButtonConstraints.gridx = 0;
-		applyButtonConstraints.gridy = 1;
-		applyButtonConstraints.weightx = 1;
-		applyButtonConstraints.weighty = 0;
-		applyButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
-		applyButtonConstraints.insets = new Insets(Constants.MEDIUM_INSET / 2, 0, 0, 0);
-
-		final JPanel sidePanel = new JPanel(new GridBagLayout());
-		sidePanel.add(revertButton, revertButtonConstraints);
-		sidePanel.add(applyButton, applyButtonConstraints);
-
-		contentPanel = new JPanel();
+		sidePanelContainer = new JPanel(new BorderLayout());
 
 		importButton = new JButton("Import");
-		Utilities.setScaledIcon(importButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
+		Utilities.setScaledIcon(importButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 		exportButton = new JButton("Export");
-		Utilities.setScaledIcon(exportButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
+		Utilities.setScaledIcon(exportButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+
+		contentPanelContainer = new JPanel(new BorderLayout());
 
 		final JPanel portPanel = new JPanel(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		portPanel.add(importButton);
@@ -76,7 +72,7 @@ public final class EditorPanel extends JPanel {
 
 		final JPanel mainPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		mainPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		mainPanel.add(contentPanel, BorderLayout.CENTER);
+		mainPanel.add(contentPanelContainer, BorderLayout.CENTER);
 		mainPanel.add(portPanel, BorderLayout.SOUTH);
 
 		titledBorder = new TitledBorder((String )null);
@@ -86,22 +82,24 @@ public final class EditorPanel extends JPanel {
 		titledMainPanel.add(mainPanel, BorderLayout.CENTER);
 
 		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		add(sidePanel, BorderLayout.WEST);
+		add(sidePanelContainer, BorderLayout.WEST);
 		add(titledMainPanel, BorderLayout.CENTER);
 	}
 
 	/**
-	@return The revert button.
+	@return The side panel.
 	**/
-	public JButton getRevertButton() {
-		return revertButton;
+	public SideType getSidePanel() {
+		return sidePanel;
 	}
 
 	/**
-	@return The apply button.
+	@param sidePanel The new side panel.
 	**/
-	public JButton getApplyButton() {
-		return applyButton;
+	public void setSidePanel(final SideType sidePanel) {
+		sidePanelContainer.removeAll();
+		sidePanelContainer.add(sidePanel, BorderLayout.CENTER);
+		this.sidePanel = sidePanel;
 	}
 
 	/**
@@ -121,8 +119,17 @@ public final class EditorPanel extends JPanel {
 	/**
 	@return The content panel.
 	**/
-	public JPanel getContentPanel() {
+	public ContentType getContentPanel() {
 		return contentPanel;
+	}
+
+	/**
+	@param contentPanel The new content panel.
+	**/
+	public void setContentPanel(final ContentType contentPanel) {
+		contentPanelContainer.removeAll();
+		contentPanelContainer.add(contentPanel, BorderLayout.CENTER);
+		this.contentPanel = contentPanel;
 	}
 
 	/**

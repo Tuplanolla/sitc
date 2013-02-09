@@ -21,8 +21,6 @@ Represents a panel that's used to manage a local copy of data.
 public final class ListPanel extends JPanel {
 	private static final long serialVersionUID = 1363814333182518609l;
 
-	private final JButton loadButton,
-			saveButton;
 	private final JTextField searchTextField;
 	private final JButton searchButton;
 	private final JList<String> list;//TODO <org.sitdb.model.*>
@@ -36,20 +34,10 @@ public final class ListPanel extends JPanel {
 	public ListPanel() {
 		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
-		loadButton = new JButton("Load");
-		Utilities.setScaledIcon(loadButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
-
-		saveButton = new JButton("Save");
-		Utilities.setScaledIcon(saveButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
-
-		final JPanel interfacePanel = new JPanel(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		interfacePanel.add(loadButton);
-		interfacePanel.add(saveButton);
-
 		searchTextField = new JTextField();
 
 		searchButton = new JButton("Search");
-		Utilities.setScaledIcon(searchButton, Resources.SEARCH_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
+		Utilities.setScaledIcon(searchButton, Resources.SEARCH_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 		final JPanel searchPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		searchPanel.add(searchTextField, BorderLayout.CENTER);
@@ -65,10 +53,10 @@ public final class ListPanel extends JPanel {
 		list.setBorder(new JTextField().getBorder());//TODO test
 
 		newButton = new JButton("New");
-		Utilities.setScaledIcon(newButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
+		Utilities.setScaledIcon(newButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 		deleteButton = new JButton("Delete");
-		Utilities.setScaledIcon(deleteButton, Resources.MINUS_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
+		Utilities.setScaledIcon(deleteButton, Resources.MINUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 		final JPanel existencePanel = new JPanel(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		existencePanel.add(newButton);
@@ -80,28 +68,10 @@ public final class ListPanel extends JPanel {
 		listPanel.add(list, BorderLayout.CENTER);
 		listPanel.add(existencePanel, BorderLayout.SOUTH);
 
-		titledBorder = new TitledBorder("List");
+		titledBorder = new TitledBorder((String )null);
 
-		final JPanel titledListPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		titledListPanel.setBorder(titledBorder);
-		titledListPanel.add(listPanel, BorderLayout.CENTER);
-
-		add(interfacePanel, BorderLayout.NORTH);
-		add(titledListPanel, BorderLayout.CENTER);
-	}
-
-	/**
-	@return The load button.
-	**/
-	public JButton getLoadButton() {
-		return loadButton;
-	}
-
-	/**
-	@return The save button.
-	**/
-	public JButton getSaveButton() {
-		return saveButton;
+		setBorder(titledBorder);
+		add(listPanel, BorderLayout.CENTER);
 	}
 
 	/**

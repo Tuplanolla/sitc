@@ -13,19 +13,36 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
-Represents a panel that does something.
+Represents a panel that combines manager panels with editor panels.
+
+The panel has the following structural hierarchy:
+
+<pre>
++----------------------------------------------------------------+
+| MainPanel        |                                             |
+| +--------------+ | +-------------+-------------+-------------+ |
+| | ManagerPanel | | | EditorPanel | EditorPanel | EditorPanel | |
+| +--------------+ | |             +-------------+-------------+ |
+| +--------------+ | |                                         | |
+| | ManagerPanel | | |                                         | |
+| +--------------+ | |                                         | |
+| +--------------+ | |                                         | |
+| | ManagerPanel | | |                                         | |
+| +--------------+ | +-----------------------------------------+ |
++----------------------------------------------------------------+
+</pre>
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class MainPanel extends JSplitPane {
 	private static final long serialVersionUID = 7394003596145374355l;
 
-	private final ManagerPanel instrumentManagerPanel,
-			tuningManagerPanel,
-			transitionManagerPanel;
-	private final EditorPanel instrumentEditorPanel,
-			tuningEditorPanel,
-			transitionEditorPanel;
+	private final ManagerPanel instrumentManagerPanel;
+	private final ManagerPanel tuningManagerPanel;
+	private final ManagerPanel transitionManagerPanel;
+	private final EditorPanel<InterfacePanel, InstrumentEditorPanel> instrumentEditorPanel;
+	private final EditorPanel<InterfacePanel, TuningEditorPanel> tuningEditorPanel;
+	private final EditorPanel<ExtendedInterfacePanel, TransitionEditorPanel> transitionEditorPanel;
 
 	/**
 	Constructs a new panel.
@@ -39,22 +56,40 @@ public final class MainPanel extends JSplitPane {
 		instrumentManagerPanel.getListPanel().setTitle("Instrument List");
 
 		tuningManagerPanel = new ManagerPanel();
+		tuningManagerPanel.setTitle("Tunings");
+		tuningManagerPanel.getFilePanel().setTitle("Tuning File");
+		tuningManagerPanel.getListPanel().setTitle("Tuning List");
 
 		transitionManagerPanel = new ManagerPanel();
+		transitionManagerPanel.setTitle("Transitions");
+		transitionManagerPanel.getFilePanel().setTitle("Transition File");
+		transitionManagerPanel.getListPanel().setTitle("Transition List");
 
 		final GridLayout sidePanelLayout = new GridLayout(3, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET);
+
 		final JPanel sidePanel = new JPanel(sidePanelLayout);
 		sidePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
 		sidePanel.add(instrumentManagerPanel);
 		sidePanel.add(tuningManagerPanel);
 		sidePanel.add(transitionManagerPanel);
 
-		instrumentEditorPanel = new EditorPanel();
+		final InterfacePanel instrumentInterfacePanel = new InterfacePanel();
+
+		instrumentEditorPanel = new EditorPanel<InterfacePanel, InstrumentEditorPanel>();
 		instrumentEditorPanel.setTitle("Instrument");
+		instrumentEditorPanel.setSidePanel(instrumentInterfacePanel);
 
-		tuningEditorPanel = new EditorPanel();
+		final InterfacePanel tuningInterfacePanel = new InterfacePanel();
 
-		transitionEditorPanel = new EditorPanel();
+		tuningEditorPanel = new EditorPanel<InterfacePanel, TuningEditorPanel>();
+		tuningEditorPanel.setTitle("Tuning");
+		tuningEditorPanel.setSidePanel(tuningInterfacePanel);
+
+		final ExtendedInterfacePanel transitionInterfacePanel = new ExtendedInterfacePanel();
+
+		transitionEditorPanel = new EditorPanel<ExtendedInterfacePanel, TransitionEditorPanel>();
+		transitionEditorPanel.setTitle("Transition");
+		transitionEditorPanel.setSidePanel(transitionInterfacePanel);
 
 		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.addTab("Instrument Editor", null, instrumentEditorPanel);
@@ -119,21 +154,21 @@ public final class MainPanel extends JSplitPane {
 	/**
 	@return The instrument editor panel.
 	**/
-	public EditorPanel getInstrumentEditorPanel() {
+	public EditorPanel<InterfacePanel, InstrumentEditorPanel> getInstrumentEditorPanel() {
 		return instrumentEditorPanel;
 	}
 
 	/**
 	@return The tuning editor panel.
 	**/
-	public EditorPanel getTuningEditorPanel() {
+	public EditorPanel<InterfacePanel, TuningEditorPanel> getTuningEditorPanel() {
 		return tuningEditorPanel;
 	}
 
 	/**
 	@return The transition editor panel.
 	**/
-	public EditorPanel getTransitionEditorPanel() {
+	public EditorPanel<ExtendedInterfacePanel, TransitionEditorPanel> getTransitionEditorPanel() {
 		return transitionEditorPanel;
 	}
 }

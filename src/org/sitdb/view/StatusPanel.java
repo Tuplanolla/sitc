@@ -20,10 +20,11 @@ public final class StatusPanel extends JPanel {
 	Constructs a new panel.
 	**/
 	public StatusPanel() {
+		super(new BorderLayout());
+
 		progressBar = new JProgressBar(SwingConstants.HORIZONTAL, Byte.MIN_VALUE, Byte.MAX_VALUE);
 
-		final JPanel statusPanel = new JPanel(new BorderLayout());
-		statusPanel.add(progressBar);
+		add(progressBar);
 	}
 
 	/**

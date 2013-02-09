@@ -17,27 +17,15 @@ Represents the main window.
 The window has the following structural hierarchy:
 
 <pre>
-/------------------------------------------------------------------------\
-| [ ] MainFrame                                              [_] [#] [X] |
-+------------------------------------------------------------------------+
-| menuBar                                                                |
-|------------------------------------------------------------------------|
-| splitPane            |                                                 |
-| +------------------+ | +---------------------------------------------+ |
-| | sidePanel        | | | mainPanel                                   | |
-| | +--------------+ | | | +-------------+-------------+-------------+ | |
-| | | ManagerPanel | | | | | EditorPanel | EditorPanel | EditorPanel | | |
-| | +--------------+ | | | |             +-------------+-------------+ | |
-| | +--------------+ | | | |                                         | | |
-| | | ManagerPanel | | | | |                                         | | |
-| | +--------------+ | | | |                                         | | |
-| | +--------------+ | | | |                                         | | |
-| | | ManagerPanel | | | | |                                         | | |
-| | +--------------+ | | | +-----------------------------------------+ | |
-| +------------------+ | +---------------------------------------------+ |
-|------------------------------------------------------------------------|
-| statusBar                                                              |
-+------------------------------------------------------------------------+
+/---------------------------\
+| [ ] MainFrame [_] [#] [X] |
++---------------------------+
+| MenuBar                   |
+|---------------------------|
+| MainPanel                 |
+|---------------------------|
+| StatusPanel               |
++---------------------------+
 </pre>
 
 @author Sampsa "Tuplanolla" Kiiskinen
@@ -45,7 +33,7 @@ The window has the following structural hierarchy:
 public final class MainFrame extends JFrame {
 	private static final long serialVersionUID = 2641621164911831151l;
 
-	private final MenuPanel menuPanel;
+	private final MenuBar menuPanel;
 	private final MainPanel mainPanel;
 	private final StatusPanel statusPanel;
 
@@ -57,13 +45,13 @@ public final class MainFrame extends JFrame {
 				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file browser goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
-		mainPanel.getInstrumentManagerPanel().getListPanel().getLoadButton().addActionListener(new ActionListener() {
+		mainPanel.getInstrumentManagerPanel().getLoadButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file loader goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
-		mainPanel.getInstrumentManagerPanel().getListPanel().getSaveButton().addActionListener(new ActionListener() {
+		mainPanel.getInstrumentManagerPanel().getSaveButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file saver goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
@@ -88,13 +76,13 @@ public final class MainFrame extends JFrame {
 			}
 		});
 
-		mainPanel.getInstrumentEditorPanel().getRevertButton().addActionListener(new ActionListener() {
+		mainPanel.getInstrumentEditorPanel().getSidePanel().getRevertButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change reverter goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
-		mainPanel.getInstrumentEditorPanel().getApplyButton().addActionListener(new ActionListener() {
+		mainPanel.getInstrumentEditorPanel().getSidePanel().getApplyButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change applier goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
@@ -151,7 +139,7 @@ public final class MainFrame extends JFrame {
 		Feeling as if their anger seared,
 			Though vain!
 		*/
-		menuPanel = new MenuPanel();
+		menuPanel = new MenuBar();
 
 		mainPanel = new MainPanel();
 
@@ -189,7 +177,7 @@ public final class MainFrame extends JFrame {
 	/**
 	@return The menu panel.
 	**/
-	public MenuPanel getMenuPanel() {
+	public MenuBar getMenuPanel() {
 		return menuPanel;
 	}
 

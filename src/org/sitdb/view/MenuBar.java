@@ -10,7 +10,7 @@ Represents a panel that does something.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class MenuPanel extends JMenuBar {
+public final class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = 5495273314694096920l;
 
 	private final JMenuItem exitMenuItem;
@@ -22,7 +22,7 @@ public final class MenuPanel extends JMenuBar {
 	/**
 	Constructs a new panel.
 	**/
-	public MenuPanel() {
+	public MenuBar() {
 		exitMenuItem = new JMenuItem("Exit");
 
 		microtonalMenuCheckbox = new JCheckBoxMenuItem("Hide Microtonals");

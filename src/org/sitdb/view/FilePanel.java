@@ -30,14 +30,14 @@ public final class FilePanel extends JPanel {
 		pathTextField = new JTextField();
 
 		browseButton = new JButton("Browse");
-		Utilities.setScaledIcon(browseButton, Resources.BROWSE_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
+		Utilities.setScaledIcon(browseButton, Resources.BROWSE_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 		final JPanel filePanel = new JPanel(new BorderLayout());
 		filePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
 		filePanel.add(pathTextField, BorderLayout.CENTER);
 		filePanel.add(browseButton, BorderLayout.EAST);
 
-		titledBorder = new TitledBorder("File");
+		titledBorder = new TitledBorder((String )null);
 
 		setBorder(titledBorder);
 		add(filePanel, BorderLayout.CENTER);

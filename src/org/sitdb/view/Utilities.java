@@ -15,7 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
-Provides additional Swing utilities.
+A collection of utility methods for Swing, much like <code>SwingUtilities</code>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
@@ -29,8 +29,10 @@ public final class Utilities {
 	 scales it to a given factor of the button's preferred size and
 	 aligns it to the given orientation.
 
+	Use with care:
+
 	<pre>
-Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), SwingConstants.VERTICAL);
+Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), SwingConstants.VERTICAL, 0.5);
 </pre>
 
 	@param button The button.
@@ -69,6 +71,8 @@ Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), Swin
 	Sets the button's default icon,
 	 scales it to the button's preferred size and
 	 aligns it to the given orientation.
+
+	Use with care:
 
 	<pre>
 Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), SwingConstants.VERTICAL);

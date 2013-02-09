@@ -34,6 +34,8 @@ public final class EditorPanel extends JPanel {
 	Constructs a new panel.
 	**/
 	public EditorPanel() {
+		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+
 		revertButton = new JButton("Revert");
 		Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.ICON_SCALE);
 
@@ -83,7 +85,6 @@ public final class EditorPanel extends JPanel {
 		titledMainPanel.setBorder(titledBorder);
 		titledMainPanel.add(mainPanel, BorderLayout.CENTER);
 
-		setLayout(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
 		add(sidePanel, BorderLayout.WEST);
 		add(titledMainPanel, BorderLayout.CENTER);

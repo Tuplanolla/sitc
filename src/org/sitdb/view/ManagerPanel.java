@@ -14,7 +14,7 @@ Represents a panel that's used to
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class ManagementPanel extends JPanel {
+public final class ManagerPanel extends JPanel {
 	private static final long serialVersionUID = 7145893573631860866l;
 
 	private final FilePanel filePanel;
@@ -24,21 +24,22 @@ public final class ManagementPanel extends JPanel {
 	/**
 	Constructs a new panel.
 	**/
-	public ManagementPanel() {
+	public ManagerPanel() {
+		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+
 		filePanel = new FilePanel();
 
 		listPanel = new ListPanel();
 
-		final JPanel managementPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		managementPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		managementPanel.add(filePanel, BorderLayout.NORTH);
-		managementPanel.add(listPanel, BorderLayout.CENTER);
+		final JPanel managerPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+		managerPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+		managerPanel.add(filePanel, BorderLayout.NORTH);
+		managerPanel.add(listPanel, BorderLayout.CENTER);
 	
 		titledBorder = new TitledBorder((String )null);
 	
-		setLayout(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		setBorder(titledBorder);
-		add(managementPanel, BorderLayout.CENTER);
+		add(managerPanel, BorderLayout.CENTER);
 	}
 
 	/**

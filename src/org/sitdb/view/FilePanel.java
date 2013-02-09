@@ -25,6 +25,8 @@ public final class FilePanel extends JPanel {
 	Constructs a new panel.
 	**/
 	public FilePanel() {
+		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+
 		pathTextField = new JTextField();
 
 		browseButton = new JButton("Browse");
@@ -37,7 +39,6 @@ public final class FilePanel extends JPanel {
 
 		titledBorder = new TitledBorder("File");
 
-		setLayout(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		setBorder(titledBorder);
 		add(filePanel, BorderLayout.CENTER);
 	}

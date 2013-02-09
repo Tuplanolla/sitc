@@ -34,6 +34,8 @@ public final class ListPanel extends JPanel {
 	Constructs a new panel.
 	**/
 	public ListPanel() {
+		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+
 		loadButton = new JButton("Load");
 		Utilities.setScaledIcon(loadButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.ICON_SCALE);
 
@@ -84,7 +86,6 @@ public final class ListPanel extends JPanel {
 		titledListPanel.setBorder(titledBorder);
 		titledListPanel.add(listPanel, BorderLayout.CENTER);
 
-		setLayout(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		add(interfacePanel, BorderLayout.NORTH);
 		add(titledListPanel, BorderLayout.CENTER);
 	}

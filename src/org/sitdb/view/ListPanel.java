@@ -14,22 +14,19 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 /**
-Represents a panel that's used to
- load data,
- manage a local copy of the data and
- eventually save data.
+Represents a panel that's used to manage a local copy of data.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class ListPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1363814333182518609l;
 
-	public final JButton loadButton,//TODO encapsulate
+	private final JButton loadButton,
 			saveButton;
-	public final JTextField searchTextField;
-	public final JButton searchButton;
-	public final JList<String> list;//TODO <org.sitdb.model.*>
-	public final JButton newButton,
+	private final JTextField searchTextField;
+	private final JButton searchButton;
+	private final JList<String> list;//TODO <org.sitdb.model.*>
+	private final JButton newButton,
 			deleteButton;
 	private final TitledBorder titledBorder;
 
@@ -93,9 +90,63 @@ public final class ListPanel extends JPanel {
 	}
 
 	/**
-	Sets the title of this panel.
+	@return The load button.
+	**/
+	public JButton getLoadButton() {
+		return loadButton;
+	}
 
-	@param title The title.
+	/**
+	@return The save button.
+	**/
+	public JButton getSaveButton() {
+		return saveButton;
+	}
+
+	/**
+	@return The search text field.
+	**/
+	public JTextField getSearchTextField() {
+		return searchTextField;
+	}
+
+	/**
+	@return The search button.
+	**/
+	public JButton getSearchButton() {
+		return searchButton;
+	}
+
+	/**
+	@return The list.
+	**/
+	public JList<String> getList() {
+		return list;
+	}
+
+	/**
+	@return The new button.
+	**/
+	public JButton getNewButton() {
+		return newButton;
+	}
+
+	/**
+	@return The delete button.
+	**/
+	public JButton getDeleteButton() {
+		return deleteButton;
+	}
+
+	/**
+	@return The title.
+	**/
+	public String getTitle() {
+		return titledBorder.getTitle();
+	}
+
+	/**
+	@param title The new title.
 	**/
 	public void setTitle(final String title) {
 		titledBorder.setTitle(title);

@@ -21,19 +21,19 @@ Represents a panel that's used to
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class EditorPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1584690058857036971l;
 
-	public final JButton revertButton,//TODO encapsulate
+	private final JButton revertButton,
 			applyButton;
-	public final JButton importButton,
+	private final JButton importButton,
 			exportButton;
-	public final JPanel contentPanel;
+	private final JPanel contentPanel;
 	private final TitledBorder titledBorder;
 
 	/**
 	Constructs a new panel.
 	**/
-	public EditorPanel() {//TODO split into SidePanel and MainPanel
+	public EditorPanel() {
 		revertButton = new JButton("Revert");
 		Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.ICON_SCALE);
 
@@ -90,9 +90,42 @@ public final class EditorPanel extends JPanel {
 	}
 
 	/**
-	Sets the title of this panel.
+	@return The revert button.
+	**/
+	public JButton getRevertButton() {
+		return revertButton;
+	}
 
-	@param title The title.
+	/**
+	@return The apply button.
+	**/
+	public JButton getApplyButton() {
+		return applyButton;
+	}
+
+	/**
+	@return The import button.
+	**/
+	public JButton getImportButton() {
+		return importButton;
+	}
+
+	/**
+	@return The export button.
+	**/
+	public JButton getExportButton() {
+		return exportButton;
+	}
+
+	/**
+	@return The content panel.
+	**/
+	public JPanel getContentPanel() {
+		return contentPanel;
+	}
+
+	/**
+	@param title The new title.
 	**/
 	public void setTitle(final String title) {
 		titledBorder.setTitle(title);

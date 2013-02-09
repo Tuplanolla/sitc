@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -31,136 +32,141 @@ Represents the main window.
 The window has the following structural hierarchy:
 
 <pre>
-+-------------------------------------------------------------------+
-| MainFrame                                                         |
-+-------------------------------------------------------------------+
-| MenuBar                                                           |
-|-------------------------------------------------------------------|
-| SidePanel           | MainPanel                                   |
-| +-----------------+ | +-------------+-------------+-------------+ |
-| | ManagementPanel | | | EditorPanel | EditorPanel | EditorPanel | |
-| |                 | | |             +-------------+-------------+ |
-| |                 | | | +-----------------+ +-----------------+ | |
-| +-----------------+ | | | EditorSidePanel | | EditorMainPanel | | |
-| +-----------------+ | | |                 | |                 | | |
-| | ManagementPanel | | | |                 | |                 | | |
-| |                 | | | |                 | |                 | | |
-| |                 | | | |                 | |                 | | |
-| +-----------------+ | | |                 | |                 | | |
-| +-----------------+ | | |                 | |                 | | |
-| | ManagementPanel | | | |                 | |                 | | |
-| |                 | | | |                 | |                 | | |
-| |                 | | | +-----------------+ +-----------------+ | |
-| +-----------------+ | +-----------------------------------------+ |
-|-------------------------------------------------------------------|
-| StatusBar                                                         |
-+-------------------------------------------------------------------+
+/---------------------------------------------------------------------------\
+| [ ] MainFrame                                                 [_] [#] [X] |
++---------------------------------------------------------------------------+
+| menuBar                                                                   |
+|---------------------------------------------------------------------------|
+| splitPane               |                                                 |
+| +---------------------+ | +---------------------------------------------+ |
+| | sidePanel           | | | mainPanel                                   | |
+| | +-----------------+ | | | +-------------+-------------+-------------+ | |
+| | | ManagementPanel | | | | | EditorPanel | EditorPanel | EditorPanel | | |
+| | +-----------------+ | | | |             +-------------+-------------+ | |
+| | +-----------------+ | | | |                                         | | |
+| | | ManagementPanel | | | | |                                         | | |
+| | +-----------------+ | | | |                                         | | |
+| | +-----------------+ | | | |                                         | | |
+| | | ManagementPanel | | | | |                                         | | |
+| | +-----------------+ | | | +-----------------------------------------+ | |
+| +---------------------+ | +---------------------------------------------+ |
+|---------------------------------------------------------------------------|
+| statusBar                                                                 |
++---------------------------------------------------------------------------+
 </pre>
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class MainFrame extends JFrame {//TODO move the listeners into the controller
-	private static final long serialVersionUID = 1l;
+public final class MainFrame extends JFrame {
+	private static final long serialVersionUID = 2641621164911831151l;
+
+	private JMenuItem exitMenuItem;
+	private JCheckBoxMenuItem microtonalMenuCheckbox;
+	private JCheckBoxMenuItem notationMenuCheckbox;
+	private JMenuItem manualMenuItem;
+	private JMenuItem aboutMenuItem;
+
+	private ManagementPanel instrumentManagementPanel;
+	private EditorPanel instrumentEditorPanel;
 
 	private JProgressBar progressBar;
 
-	/*
-	browseButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The file browser goes here.", "File Browser", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	loadButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The file loader goes here.", "File Loader", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	saveButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The file saver goes here.", "File Saver", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	searchButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The list searcher goes here.", "List Searcher", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	newButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The list creator goes here.", "List Creator", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	deleteButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The list destroyer goes here.", "List Destroyer", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	*/
+	private void addTestControls() {//TODO move into the controller
+		instrumentManagementPanel.getFilePanel().getBrowseButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file browser goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		instrumentManagementPanel.getListPanel().getLoadButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file loader goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		instrumentManagementPanel.getListPanel().getSaveButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file saver goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		instrumentManagementPanel.getListPanel().getSearchButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list searcher goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		instrumentManagementPanel.getListPanel().getNewButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list item creator goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		instrumentManagementPanel.getListPanel().getDeleteButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list item disposer goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
 
-	/*
-	revertButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The reverter goes here.", "Reverter", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	applyButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The applier goes here.", "Applier", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	importButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The importer goes here.", "Importer", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	exportButton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(final ActionEvent event) {
-			JOptionPane.showMessageDialog(MainFrame.this, "The exporter goes here.", "Exporter", JOptionPane.PLAIN_MESSAGE);
-		}
-	});
-	*/
+		instrumentEditorPanel.getRevertButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change reverter goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		instrumentEditorPanel.getApplyButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change applier goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		instrumentEditorPanel.getImportButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor importer goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		instrumentEditorPanel.getExportButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor exporter goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
 
-	/**
-	Adds the menu bar to this window.
-	**/
-	private void addMenuBar() {
-		final JMenuItem exitMenuItem = new JMenuItem("Exit");
 		exitMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				MainFrame.this.dispose();
 			}
 		});
-
-		final JCheckBoxMenuItem microtonalMenuCheckbox = new JCheckBoxMenuItem("Hide Microtonals");
-
-		final JCheckBoxMenuItem notationMenuCheckbox = new JCheckBoxMenuItem("Use European Notation");
-
-		final JMenuItem manualMenuItem = new JMenuItem("Manual");
 		manualMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The manual goes here.", "Manual", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(MainFrame.this, "The manual goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
-
-		final JMenuItem aboutMenuItem = new JMenuItem("About");
 		aboutMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The about dialog goes here.", "About", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(MainFrame.this, "The about dialog goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
+	}
+
+	/**
+	Adds the menu bar to this window.
+	**/
+	private JComponent buildMenuBar() {
+		exitMenuItem = new JMenuItem("Exit");
+
+		microtonalMenuCheckbox = new JCheckBoxMenuItem("Hide Microtonals");
+
+		notationMenuCheckbox = new JCheckBoxMenuItem("Use European Notation");
+
+		manualMenuItem = new JMenuItem("Manual");
+
+		aboutMenuItem = new JMenuItem("About");
 
 		final JMenu fileMenu = new JMenu("File");
 		fileMenu.add(exitMenuItem);
@@ -179,15 +185,14 @@ public final class MainFrame extends JFrame {//TODO move the listeners into the 
 		menuBar.add(settingsMenu);
 		menuBar.add(helpMenu);
 
-		final Container contentPane = getContentPane();
-		contentPane.add(menuBar, BorderLayout.NORTH);
+		return menuBar;
 	}
 
 	/**
 	Adds the actual layout to this window.
 	**/
-	private void addSplitPane() {
-		final ManagementPanel instrumentManagementPanel = new ManagementPanel();
+	private JComponent buildSplitPane() {
+		instrumentManagementPanel = new ManagementPanel();
 		instrumentManagementPanel.setTitle("Instruments");
 		instrumentManagementPanel.getFilePanel().setTitle("Instrument File");
 		instrumentManagementPanel.getListPanel().setTitle("Instrument List");
@@ -203,12 +208,12 @@ public final class MainFrame extends JFrame {//TODO move the listeners into the 
 		sidePanel.add(tuningManagementPanel);
 		sidePanel.add(transitionManagementPanel);
 
-		final EditorPanel instrumentEditorPanel = new EditorPanel();
+		instrumentEditorPanel = new EditorPanel();
 		instrumentEditorPanel.setTitle("Instrument");
 
-		final EditorPanel tuningEditorPanel = new EditorPanel();
+		final JPanel tuningEditorPanel = new JPanel();
 
-		final EditorPanel transitionEditorPanel = new EditorPanel();
+		final JPanel transitionEditorPanel = new JPanel();
 
 		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.addTab("Instrument Editor", null, instrumentEditorPanel);
@@ -249,21 +254,19 @@ public final class MainFrame extends JFrame {//TODO move the listeners into the 
 		splitPane.setRightComponent(mainPanel);
 		splitPane.setLeftComponent(sidePanel);
 
-		final Container contentPane = getContentPane();
-		contentPane.add(splitPane, BorderLayout.CENTER);
+		return splitPane;
 	}
 
 	/**
 	Adds the status bar to this window.
 	**/
-	private void addStatusBar() {
+	private JComponent buildStatusBar() {
 		progressBar = new JProgressBar(SwingConstants.HORIZONTAL, Byte.MIN_VALUE, Byte.MAX_VALUE);
 
 		final JPanel statusPanel = new JPanel(new BorderLayout());
 		statusPanel.add(progressBar);
 
-		final Container contentPane = getContentPane();
-		contentPane.add(statusPanel, BorderLayout.SOUTH);
+		return statusPanel;
 	}
 
 	/**
@@ -284,9 +287,11 @@ public final class MainFrame extends JFrame {//TODO move the listeners into the 
 		Feeling as if their anger seared,
 			Though vain!
 		*/
-		addMenuBar();
-		addSplitPane();
-		addStatusBar();
+		final Container contentPane = getContentPane();
+		contentPane.add(buildMenuBar(), BorderLayout.NORTH);
+		contentPane.add(buildSplitPane(), BorderLayout.CENTER);//TODO consider splitting
+		contentPane.add(buildStatusBar(), BorderLayout.SOUTH);
+		addTestControls();
 		setTitle("String Instrument Tuning Database");
 		setIconImages(Resources.ICON_IMAGES);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

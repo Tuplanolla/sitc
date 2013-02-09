@@ -10,18 +10,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 /**
-Represents a panel that's used to
- load data,
- manage a local copy of the data and
- eventually save data.
+Represents a panel that's used to load and save data.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class FilePanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1569711177821808903l;
 
-	public final JTextField pathTextField;//TODO encapsulate
-	public final JButton browseButton;
+	private final JTextField pathTextField;
+	private final JButton browseButton;
 	private final TitledBorder titledBorder;
 
 	/**
@@ -46,9 +43,28 @@ public final class FilePanel extends JPanel {
 	}
 
 	/**
-	Sets the title of this panel.
+	@return The path text field.
+	**/
+	public JTextField getPathTextField() {
+		return pathTextField;
+	}
 
-	@param title The title.
+	/**
+	@return The browse button.
+	**/
+	public JButton getBrowseButton() {
+		return browseButton;
+	}
+
+	/**
+	@return The title.
+	**/
+	public String getTitle() {
+		return titledBorder.getTitle();
+	}
+
+	/**
+	@param title The new title.
 	**/
 	public void setTitle(final String title) {
 		titledBorder.setTitle(title);

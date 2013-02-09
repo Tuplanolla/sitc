@@ -9,13 +9,13 @@ import javax.swing.border.TitledBorder;
 /**
 Represents a panel that's used to
  load data,
- manage a local copy of the data and
- eventually save data.
+ manage a local copy of a portion of the data and
+ eventually save the data.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class ManagementPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 7145893573631860866l;
 
 	private final FilePanel filePanel;
 	private final ListPanel listPanel;
@@ -56,9 +56,14 @@ public final class ManagementPanel extends JPanel {
 	}
 
 	/**
-	Sets the title of this panel.
+	@return The title.
+	**/
+	public String getTitle() {
+		return titledBorder.getTitle();
+	}
 
-	@param title The title.
+	/**
+	@param title The new title.
 	**/
 	public void setTitle(final String title) {
 		titledBorder.setTitle(title);

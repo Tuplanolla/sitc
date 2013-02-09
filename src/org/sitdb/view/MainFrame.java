@@ -189,11 +189,12 @@ public final class MainFrame extends JFrame {//TODO move the listeners into the 
 	private void addSplitPane() {
 		final ManagementPanel instrumentManagementPanel = new ManagementPanel();
 		instrumentManagementPanel.setTitle("Instruments");
-		instrumentManagementPanel.setSubtitle("Instrument");
+		instrumentManagementPanel.getFilePanel().setTitle("Instrument File");
+		instrumentManagementPanel.getListPanel().setTitle("Instrument List");
 
-		final ManagementPanel tuningManagementPanel = new ManagementPanel();
+		final JPanel tuningManagementPanel = new JPanel();
 
-		final ManagementPanel transitionManagementPanel = new ManagementPanel();
+		final JPanel transitionManagementPanel = new JPanel();
 
 		final GridLayout sidePanelLayout = new GridLayout(3, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET);
 		final JPanel sidePanel = new JPanel(sidePanelLayout);

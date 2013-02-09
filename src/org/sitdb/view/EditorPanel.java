@@ -23,17 +23,17 @@ Represents a panel that's used to
 public final class EditorPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	public final JButton revertButton,
+	public final JButton revertButton,//TODO encapsulate
 			applyButton;
 	public final JButton importButton,
 			exportButton;
 	public final JPanel contentPanel;
-	private final TitledBorder border;
+	private final TitledBorder titledBorder;
 
 	/**
 	Constructs a new panel.
 	**/
-	public EditorPanel() {
+	public EditorPanel() {//TODO split into SidePanel and MainPanel
 		revertButton = new JButton("Revert");
 		Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.ICON_SCALE);
 
@@ -77,10 +77,10 @@ public final class EditorPanel extends JPanel {
 		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		mainPanel.add(portPanel, BorderLayout.SOUTH);
 
-		border = new TitledBorder((String )null);
+		titledBorder = new TitledBorder((String )null);
 
 		final JPanel titledMainPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		titledMainPanel.setBorder(border);
+		titledMainPanel.setBorder(titledBorder);
 		titledMainPanel.add(mainPanel, BorderLayout.CENTER);
 
 		setLayout(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
@@ -95,6 +95,6 @@ public final class EditorPanel extends JPanel {
 	@param title The title.
 	**/
 	public void setTitle(final String title) {
-		border.setTitle(title);
+		titledBorder.setTitle(title);
 	}
 }

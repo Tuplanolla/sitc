@@ -7,7 +7,11 @@ A collection of constants, much like <code>SwingConstants</code>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public interface Constants {
+public final class Constants {
+	private Constants() {
+		throw new InstantiationError();
+	}
+
 	public static final int BIG_INSET = 8,
 			MEDIUM_INSET = 4,
 			SMALL_INSET = 2;

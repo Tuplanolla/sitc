@@ -41,10 +41,10 @@ public final class StaticExtendedInterfacePanel extends JPanel {
 		removeButton = new JButton("Remove Tuning");
 		Utilities.setScaledIcon(removeButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		revertButton = new JButton("Revert Transition");
+		revertButton = new JButton("Revert Sequence");
 		Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		applyButton = new JButton("Apply Transition");
+		applyButton = new JButton("Apply Sequence");
 		Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 		final JPanel buttonPanel = new JPanel(new GridLayout(8, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));

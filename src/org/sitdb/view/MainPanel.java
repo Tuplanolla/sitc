@@ -39,10 +39,10 @@ public final class MainPanel extends JSplitPane {
 
 	private final ManagerPanel instrumentManagerPanel;
 	private final ManagerPanel tuningManagerPanel;
-	private final ManagerPanel transitionManagerPanel;
+	private final ManagerPanel sequenceManagerPanel;
 	private final EditorPanel<InterfacePanel, InstrumentEditorPanel> instrumentEditorPanel;
 	private final EditorPanel<InterfacePanel, TuningEditorPanel> tuningEditorPanel;
-	private final EditorPanel<ExtendedInterfacePanel, TransitionEditorPanel> transitionEditorPanel;
+	private final EditorPanel<ExtendedInterfacePanel, SequenceEditorPanel> sequenceEditorPanel;
 
 	/**
 	Constructs a new panel.
@@ -60,10 +60,10 @@ public final class MainPanel extends JSplitPane {
 		tuningManagerPanel.getFilePanel().setTitle("Tuning File");
 		tuningManagerPanel.getListPanel().setTitle("Tuning List");
 
-		transitionManagerPanel = new ManagerPanel();
-		transitionManagerPanel.setTitle("Transitions");
-		transitionManagerPanel.getFilePanel().setTitle("Transition File");
-		transitionManagerPanel.getListPanel().setTitle("Transition List");
+		sequenceManagerPanel = new ManagerPanel();
+		sequenceManagerPanel.setTitle("Sequences");
+		sequenceManagerPanel.getFilePanel().setTitle("Sequence File");
+		sequenceManagerPanel.getListPanel().setTitle("Sequence List");
 
 		final GridLayout sidePanelLayout = new GridLayout(3, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET);
 
@@ -71,7 +71,7 @@ public final class MainPanel extends JSplitPane {
 		sidePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
 		sidePanel.add(instrumentManagerPanel);
 		sidePanel.add(tuningManagerPanel);
-		sidePanel.add(transitionManagerPanel);
+		sidePanel.add(sequenceManagerPanel);
 
 		final InterfacePanel instrumentInterfacePanel = new InterfacePanel();
 
@@ -91,19 +91,19 @@ public final class MainPanel extends JSplitPane {
 		tuningEditorPanel.setSidePanel(tuningInterfacePanel);
 		tuningEditorPanel.setContentPanel(tuningEditor);
 
-		final ExtendedInterfacePanel transitionInterfacePanel = new ExtendedInterfacePanel();
+		final ExtendedInterfacePanel sequenceInterfacePanel = new ExtendedInterfacePanel();
 
-		final TransitionEditorPanel transitionEditor = new TransitionEditorPanel();
+		final SequenceEditorPanel sequenceEditor = new SequenceEditorPanel();
 
-		transitionEditorPanel = new EditorPanel<ExtendedInterfacePanel, TransitionEditorPanel>();
-		transitionEditorPanel.setTitle("Transition");
-		transitionEditorPanel.setSidePanel(transitionInterfacePanel);
-		transitionEditorPanel.setContentPanel(transitionEditor);
+		sequenceEditorPanel = new EditorPanel<ExtendedInterfacePanel, SequenceEditorPanel>();
+		sequenceEditorPanel.setTitle("Sequence");
+		sequenceEditorPanel.setSidePanel(sequenceInterfacePanel);
+		sequenceEditorPanel.setContentPanel(sequenceEditor);
 
 		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.addTab("Instrument Editor", null, instrumentEditorPanel);
 		tabbedPane.addTab("Tuning Editor", null, tuningEditorPanel);
-		tabbedPane.addTab("Transition Editor", null, transitionEditorPanel);
+		tabbedPane.addTab("Sequence Editor", null, sequenceEditorPanel);
 
 		tabbedPane.addChangeListener(new ChangeListener() {
 			@Override
@@ -118,11 +118,11 @@ public final class MainPanel extends JSplitPane {
 					sidePanelLayout.setRows(1);
 					sidePanel.add(tuningManagerPanel);
 				}
-				else if (selectedComponent == transitionEditorPanel) {
+				else if (selectedComponent == sequenceEditorPanel) {
 					sidePanelLayout.setRows(3);
 					sidePanel.add(instrumentManagerPanel);
 					sidePanel.add(tuningManagerPanel);
-					sidePanel.add(transitionManagerPanel);
+					sidePanel.add(sequenceManagerPanel);
 				}
 				sidePanel.revalidate();
 				sidePanel.repaint();
@@ -154,10 +154,10 @@ public final class MainPanel extends JSplitPane {
 	}
 
 	/**
-	@return The transition manager panel.
+	@return The sequence manager panel.
 	**/
-	public ManagerPanel getTransitionManagerPanel() {
-		return transitionManagerPanel;
+	public ManagerPanel getSequenceManagerPanel() {
+		return sequenceManagerPanel;
 	}
 
 	/**
@@ -175,9 +175,9 @@ public final class MainPanel extends JSplitPane {
 	}
 
 	/**
-	@return The transition editor panel.
+	@return The sequence editor panel.
 	**/
-	public EditorPanel<ExtendedInterfacePanel, TransitionEditorPanel> getTransitionEditorPanel() {
-		return transitionEditorPanel;
+	public EditorPanel<ExtendedInterfacePanel, SequenceEditorPanel> getSequenceEditorPanel() {
+		return sequenceEditorPanel;
 	}
 }

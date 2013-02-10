@@ -12,7 +12,7 @@ The name <code>Natural</code> was chosen solely to
 @see Scalar
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public class Natural implements Scalar<Natural>, Comparable<Natural>, Serializable {
+public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, Serializable {
 	private static final long serialVersionUID = 5889084946555354348l;
 
 	/**

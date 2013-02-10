@@ -1,0 +1,51 @@
+package org.sitdb.model;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+Represents a mutable sequence of tunings.
+
+@author Sampsa "Tuplanolla" Kiiskinen
+**/
+public final class Sequence implements Serializable {
+	private static final long serialVersionUID = 998214478284717463l;
+
+	/**
+	The name of this sequence.
+	**/
+	public final java.lang.String name;
+
+	/**
+	The instrument this sequence is for or <code>null</code>.
+	**/
+	public final Instrument instrument;
+
+	/**
+	The tunings this sequence is made of.
+	**/
+	public final List<Tuning> tunings;
+
+	/**
+	Constructs a new sequence of tunings for a specific instrument.
+
+	@param name The name.
+	@param instrument The instrument.
+	**/
+	public Sequence(final java.lang.String name, final Instrument instrument) {
+		if (name == null) throw new IllegalArgumentException();
+		this.name = name;
+		this.instrument = instrument;
+		tunings = new LinkedList<Tuning>();
+	}
+
+	/**
+	Constructs a new sequence of tunings for any instrument.
+
+	@param name The name.
+	**/
+	public Sequence(final java.lang.String name) {
+		this(name, null);
+	}
+}

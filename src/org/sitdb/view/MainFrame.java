@@ -3,11 +3,8 @@ package org.sitdb.view;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
@@ -36,78 +33,6 @@ public final class MainFrame extends JFrame {
 	private final MenuBar menuPanel;
 	private final MainPanel mainPanel;
 	private final StatusPanel statusPanel;
-
-	@Deprecated
-	private void addTestControls() {//TODO move into the controller
-		mainPanel.getInstrumentManagerPanel().getFilePanel().getBrowseButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file browser goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentManagerPanel().getLoadButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file loader goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentManagerPanel().getSaveButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file saver goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentManagerPanel().getListPanel().getSearchButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list searcher goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentManagerPanel().getListPanel().getNewButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list item creator goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentManagerPanel().getListPanel().getDeleteButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list item disposer goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-
-		mainPanel.getInstrumentEditorPanel().getSidePanel().getRevertButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change reverter goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentEditorPanel().getSidePanel().getApplyButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change applier goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-
-		menuPanel.getExitMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				MainFrame.this.dispose();
-			}
-		});
-		menuPanel.getManualMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The manual goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		menuPanel.getAboutMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The about dialog goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-	}
 
 	/**
 	Constructs and initializes a new window.
@@ -144,7 +69,6 @@ public final class MainFrame extends JFrame {
 		A static tremor as a hiss
 			Like piss!
 		*/
-		addTestControls();
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("String Instrument Tuning Database");
 		setIconImages(Resources.ICON_IMAGES);

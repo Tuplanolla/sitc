@@ -8,7 +8,7 @@ Represents an exact immutable transfinite rational.
 @see Scalar
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public class Rational implements Scalar<Rational>, Comparable<Rational>, Serializable {
+public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>, Serializable {
 	private static final long serialVersionUID = 1296295622916634130l;
 
 	/**
@@ -79,7 +79,7 @@ public class Rational implements Scalar<Rational>, Comparable<Rational>, Seriali
 	@param second The second integer.
 	@return The greatest common divisor.
 	**/
-	public static int gcd(int first, int second) {
+	private static int gcd(int first, int second) {
 		if (first == 0 || second == 0) return first | second;//the same as Math.max(first, second)
 		if (first == 1 || second == 1) return 1;//the same as Math.min(Math.abs(first), Math.abs(second))
 		if (first < 0) first = -first;//the same as Math.abs(first)

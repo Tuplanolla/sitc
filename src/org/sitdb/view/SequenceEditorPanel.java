@@ -17,9 +17,9 @@ The panel has the following structural hierarchy:
 
 <pre>
 +---------------------+
-| TransitionPanel     |
+| SequencePanel     |
 | +-----------------+ |
-| | TransitionPanel | |
+| | SequencePanel | |
 | +-----------------+ |
 | +-----------------+ |
 | | JPanel          | |
@@ -41,15 +41,15 @@ The panel has the following structural hierarchy:
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class TransitionEditorPanel extends JPanel {
+public final class SequenceEditorPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	private final TransitionEditorMagicPanel magicPanel;
+	private final SequenceEditorMagicPanel magicPanel;
 
 	/**
 	Constructs a new panel.
 	**/
-	public TransitionEditorPanel() {//TODO reorder
+	public SequenceEditorPanel() {//TODO reorder
 		super(new BorderLayout());
 
 		final JTextField nameTextField = new JTextField();
@@ -68,15 +68,15 @@ public final class TransitionEditorPanel extends JPanel {
 		instrumentPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
 		instrumentPanel.add(instrumentTextField);
 
-		final JPanel titledTransitionPanel = new JPanel(new BorderLayout());
-		titledTransitionPanel.setBorder(new TitledBorder("Instrument"));
-		titledTransitionPanel.add(instrumentPanel, BorderLayout.CENTER);
+		final JPanel titledSequencePanel = new JPanel(new BorderLayout());
+		titledSequencePanel.setBorder(new TitledBorder("Instrument"));
+		titledSequencePanel.add(instrumentPanel, BorderLayout.CENTER);
 
 		final JPanel somePanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		somePanel.add(titledNamePanel, BorderLayout.NORTH);
-		somePanel.add(titledTransitionPanel, BorderLayout.CENTER);
+		somePanel.add(titledSequencePanel, BorderLayout.CENTER);
 
-		magicPanel = new TransitionEditorMagicPanel();
+		magicPanel = new SequenceEditorMagicPanel();
 
 		final JScrollPane scrollPane = new JScrollPane(magicPanel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -139,7 +139,7 @@ public final class TransitionEditorPanel extends JPanel {
 		thisPanel.add(titledChangePanel, BorderLayout.CENTER);
 		thisPanel.add(titledActionPanel, BorderLayout.SOUTH);
 
-		setBorder(new TitledBorder("Transition"));
+		setBorder(new TitledBorder("Sequence"));
 		add(thisPanel, BorderLayout.CENTER);
 	}
 }

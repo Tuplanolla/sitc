@@ -6,7 +6,7 @@ import org.sitdb.Model;
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class DefaultModel extends Model {
-	public DefaultModel(final String[] arguments) {
+	public DefaultModel(final java.lang.String[] arguments) {
 		super(arguments);
 	}
 

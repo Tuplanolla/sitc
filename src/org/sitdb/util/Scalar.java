@@ -103,46 +103,4 @@ public interface Scalar<Type extends Scalar<Type>> {
 	@return <code>-1</code> if this is negative, <code>+1</code> if positive and <code>0</code> otherwise.
 	**/
 	public int signum();
-
-	/**
-	Returns the value of this number as a long integer primitive.
-
-	@return The converted number.
-	**/
-	public long longValue();
-
-	/**
-	Returns the value of this number as an integer primitive.
-
-	@return The converted number.
-	**/
-	public int intValue();
-
-	/**
-	Returns the value of this number as a short integer primitive.
-
-	@return The converted number.
-	**/
-	public short shortValue();
-
-	/**
-	Returns the value of this number as a byte primitive.
-
-	@return The converted number.
-	**/
-	public byte byteValue();
-
-	/**
-	Returns the value of this number as a double precision floating-point primitive.
-
-	@return The converted number.
-	**/
-	public double doubleValue();
-
-	/**
-	Returns the value of this number as a floating-point primitive.
-
-	@return The converted number.
-	**/
-	public float floatValue();
 }

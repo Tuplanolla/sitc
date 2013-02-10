@@ -42,10 +42,10 @@ public final class DynamicExtendedInterfacePanel extends JPanel {
 		removeButton = new JButton("Remove Tuning");
 		Utilities.setScaledIcon(removeButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		revertButton = new JButton("Revert Transition");
+		revertButton = new JButton("Revert Sequence");
 		Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		applyButton = new JButton("Apply Transition");
+		applyButton = new JButton("Apply Sequence");
 		Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 		final JPanel instrumentButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
@@ -56,9 +56,9 @@ public final class DynamicExtendedInterfacePanel extends JPanel {
 		tuningButtonPanel.add(addButton);
 		tuningButtonPanel.add(removeButton);
 
-		final JPanel transitionButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		transitionButtonPanel.add(revertButton);
-		transitionButtonPanel.add(applyButton);
+		final JPanel sequenceButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+		sequenceButtonPanel.add(revertButton);
+		sequenceButtonPanel.add(applyButton);
 
 		final GridBagConstraints instrumentConstraints = new GridBagConstraints();
 		instrumentConstraints.gridx = 0;
@@ -81,25 +81,25 @@ public final class DynamicExtendedInterfacePanel extends JPanel {
 		tuningConstraints.weighty = 0;
 		tuningConstraints.fill = GridBagConstraints.BOTH;
 
-		final GridBagConstraints tuningTransitionConstraints = new GridBagConstraints();
-		tuningTransitionConstraints.gridx = 0;
-		tuningTransitionConstraints.gridy = 3;
-		tuningTransitionConstraints.weightx = 1;
-		tuningTransitionConstraints.weighty = 1;
-		tuningTransitionConstraints.fill = GridBagConstraints.BOTH;
+		final GridBagConstraints tuningSequenceConstraints = new GridBagConstraints();
+		tuningSequenceConstraints.gridx = 0;
+		tuningSequenceConstraints.gridy = 3;
+		tuningSequenceConstraints.weightx = 1;
+		tuningSequenceConstraints.weighty = 1;
+		tuningSequenceConstraints.fill = GridBagConstraints.BOTH;
 
-		final GridBagConstraints transitionConstraints = new GridBagConstraints();
-		transitionConstraints.gridx = 0;
-		transitionConstraints.gridy = 4;
-		transitionConstraints.weightx = 1;
-		transitionConstraints.weighty = 0;
-		transitionConstraints.fill = GridBagConstraints.BOTH;
+		final GridBagConstraints sequenceConstraints = new GridBagConstraints();
+		sequenceConstraints.gridx = 0;
+		sequenceConstraints.gridy = 4;
+		sequenceConstraints.weightx = 1;
+		sequenceConstraints.weighty = 0;
+		sequenceConstraints.fill = GridBagConstraints.BOTH;
 
 		add(instrumentButtonPanel, instrumentConstraints);
 		add(Box.createVerticalStrut(Constants.MEDIUM_INSET), instrumentTuningConstraints);
 		add(tuningButtonPanel, tuningConstraints);
-		add(Box.createVerticalStrut(Constants.MEDIUM_INSET), tuningTransitionConstraints);
-		add(transitionButtonPanel, transitionConstraints);
+		add(Box.createVerticalStrut(Constants.MEDIUM_INSET), tuningSequenceConstraints);
+		add(sequenceButtonPanel, sequenceConstraints);
 	}
 
 	/**

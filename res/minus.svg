@@ -26,9 +26,13 @@
          id="shadow-stop"
          style="stop-color:#808080;stop-opacity:1;" />
       <stop
-         id="middle-stop"
-         offset="0.5"
+         offset="0.25"
+         id="dark-stop"
          style="stop-color:#808080;stop-opacity:1" />
+      <stop
+         id="light-stop"
+         offset="0.75"
+         style="stop-color:#ffffff;stop-opacity:1" />
       <stop
          offset="1"
          id="highlight-stop"
@@ -38,13 +42,13 @@
        inkscape:collect="always"
        xlink:href="#linear-gradient"
        id="radial-gradient"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1333333,1.8991266e-7,-1.8991265e-7,2.1333332,-9.0666634,-20.758973)"
        cx="8"
-       cy="17.354591"
+       cy="17.230768"
        fx="8"
-       fy="17.354591"
-       r="7.125"
-       gradientTransform="matrix(2.2456141,1.2077491e-7,-1.2927774e-7,2.245614,-9.9649112,-22.971715)"
-       gradientUnits="userSpaceOnUse" />
+       fy="17.230768"
+       r="7.5" />
   </defs>
   <title
      id="title">Minus</title>
@@ -120,11 +124,6 @@
         </dc:creator>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
-        <dc:contributor>
-          <cc:Agent>
-            <dc:title>Denelson83</dc:title>
-          </cc:Agent>
-        </dc:contributor>
       </cc:Work>
       <cc:License
          rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
@@ -148,23 +147,28 @@
   <g
      id="sign">
     <path
-       style="fill:url(#radial-gradient);fill-opacity:1;stroke:none"
-       d="m 15,6 -5,0 -4,0 -5,0 0,4 5,0 4,0 5,0 z"
+       sodipodi:type="inkscape:offset"
+       inkscape:radius="0"
+       inkscape:original="M 1 6 L 1 10 L 15 10 L 15 6 L 1 6 z "
+       xlink:href="#outline"
+       style="fill:url(#radial-gradient);stroke:none"
        id="highlight"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccc" />
+       inkscape:href="#outline"
+       d="M 9,2 9,5 1,5 1,11 9,11 9,14 15,8 9,2 z" />
     <path
-       d="M 6.5,1.5 6.5,6 A 0.50005,0.50005 0 0 1 6,6.5 l -4.5,0 0,3 4.5,0 A 0.50005,0.50005 0 0 1 6.5,10 l 0,4.5 3,0 0,-4.5 A 0.50005,0.50005 0 0 1 10,9.5 l 4.5,0 0,-3 -4.5,0 A 0.50005,0.50005 0 0 1 9.5,6 l 0,-4.5 -3,0 z"
-       id="shadow"
-       style="fill:none;stroke:#808080;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       inkscape:original="M 1 6 L 1 10 L 6 10 L 10 10 L 15 10 L 15 6 L 10 6 L 6 6 L 1 6 z "
+       sodipodi:type="inkscape:offset"
        inkscape:radius="-0.5"
-       sodipodi:type="inkscape:offset" />
+       inkscape:original="M 1 6 L 1 10 L 15 10 L 15 6 L 1 6 z "
+       xlink:href="#outline"
+       style="fill:none;stroke:#808080;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="shadow"
+       inkscape:href="#outline"
+       d="M 9.5,3.1875 9.5,5 A 0.50005,0.50005 0 0 1 9,5.5 l -7.5,0 0,5 7.5,0 A 0.50005,0.50005 0 0 1 9.5,11 l 0,1.8125 L 14.3125,8 9.5,3.1875 z" />
     <path
-       sodipodi:nodetypes="ccccccccc"
+       sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="outline"
-       d="m 15,6 -5,0 -4,0 -5,0 0,4 5,0 4,0 5,0 z"
+       d="M 15,6 1,6 1,10 15,10 z"
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
   </g>
 </svg>

@@ -13,8 +13,8 @@
    height="16"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="up.svg"
-   inkscape:export-filename="up.png"
+   sodipodi:docname="arrow_left_right.svg"
+   inkscape:export-filename="arrow_left_right.png"
    inkscape:export-xdpi="1440"
    inkscape:export-ydpi="1440">
   <defs
@@ -26,9 +26,13 @@
          id="shadow-stop"
          style="stop-color:#808080;stop-opacity:1;" />
       <stop
-         id="middle-stop"
-         offset="0.5"
+         offset="0.25"
+         id="dark-stop"
          style="stop-color:#808080;stop-opacity:1" />
+      <stop
+         id="light-stop"
+         offset="0.75"
+         style="stop-color:#ffffff;stop-opacity:1" />
       <stop
          offset="1"
          id="highlight-stop"
@@ -38,16 +42,16 @@
        inkscape:collect="always"
        xlink:href="#linear-gradient"
        id="radial-gradient"
-       cx="4.4375"
-       cy="13.792091"
-       fx="4.4375"
-       fy="13.792091"
-       r="7.125"
-       gradientTransform="matrix(2.9601905e-8,2.2456141,-2.245614,2.1099077e-8,30.971713,-1.9649139)"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1333333,1.8991266e-7,-1.8991265e-7,2.1333332,-9.0666634,-20.758973)"
+       cx="8"
+       cy="17.230768"
+       fx="8"
+       fy="17.230768"
+       r="7.5" />
   </defs>
   <title
-     id="title">Up</title>
+     id="title">Arrow Left and Right</title>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -55,9 +59,9 @@
      borderopacity="0.5"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="33.941126"
-     inkscape:cx="4.6604032"
-     inkscape:cy="7.9827411"
+     inkscape:zoom="48"
+     inkscape:cx="8"
+     inkscape:cy="8"
      inkscape:document-units="px"
      inkscape:current-layer="svg"
      showgrid="true"
@@ -112,7 +116,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>Up</dc:title>
+        <dc:title>Arrow Left and Right</dc:title>
         <dc:creator>
           <cc:Agent>
             <dc:title>Sampsa &quot;Tuplanolla&quot; Kiiskinen</dc:title>
@@ -120,11 +124,6 @@
         </dc:creator>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
-        <dc:contributor>
-          <cc:Agent>
-            <dc:title>Denelson83</dc:title>
-          </cc:Agent>
-        </dc:contributor>
       </cc:Work>
       <cc:License
          rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
@@ -146,26 +145,30 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="arrow"
-     transform="matrix(0,-1,1,0,0,16)">
+     id="arrow">
     <path
-       style="fill:url(#radial-gradient);fill-opacity:1;stroke:none"
-       d="M 15,8 9,2 9,5 1,5 l 0,6 8,0 0,3 z"
+       sodipodi:type="inkscape:offset"
+       inkscape:radius="0"
+       inkscape:original="M 5 4 L 1 8 L 5 12 L 5 10 L 11 10 L 11 12 L 15 8 L 11 4 L 11 6 L 5 6 L 5 4 z "
+       xlink:href="#outline"
+       style="fill:url(#radial-gradient);stroke:none"
        id="highlight"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccccc" />
+       inkscape:href="#outline"
+       d="M 9,2 9,5 1,5 1,11 9,11 9,14 15,8 9,2 z" />
     <path
-       d="M 9.5,3.1875 9.5,5 A 0.50005,0.50005 0 0 1 9,5.5 l -7.5,0 0,5 7.5,0 A 0.50005,0.50005 0 0 1 9.5,11 l 0,1.8125 L 14.3125,8 9.5,3.1875 z"
-       id="shadow"
-       style="fill:none;stroke:#808080;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       inkscape:original="M 9 2 L 9 5 L 1 5 L 1 11 L 9 11 L 9 14 L 15 8 L 9 2 z "
+       sodipodi:type="inkscape:offset"
        inkscape:radius="-0.5"
-       sodipodi:type="inkscape:offset" />
+       inkscape:original="M 5 4 L 1 8 L 5 12 L 5 10 L 11 10 L 11 12 L 15 8 L 11 4 L 11 6 L 5 6 L 5 4 z "
+       xlink:href="#outline"
+       style="fill:none;stroke:#808080;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="shadow"
+       inkscape:href="#outline"
+       d="M 9.5,3.1875 9.5,5 A 0.50005,0.50005 0 0 1 9,5.5 l -7.5,0 0,5 7.5,0 A 0.50005,0.50005 0 0 1 9.5,11 l 0,1.8125 L 14.3125,8 9.5,3.1875 z" />
     <path
-       sodipodi:nodetypes="cccccccc"
+       sodipodi:nodetypes="ccccccccccc"
        inkscape:connector-curvature="0"
        id="outline"
-       d="M 15,8 9,2 9,5 1,5 l 0,6 8,0 0,3 z"
+       d="M 15,8 11,4 11,6 5,6 5,4 1,8 l 4,4 0,-2 6,0 0,2 z"
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
   </g>
 </svg>

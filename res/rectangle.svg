@@ -13,8 +13,8 @@
    height="16"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="plus.svg"
-   inkscape:export-filename="plus.png"
+   sodipodi:docname="rectangle.svg"
+   inkscape:export-filename="rectangle.png"
    inkscape:export-xdpi="1440"
    inkscape:export-ydpi="1440">
   <defs
@@ -51,7 +51,7 @@
        r="7.5" />
   </defs>
   <title
-     id="title">Plus</title>
+     id="title">Rectangle</title>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -116,7 +116,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>Plus</dc:title>
+        <dc:title>Rectangle</dc:title>
         <dc:creator>
           <cc:Agent>
             <dc:title>Sampsa &quot;Tuplanolla&quot; Kiiskinen</dc:title>
@@ -145,30 +145,30 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="sign">
+     id="rectangle">
     <path
        sodipodi:type="inkscape:offset"
        inkscape:radius="0"
-       inkscape:original="M 6 1 L 6 6 L 1 6 L 1 10 L 6 10 L 6 15 L 10 15 L 10 10 L 15 10 L 15 6 L 10 6 L 10 1 L 6 1 z "
+       inkscape:original="M 2 2 L 2 14 L 14 14 L 14 2 L 2 2 z "
        xlink:href="#outline"
        style="fill:url(#radial-gradient);stroke:none"
        id="highlight"
        inkscape:href="#outline"
-       d="M 9,2 9,5 1,5 1,11 9,11 9,14 15,8 9,2 z" />
+       d="M 4,1 4,15 15,8 4,1 z" />
     <path
        sodipodi:type="inkscape:offset"
        inkscape:radius="-0.5"
-       inkscape:original="M 6 1 L 6 6 L 1 6 L 1 10 L 6 10 L 6 15 L 10 15 L 10 10 L 15 10 L 15 6 L 10 6 L 10 1 L 6 1 z "
+       inkscape:original="M 2 2 L 2 14 L 14 14 L 14 2 L 2 2 z "
        xlink:href="#outline"
        style="fill:none;stroke:#808080;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="shadow"
        inkscape:href="#outline"
-       d="M 9.5,3.1875 9.5,5 A 0.50005,0.50005 0 0 1 9,5.5 l -7.5,0 0,5 7.5,0 A 0.50005,0.50005 0 0 1 9.5,11 l 0,1.8125 L 14.3125,8 9.5,3.1875 z" />
+       d="m 4.5,1.90625 0,12.1875 L 14.09375,8 4.5,1.90625 z" />
     <path
-       sodipodi:nodetypes="ccccccccccccc"
+       sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="outline"
-       d="m 15,6 -5,0 0,-5 -4,0 0,5 -5,0 0,4 5,0 0,5 4,0 0,-5 5,0 z"
+       d="M 14,2 2,2 2,14 14,14 z"
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
   </g>
 </svg>

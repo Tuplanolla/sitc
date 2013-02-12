@@ -1,6 +1,7 @@
 package org.sitdb.model;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ Represents a mutable tuning.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Tuning implements Serializable {//TODO nice things
+public final class Tuning implements Serializable {
 	private static final long serialVersionUID = 4640012830741353240l;
 
 	/**
@@ -32,31 +33,71 @@ public final class Tuning implements Serializable {//TODO nice things
 		notes = new LinkedList<Note>();
 	}
 
-	public Note minimum() {
-		return null;
+	/**
+	Returns the lowest note in this tuning.
+
+	@return The lowest note.
+	**/
+	public Note lowest() {
+		return Collections.min(notes);
 	}
 
-	public Note maximum() {
-		return null;
+	/**
+	Returns the highest note in this tuning.
+
+	@return The highest note.
+	**/
+	public Note highest() {
+		return Collections.max(notes);
 	}
 
+	/**
+	Returns the distance between the lowest and the highest notes in this tuning.
+
+	@return The distance.
+	**/
 	public Note span() {
-		return null;
+		return highest().distance(lowest());
 	}
 
-	public Note mean() {
-		return null;
-	}
+	/**
+	Returns whether this tuning is increasing.
 
-	public boolean monotonous() {
-		return false;
-	}
-
+	@return Whether this tuning is increasing.
+	**/
 	public boolean increasing() {
-		return false;
+		Note previous = null;
+		for (final Note note : notes) {
+			if (previous != null) {
+				if (note.compareTo(previous) < 0) return false;
+			}
+			previous = note;
+		}
+		return true;
 	}
 
+	/**
+	Returns whether this tuning is decreasing.
+
+	@return Whether this tuning is decreasing.
+	**/
 	public boolean decreasing() {
-		return false;
+		Note previous = null;
+		for (final Note note : notes) {
+			if (previous != null) {
+				if (note.compareTo(previous) > 0) return false;
+			}
+			previous = note;
+		}
+		return true;
+	}
+
+	/**
+	Returns whether this tuning is increasing or decreasing.
+
+	@return Whether this tuning is monotonous.
+	**/
+	public boolean monotonous() {
+		return increasing() || decreasing();
 	}
 }

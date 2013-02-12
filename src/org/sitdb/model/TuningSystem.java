@@ -1,7 +1,7 @@
 package org.sitdb.model;
 
 /**
-Represents a tuning system.
+Outlines an immutable tuning system.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

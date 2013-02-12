@@ -30,7 +30,7 @@ The panel has the following structural hierarchy:
 @param <ContentType> The type of the main panel.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class EditorPanel<SideType extends JPanel, ContentType extends JPanel> extends JPanel {
+public final class EditorPanel<SideType extends JPanel, ContentType extends JPanel> extends JPanel {//TODO deprecate as somewhat pointless
 	private static final long serialVersionUID = 1584690058857036971l;
 
 	private final JPanel sidePanelContainer;

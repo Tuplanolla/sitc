@@ -9,9 +9,16 @@ import org.sitdb.Model;
 import org.sitdb.View;
 
 /**
+Represents an immutable view.
+
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class DefaultView extends View {
+	/**
+	Constructs a new view and links it with a model.
+	
+	@param model The model.
+	**/
 	public DefaultView(final Model model) {
 		super(model);
 	}

@@ -5,9 +5,17 @@ import org.sitdb.Model;
 import org.sitdb.View;
 
 /**
+Represents a pointless controller.
+
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class DefaultController extends Controller {
+	/**
+	Constructs a new view and links it with a model and a view.
+	
+	@param model The model.
+	@param view The view.
+	**/
 	public DefaultController(final Model model, final View view) {
 		super(model, view);
 	}

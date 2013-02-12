@@ -9,6 +9,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -115,6 +116,7 @@ public final class SequenceEditorPanel extends JPanel {
 		actionButtonPanel.add(approximateRadioButton);
 
 		final JButton actionButton = new JButton("Organize");
+		Utilities.setScaledIcon(actionButton, Resources.CALCULATE_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 		final JPanel actionPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 		actionPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

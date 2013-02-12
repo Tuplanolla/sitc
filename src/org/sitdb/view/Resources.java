@@ -65,7 +65,7 @@ public final class Resources {
 		url = Resources.class.getResource("/triangle_right.png");
 		PLAY_ICON = url != null ? new ImageIcon(url) : null;
 
-		url = Resources.class.getResource("/gears.png");
+		url = Resources.class.getResource("/calculator.png");
 		CALCULATE_ICON = url != null ? new ImageIcon(url) : null;
 
 		url = Resources.class.getResource("/magnifier.png");

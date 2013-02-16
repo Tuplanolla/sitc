@@ -40,9 +40,9 @@ public final class MainPanel extends JSplitPane {
 	private final ManagerPanel instrumentManagerPanel;
 	private final ManagerPanel tuningManagerPanel;
 	private final ManagerPanel sequenceManagerPanel;
-	private final EditorPanel<InterfacePanel, InstrumentEditorPanel> instrumentEditorPanel;
-	private final EditorPanel<InterfacePanel, TuningEditorPanel> tuningEditorPanel;
-	private final EditorPanel<ExtendedInterfacePanel, SequenceEditorPanel> sequenceEditorPanel;
+	private final InstrumentEditorPanel instrumentEditorPanel;
+	private final TuningEditorPanel tuningEditorPanel;
+	private final SequenceEditorPanel sequenceEditorPanel;
 
 	/**
 	Constructs a new panel.
@@ -73,32 +73,11 @@ public final class MainPanel extends JSplitPane {
 		sidePanel.add(tuningManagerPanel);
 		sidePanel.add(sequenceManagerPanel);
 
-		final InterfacePanel instrumentInterfacePanel = new InterfacePanel();
+		instrumentEditorPanel = new InstrumentEditorPanel();
 
-		final InstrumentEditorPanel instrumentEditor = new InstrumentEditorPanel();
+		tuningEditorPanel = new TuningEditorPanel();
 
-		instrumentEditorPanel = new EditorPanel<InterfacePanel, InstrumentEditorPanel>();
-		instrumentEditorPanel.setTitle("Instrument");
-		instrumentEditorPanel.setSidePanel(instrumentInterfacePanel);
-		instrumentEditorPanel.setContentPanel(instrumentEditor);
-
-		final InterfacePanel tuningInterfacePanel = new InterfacePanel();
-
-		final TuningEditorPanel tuningEditor = new TuningEditorPanel();
-
-		tuningEditorPanel = new EditorPanel<InterfacePanel, TuningEditorPanel>();
-		tuningEditorPanel.setTitle("Tuning");
-		tuningEditorPanel.setSidePanel(tuningInterfacePanel);
-		tuningEditorPanel.setContentPanel(tuningEditor);
-
-		final ExtendedInterfacePanel sequenceInterfacePanel = new ExtendedInterfacePanel();
-
-		final SequenceEditorPanel sequenceEditor = new SequenceEditorPanel();
-
-		sequenceEditorPanel = new EditorPanel<ExtendedInterfacePanel, SequenceEditorPanel>();
-		sequenceEditorPanel.setTitle("Sequence");
-		sequenceEditorPanel.setSidePanel(sequenceInterfacePanel);
-		sequenceEditorPanel.setContentPanel(sequenceEditor);
+		sequenceEditorPanel = new SequenceEditorPanel();
 
 		final JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.addTab("Instrument Editor", null, instrumentEditorPanel);
@@ -163,21 +142,21 @@ public final class MainPanel extends JSplitPane {
 	/**
 	@return The instrument editor panel.
 	**/
-	public EditorPanel<InterfacePanel, InstrumentEditorPanel> getInstrumentEditorPanel() {
+	public InstrumentEditorPanel getInstrumentEditorPanel() {
 		return instrumentEditorPanel;
 	}
 
 	/**
 	@return The tuning editor panel.
 	**/
-	public EditorPanel<InterfacePanel, TuningEditorPanel> getTuningEditorPanel() {
+	public TuningEditorPanel getTuningEditorPanel() {
 		return tuningEditorPanel;
 	}
 
 	/**
 	@return The sequence editor panel.
 	**/
-	public EditorPanel<ExtendedInterfacePanel, SequenceEditorPanel> getSequenceEditorPanel() {
+	public SequenceEditorPanel getSequenceEditorPanel() {
 		return sequenceEditorPanel;
 	}
 }

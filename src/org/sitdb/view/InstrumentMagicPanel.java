@@ -5,11 +5,11 @@ import javax.swing.JPanel;
 /**
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class TuningEditorMagicPanel extends JPanel {
+public final class InstrumentMagicPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
 	/**
 	Constructs a new panel.
 	**/
-	public TuningEditorMagicPanel() {}
+	public InstrumentMagicPanel() {}
 }

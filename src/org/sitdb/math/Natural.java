@@ -1,4 +1,4 @@
-package org.sitdb.util;
+package org.sitdb.math;
 
 import java.io.Serializable;
 
@@ -34,6 +34,11 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	The integer representing <i>1</i>.
 	**/
 	public static final Natural ONE = new Natural(1);
+
+	/**
+	The integer representing <i>-1</i>.
+	**/
+	public static final Natural MINUS_ONE = new Natural(-1);
 
 	/**
 	The smallest finite integer <i>-2<sup>31</sup>+2</i>.

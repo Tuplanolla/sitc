@@ -14,7 +14,7 @@ Represents a panel that's used to move data between
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public class InterfacePanel extends JPanel {
+public class EditorInterfacePanel extends JPanel {
 	private static final long serialVersionUID = 7074521139259979076l;
 
 	private final JButton revertButton,
@@ -23,7 +23,7 @@ public class InterfacePanel extends JPanel {
 	/**
 	Constructs a new panel.
 	**/
-	public InterfacePanel() {
+	public EditorInterfacePanel() {
 		super(new GridBagLayout());
 
 		revertButton = new JButton("Revert");

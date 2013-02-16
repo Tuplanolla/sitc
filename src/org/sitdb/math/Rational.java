@@ -1,4 +1,4 @@
-package org.sitdb.util;
+package org.sitdb.math;
 
 import java.io.Serializable;
 
@@ -30,6 +30,11 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 	The rational representing <i>1</i>.
 	**/
 	public static final Rational ONE = new Rational(1);
+
+	/**
+	The rational representing <i>-1</i>.
+	**/
+	public static final Rational MINUS_ONE = new Rational(-1);
 
 	/**
 	The smallest finite rational <i>-2<sup>31</sup>+1</i>.

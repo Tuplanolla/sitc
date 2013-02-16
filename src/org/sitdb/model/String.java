@@ -93,7 +93,7 @@ public final class String implements Serializable {
 			final double length,
 			final double diameter,
 			final Double maximumTension) {
-		this(vibratingLength, Math.PI * density * length * diameter * diameter);
+		this(vibratingLength, Math.PI * density * length * (diameter * diameter));
 	}
 
 	/**

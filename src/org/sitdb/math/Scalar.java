@@ -1,4 +1,4 @@
-package org.sitdb.util;
+package org.sitdb.math;
 
 /**
 Outlines basic symbolic arithmetic that is implemented by

@@ -13,18 +13,18 @@ import javax.swing.border.TitledBorder;
 The panel has the following structural hierarchy:
 
 <pre>
-+---------------------+
-| InstrumentPanel     |
-| +-----------------+ |
-| | InstrumentPanel | |
-| +-----------------+ |
-| +-----------------+ |
-| | JPanel          | |
-| +-----------------+ |
-| +-----------------+ |
-| | PortPanel       | |
-| +-----------------+ |
-+---------------------+
++--------------------------------------+
+| InstrumentPanel                      |
+| +----------------+ +---------------+ |
+| | InterfacePanel | | JPanel        | |
+| |                | | +-----------+ | |
+| |                | | | JPanel    | | |
+| |                | | +-----------+ | |
+| |                | | +-----------+ | |
+| |                | | | PortPanel | | |
+| |                | | +-----------+ | |
+| +----------------+ +---------------+ |
++--------------------------------------+
 </pre>
 
 @author Sampsa "Tuplanolla" Kiiskinen
@@ -32,13 +32,14 @@ The panel has the following structural hierarchy:
 public final class InstrumentEditorPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	private final InstrumentEditorMagicPanel magicPanel;
+	private final InstrumentMagicPanel magicPanel;
+	private final PortPanel portPanel;
 
 	/**
 	Constructs a new panel.
 	**/
 	public InstrumentEditorPanel() {
-		super(new BorderLayout());
+		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
 		final JTextField nameTextField = new JTextField();
 
@@ -50,7 +51,7 @@ public final class InstrumentEditorPanel extends JPanel {
 		titledNamePanel.setBorder(new TitledBorder("Name"));
 		titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-		magicPanel = new InstrumentEditorMagicPanel();
+		magicPanel = new InstrumentMagicPanel();
 
 		final JScrollPane scrollPane = new JScrollPane(magicPanel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -69,7 +70,10 @@ public final class InstrumentEditorPanel extends JPanel {
 		thisPanel.add(titledNamePanel, BorderLayout.NORTH);
 		thisPanel.add(titledStringPanel, BorderLayout.CENTER);
 
+		portPanel = new PortPanel();
+
 		setBorder(new TitledBorder("Instrument"));
 		add(thisPanel, BorderLayout.CENTER);
+		add(portPanel, BorderLayout.SOUTH);//TODO fix
 	}
 }

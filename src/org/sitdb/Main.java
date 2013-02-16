@@ -1,26 +1,45 @@
 package org.sitdb;
 
-import org.sitdb.controller.DefaultController;
-import org.sitdb.model.DefaultModel;
-import org.sitdb.view.DefaultView;
+import java.awt.EventQueue;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
 Serves as the main entry point.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Main {
+public final class Main implements Runnable {
+	private final List<String> arguments;
+
 	/**
-	Creates the main window.
+	Creates a new main class.
+
+	@param arguments The command line arguments.
+	**/
+	public Main(final String[] arguments) {
+		final String[] array = new String[arguments.length]; 
+		System.arraycopy(arguments, 0, array, 0, arguments.length);
+		this.arguments = Collections.unmodifiableList(Arrays.asList(array));
+	}
+
+	@Override
+	public void run() {
+		final Model model = new Model(arguments);
+		final View view = new View(model);
+		final Controller controller = new Controller(model, view);
+		model.activate();
+		controller.activate();
+		view.activate();
+	}
+
+	/**
+	Creates a new main class and schedules it to be ran in the event dispatch thread.
 
 	@param arguments The command line arguments.
 	**/
 	public static void main(final String[] arguments) {
-		final Model model = new DefaultModel(arguments);
-		final View view = new DefaultView(model);
-		final Controller controller = new DefaultController(model, view);
-		model.activate();
-		controller.activate();
-		view.activate();
+		EventQueue.invokeLater(new Main(arguments));
 	}
 }

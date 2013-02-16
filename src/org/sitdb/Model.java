@@ -1,20 +1,32 @@
 package org.sitdb;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
+import org.sitdb.model.Instrument;
+import org.sitdb.model.Sequence;
+import org.sitdb.model.Tuning;
+
 /**
-Contains the data.
+Represents a mutable model.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public abstract class Model implements Part {
-	protected final List<String> arguments;
+public final class Model {
+	public final List<Instrument> instruments;
+	public final List<Tuning> tunings;
+	public final List<Sequence> sequences;
 
-	public Model(final String[] arguments) {
-		final List<String> modifiableList = new ArrayList<String>(arguments.length);
-		for (final String argument : arguments) modifiableList.add(argument);
-		this.arguments = Collections.unmodifiableList(modifiableList);
+	/**
+	Constructs a new model.
+
+	@param arguments The command-line arguments.
+	**/
+	public Model(final List<String> arguments) {
+		instruments = new LinkedList<Instrument>();
+		tunings = new LinkedList<Tuning>();
+		sequences = new LinkedList<Sequence>();
 	}
+
+	public void activate() {}
 }

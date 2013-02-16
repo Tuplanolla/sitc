@@ -1,4 +1,4 @@
-package org.sitdb.util;
+package org.sitdb.math;
 
 /**
 Outlines basic conversions to numeric types and is implemented by

@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
 /**
-Represents a panel that does something.
+Represents a status panel.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

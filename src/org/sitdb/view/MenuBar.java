@@ -6,7 +6,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /**
-Represents a panel that does something.
+Represents a menu panel.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

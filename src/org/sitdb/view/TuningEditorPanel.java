@@ -38,7 +38,7 @@ The panel has the following structural hierarchy:
 public final class TuningEditorPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	private final TuningEditorMagicPanel magicPanel;
+	private final TuningMagicPanel magicPanel;
 
 	/**
 	Constructs a new panel.
@@ -66,7 +66,7 @@ public final class TuningEditorPanel extends JPanel {
 		titledNamePanel.setBorder(new TitledBorder("Name"));
 		titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-		magicPanel = new TuningEditorMagicPanel();
+		magicPanel = new TuningMagicPanel();
 
 		final JScrollPane scrollPane = new JScrollPane(magicPanel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

@@ -2,7 +2,7 @@ package org.sitdb.model;
 
 import java.io.Serializable;
 
-import org.sitdb.util.Natural;
+import org.sitdb.math.Natural;
 
 /**
 Represents an immutable pitch system.
@@ -17,14 +17,14 @@ public final class PitchSystem implements Serializable {
 	**/
 	public static final PitchSystem SCIENTIFIC = new PitchSystem(256,
 			new Note(Natural.valueOf(4 * 12)),
-			EqualTemperamentTuningSystem.TWELVE_TONE);
+			EqualTemperament.TWELVE_TONE);
 
 	/**
 	Represents the twelve-tone concert pitch system where A<sub>4</sub> is tuned to 440 Hz.
 	**/
 	public static final PitchSystem STANDARD = new PitchSystem(440,
 			new Note(Natural.valueOf(4 * 12 + 9)),
-			EqualTemperamentTuningSystem.TWELVE_TONE);
+			EqualTemperament.TWELVE_TONE);
 
 	/**
 	The frequency of the note that's used to define the rest.
@@ -73,7 +73,7 @@ public final class PitchSystem implements Serializable {
 	@param baseFrequency The base frequency.
 	**/
 	public PitchSystem(final double baseFrequency) {
-		this(baseFrequency, Note.C0, EqualTemperamentTuningSystem.TWELVE_TONE);
+		this(baseFrequency, Note.C0, EqualTemperament.TWELVE_TONE);
 	}
 
 	/**

@@ -18,6 +18,11 @@ public final class Sequence implements Serializable {
 	public final java.lang.String name;
 
 	/**
+	The tuning system this sequence uses.
+	**/
+	public final TuningSystem tuningSystem;
+
+	/**
 	The instrument this sequence is for or <code>null</code>.
 	**/
 	public final Instrument instrument;
@@ -31,11 +36,13 @@ public final class Sequence implements Serializable {
 	Constructs a new sequence of tunings for a specific instrument.
 
 	@param name The name.
+	@param tuningSystem The tuning system.
 	@param instrument The instrument.
 	**/
-	public Sequence(final java.lang.String name, final Instrument instrument) {
+	public Sequence(final java.lang.String name, final TuningSystem tuningSystem, final Instrument instrument) {
 		if (name == null) throw new IllegalArgumentException();
 		this.name = name;
+		this.tuningSystem = tuningSystem;
 		this.instrument = instrument;
 		tunings = new LinkedList<Tuning>();
 	}
@@ -44,8 +51,9 @@ public final class Sequence implements Serializable {
 	Constructs a new sequence of tunings for any instrument.
 
 	@param name The name.
+	@param tuningSystem The tuning system.
 	**/
-	public Sequence(final java.lang.String name) {
-		this(name, null);
+	public Sequence(final java.lang.String name, final TuningSystem tuningSystem) {
+		this(name, tuningSystem, null);
 	}
 }

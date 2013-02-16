@@ -9,11 +9,11 @@ Represents the equal temperament tuning system in which
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public class EqualTemperamentTuningSystem implements TuningSystem {
+public class EqualTemperament implements TuningSystem {
 	/**
 	The twelve-tone tuning system.
 	**/
-	public static final TuningSystem TWELVE_TONE = new EqualTemperamentTuningSystem(12);
+	public static final TuningSystem TWELVE_TONE = new EqualTemperament(12);
 
 	/**
 	The amount of semitones in an octave.
@@ -25,7 +25,7 @@ public class EqualTemperamentTuningSystem implements TuningSystem {
 
 	@param semitonesInOctave The amount of semitones in an octave.
 	**/
-	public EqualTemperamentTuningSystem(final int semitonesInOctave) {
+	public EqualTemperament(final int semitonesInOctave) {
 		this.semitonesInOctave = semitonesInOctave;
 	}
 

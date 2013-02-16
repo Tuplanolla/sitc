@@ -45,7 +45,7 @@ The panel has the following structural hierarchy:
 public final class SequenceEditorPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	private final SequenceEditorMagicPanel magicPanel;
+	private final SequenceMagicPanel magicPanel;
 
 	/**
 	Constructs a new panel.
@@ -77,7 +77,7 @@ public final class SequenceEditorPanel extends JPanel {
 		somePanel.add(titledNamePanel, BorderLayout.NORTH);
 		somePanel.add(titledSequencePanel, BorderLayout.CENTER);
 
-		magicPanel = new SequenceEditorMagicPanel();
+		magicPanel = new SequenceMagicPanel();
 
 		final JScrollPane scrollPane = new JScrollPane(magicPanel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

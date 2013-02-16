@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.sitdb.util.Natural;
-import org.sitdb.util.Numeric;
-import org.sitdb.util.Rational;
+import org.sitdb.math.Natural;
+import org.sitdb.math.Numeric;
+import org.sitdb.math.Rational;
 
 /**
 Represents an immutable note as a distance from C<sub>0</sub>.
@@ -65,8 +65,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	@param microtones The distance in microtones.
 	**/
 	public Note(Natural semitones, Rational microtones) {
-		final Rational minusOne = Rational.ONE.opposite();
-		while (microtones.compareTo(minusOne) <= 0) {
+		while (microtones.compareTo(Rational.MINUS_ONE) <= 0) {
 			semitones = semitones.subtract(Natural.ONE);
 			microtones = microtones.add(Rational.ONE);
 		}
@@ -131,15 +130,29 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	}
 
 	/**
-	Parses a character as the sign part of a note.
+	Parses a character as the octave sign part of a note.
 
 	@param character The character.
 	@return The sign.
 	**/
-	private static int parseSign(final char character) throws NumberFormatException {
+	private static int parseSubscriptSign(final char character) throws NumberFormatException {
 		switch (character) {
 		case '+': case '\u208a': return +1;
 		case '-': case '\u208b': return -1;
+		default: throw new NumberFormatException();
+		}
+	}
+
+	/**
+	Parses a character as the microtonal sign part of a note.
+
+	@param character The character.
+	@return The sign.
+	**/
+	private static int parseSuperscriptSign(final char character) throws NumberFormatException {
+		switch (character) {
+		case '+': case '\u207a': return +1;
+		case '-': case '\u207b': return -1;
 		default: throw new NumberFormatException();
 		}
 	}
@@ -241,7 +254,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	@return The note.
 	@throws NumberFormatException If the string couldn't be parsed.
 	**/
-	public static Note parse(final java.lang.String string) throws NumberFormatException {
+	public static Note parse(final java.lang.String string) throws NumberFormatException {//TODO outsource
 		final Matcher matcher = LENIENT_PATTERN.matcher(string);
 		if (!matcher.matches()) throw new NumberFormatException();
 
@@ -253,7 +266,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 		final int octaveSign;
 		if (matcher.group(3).isEmpty()) octaveSign = 1;
-		else octaveSign = parseSign(matcher.group(3).charAt(0));
+		else octaveSign = parseSubscriptSign(matcher.group(3).charAt(0));
 
 		final int octave = octaveSign * parseSubscripts(matcher.group(4));
 
@@ -263,7 +276,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 		final int dividendSign;
 		if (matcher.group(5).isEmpty()) dividendSign = 1;
-		else dividendSign = parseSign(matcher.group(5).charAt(0));
+		else dividendSign = parseSuperscriptSign(matcher.group(5).charAt(0));
 
 		final int dividend = dividendSign * parseSubscripts(matcher.group(6));
 
@@ -275,7 +288,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 		final int divisorSign;
 		if (matcher.group(8).isEmpty()) divisorSign = 1;
-		else divisorSign = parseSign(matcher.group(8).charAt(0));
+		else divisorSign = parseSuperscriptSign(matcher.group(8).charAt(0));
 
 		final int divisor = divisorSign * parseSuperscripts(matcher.group(9));
 

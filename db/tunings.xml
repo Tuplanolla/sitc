@@ -3,34 +3,7 @@
 	<tuning>
 		<name>Standard</name>
 		<notes>
-			<note>E3</note>
-			<note>A3</note>
-			<note>D4</note>
-			<note>G4</note>
-			<note>B4</note>
-			<note>E5</note>
-		</notes>
-	</tuning>
-	<tuning>
-		<name>Perfect Fourth Baritone</name>
-		<notes>
-			<note>B2</note>
-			<note>E3</note>
-			<note>A3</note>
-			<note>D4</note>
-			<note>F#4</note>
-			<note>B4</note>
-		</notes>
-	</tuning>
-	<tuning>
-		<name>Quarter Semitone Raised Open C</name>
-		<notes>
-			<note>C3(1/4)</note>
-			<note>G3(2/8)</note>
-			<note>C4(4\1)</note>
-			<note>G4(+1/4)</note>
-			<note>C5(1/+4)</note>
-			<note>E5(-1/-4)</note>
+			<note>C4</note>
 		</notes>
 	</tuning>
 	<tuning>
@@ -49,6 +22,46 @@
 			<note>A2</note>
 			<note>D3</note>
 			<note>G3</note>
+		</notes>
+	</tuning>
+	<tuning>
+		<name>Open C</name>
+		<notes>
+			<note>C2</note>
+			<note>G2</note>
+			<note>C3</note>
+			<note>G3</note>
+		</notes>
+	</tuning>
+	<tuning>
+		<name>Step Down</name>
+		<notes>
+			<note>D2</note>
+			<note>G2</note>
+			<note>C3</note>
+			<note>F3</note>
+		</notes>
+	</tuning>
+	<tuning>
+		<name>Standard</name>
+		<notes>
+			<note>E3</note>
+			<note>A3</note>
+			<note>D4</note>
+			<note>G4</note>
+			<note>B4</note>
+			<note>E5</note>
+		</notes>
+	</tuning>
+	<tuning>
+		<name>Quarter Semitone Raised Nashville</name>
+		<notes>
+			<note>E4+1/4</note>
+			<note>A4+2/8</note>
+			<note>D5+4\1</note>
+			<note>G5 1/4</note>
+			<note>B4+1/+4</note>
+			<note>E5-1/-4</note>
 		</notes>
 	</tuning>
 </tunings>

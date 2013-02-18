@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <instruments>
 	<instrument>
-		<name>Fender American Standard Stratocaster Electric Guitar</name>
+		<name>Soprano Ektara</name>
 		<strings>
 			<string>
-				<density>0.2</density>
-				<length>64.8</length>
+				<density>0.4</density>
+				<length>58.4</length>
 			</string>
-			<!--...-->
 		</strings>
 	</instrument>
 	<instrument>
 		<name>Fender American Standard Jazz Bass</name>
 		<strings>
-			<!--...-->
+			<string>
+				<density>6</density>
+				<length>86.4</length>
+			</string>
+			<string>
+				<density>5</density>
+				<length>86.2</length>
+			</string>
+			<string>
+				<density>4</density>
+				<length>86.0</length>
+			</string>
+			<string>
+				<density>3</density>
+				<length>85.8</length>
+			</string>
 		</strings>
 	</instrument>
 </instruments>

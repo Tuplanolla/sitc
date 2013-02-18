@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequences>
+	<sequence>
+		<name>Guitar Destroyer</name>
+		<strings>6</strings>
+		<tunings>
+			<tuning hash="">Standard</tuning>
+			<tuning hash="">Baritone</tuning>
+			<tuning hash="">Standard</tuning>
+			<tuning hash="">Baritone</tuning>
+			<tuning hash="">Standard</tuning>
+			<!--...-->
+		</tunings>
+	</sequence>
+	<sequence>
+		<name>Practice</name>
+		<strings>4</strings>
+		<instrument hash="">Fender American Standard Jazz Bass</instrument>
+		<tunings>
+			<tuning hash="">Standard</tuning>
+			<tuning hash="">Open C</tuning>
+			<tuning hash="">Step Down</tuning>
+			<tuning hash="">Dropped D</tuning>
+		</tunings>
+	</sequence>
+</sequences>

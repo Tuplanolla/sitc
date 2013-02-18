@@ -23,7 +23,7 @@ public final class Main implements Runnable {
 	@param arguments The command line arguments.
 	**/
 	public Main(final String[] arguments) {
-		final String[] array = new String[arguments.length]; 
+		final String[] array = new String[arguments.length];
 		System.arraycopy(arguments, 0, array, 0, arguments.length);
 		this.arguments = Collections.unmodifiableList(Arrays.asList(array));
 	}

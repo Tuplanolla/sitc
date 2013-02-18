@@ -5,72 +5,66 @@ import java.io.Serializable;
 /**
 Represents an exact immutable transfinite integer.
 
-The name <code>Natural</code> was chosen solely to
- avoid confusion with <code>java.lang.Integer</code> and
- doesn't imply that the numbers can't be negative.
-
 @see Scalar
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, Serializable {
+public class Integer implements Numeric, Scalar<Integer>, Comparable<Integer>, Serializable {
 	private static final long serialVersionUID = 1l;
 
 	/**
 	The smallest finite integer <i>-2<sup>31</sup>+2</i> accepted by the constructor.
 	**/
-	public static final int MIN_PARAM_VALUE = -Integer.MAX_VALUE + 1;
+	public static final int MIN_PARAM_VALUE = -java.lang.Integer.MAX_VALUE + 1;
 
 	/**
 	The biggest finite integer <i>2<sup>31</sup>-1</i> accepted by the constructor.
 	**/
-	public static final int MAX_PARAM_VALUE = Integer.MAX_VALUE - 1;
+	public static final int MAX_PARAM_VALUE = java.lang.Integer.MAX_VALUE - 1;
 
 	/**
 	The integer representing <i>0</i>.
 	**/
-	public static final Natural ZERO = new Natural(0);
+	public static final Integer ZERO = new Integer(0);
 
 	/**
 	The integer representing <i>1</i>.
 	**/
-	public static final Natural ONE = new Natural(1);
+	public static final Integer ONE = new Integer(1);
 
 	/**
 	The integer representing <i>-1</i>.
 	**/
-	public static final Natural MINUS_ONE = new Natural(-1);
+	public static final Integer MINUS_ONE = new Integer(-1);
 
 	/**
 	The smallest finite integer <i>-2<sup>31</sup>+2</i>.
 	**/
-	public static final Natural MIN_VALUE = new Natural(MIN_PARAM_VALUE);
+	public static final Integer MIN_VALUE = new Integer(MIN_PARAM_VALUE);
 
 	/**
 	The biggest finite integer <i>2<sup>31</sup>-1</i>.
 	**/
-	public static final Natural MAX_VALUE = new Natural(MAX_PARAM_VALUE);
+	public static final Integer MAX_VALUE = new Integer(MAX_PARAM_VALUE);
 
 	/**
 	The smallest infinite integer <i>-&infin;</i>.
 	**/
-	public static final Natural NEGATIVE_INFINITY = new Natural(MIN_PARAM_VALUE - 1);
+	public static final Integer NEGATIVE_INFINITY = new Integer(MIN_PARAM_VALUE - 1);
 
 	/**
 	The biggest infinite integer <i>&infin;</i>.
 	**/
-	public static final Natural POSITIVE_INFINITY = new Natural(MAX_PARAM_VALUE + 1);
+	public static final Integer POSITIVE_INFINITY = new Integer(MAX_PARAM_VALUE + 1);
 
 	/**
 	An indeterminate integer <i>NaN</i>.
 	**/
-	public static final Natural NaN = new Natural(MIN_PARAM_VALUE - 2);
+	public static final Integer NaN = new Integer(MIN_PARAM_VALUE - 2);
 
 	/**
 	The raw value of the integer.
 
 	The smallest value is reserved for <i>NaN</i>, the second smallest value for <i>-&infin;</i> and the biggest value for <i>&infin;</i>.
-
-	@serial
 	**/
 	private final int value;
 
@@ -79,7 +73,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 
 	@param value The value of the new integer.
 	**/
-	private Natural(final int value) {
+	private Integer(final int value) {
 		this.value = value;
 	}
 
@@ -89,11 +83,11 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	@param value The value of the new integer.
 	@return The new integer.
 	**/
-	public static Natural valueOf(final int value) {
+	public static Integer valueOf(final int value) {
 		if (value == 0) return ZERO;
 		if (value < MIN_PARAM_VALUE) return NEGATIVE_INFINITY;
 		if (value > MAX_PARAM_VALUE) return POSITIVE_INFINITY;
-		return new Natural(value);
+		return new Integer(value);
 	}
 
 	/**
@@ -102,7 +96,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	If this integer is indeterminate or infinite anything may be returned.
 
 	@return The value.
-	@see Natural#intValue()
+	@see #intValue()
 	**/
 	public int get() {
 		return value;
@@ -119,7 +113,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	}
 
 	@Override
-	public Natural opposite() {
+	public Integer opposite() {
 		if (this == NaN) return NaN;
 		if (this == ZERO) return ZERO;
 		if (this == NEGATIVE_INFINITY) return POSITIVE_INFINITY;
@@ -128,7 +122,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	}
 
 	@Override
-	public Natural reciprocal() {
+	public Integer reciprocal() {
 		if (this == NaN) return NaN;
 		if (this == ZERO) return POSITIVE_INFINITY;//loses the sign
 		if (this == NEGATIVE_INFINITY || this == POSITIVE_INFINITY) return ZERO;
@@ -137,7 +131,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	}
 
 	@Override
-	public Natural add(final Natural natural) {
+	public Integer add(final Integer natural) {
 		if (this == NaN || natural == NaN) return NaN;
 		if (this == ZERO) return natural;
 		if (this == NEGATIVE_INFINITY) {
@@ -158,12 +152,12 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	}
 
 	@Override
-	public Natural subtract(final Natural natural) {
+	public Integer subtract(final Integer natural) {
 		return add(natural.opposite());
 	}
 
 	@Override
-	public Natural multiply(final Natural natural) {
+	public Integer multiply(final Integer natural) {
 		if (this == NaN || natural == NaN) return NaN;
 		if (this == ZERO) {
 			if (natural == NEGATIVE_INFINITY || natural == POSITIVE_INFINITY) return NaN;
@@ -195,7 +189,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	}
 
 	@Override
-	public Natural divide(final Natural natural) {
+	public Integer divide(final Integer natural) {
 		if (this == NaN || natural == NaN) return NaN;
 		if (this == ZERO) {
 			if (natural == ZERO) return NaN;
@@ -228,7 +222,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	}
 
 	@Override
-	public Natural abs() {
+	public Integer abs() {
 		if (this == NaN) return NaN;
 		if (this == ZERO) return ZERO;
 		if (this == NEGATIVE_INFINITY || this == POSITIVE_INFINITY) return POSITIVE_INFINITY;
@@ -245,7 +239,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	}
 
 	@Override
-	public Natural sqrt() {
+	public Integer sqrt() {
 		if (this == NaN) return NaN;
 		if (this == ZERO) return ZERO;
 		if (this == NEGATIVE_INFINITY) return NEGATIVE_INFINITY;
@@ -256,7 +250,7 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 	}
 
 	@Override
-	public Natural square() {
+	public Integer square() {
 		if (this == NaN) return NaN;
 		if (this == ZERO) return ZERO;
 		if (this == NEGATIVE_INFINITY) return NEGATIVE_INFINITY;
@@ -323,16 +317,8 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 		return value;
 	}
 
-	/**
-	Compares this integer to another integer.
-
-	@param natural The other integer.
-	@return <i>-1</i> if the this integer is smaller than the other integer, <i>+1</i> if this integer is bigger than the other integer and <i>0</i> otherwise.
-	@throws NullPointerException If the other integer is <code>null</code>.
-	@throws ArithmeticException If either of the integers is indeterminate.
-	**/
 	@Override
-	public int compareTo(final Natural natural) {
+	public int compareTo(final Integer natural) {
 		if (natural == this) return 0;
 		if (natural == null) throw new NullPointerException("Can't compare a natural number to null.");
 		if (this == NaN || natural == NaN) throw new ArithmeticException("Can't compare a natural number to a natural not-a-number.");
@@ -349,68 +335,25 @@ public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, S
 		return 0;
 	}
 
-	/**
-	Equates this integer to an object.
-
-	@param object The object.
-	@return True if this integer is equal to the object and false otherwise.
-	@throws NullPointerException If the object is <code>null</code>.
-	**/
 	@Override
 	public boolean equals(final Object object) {
 		if (object == this) return true;
 		if (object == null) throw new NullPointerException("Can't equate a natural number with null.");
 		if (object.getClass() != this.getClass()) return false;
-		final Natural natural = (Natural )object;
+		final Integer natural = (Integer )object;
 		return natural.value == value;
 	}
 
-	/**
-	Returns the hash code of this integer.
-
-	@return The hash code.
-	**/
 	@Override
 	public int hashCode() {
 		return value;
 	}
 
-	/**
-	Returns the string representation of this integer.
-
-	@return The string.
-	**/
 	@Override
 	public String toString() {
 		if (this == NaN) return String.valueOf(Double.NaN);
 		if (this == NEGATIVE_INFINITY) return String.valueOf(Double.NEGATIVE_INFINITY);
 		if (this == POSITIVE_INFINITY) return String.valueOf(Double.POSITIVE_INFINITY);
 		return String.valueOf(value);
-	}
-
-	/**
-	Tests the class.
-
-	@param arguments Command line arguments are ignored.
-	@throws AssertionError If the tests fail.
-	**/
-	public static void main(final String[] arguments) {
-		assert valueOf(2).equals(valueOf(2)) : "Failed to equate.";
-		assert valueOf(2).compareTo(valueOf(3)) == -1 : "Failed to compare.";
-		assert valueOf(0).divide(valueOf(0)) == NaN : "Failed to construct a not-a-number.";
-		assert valueOf(2).divide(valueOf(0)) == POSITIVE_INFINITY : "Failed to construct an infinite number.";
-		assert valueOf(2).opposite().equals(valueOf(-2)) : "Failed to invert.";
-		assert valueOf(2).add(valueOf(3)).equals(valueOf(5)) : "Failed to add.";
-		assert valueOf(2).subtract(valueOf(3)).equals(valueOf(-1)) : "Failed to subtract.";
-		assert valueOf(2).multiply(valueOf(3)).equals(valueOf(6)) : "Failed to multiply.";
-		assert valueOf(4).divide(valueOf(2)).equals(valueOf(2)) : "Failed to divide.";
-		assert valueOf(-2).abs().equals(valueOf(2)) : "Failed to find the absolute value.";
-		assert valueOf(-2).signum() == -1 && valueOf(2).signum() == +1 : "Failed to find the sign.";
-		assert valueOf(4).sqrt().equals(valueOf(2)) : "Failed to find the square root.";
-		assert valueOf(-2).square().equals(valueOf(4)) : "Failed to find the square.";
-		assert valueOf(MIN_PARAM_VALUE).subtract(valueOf(1)) == NEGATIVE_INFINITY : "Failed to overflow.";
-		assert valueOf(2).add(NaN).multiply(valueOf(3)).equals(NaN) : "Failed to operate on a not-a-number.";
-		assert valueOf(2).add(POSITIVE_INFINITY).multiply(valueOf(3)).equals(POSITIVE_INFINITY) : "Failed to operate on an infinite number.";
-		assert valueOf(-2).intValue() == -2 : "Failed to convert to a primitive integer.";
 	}
 }

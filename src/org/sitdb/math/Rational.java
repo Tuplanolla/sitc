@@ -14,12 +14,12 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 	/**
 	The smallest finite dividend or divisor <i>-2<sup>31</sup>+1</i>.
 	**/
-	public static final int MIN_PARAM_VALUE = -Integer.MAX_VALUE;
+	public static final int MIN_PARAM_VALUE = -java.lang.Integer.MAX_VALUE;
 
 	/**
 	The biggest finite dividend or divisor <i>2<sup>31</sup>-1</i>.
 	**/
-	public static final int MAX_PARAM_VALUE = Integer.MAX_VALUE;
+	public static final int MAX_PARAM_VALUE = java.lang.Integer.MAX_VALUE;
 
 	/**
 	The rational representing <i>0</i>.
@@ -63,22 +63,18 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 
 	/**
 	The raw numerator of the rational.
-
-	@serial
 	**/
 	private final int dividend;
 
 	/**
 	The raw denominator of the rational.
-
-	@serial
 	**/
 	private final int divisor;
 
 	/**
 	Returns the greatest common divisor of two primitive integers.
 
-	The integers must lie between <i>-2<sup>31</sup>+1</i> and <i>2<sup>31</sup>-1</i>.
+	The integers must lie between -2<sup>31</sup>+1 and 2<sup>31</sup>-1.
 
 	@param first The first integer.
 	@param second The second integer.
@@ -98,8 +94,7 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 		if ((first & 1) == 0) either = first >> 1;
 		else either = -second;
 		do {//converted from a recursive algorithm
-			while ((either & 1) == 0)
-				either >>= 1;
+			while ((either & 1) == 0) either >>= 1;
 			if (either > 0) first = either;
 			else second = -either;
 			either = first - second >> 1;
@@ -420,14 +415,6 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 		return (float )dividend / (float )divisor;
 	}
 
-	/**
-	Compares this rational to another rational.
-
-	@param rational The other rational.
-	@return <i>-1</i> if the this rational is smaller than the other rational, <i>+1</i> if this rational is bigger than the other rational and <i>0</i> otherwise.
-	@throws NullPointerException If the other rational is <code>null</code>.
-	@throws ArithmeticException If either of the rationals is indeterminate.
-	**/
 	@Override
 	public int compareTo(final Rational rational) {
 		if (rational == this) return 0;
@@ -449,13 +436,6 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 		return 0;
 	}
 
-	/**
-	Equates this rational to an object.
-
-	@param object The object.
-	@return True if this rational is equal to the object and false otherwise.
-	@throws NullPointerException If the object is <code>null</code>.
-	**/
 	@Override
 	public boolean equals(final Object object) {
 		if (object == this) return true;
@@ -465,21 +445,11 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 		return rational.dividend == dividend && rational.divisor == divisor;
 	}
 
-	/**
-	Returns the hash code of this rational.
-
-	@return The hash code.
-	**/
 	@Override
 	public int hashCode() {
 		return dividend + 31 * divisor;
 	}
 
-	/**
-	Returns the string representation of this rational.
-
-	@return The string.
-	**/
 	@Override
 	public String toString() {
 		if (this == NaN) return String.valueOf(Double.NaN);
@@ -488,33 +458,5 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 		if (this == POSITIVE_INFINITY) return String.valueOf(Double.POSITIVE_INFINITY);
 		if (divisor == 1) return String.valueOf(dividend);
 		return dividend + "/" + divisor;
-	}
-
-	/**
-	Tests the class.
-
-	@param arguments Command line arguments are ignored.
-	@throws AssertionError If the tests fail.
-	**/
-	public static void main(final String[] arguments) {
-		assert valueOf(2, 3).equals(valueOf(2, 3)) : "Failed to equate.";
-		assert valueOf(2, 3).compareTo(valueOf(4, 5)) == -1 : "Failed to compare.";
-		assert valueOf(0, 0) == NaN : "Failed to construct a not-a-number.";
-		assert valueOf(2, 0) == POSITIVE_INFINITY : "Failed to construct an infinite number.";
-		assert valueOf(2, 4).equals(valueOf(1, 2)) : "Failed to simplify.";
-		assert valueOf(2, -3).equals(valueOf(-2, 3)) && valueOf(-2, -3).equals(valueOf(2, 3)) : "Failed to propagate the sign.";
-		assert valueOf(2, 3).opposite().equals(valueOf(-2, 3)) && valueOf(2, 3).reciprocal().equals(valueOf(3, 2)) : "Failed to invert.";
-		assert valueOf(2, 3).add(valueOf(4, 5)).equals(valueOf(22, 15)) : "Failed to add.";
-		assert valueOf(2, 3).subtract(valueOf(4, 5)).equals(valueOf(-2, 15)) : "Failed to subtract.";
-		assert valueOf(2, 3).multiply(valueOf(4, 5)).equals(valueOf(8, 15)) : "Failed to multiply.";
-		assert valueOf(2, 3).divide(valueOf(4, 5)).equals(valueOf(5, 6)) : "Failed to divide.";
-		assert valueOf(-2, 3).abs().equals(valueOf(2, 3)) : "Failed to find the absolute value.";
-		assert valueOf(-2, 3).signum() == -1 && valueOf(2, 3).signum() == +1 : "Failed to find the sign.";
-		assert valueOf(4, 9).sqrt().equals(valueOf(2, 3)) : "Failed to find the square root.";
-		assert valueOf(-2, 3).square().equals(valueOf(4, 9)) : "Failed to find the square.";
-		assert valueOf(MIN_PARAM_VALUE, 1).subtract(valueOf(1, 1)) == NEGATIVE_INFINITY : "Failed to overflow.";
-		assert valueOf(2, 3).add(NaN).multiply(valueOf(4, 5)).equals(NaN) : "Failed to operate on a not-a-number.";
-		assert valueOf(2, 3).add(POSITIVE_INFINITY).multiply(valueOf(4, 5)).equals(POSITIVE_INFINITY) : "Failed to operate on an infinite number.";
-		assert valueOf(-2, 1).intValue() == -2 : "Failed to convert to a primitive integer.";
 	}
 }

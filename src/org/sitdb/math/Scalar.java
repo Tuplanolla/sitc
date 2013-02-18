@@ -11,7 +11,7 @@ The methods never throw exceptions, but instead overflow to
   values.
 
 @param <Type> The type of the number.
-@see Natural
+@see Integer
 @see Rational
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

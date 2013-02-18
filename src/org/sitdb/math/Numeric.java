@@ -5,7 +5,7 @@ Outlines basic conversions to numeric types and is implemented by
  all numeric classes and
  their containers.
 
-@see Natural
+@see Integer
 @see Rational
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

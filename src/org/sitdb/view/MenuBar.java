@@ -11,7 +11,7 @@ Represents a menu panel.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = 5495273314694096920l;
+	private static final long serialVersionUID = 1l;
 
 	private final JMenuItem exitMenuItem;
 	private final JCheckBoxMenuItem microtonalMenuCheckbox;

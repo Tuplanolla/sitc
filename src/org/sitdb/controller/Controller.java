@@ -1,12 +1,16 @@
-package org.sitdb;
+package org.sitdb.controller;
+
+import org.sitdb.Part;
+import org.sitdb.model.Model;
+import org.sitdb.view.View;
 
 
 /**
-Represents a pointless controller.
+Represents an immutable controller.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Controller {
+public final class Controller implements Part {
 	private final Model model;
 	private final View view;
 
@@ -95,6 +99,7 @@ public final class Controller {
 	}
 	*/
 
+	@Override
 	public void activate() {
 		//addTestControls();
 	}

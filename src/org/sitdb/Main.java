@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.sitdb.controller.Controller;
+import org.sitdb.model.Model;
+import org.sitdb.view.View;
+
 /**
 Serves as the main entry point.
 

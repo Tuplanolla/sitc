@@ -14,7 +14,7 @@ Represents an immutable note as a distance from C<sub>0</sub>.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Note implements Numeric, Comparable<Note>, Serializable {
-	private static final long serialVersionUID = 3843295524835957841l;
+	private static final long serialVersionUID = 1l;
 
 	/**
 	The string pattern for the parser that doesn't allow spaces.

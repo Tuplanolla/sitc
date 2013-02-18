@@ -10,7 +10,7 @@ Represents a mutable sequence of tunings.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Sequence implements Serializable {
-	private static final long serialVersionUID = 998214478284717463l;
+	private static final long serialVersionUID = 1l;
 
 	/**
 	The name of this sequence.

@@ -10,7 +10,7 @@ Represents a mutable instrument.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Instrument implements Serializable {
-	private static final long serialVersionUID = 6451285864377938696l;
+	private static final long serialVersionUID = 1l;
 
 	/**
 	The name of this instrument.

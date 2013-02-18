@@ -11,7 +11,7 @@ Represents a mutable tuning.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Tuning implements Serializable {
-	private static final long serialVersionUID = 4640012830741353240l;
+	private static final long serialVersionUID = 1l;
 
 	/**
 	The name of this tuning.

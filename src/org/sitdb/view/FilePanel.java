@@ -15,7 +15,7 @@ Represents a panel that's used to load and save data.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class FilePanel extends JPanel {
-	private static final long serialVersionUID = 1569711177821808903l;
+	private static final long serialVersionUID = 1l;
 
 	private final JTextField pathTextField;
 	private final JButton browseButton;

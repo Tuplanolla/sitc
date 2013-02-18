@@ -15,7 +15,7 @@ Represents a panel that does something.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class ExtendedInterfacePanel extends JPanel {
-	private static final long serialVersionUID = 6930879354977115881l;
+	private static final long serialVersionUID = 1l;
 
 	private final JButton useButton,
 			discardButton;

@@ -28,7 +28,7 @@ The window has the following structural hierarchy:
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class MainFrame extends JFrame {
-	private static final long serialVersionUID = 2641621164911831151l;
+	private static final long serialVersionUID = 1l;
 
 	private final MenuBar menuPanel;
 	private final MainPanel mainPanel;

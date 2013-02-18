@@ -1,16 +1,17 @@
-package org.sitdb;
+package org.sitdb.view;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.sitdb.view.MainFrame;
+import org.sitdb.Part;
+import org.sitdb.model.Model;
 
 /**
 Represents an immutable view.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class View {
+public final class View implements Part {
 	private final Model model;
 
 	/**
@@ -22,9 +23,7 @@ public final class View {
 		this.model = model;
 	}
 
-	/**
-	Sets the look and feel and creates the main window.
-	**/
+	@Override
 	public void activate() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

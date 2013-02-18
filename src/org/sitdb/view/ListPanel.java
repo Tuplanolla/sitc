@@ -19,7 +19,7 @@ Represents a panel that's used to manage a local copy of data.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class ListPanel extends JPanel {
-	private static final long serialVersionUID = 1363814333182518609l;
+	private static final long serialVersionUID = 1l;
 
 	private final JTextField searchTextField;
 	private final JButton searchButton;

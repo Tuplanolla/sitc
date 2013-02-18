@@ -8,7 +8,7 @@ Represents an immutable string of an instrument.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class String implements Serializable {
-	private static final long serialVersionUID = 5727511354229731815l;
+	private static final long serialVersionUID = 1l;
 
 	/**
 	The vibrating length of this string.

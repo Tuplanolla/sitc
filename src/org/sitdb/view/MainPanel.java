@@ -35,7 +35,7 @@ The panel has the following structural hierarchy:
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class MainPanel extends JSplitPane {
-	private static final long serialVersionUID = 7394003596145374355l;
+	private static final long serialVersionUID = 1l;
 
 	private final ManagerPanel instrumentManagerPanel;
 	private final ManagerPanel tuningManagerPanel;

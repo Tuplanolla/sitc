@@ -9,7 +9,7 @@ Represents an exact immutable transfinite rational.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>, Serializable {
-	private static final long serialVersionUID = 1296295622916634130l;
+	private static final long serialVersionUID = 1l;
 
 	/**
 	The smallest finite dividend or divisor <i>-2<sup>31</sup>+1</i>.

@@ -13,7 +13,7 @@ The name <code>Natural</code> was chosen solely to
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public class Natural implements Numeric, Scalar<Natural>, Comparable<Natural>, Serializable {
-	private static final long serialVersionUID = 5889084946555354348l;
+	private static final long serialVersionUID = 1l;
 
 	/**
 	The smallest finite integer <i>-2<sup>31</sup>+2</i> accepted by the constructor.

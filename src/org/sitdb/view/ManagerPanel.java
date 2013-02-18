@@ -38,7 +38,7 @@ The panel has the following structural hierarchy:
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class ManagerPanel extends JPanel {
-	private static final long serialVersionUID = 7145893573631860866l;
+	private static final long serialVersionUID = 1l;
 
 	private final JButton loadButton,
 			saveButton;

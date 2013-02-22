@@ -24,8 +24,8 @@ The behavior of the clusters can be modified with three variables:
 
 A full cluster in a list with
  a cluster capacity <code>c</code> of 8,
- a load factor <code>l</code> of 0.625 and
- a stability factor <code>s</code> of 0.125
+ a load factor <code>l</code> of 0.75 and
+ a stability factor <code>s</code> of 0.25
   is as follows:
 
 <pre>
@@ -33,14 +33,11 @@ A full cluster in a list with
 +-+-+-+-+-+-+-+-+
 | | | | | | | | |
 +-+-+-+-+-+-+-+-+
-         ^ ^ ^   ^
-         | | |   |
-         | | |   `- c
-         | `-+- l * c
-         |   |
-         |   `- (l + s) * c
+         ^   ^   ^
+         |   |   |
+         |   |   `- c
+         |   `- l * c
          `- (l - s) * c
-</pre>
 
 @param <Type> The type of the elements.
 @author Sampsa "Tuplanolla" Kiiskinen

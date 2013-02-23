@@ -33,7 +33,7 @@ public final class Sequence implements Serializable {
 	public final List<Tuning> tunings;
 
 	/**
-	Constructs a new sequence of tunings for a specific instrument.
+	Creates a sequence of tunings for a specific instrument.
 
 	@param name The name.
 	@param tuningSystem The tuning system.
@@ -48,7 +48,7 @@ public final class Sequence implements Serializable {
 	}
 
 	/**
-	Constructs a new sequence of tunings for any instrument.
+	Creates a sequence of tunings for any instrument.
 
 	@param name The name.
 	@param tuningSystem The tuning system.

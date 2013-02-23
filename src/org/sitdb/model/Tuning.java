@@ -24,7 +24,7 @@ public final class Tuning implements Serializable {
 	public final List<Note> notes;
 
 	/**
-	Constructs a new tuning.
+	Creates a tuning.
 
 	@param name The name.
 	**/

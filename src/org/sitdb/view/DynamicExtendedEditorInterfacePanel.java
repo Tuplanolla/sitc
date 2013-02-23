@@ -10,11 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
-Is an alternative to the static <code>ExtendedInterfacePanel</code>.
+Is an alternative to the static <code>ExtendedEditorInterfacePanel</code>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class DynamicExtendedInterfacePanel extends JPanel {
+@Deprecated
+public final class DynamicExtendedEditorInterfacePanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
 	private final JButton useButton,
@@ -25,9 +26,9 @@ public final class DynamicExtendedInterfacePanel extends JPanel {
 			applyButton;
 
 	/**
-	Constructs a new panel.
+	Creates a panel.
 	**/
-	public DynamicExtendedInterfacePanel() {
+	public DynamicExtendedEditorInterfacePanel() {
 		super(new GridBagLayout());
 
 		useButton = new JButton("Use Instrument");

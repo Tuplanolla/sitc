@@ -26,7 +26,7 @@ public final class String implements Serializable {
 	public final double maximumTension;
 
 	/**
-	Constructs a new string with a tension limit.
+	Creates a string with a tension limit.
 
 	@param vibratingLength The vibrating length.
 	@param linearDensity The linear density.
@@ -41,7 +41,7 @@ public final class String implements Serializable {
 	}
 
 	/**
-	Constructs a new string without a tension limit.
+	Creates a string without a tension limit.
 
 	@param vibratingLength The vibrating length.
 	@param linearDensity The linear density.
@@ -52,7 +52,7 @@ public final class String implements Serializable {
 	}
 
 	/**
-	Constructs a new string with a tension limit.
+	Creates a string with a tension limit.
 
 	@param vibratingLength The vibrating length.
 	@param mass The total mass.
@@ -67,7 +67,7 @@ public final class String implements Serializable {
 	}
 
 	/**
-	Constructs a new string without a tension limit.
+	Creates a string without a tension limit.
 
 	@param vibratingLength The vibrating length.
 	@param mass The total mass.
@@ -80,7 +80,7 @@ public final class String implements Serializable {
 	}
 
 	/**
-	Constructs a new string with a tension limit.
+	Creates a string with a tension limit.
 
 	@param vibratingLength The vibrating length.
 	@param density The density (mass per unit volume) of the material.
@@ -97,7 +97,7 @@ public final class String implements Serializable {
 	}
 
 	/**
-	Constructs a new string without a tension limit.
+	Creates a string without a tension limit.
 
 	@param vibratingLength The vibrating length.
 	@param density The density (mass per unit volume) of the material.

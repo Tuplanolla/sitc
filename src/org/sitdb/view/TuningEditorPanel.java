@@ -10,86 +10,98 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 /**
-The panel has the following structural hierarchy:
-
-<pre>
-+--------------------+
-| TuningPanel        |
-| +----------------+ |
-| | JPanel         | |
-| +----------------+ |
-| +----------------+ |
-| | JPanel         | |
-| | +------------+ | |
-| | | JPanel     | | |
-| | +------------+ | |
-| | +------------+ | |
-| | | MagicPanel | | |
-| | +------------+ | |
-| | +------------+ | |
-| | | PortPanel  | | |
-| | +------------+ | |
-| +----------------+ |
-+--------------------+
-</pre>
+Represents a tuning editor panel.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class TuningEditorPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
+	private final EditorInterfacePanel interfacePanel;
 	private final TuningMagicPanel magicPanel;
+	private final PortPanel portPanel;
 
 	/**
-	Constructs a new panel.
+	Creates a tuning editor panel.
 	**/
 	public TuningEditorPanel() {
 		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
-		final JTextField midiTextField = new JTextField();
+			interfacePanel = new EditorInterfacePanel();
 
-		final JPanel midiPanel = new JPanel(new BorderLayout());
-		midiPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		midiPanel.add(midiTextField);
+						final JTextField soundTextField = new JTextField();
 
-		final JPanel titledMidiPanel = new JPanel(new BorderLayout());
-		titledMidiPanel.setBorder(new TitledBorder("Sound"));
-		titledMidiPanel.add(midiPanel, BorderLayout.CENTER);
+					final JPanel soundPanel = new JPanel(new BorderLayout());
+					soundPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+					soundPanel.add(soundTextField);
 
-		final JTextField nameTextField = new JTextField();
+				final JPanel titledSoundPanel = new JPanel(new BorderLayout());
+				titledSoundPanel.setBorder(new TitledBorder("Sound"));
+				titledSoundPanel.add(soundPanel, BorderLayout.CENTER);
 
-		final JPanel namePanel = new JPanel(new BorderLayout());
-		namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		namePanel.add(nameTextField);
+								final JTextField nameTextField = new JTextField();
 
-		final JPanel titledNamePanel = new JPanel(new BorderLayout());
-		titledNamePanel.setBorder(new TitledBorder("Name"));
-		titledNamePanel.add(namePanel, BorderLayout.CENTER);
+							final JPanel namePanel = new JPanel(new BorderLayout());
+							namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+							namePanel.add(nameTextField);
 
-		magicPanel = new TuningMagicPanel();
+						final JPanel titledNamePanel = new JPanel(new BorderLayout());
+						titledNamePanel.setBorder(new TitledBorder("Name"));
+						titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-		final JScrollPane scrollPane = new JScrollPane(magicPanel);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+									magicPanel = new TuningMagicPanel();
 
-		final JPanel stringPanel = new JPanel(new BorderLayout());
-		stringPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		stringPanel.add(scrollPane);
+								final JScrollPane scrollPane = new JScrollPane(magicPanel);
+								scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+								scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		final JPanel titledStringPanel = new JPanel(new BorderLayout());
-		titledStringPanel.setBorder(new TitledBorder("Strings"));
-		titledStringPanel.add(stringPanel, BorderLayout.CENTER);
+							final JPanel stringPanel = new JPanel(new BorderLayout());
+							stringPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+							stringPanel.add(scrollPane);
 
-		final JPanel thisPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		thisPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		thisPanel.add(titledNamePanel, BorderLayout.NORTH);
-		thisPanel.add(titledStringPanel, BorderLayout.CENTER);
+						final JPanel titledStringPanel = new JPanel(new BorderLayout());
+						titledStringPanel.setBorder(new TitledBorder("Strings"));
+						titledStringPanel.add(stringPanel, BorderLayout.CENTER);
 
-		final JPanel superPanel = new JPanel(new BorderLayout());
-		superPanel.setBorder(new TitledBorder("Tuning"));
-		superPanel.add(thisPanel, BorderLayout.CENTER);
+						portPanel = new PortPanel();
 
-		add(titledMidiPanel, BorderLayout.NORTH);
-		add(superPanel, BorderLayout.CENTER);
+					final JPanel editorPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+					editorPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+					editorPanel.add(titledNamePanel, BorderLayout.NORTH);
+					editorPanel.add(titledStringPanel, BorderLayout.CENTER);
+					editorPanel.add(portPanel, BorderLayout.SOUTH);
+
+				final JPanel titledEditorPanel = new JPanel(new BorderLayout());
+				titledEditorPanel.setBorder(new TitledBorder("Tuning"));
+				titledEditorPanel.add(editorPanel, BorderLayout.CENTER);
+
+			final JPanel containerPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+			containerPanel.add(titledSoundPanel, BorderLayout.NORTH);
+			containerPanel.add(titledEditorPanel, BorderLayout.CENTER);
+
+		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+		add(interfacePanel, BorderLayout.WEST);
+		add(containerPanel, BorderLayout.CENTER);
+	}
+
+	/**
+	@return The interface panel.
+	**/
+	public EditorInterfacePanel getInterfacePanel() {
+		return interfacePanel;
+	}
+
+	/**
+	@return The magic panel.
+	**/
+	public TuningMagicPanel getMagicPanel() {
+		return magicPanel;
+	}
+
+	/**
+	@return The port panel.
+	**/
+	public PortPanel getPortPanel() {
+		return portPanel;
 	}
 }

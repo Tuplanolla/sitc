@@ -17,11 +17,11 @@ public final class Model implements Part {
 	private final List<Sequence> sequences;
 
 	/**
-	Constructs a new model.
+	Creates a model.
 
 	@param arguments The command-line arguments.
 	**/
-	public Model(final List<String> arguments) {
+	public Model(final List<java.lang.String> arguments) {
 		instruments = new LinkedList<Instrument>();
 		tunings = new LinkedList<Tuning>();
 		sequences = new LinkedList<Sequence>();
@@ -30,17 +30,17 @@ public final class Model implements Part {
 	@Override
 	public void activate() {}
 
-	public void loadInstruments(final String filename) {
+	public void loadInstruments(final java.lang.String filename) {
 		//InstrumentParser.load(instruments, filename);
 	}
 
-	public void saveInstruments(final String filename) {}
+	public void saveInstruments(final java.lang.String filename) {}
 
-	public void loadTunings(final String filename) {}
+	public void loadTunings(final java.lang.String filename) {}
 
-	public void saveTunings(final String filename) {}
+	public void saveTunings(final java.lang.String filename) {}
 
-	public void loadSequences(final String filename) {}
+	public void loadSequences(final java.lang.String filename) {}
 
-	public void saveSequences(final String filename) {}
+	public void saveSequences(final java.lang.String filename) {}
 }

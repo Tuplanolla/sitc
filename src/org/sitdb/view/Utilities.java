@@ -6,16 +6,18 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
-A collection of utility methods for Swing, much like <code>SwingUtilities</code>.
+Represents a collection of utility methods for Swing, much like <code>SwingUtilities</code>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
@@ -114,6 +116,18 @@ Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), Swin
 			for (final ChangeListener listener : component.getListeners(ChangeListener.class)) {
 				listener.stateChanged(new ChangeEvent(component));
 			}
+		}
+	}
+
+	/**
+	Enables (or disables) all the buttons in a button group.
+
+	@param buttonGroup The button group.
+	@param enabled Whether the button should be enabled.
+	**/
+	public static void setAllEnabled(final ButtonGroup buttonGroup, final boolean enabled) {
+		for (final AbstractButton button : Collections.list(buttonGroup.getElements())) {
+			button.setEnabled(enabled);
 		}
 	}
 }

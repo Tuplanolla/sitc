@@ -1,7 +1,19 @@
 package org.sitdb.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.List;
+import java.util.Random;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+
 import org.sitdb.Part;
 import org.sitdb.model.Model;
+import org.sitdb.view.OptionBar;
 import org.sitdb.view.View;
 
 
@@ -15,7 +27,7 @@ public final class Controller implements Part {
 	private final View view;
 
 	/**
-	Constructs a new view and links it with a model and a view.
+	Creates a view and links it with a model and a view.
 
 	@param model The model.
 	@param view The view.
@@ -25,82 +37,90 @@ public final class Controller implements Part {
 		this.view = view;
 	}
 
-	/*
 	@Deprecated
-	private void addTestControls() {//TODO move into the controller
-		mainPanel.getInstrumentManagerPanel().getFilePanel().getBrowseButton().addActionListener(new ActionListener() {
+	private void addTestControls() {
+		final OptionBar optionBar = view.getMainFrame().getExtraMenuBar();
+		optionBar.getExitMenuItem().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file browser goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+				view.getMainFrame().dispose();
 			}
 		});
-		mainPanel.getInstrumentManagerPanel().getLoadButton().addActionListener(new ActionListener() {
+		optionBar.getManualMenuItem().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file loader goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(view.getMainFrame(), "Push buttons.", "Manual", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
-		mainPanel.getInstrumentManagerPanel().getSaveButton().addActionListener(new ActionListener() {
+		optionBar.getAboutMenuItem().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument file saver goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentManagerPanel().getListPanel().getSearchButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list searcher goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentManagerPanel().getListPanel().getNewButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list item creator goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentManagerPanel().getListPanel().getDeleteButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument list item disposer goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-
-		mainPanel.getInstrumentEditorPanel().getSidePanel().getRevertButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change reverter goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		mainPanel.getInstrumentEditorPanel().getSidePanel().getApplyButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The instrument editor change applier goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-
-		menuPanel.getExitMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				MainFrame.this.dispose();
-			}
-		});
-		menuPanel.getManualMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The manual goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
-		menuPanel.getAboutMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(MainFrame.this, "The about dialog goes here.", "Note", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(view.getMainFrame(), "This program is the best thing since sliced bread.", "About", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 	}
-	*/
+
+	@Deprecated
+	private void addTestActions() {
+		final SwingWorker<Integer, Integer> worker = new SwingWorker<Integer, Integer>() {
+			private final Random random = new Random();
+			private int progress = 0;
+
+			@SuppressWarnings("unused")
+			@Override
+			protected void process(final List<Integer> chunks) {
+				for (final Integer chunk : chunks) {
+					//System.out.println("Processed " + chunk + "...");
+				}
+			}
+
+			@Override
+			protected void done() {
+				//System.out.println(isCancelled() ? "...cancelled!" : "...finished!");
+			}
+
+			@Override
+			public Integer doInBackground() throws InterruptedException {
+				while (!isCancelled()) {
+					final int result = random.nextInt(Byte.MAX_VALUE);
+					if (result < 1) cancel(false);
+					publish(result);
+					setProgress(++progress);
+					Thread.sleep(42);
+				}
+				return 0;
+			}
+		};
+		worker.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(final PropertyChangeEvent event) {
+				if (event.getPropertyName().equals("progress")) {
+					view.getMainFrame().getStatusPanel().getProgressBar().setValue((Integer )event.getNewValue());
+				}
+			}
+		});
+		worker.execute();
+	}
+
+	@Deprecated
+	private void addTestData() {
+		final DefaultListModel<String> instrumentListModel = view.getMainFrame().getMainPane().getInstrumentManagerPanel().getLocalPanel().getListModel();
+		instrumentListModel.addElement("Instrument");
+
+		final DefaultListModel<String> tuningListModel = view.getMainFrame().getMainPane().getTuningManagerPanel().getLocalPanel().getListModel();
+		tuningListModel.addElement("Tuning");
+		tuningListModel.addElement("Another Tuning");
+
+		final DefaultListModel<String> sequenceListModel = view.getMainFrame().getMainPane().getSequenceManagerPanel().getLocalPanel().getListModel();
+		sequenceListModel.addElement("Sequence");
+		sequenceListModel.addElement("Another Sequence");
+		sequenceListModel.addElement("Yet Another Sequence");
+	}
 
 	@Override
 	public void activate() {
-		//addTestControls();
+		addTestControls();
+		addTestActions();
+		addTestData();
 	}
 }

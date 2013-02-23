@@ -69,7 +69,7 @@ public class Integer implements Numeric, Scalar<Integer>, Comparable<Integer>, S
 	private final int value;
 
 	/**
-	Constructs a new integer from a primitive integer.
+	Creates a integer from a primitive integer.
 
 	@param value The value of the new integer.
 	**/
@@ -302,7 +302,7 @@ public class Integer implements Numeric, Scalar<Integer>, Comparable<Integer>, S
 	@Override
 	public double doubleValue() {
 		if (this == NaN) return Double.NaN;
-		if (this == ZERO) return 0.0;
+		if (this == ZERO) return 0;
 		if (this == NEGATIVE_INFINITY) return Double.NEGATIVE_INFINITY;
 		if (this == POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;
 		return value;
@@ -311,7 +311,7 @@ public class Integer implements Numeric, Scalar<Integer>, Comparable<Integer>, S
 	@Override
 	public float floatValue() {
 		if (this == NaN) return Float.NaN;
-		if (this == ZERO) return 0.0f;
+		if (this == ZERO) return 0;
 		if (this == NEGATIVE_INFINITY) return Float.NEGATIVE_INFINITY;
 		if (this == POSITIVE_INFINITY) return Float.POSITIVE_INFINITY;
 		return value;

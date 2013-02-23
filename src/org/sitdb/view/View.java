@@ -1,5 +1,7 @@
 package org.sitdb.view;
 
+import java.awt.Dimension;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -14,17 +16,16 @@ Represents an immutable view.
 public final class View implements Part {
 	private final Model model;
 
+	private final MainFrame mainFrame;
+
 	/**
-	Constructs a new view and links it with a model.
+	Creates a view and links it with a model.
 
 	@param model The model.
 	**/
 	public View(final Model model) {
 		this.model = model;
-	}
 
-	@Override
-	public void activate() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
@@ -34,6 +35,19 @@ public final class View implements Part {
 				| UnsupportedLookAndFeelException exception) {
 			exception.printStackTrace();
 		}
-		new MainFrame();
+		mainFrame = new MainFrame();
+	}
+
+	@Override
+	public void activate() {
+		mainFrame.setSize(new Dimension(800, 800));
+		mainFrame.setVisible(true);
+	}
+
+	/**
+	@return The main frame.
+	**/
+	public MainFrame getMainFrame() {
+		return mainFrame;
 	}
 }

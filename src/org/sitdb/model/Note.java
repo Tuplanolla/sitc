@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.sitdb.math.Natural;
+import org.sitdb.math.Integer;
 import org.sitdb.math.Numeric;
 import org.sitdb.math.Rational;
 
@@ -46,12 +46,12 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	/**
 	The note C<sub>0</sub>.
 	**/
-	public static final Note C0 = new Note(Natural.ZERO);
+	public static final Note C0 = new Note(Integer.ZERO);
 
 	/**
 	The amount of semitones from C<sub>0</sub>.
 	**/
-	public final Natural semitones;
+	public final Integer semitones;
 
 	/**
 	The amount of microtones from the semitone.
@@ -59,18 +59,18 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	public final Rational microtones;
 
 	/**
-	Constructs a new note.
+	Creates a note.
 
 	@param semitones The distance in semitones.
 	@param microtones The distance in microtones.
 	**/
-	public Note(Natural semitones, Rational microtones) {
+	public Note(Integer semitones, Rational microtones) {
 		while (microtones.compareTo(Rational.MINUS_ONE) <= 0) {
-			semitones = semitones.subtract(Natural.ONE);
+			semitones = semitones.subtract(Integer.ONE);
 			microtones = microtones.add(Rational.ONE);
 		}
 		while (microtones.compareTo(Rational.ONE) >= 0) {
-			semitones = semitones.add(Natural.ONE);
+			semitones = semitones.add(Integer.ONE);
 			microtones = microtones.subtract(Rational.ONE);
 		}
 		this.semitones = semitones;
@@ -78,21 +78,21 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	}
 
 	/**
-	Constructs a new note.
+	Creates a note.
 
 	@param semitones The distance in semitones.
 	**/
-	public Note(final Natural semitones) {
+	public Note(final Integer semitones) {
 		this(semitones, Rational.ZERO);
 	}
 
 	/**
-	Constructs a new note.
+	Creates a note.
 
 	@param semitones The distance in semitones.
 	**/
 	public Note(final int semitones) {
-		this(Natural.valueOf(semitones), Rational.ZERO);
+		this(Integer.valueOf(semitones), Rational.ZERO);
 	}
 
 	/**
@@ -270,7 +270,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 		final int octave = octaveSign * parseSubscripts(matcher.group(4));
 
-		final Natural semitones = Natural.valueOf(letter + accidental + 12 * octave);//TODO notes in octave
+		final Integer semitones = Integer.valueOf(letter + accidental + 12 * octave);//TODO notes in octave
 
 		if (matcher.group(6) == null || matcher.group(6).isEmpty()) return new Note(semitones);
 
@@ -316,7 +316,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	@param microtones The amount of microtones to transpose.
 	@return The transposition.
 	**/
-	public Note transpose(final Natural semitones, final Rational microtones) {
+	public Note transpose(final Integer semitones, final Rational microtones) {
 		return new Note(this.semitones.add(semitones), this.microtones.add(microtones));
 	}
 
@@ -326,7 +326,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	@param semitones The amount of semitones to transpose.
 	@return The transposition.
 	**/
-	public Note transpose(final Natural semitones) {
+	public Note transpose(final Integer semitones) {
 		return transpose(semitones, Rational.ZERO);
 	}
 

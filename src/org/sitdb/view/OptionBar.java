@@ -6,43 +6,43 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /**
-Represents a menu panel.
+Represents a menu bar.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class MenuBar extends JMenuBar {
+public final class OptionBar extends JMenuBar {
 	private static final long serialVersionUID = 1l;
 
 	private final JMenuItem exitMenuItem;
 	private final JCheckBoxMenuItem microtonalMenuCheckbox;
 	private final JCheckBoxMenuItem notationMenuCheckbox;
 	private final JMenuItem manualMenuItem;
-	private final JMenuItem aboutMenuItem;;
+	private final JMenuItem aboutMenuItem;
 
 	/**
-	Constructs a new panel.
+	Creates a menu bar.
 	**/
-	public MenuBar() {
-		exitMenuItem = new JMenuItem("Exit");
+	public OptionBar() {
+				exitMenuItem = new JMenuItem("Exit");
 
-		microtonalMenuCheckbox = new JCheckBoxMenuItem("Hide Microtonals");
+			final JMenu fileMenu = new JMenu("File");
+			fileMenu.add(exitMenuItem);
 
-		notationMenuCheckbox = new JCheckBoxMenuItem("Use European Notation");
+				microtonalMenuCheckbox = new JCheckBoxMenuItem("Hide Microtonals");
 
-		manualMenuItem = new JMenuItem("Manual");
+				notationMenuCheckbox = new JCheckBoxMenuItem("Use European Notation");
 
-		aboutMenuItem = new JMenuItem("About");
+			final JMenu settingsMenu = new JMenu("Settings");
+			settingsMenu.add(microtonalMenuCheckbox);
+			settingsMenu.add(notationMenuCheckbox);
 
-		final JMenu fileMenu = new JMenu("File");
-		fileMenu.add(exitMenuItem);
+				manualMenuItem = new JMenuItem("Manual");
 
-		final JMenu settingsMenu = new JMenu("Settings");
-		settingsMenu.add(microtonalMenuCheckbox);
-		settingsMenu.add(notationMenuCheckbox);
+				aboutMenuItem = new JMenuItem("About");
 
-		final JMenu helpMenu = new JMenu("Help");
-		helpMenu.add(manualMenuItem);
-		helpMenu.add(aboutMenuItem);
+			final JMenu helpMenu = new JMenu("Help");
+			helpMenu.add(manualMenuItem);
+			helpMenu.add(aboutMenuItem);
 
 		setBorderPainted(false);
 		add(fileMenu);

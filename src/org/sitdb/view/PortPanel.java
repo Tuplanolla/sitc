@@ -8,6 +8,9 @@ import javax.swing.SwingConstants;
 
 
 /**
+Represents a port panel that
+ manages data conversion.
+
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class PortPanel extends JPanel {
@@ -17,7 +20,7 @@ public final class PortPanel extends JPanel {
 			exportButton;
 
 	/**
-	Constructs a new panel.
+	Creates a port panel.
 	**/
 	public PortPanel() {
 		super(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));

@@ -3,7 +3,7 @@ package org.sitdb.view;
 import java.awt.Insets;
 
 /**
-A collection of constants, much like <code>SwingConstants</code>.
+Represents a collection of constants, much like <code>SwingConstants</code>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

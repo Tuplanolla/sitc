@@ -8,9 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
-Represents a panel that's used to move data between
- a <code>ManagerPanel</code> and
- a specific <code>EditorPanel</code>.
+Represents an editor interface panel that
+ connects a local panel with an editor panel.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
@@ -21,7 +20,7 @@ public class EditorInterfacePanel extends JPanel {
 			applyButton;
 
 	/**
-	Constructs a new panel.
+	Creates an editor interface panel.
 	**/
 	public EditorInterfacePanel() {
 		super(new GridBagLayout());

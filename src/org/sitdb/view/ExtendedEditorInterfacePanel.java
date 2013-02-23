@@ -10,11 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
-Represents a panel that does something.
+Represents an editor interface panel that
+ connects list panels with an editor panel.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class ExtendedInterfacePanel extends JPanel {
+public final class ExtendedEditorInterfacePanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
 	private final JButton useButton,
@@ -25,9 +26,9 @@ public final class ExtendedInterfacePanel extends JPanel {
 			applyButton;
 
 	/**
-	Constructs a new panel.
+	Creates a panel.
 	**/
-	public ExtendedInterfacePanel() {
+	public ExtendedEditorInterfacePanel() {
 		super(new GridBagLayout());
 
 		useButton = new JButton("Use");//"Use Instrument"

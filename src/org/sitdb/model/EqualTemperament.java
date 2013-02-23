@@ -21,7 +21,7 @@ public class EqualTemperament implements TuningSystem {
 	public final int semitonesInOctave;
 
 	/**
-	Constructs a new tuning system.
+	Creates a tuning system.
 
 	@param semitonesInOctave The amount of semitones in an octave.
 	**/

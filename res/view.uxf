@@ -21,7 +21,7 @@
       <w>660</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>MenuBar [N]</panel_attributes>
+    <panel_attributes>OptionBar [N]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -43,7 +43,7 @@
       <w>660</w>
       <h>260</h>
     </coordinates>
-    <panel_attributes>MainPanel [C]</panel_attributes>
+    <panel_attributes>MainPane [C]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -156,7 +156,7 @@ SequenceEditorPanel [3]</panel_attributes>
       <w>180</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>FilePanel [N]</panel_attributes>
+    <panel_attributes>RemotePanel [N]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -167,7 +167,7 @@ SequenceEditorPanel [3]</panel_attributes>
       <w>180</w>
       <h>140</h>
     </coordinates>
-    <panel_attributes>ListPanel [C]</panel_attributes>
+    <panel_attributes>LocalPanel [C]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -178,7 +178,7 @@ SequenceEditorPanel [3]</panel_attributes>
       <w>140</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>ListInterfacePanel [N]</panel_attributes>
+    <panel_attributes>LocalInterfacePanel [N]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -487,14 +487,23 @@ ManagerPanel [3]</panel_attributes>
       <x>20</x>
       <y>0</y>
       <w>340</w>
-      <h>640</h>
+      <h>780</h>
     </coordinates>
     <panel_attributes>MainFrame
-	MenuBar
-	MainPanel
+	OptionBar
+	MainPane
 		ManagerPanel
-			FilePanel
-			ListInterfacePanel
+			RemotePanel
+			LocalPanel
+				LocalInterfacePanel
+		(ManagerPanel)
+			(RemotePanel)
+			(LocalPanel)
+				(LocalInterfacePanel)
+		(ManagerPanel)
+			(RemotePanel)
+			(LocalPanel)
+				(LocalInterfacePanel)
 		InstrumentEditorPanel
 			EditorInterfacePanel
 			InstrumentMagicPanel

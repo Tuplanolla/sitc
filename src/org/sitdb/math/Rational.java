@@ -104,7 +104,7 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 	}
 
 	/**
-	Constructs a new rational from two primitive integers.
+	Creates a rational from two primitive integers.
 
 	@param dividend The dividend of the new rational.
 	@param divisor The divisor of the new rational.
@@ -115,7 +115,7 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 	}
 
 	/**
-	Constructs a new rational from a primitive integer.
+	Creates a rational from a primitive integer.
 
 	@param dividend The value of the new rational.
 	**/
@@ -400,7 +400,7 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 	@Override
 	public double doubleValue() {
 		if (this == NaN) return Double.NaN;
-		if (this == ZERO) return 0.0;
+		if (this == ZERO) return 0;
 		if (this == NEGATIVE_INFINITY) return Double.NEGATIVE_INFINITY;
 		if (this == POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;
 		return (double )dividend / (double )divisor;
@@ -409,7 +409,7 @@ public class Rational implements Numeric, Scalar<Rational>, Comparable<Rational>
 	@Override
 	public float floatValue() {
 		if (this == NaN) return Float.NaN;
-		if (this == ZERO) return 0.0f;
+		if (this == ZERO) return 0;
 		if (this == NEGATIVE_INFINITY) return Float.NEGATIVE_INFINITY;
 		if (this == POSITIVE_INFINITY) return Float.POSITIVE_INFINITY;
 		return (float )dividend / (float )divisor;

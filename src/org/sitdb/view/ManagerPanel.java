@@ -1,112 +1,44 @@
 package org.sitdb.view;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 /**
-Represents a panel that's used to
- load data,
- manage a local copy of the data and
- eventually save the data.
+Represents a manager panel that
+ combines a remote (file) panel and a local (list) panel.
 
-The panel has the following structural hierarchy:
-
-<pre>
-+-------------------+
-| ManagerPanel      |
-| +---------------+ |
-| | FilePanel     | |
-| +---------------+ |
-| +---------------+ |
-| | JPanel        | |
-| | +-----------+ | |
-| | | JPanel    | | |
-| | +-----------+ | |
-| | +-----------+ | |
-| | | ListPanel | | |
-| | +-----------+ | |
-| +---------------+ |
-+-------------------+
-</pre>
-
+@param <Type> The type of the list model.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class ManagerPanel extends JPanel {
+public final class ManagerPanel<Type> extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	private final JButton loadButton,
-			saveButton;
-	private final FilePanel filePanel;
-	private final ListPanel listPanel;
 	private final TitledBorder titledBorder;
+	private final RemotePanel remotePanel;
+	private final LocalPanel<Type> localPanel;
 
 	/**
-	Constructs a new panel.
+	Creates a manager panel.
 	**/
 	public ManagerPanel() {
 		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
-		filePanel = new FilePanel();
+			titledBorder = new TitledBorder((String )null);
 
-		loadButton = new JButton("Load");
-		Utilities.setScaledIcon(loadButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+				remotePanel = new RemotePanel();
 
-		saveButton = new JButton("Save");
-		Utilities.setScaledIcon(saveButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+				localPanel = new LocalPanel<Type>();
 
-		final JPanel interfacePanel = new JPanel(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		interfacePanel.add(loadButton);
-		interfacePanel.add(saveButton);
-
-		listPanel = new ListPanel();
-
-		final JPanel somePanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		somePanel.add(interfacePanel, BorderLayout.NORTH);
-		somePanel.add(listPanel, BorderLayout.CENTER);
-
-		final JPanel managerPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		managerPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		managerPanel.add(filePanel, BorderLayout.NORTH);
-		managerPanel.add(somePanel, BorderLayout.CENTER);
-
-		titledBorder = new TitledBorder((String )null);
+			final JPanel managerPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+			managerPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+			managerPanel.add(remotePanel, BorderLayout.NORTH);
+			managerPanel.add(localPanel, BorderLayout.CENTER);
 
 		setBorder(titledBorder);
 		add(managerPanel, BorderLayout.CENTER);
-	}
-
-	/**
-	@return The file panel.
-	**/
-	public FilePanel getFilePanel() {
-		return filePanel;
-	}
-
-	/**
-	@return The load button.
-	**/
-	public JButton getLoadButton() {
-		return loadButton;
-	}
-
-	/**
-	@return The save button.
-	**/
-	public JButton getSaveButton() {
-		return saveButton;
-	}
-
-	/**
-	@return The list panel.
-	**/
-	public ListPanel getListPanel() {
-		return listPanel;
 	}
 
 	/**
@@ -121,5 +53,19 @@ public final class ManagerPanel extends JPanel {
 	**/
 	public void setTitle(final String title) {
 		titledBorder.setTitle(title);
+	}
+
+	/**
+	@return The remote (file) panel.
+	**/
+	public RemotePanel getRemotePanel() {
+		return remotePanel;
+	}
+
+	/**
+	@return The local (list) panel.
+	**/
+	public LocalPanel<Type> getLocalPanel() {
+		return localPanel;
 	}
 }

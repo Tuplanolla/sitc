@@ -2,7 +2,10 @@ package org.sitdb.view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.Collections;
 
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -12,136 +15,207 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
-The panel has the following structural hierarchy:
-
-<pre>
-+---------------------+
-| SequencePanel     |
-| +-----------------+ |
-| | SequencePanel | |
-| +-----------------+ |
-| +-----------------+ |
-| | JPanel          | |
-| | +-------------+ | |
-| | | JPanel      | | |
-| | +-------------+ | |
-| | +-------------+ | |
-| | | MagicPanel  | | |
-| | +-------------+ | |
-| | +-------------+ | |
-| | | JPanel      | | |
-| | +-------------+ | |
-| +-----------------+ |
-| +-----------------+ |
-| | PortPanel       | |
-| +-----------------+ |
-+---------------------+
-</pre>
+Represents a sequence editor panel.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class SequenceEditorPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
+	private final ExtendedEditorInterfacePanel interfacePanel;
 	private final SequenceMagicPanel magicPanel;
+	private final PortPanel portPanel;
 
 	/**
-	Constructs a new panel.
+	Creates a sequence editor panel.
 	**/
-	public SequenceEditorPanel() {//TODO reorder
-		super(new BorderLayout());
+	public SequenceEditorPanel() {
+		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
-		final JTextField nameTextField = new JTextField();
+			interfacePanel = new ExtendedEditorInterfacePanel();
 
-		final JPanel namePanel = new JPanel(new BorderLayout());
-		namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		namePanel.add(nameTextField);
+							final JTextField nameTextField = new JTextField();
 
-		final JPanel titledNamePanel = new JPanel(new BorderLayout());
-		titledNamePanel.setBorder(new TitledBorder("Name"));
-		titledNamePanel.add(namePanel, BorderLayout.CENTER);
+						final JPanel namePanel = new JPanel(new BorderLayout());
+						namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+						namePanel.add(nameTextField);
 
-		final JTextField instrumentTextField = new JTextField();
+					final JPanel titledNamePanel = new JPanel(new BorderLayout());
+					titledNamePanel.setBorder(new TitledBorder("Name"));
+					titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-		final JPanel instrumentPanel = new JPanel(new BorderLayout());
-		instrumentPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		instrumentPanel.add(instrumentTextField);
+								final JTextField instrumentTextField = new JTextField();
 
-		final JPanel titledSequencePanel = new JPanel(new BorderLayout());
-		titledSequencePanel.setBorder(new TitledBorder("Instrument"));
-		titledSequencePanel.add(instrumentPanel, BorderLayout.CENTER);
+							final JPanel instrumentPanel = new JPanel(new BorderLayout());
+							instrumentPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+							instrumentPanel.add(instrumentTextField);
 
-		final JPanel somePanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		somePanel.add(titledNamePanel, BorderLayout.NORTH);
-		somePanel.add(titledSequencePanel, BorderLayout.CENTER);
+						final JPanel titledInstrumentPanel = new JPanel(new BorderLayout());
+						titledInstrumentPanel.setBorder(new TitledBorder("Instrument"));
+						titledInstrumentPanel.add(instrumentPanel, BorderLayout.CENTER);
 
-		magicPanel = new SequenceMagicPanel();
+									magicPanel = new SequenceMagicPanel();
 
-		final JScrollPane scrollPane = new JScrollPane(magicPanel);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+								final JScrollPane scrollPane = new JScrollPane(magicPanel);
+								scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+								scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		final JRadioButton nameRadioButton = new JRadioButton("Sort by Name");
+							final JPanel transitionPanel = new JPanel(new BorderLayout());
+							transitionPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+							transitionPanel.add(scrollPane);
 
-		final JRadioButton tuningRadioButton = new JRadioButton("Sort by Tuning");
+						final JPanel titledTransitionPanel = new JPanel(new BorderLayout());
+						titledTransitionPanel.setBorder(new TitledBorder("Tunings"));
+						titledTransitionPanel.add(transitionPanel, BorderLayout.CENTER);
 
-		final JRadioButton currentOrderRadioButton = new JRadioButton("Sort by Current Order");
+											final JRadioButton nameRadioButton = new JRadioButton("Sort by Name");
 
-		final JRadioButton transpositionRadioButton = new JRadioButton("Minimize Transpositions");
+											final JRadioButton tuningRadioButton = new JRadioButton("Sort by Tuning");
 
-		final JRadioButton tensionRadioButton = new JRadioButton("Minimize Tension Changes");
+											final JRadioButton currentOrderRadioButton = new JRadioButton("Sort by Current Order");
 
-		final JRadioButton ascendingRadioButton = new JRadioButton("Ascending");
+										final JPanel sortPanel = new JPanel(new GridLayout(3, 1));
+										sortPanel.add(nameRadioButton);
+										sortPanel.add(tuningRadioButton);
+										sortPanel.add(currentOrderRadioButton);
 
-		final JRadioButton descendingRadioButton = new JRadioButton("Descending");
+											final JRadioButton ascendingRadioButton = new JRadioButton("Ascending");
+											ascendingRadioButton.setSelected(true);
 
-		final JRadioButton randomRadioButton = new JRadioButton("Random");
+											final JRadioButton descendingRadioButton = new JRadioButton("Descending");
 
-		final JRadioButton exactRadioButton = new JRadioButton("Exact (Slow)");
+											final JRadioButton randomRadioButton = new JRadioButton("Random");
 
-		final JRadioButton approximateRadioButton = new JRadioButton("Approximate (Fast)");
+										final ButtonGroup orderButtonGroup = new ButtonGroup();
+										orderButtonGroup.add(ascendingRadioButton);
+										orderButtonGroup.add(descendingRadioButton);
+										orderButtonGroup.add(randomRadioButton);
 
-		final JPanel actionButtonPanel = new JPanel(new GridLayout(5, 2, Constants.MEDIUM_INSET, 0));
-		actionButtonPanel.add(nameRadioButton);
-		actionButtonPanel.add(ascendingRadioButton);
-		actionButtonPanel.add(tuningRadioButton);
-		actionButtonPanel.add(descendingRadioButton);
-		actionButtonPanel.add(currentOrderRadioButton);
-		actionButtonPanel.add(randomRadioButton);
-		actionButtonPanel.add(transpositionRadioButton);
-		actionButtonPanel.add(exactRadioButton);
-		actionButtonPanel.add(tensionRadioButton);
-		actionButtonPanel.add(approximateRadioButton);
+										final JPanel orderPanel = new JPanel(new GridLayout(3, 1));
+										orderPanel.add(ascendingRadioButton);
+										orderPanel.add(descendingRadioButton);
+										orderPanel.add(randomRadioButton);
 
-		final JButton actionButton = new JButton("Organize");
-		Utilities.setScaledIcon(actionButton, Resources.CALCULATE_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+									final JPanel sortGroupPanel = new JPanel(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+									sortGroupPanel.add(sortPanel);
+									sortGroupPanel.add(orderPanel);
 
-		final JPanel actionPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		actionPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		actionPanel.add(actionButtonPanel, BorderLayout.CENTER);
-		actionPanel.add(actionButton, BorderLayout.SOUTH);
+											final JRadioButton transpositionRadioButton = new JRadioButton("Minimize Transpositions");
+											transpositionRadioButton.setSelected(true);
 
-		final JPanel titledActionPanel = new JPanel(new BorderLayout());
-		titledActionPanel.setBorder(new TitledBorder("Actions"));
-		titledActionPanel.add(actionPanel, BorderLayout.CENTER);
+											final JRadioButton tensionRadioButton = new JRadioButton("Minimize Tension Changes");
 
-		final JPanel changePanel = new JPanel(new BorderLayout());
-		changePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		changePanel.add(scrollPane, BorderLayout.CENTER);
+										final JPanel minimizePanel = new JPanel(new GridLayout(2, 1));
+										minimizePanel.add(transpositionRadioButton);
+										minimizePanel.add(tensionRadioButton);
 
-		final JPanel titledChangePanel = new JPanel(new BorderLayout());
-		titledChangePanel.setBorder(new TitledBorder("Tunings"));
-		titledChangePanel.add(changePanel, BorderLayout.CENTER);
+											final JRadioButton exactRadioButton = new JRadioButton("Exact (Slow)");
+											exactRadioButton.setSelected(true);
 
-		final JPanel thisPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		thisPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		thisPanel.add(somePanel, BorderLayout.NORTH);
-		thisPanel.add(titledChangePanel, BorderLayout.CENTER);
-		thisPanel.add(titledActionPanel, BorderLayout.SOUTH);
+											final JRadioButton approximateRadioButton = new JRadioButton("Approximate (Fast)");
 
-		setBorder(new TitledBorder("Sequence"));
-		add(thisPanel, BorderLayout.CENTER);
+										final ButtonGroup methodButtonGroup = new ButtonGroup();
+										methodButtonGroup.add(exactRadioButton);
+										methodButtonGroup.add(approximateRadioButton);
+
+										final JPanel methodPanel = new JPanel(new GridLayout(2, 1));
+										methodPanel.add(exactRadioButton);
+										methodPanel.add(approximateRadioButton);
+
+									final JPanel minimizeGroupPanel = new JPanel(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+									minimizeGroupPanel.add(minimizePanel);
+									minimizeGroupPanel.add(methodPanel);
+
+								final ButtonGroup optionButtonGroup = new ButtonGroup();//reversed intentionally
+								optionButtonGroup.add(transpositionRadioButton);
+								optionButtonGroup.add(tensionRadioButton);
+								optionButtonGroup.add(nameRadioButton);
+								optionButtonGroup.add(tuningRadioButton);
+								optionButtonGroup.add(currentOrderRadioButton);
+
+								for (final AbstractButton button : Collections.list(optionButtonGroup.getElements())) {
+									button.addChangeListener(new ChangeListener() {
+										@Override
+										public void stateChanged(final ChangeEvent event) {
+											boolean enableOrderButtonGroup = false,
+													enableMethodButtonGroup = false;
+											if (nameRadioButton.isSelected()
+													|| tuningRadioButton.isSelected()
+													|| currentOrderRadioButton.isSelected()) {
+												enableOrderButtonGroup = true;
+												enableMethodButtonGroup = false;
+											}
+											else if (transpositionRadioButton.isSelected()
+													|| tensionRadioButton.isSelected()) {
+												enableOrderButtonGroup = false;
+												enableMethodButtonGroup = true;
+											}
+											Utilities.setAllEnabled(orderButtonGroup, enableOrderButtonGroup);
+											Utilities.setAllEnabled(methodButtonGroup, enableMethodButtonGroup);
+										}
+									});
+								}
+
+								final JPanel groupPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+								groupPanel.add(sortGroupPanel, BorderLayout.NORTH);
+								groupPanel.add(minimizeGroupPanel, BorderLayout.SOUTH);
+
+								final JButton actionButton = new JButton("Run");
+								Utilities.setScaledIcon(actionButton, Resources.CALCULATE_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+
+							final JPanel actionPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+							actionPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+							actionPanel.add(groupPanel, BorderLayout.CENTER);
+							actionPanel.add(actionButton, BorderLayout.SOUTH);
+
+						final JPanel titledActionPanel = new JPanel(new BorderLayout());
+						titledActionPanel.setBorder(new TitledBorder("Actions"));
+						titledActionPanel.add(actionPanel, BorderLayout.CENTER);
+
+					final JPanel containerPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+					containerPanel.add(titledInstrumentPanel, BorderLayout.NORTH);
+					containerPanel.add(titledTransitionPanel, BorderLayout.CENTER);
+					containerPanel.add(titledActionPanel, BorderLayout.SOUTH);
+
+					portPanel = new PortPanel();
+
+				final JPanel editorPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+				editorPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+				editorPanel.add(titledNamePanel, BorderLayout.NORTH);
+				editorPanel.add(containerPanel, BorderLayout.CENTER);
+				editorPanel.add(portPanel, BorderLayout.SOUTH);
+
+			final JPanel titledEditorPanel = new JPanel(new BorderLayout());
+			titledEditorPanel.setBorder(new TitledBorder("Sequence"));
+			titledEditorPanel.add(editorPanel, BorderLayout.CENTER);
+
+		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+		add(interfacePanel, BorderLayout.WEST);
+		add(titledEditorPanel, BorderLayout.CENTER);
+	}
+
+	/**
+	@return The interface panel.
+	**/
+	public ExtendedEditorInterfacePanel getInterfacePanel() {
+		return interfacePanel;
+	}
+
+	/**
+	@return The magic panel.
+	**/
+	public SequenceMagicPanel getMagicPanel() {
+		return magicPanel;
+	}
+
+	/**
+	@return The port panel.
+	**/
+	public PortPanel getPortPanel() {
+		return portPanel;
 	}
 }

@@ -33,7 +33,7 @@ public final class Instrument implements Serializable {
 	public final Double maximumTension;
 
 	/**
-	Constructs a new instrument with tension limits.
+	Creates a instrument with tension limits.
 
 	@param name The name.
 	@param minimumTension The minimum tension.
@@ -47,7 +47,7 @@ public final class Instrument implements Serializable {
 	}
 
 	/**
-	Constructs a new instrument with a tension limit.
+	Creates a instrument with a tension limit.
 
 	@param name The name.
 	@param maximumTension The maximum tension.
@@ -57,7 +57,7 @@ public final class Instrument implements Serializable {
 	}
 
 	/**
-	Constructs a new instrument without tension limits.
+	Creates a instrument without tension limits.
 
 	@param name The name.
 	**/

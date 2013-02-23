@@ -10,70 +10,84 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 /**
-The panel has the following structural hierarchy:
-
-<pre>
-+--------------------------------------+
-| InstrumentPanel                      |
-| +----------------+ +---------------+ |
-| | InterfacePanel | | JPanel        | |
-| |                | | +-----------+ | |
-| |                | | | JPanel    | | |
-| |                | | +-----------+ | |
-| |                | | +-----------+ | |
-| |                | | | PortPanel | | |
-| |                | | +-----------+ | |
-| +----------------+ +---------------+ |
-+--------------------------------------+
-</pre>
+Represents an instrument editor panel.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class InstrumentEditorPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
+	private final EditorInterfacePanel interfacePanel;
 	private final InstrumentMagicPanel magicPanel;
 	private final PortPanel portPanel;
 
 	/**
-	Constructs a new panel.
+	Creates an instrument editor panel.
 	**/
 	public InstrumentEditorPanel() {
 		super(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
-		final JTextField nameTextField = new JTextField();
+			interfacePanel = new EditorInterfacePanel();
 
-		final JPanel namePanel = new JPanel(new BorderLayout());
-		namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		namePanel.add(nameTextField);
+							final JTextField nameTextField = new JTextField();
 
-		final JPanel titledNamePanel = new JPanel(new BorderLayout());
-		titledNamePanel.setBorder(new TitledBorder("Name"));
-		titledNamePanel.add(namePanel, BorderLayout.CENTER);
+						final JPanel namePanel = new JPanel(new BorderLayout());
+						namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+						namePanel.add(nameTextField);
 
-		magicPanel = new InstrumentMagicPanel();
+					final JPanel titledNamePanel = new JPanel(new BorderLayout());
+					titledNamePanel.setBorder(new TitledBorder("Name"));
+					titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-		final JScrollPane scrollPane = new JScrollPane(magicPanel);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+								magicPanel = new InstrumentMagicPanel();
 
-		final JPanel stringPanel = new JPanel(new BorderLayout());
-		stringPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		stringPanel.add(scrollPane);
+							final JScrollPane scrollPane = new JScrollPane(magicPanel);
+							scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+							scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		final JPanel titledStringPanel = new JPanel(new BorderLayout());
-		titledStringPanel.setBorder(new TitledBorder("Strings"));
-		titledStringPanel.add(stringPanel, BorderLayout.CENTER);
+						final JPanel stringPanel = new JPanel(new BorderLayout());
+						stringPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+						stringPanel.add(scrollPane);
 
-		final JPanel thisPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		thisPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		thisPanel.add(titledNamePanel, BorderLayout.NORTH);
-		thisPanel.add(titledStringPanel, BorderLayout.CENTER);
+					final JPanel titledStringPanel = new JPanel(new BorderLayout());
+					titledStringPanel.setBorder(new TitledBorder("Strings"));
+					titledStringPanel.add(stringPanel, BorderLayout.CENTER);
 
-		portPanel = new PortPanel();
+					portPanel = new PortPanel();
 
-		setBorder(new TitledBorder("Instrument"));
-		add(thisPanel, BorderLayout.CENTER);
-		add(portPanel, BorderLayout.SOUTH);//TODO fix
+				final JPanel editorPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+				editorPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+				editorPanel.add(titledNamePanel, BorderLayout.NORTH);
+				editorPanel.add(titledStringPanel, BorderLayout.CENTER);
+				editorPanel.add(portPanel, BorderLayout.SOUTH);
+
+			final JPanel titledEditorPanel = new JPanel(new BorderLayout());
+			titledEditorPanel.setBorder(new TitledBorder("Instrument"));
+			titledEditorPanel.add(editorPanel, BorderLayout.CENTER);
+
+		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+		add(interfacePanel, BorderLayout.WEST);
+		add(titledEditorPanel, BorderLayout.CENTER);
+	}
+
+	/**
+	@return The interface panel.
+	**/
+	public EditorInterfacePanel getInterfacePanel() {
+		return interfacePanel;
+	}
+
+	/**
+	@return The magic panel.
+	**/
+	public InstrumentMagicPanel getMagicPanel() {
+		return magicPanel;
+	}
+
+	/**
+	@return The port panel.
+	**/
+	public PortPanel getPortPanel() {
+		return portPanel;
 	}
 }

@@ -25,11 +25,11 @@ public final class PortPanel extends JPanel {
 	public PortPanel() {
 		super(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
-		importButton = new JButton("Import");
-		Utilities.setScaledIcon(importButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			importButton = new JButton("Import");
+			Utilities.setScaledIcon(importButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
-		exportButton = new JButton("Export");
-		Utilities.setScaledIcon(exportButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			exportButton = new JButton("Export");
+			Utilities.setScaledIcon(exportButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 		add(importButton);
 		add(exportButton);

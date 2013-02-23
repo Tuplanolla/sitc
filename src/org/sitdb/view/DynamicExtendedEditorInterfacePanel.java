@@ -31,70 +31,70 @@ public final class DynamicExtendedEditorInterfacePanel extends JPanel {
 	public DynamicExtendedEditorInterfacePanel() {
 		super(new GridBagLayout());
 
-		useButton = new JButton("Use Instrument");
-		Utilities.setScaledIcon(useButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				useButton = new JButton("Use Instrument");
+				Utilities.setScaledIcon(useButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		discardButton = new JButton("Don't Use Instrument");
-		Utilities.setScaledIcon(discardButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				discardButton = new JButton("Don't Use Instrument");
+				Utilities.setScaledIcon(discardButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		addButton = new JButton("Add Tuning");
-		Utilities.setScaledIcon(addButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+			final JPanel instrumentButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+			instrumentButtonPanel.add(useButton);
+			instrumentButtonPanel.add(discardButton);
 
-		removeButton = new JButton("Remove Tuning");
-		Utilities.setScaledIcon(removeButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				addButton = new JButton("Add Tuning");
+				Utilities.setScaledIcon(addButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		revertButton = new JButton("Revert Sequence");
-		Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				removeButton = new JButton("Remove Tuning");
+				Utilities.setScaledIcon(removeButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		applyButton = new JButton("Apply Sequence");
-		Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+			final JPanel tuningButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+			tuningButtonPanel.add(addButton);
+			tuningButtonPanel.add(removeButton);
 
-		final JPanel instrumentButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		instrumentButtonPanel.add(useButton);
-		instrumentButtonPanel.add(discardButton);
+				revertButton = new JButton("Revert Sequence");
+				Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		final JPanel tuningButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		tuningButtonPanel.add(addButton);
-		tuningButtonPanel.add(removeButton);
+				applyButton = new JButton("Apply Sequence");
+				Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		final JPanel sequenceButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		sequenceButtonPanel.add(revertButton);
-		sequenceButtonPanel.add(applyButton);
+			final JPanel sequenceButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+			sequenceButtonPanel.add(revertButton);
+			sequenceButtonPanel.add(applyButton);
 
-		final GridBagConstraints instrumentConstraints = new GridBagConstraints();
-		instrumentConstraints.gridx = 0;
-		instrumentConstraints.gridy = 0;
-		instrumentConstraints.weightx = 1;
-		instrumentConstraints.weighty = 0;
-		instrumentConstraints.fill = GridBagConstraints.BOTH;
+			final GridBagConstraints instrumentConstraints = new GridBagConstraints();
+			instrumentConstraints.gridx = 0;
+			instrumentConstraints.gridy = 0;
+			instrumentConstraints.weightx = 1;
+			instrumentConstraints.weighty = 0;
+			instrumentConstraints.fill = GridBagConstraints.BOTH;
 
-		final GridBagConstraints instrumentTuningConstraints = new GridBagConstraints();
-		instrumentTuningConstraints.gridx = 0;
-		instrumentTuningConstraints.gridy = 1;
-		instrumentTuningConstraints.weightx = 1;
-		instrumentTuningConstraints.weighty = 1;
-		instrumentTuningConstraints.fill = GridBagConstraints.BOTH;
+			final GridBagConstraints instrumentTuningConstraints = new GridBagConstraints();
+			instrumentTuningConstraints.gridx = 0;
+			instrumentTuningConstraints.gridy = 1;
+			instrumentTuningConstraints.weightx = 1;
+			instrumentTuningConstraints.weighty = 1;
+			instrumentTuningConstraints.fill = GridBagConstraints.BOTH;
 
-		final GridBagConstraints tuningConstraints = new GridBagConstraints();
-		tuningConstraints.gridx = 0;
-		tuningConstraints.gridy = 2;
-		tuningConstraints.weightx = 1;
-		tuningConstraints.weighty = 0;
-		tuningConstraints.fill = GridBagConstraints.BOTH;
+			final GridBagConstraints tuningConstraints = new GridBagConstraints();
+			tuningConstraints.gridx = 0;
+			tuningConstraints.gridy = 2;
+			tuningConstraints.weightx = 1;
+			tuningConstraints.weighty = 0;
+			tuningConstraints.fill = GridBagConstraints.BOTH;
 
-		final GridBagConstraints tuningSequenceConstraints = new GridBagConstraints();
-		tuningSequenceConstraints.gridx = 0;
-		tuningSequenceConstraints.gridy = 3;
-		tuningSequenceConstraints.weightx = 1;
-		tuningSequenceConstraints.weighty = 1;
-		tuningSequenceConstraints.fill = GridBagConstraints.BOTH;
+			final GridBagConstraints tuningSequenceConstraints = new GridBagConstraints();
+			tuningSequenceConstraints.gridx = 0;
+			tuningSequenceConstraints.gridy = 3;
+			tuningSequenceConstraints.weightx = 1;
+			tuningSequenceConstraints.weighty = 1;
+			tuningSequenceConstraints.fill = GridBagConstraints.BOTH;
 
-		final GridBagConstraints sequenceConstraints = new GridBagConstraints();
-		sequenceConstraints.gridx = 0;
-		sequenceConstraints.gridy = 4;
-		sequenceConstraints.weightx = 1;
-		sequenceConstraints.weighty = 0;
-		sequenceConstraints.fill = GridBagConstraints.BOTH;
+			final GridBagConstraints sequenceConstraints = new GridBagConstraints();
+			sequenceConstraints.gridx = 0;
+			sequenceConstraints.gridy = 4;
+			sequenceConstraints.weightx = 1;
+			sequenceConstraints.weighty = 0;
+			sequenceConstraints.fill = GridBagConstraints.BOTH;
 
 		add(instrumentButtonPanel, instrumentConstraints);
 		add(Box.createVerticalStrut(Constants.MEDIUM_INSET), instrumentTuningConstraints);

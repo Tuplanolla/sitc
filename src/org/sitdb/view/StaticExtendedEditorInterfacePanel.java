@@ -30,33 +30,33 @@ public final class StaticExtendedEditorInterfacePanel extends JPanel {
 	public StaticExtendedEditorInterfacePanel() {
 		super(new GridBagLayout());
 
-		useButton = new JButton("Use Instrument");
-		Utilities.setScaledIcon(useButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				useButton = new JButton("Use Instrument");
+				Utilities.setScaledIcon(useButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		discardButton = new JButton("Don't Use Instrument");
-		Utilities.setScaledIcon(discardButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				discardButton = new JButton("Don't Use Instrument");
+				Utilities.setScaledIcon(discardButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		addButton = new JButton("Add Tuning");
-		Utilities.setScaledIcon(addButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				addButton = new JButton("Add Tuning");
+				Utilities.setScaledIcon(addButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		removeButton = new JButton("Remove Tuning");
-		Utilities.setScaledIcon(removeButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				removeButton = new JButton("Remove Tuning");
+				Utilities.setScaledIcon(removeButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		revertButton = new JButton("Revert Sequence");
-		Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				revertButton = new JButton("Revert Sequence");
+				Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		applyButton = new JButton("Apply Sequence");
-		Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				applyButton = new JButton("Apply Sequence");
+				Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
-		final JPanel buttonPanel = new JPanel(new GridLayout(8, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-		buttonPanel.add(useButton);
-		buttonPanel.add(discardButton);
-		buttonPanel.add(Box.createVerticalStrut(Constants.MEDIUM_INSET));
-		buttonPanel.add(addButton);
-		buttonPanel.add(removeButton);
-		buttonPanel.add(Box.createVerticalStrut(Constants.MEDIUM_INSET));
-		buttonPanel.add(revertButton);
-		buttonPanel.add(applyButton);
+			final JPanel buttonPanel = new JPanel(new GridLayout(8, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+			buttonPanel.add(useButton);
+			buttonPanel.add(discardButton);
+			buttonPanel.add(Box.createVerticalStrut(Constants.MEDIUM_INSET));
+			buttonPanel.add(addButton);
+			buttonPanel.add(removeButton);
+			buttonPanel.add(Box.createVerticalStrut(Constants.MEDIUM_INSET));
+			buttonPanel.add(revertButton);
+			buttonPanel.add(applyButton);
 
 		add(buttonPanel);
 	}

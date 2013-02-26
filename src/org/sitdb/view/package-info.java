@@ -1,5 +1,5 @@
 /**
-Contains the views.
+Contains the view.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

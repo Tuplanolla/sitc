@@ -4,104 +4,104 @@
  |        |  |     ,- capacity
  |        |  |     |
  v        v  v     v
-                     add a
-   [a][ ][ ][ ][ ]    unstable, (must have 0, need to have 2, want to have 3, can give 0, need to give 0, must give 0) elements
+                      add a
+   [a][ ][ ][ ][ ]    unstable, (must have 0, need to have 2, should have 3, can give 0, need to give 0, must give 0) elements
                       add b
-   [a][b][ ][ ][ ]    unstable, (must have 0, need to have 1, want to have 2, can give 0, need to give 0, must give 0) elements
+   [a][b][ ][ ][ ]    unstable, (must have 0, need to have 1, should have 2, can give 0, need to give 0, must give 0) elements
                       add c
-   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
+   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
                       add d
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       add e
-   [a][b][c][d][e]    unstable, (must have 0, need to have 0, want to have 0, can give 2, need to give 1, must give 0) elements
+   [a][b][c][d][e]    unstable, (must have 0, need to have 0, should have 0, can give 2, need to give 1, must give 0) elements
                       add f
-   [a][b][c][d][e] f  critically unstable, (must have 0, need to have 0, want to have 0, can give 3, need to give 2, must give 1) elements
+   [a][b][c][d][e] f  critically unstable, (must have 0, need to have 0, should have 0, can give 3, need to give 2, must give 1) elements
                       expand
-   [a][b][c][d][e] f  critically unstable, (must have 0, need to have 0, want to have 0, can give 3, need to give 2, must give 1) elements
-   [ ][ ][ ][ ][ ]    critically unstable, (must have 1, need to have 3, want to have 4, can give 0, need to give 0, must give 0) elements
+   [a][b][c][d][e] f  critically unstable, (must have 0, need to have 0, should have 0, can give 3, need to give 2, must give 1) elements
+   [ ][ ][ ][ ][ ]    critically unstable, (must have 1, need to have 3, should have 4, can give 0, need to give 0, must give 0) elements
                       balance
-   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [d][e][f][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
+   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [d][e][f][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
                       add g
-   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [d][e][f][g][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [d][e][f][g][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       add h
-   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [d][e][f][g][h]    unstable, (must have 0, need to have 0, want to have 0, can give 2, need to give 1, must give 0) elements
+   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [d][e][f][g][h]    unstable, (must have 0, need to have 0, should have 0, can give 2, need to give 1, must give 0) elements
                       balance
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][g][h][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][g][h][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       add i
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][g][h][i]    unstable, (must have 0, need to have 0, want to have 0, can give 2, need to give 1, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][g][h][i]    unstable, (must have 0, need to have 0, should have 0, can give 2, need to give 1, must give 0) elements
                       add j
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][g][h][i] j  critically unstable, (must have 0, need to have 0, want to have 0, can give 3, need to give 2, must give 1) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][g][h][i] j  critically unstable, (must have 0, need to have 0, should have 0, can give 3, need to give 2, must give 1) elements
                       expand
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][g][h][i] j  critically unstable, (must have 0, need to have 0, want to have 0, can give 3, need to give 2, must give 1) elements
-   [ ][ ][ ][ ][ ]    critically unstable, (must have 1, need to have 3, want to have 4, can give 0, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][g][h][i] j  critically unstable, (must have 0, need to have 0, should have 0, can give 3, need to give 2, must give 1) elements
+   [ ][ ][ ][ ][ ]    critically unstable, (must have 1, need to have 3, should have 4, can give 0, need to give 0, must give 0) elements
                       balance
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][g][h][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [i][j][ ][ ][ ]    stable, (must have 0, need to have 1, want to have 2, can give 0, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][g][h][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [i][j][ ][ ][ ]    stable, (must have 0, need to have 1, should have 2, can give 0, need to give 0, must give 0) elements
  ^        ^  ^     ^
  |        |  |     |
  v        v  v     v
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][g][h][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][g][h][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       add m
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][m][g][h]    unstable, (must have 0, need to have 0, want to have 0, can give 2, need to give 1, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][m][g][h]    unstable, (must have 0, need to have 0, should have 0, can give 2, need to give 1, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       add n
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][m][n][g] h  critically unstable, (must have 0, need to have 0, want to have 0, can give 2, need to give 1, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][m][n][g] h  critically unstable, (must have 0, need to have 0, should have 0, can give 2, need to give 1, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       expand
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][m][n][g] h  critically unstable, (must have 0, need to have 0, want to have 0, can give 2, need to give 1, must give 0) elements
-   [ ][ ][ ][ ][ ]    critically unstable, (must have 1, need to have 3, want to have 4, can give 0, need to give 0, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][m][n][g] h  critically unstable, (must have 0, need to have 0, should have 0, can give 2, need to give 1, must give 0) elements
+   [ ][ ][ ][ ][ ]    critically unstable, (must have 1, need to have 3, should have 4, can give 0, need to give 0, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       balance
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][m][n][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [g][h][i][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [j][k][l][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][m][n][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [g][h][i][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [j][k][l][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
  ^        ^  ^     ^
  |        |  |     |
  v        v  v     v
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [e][f][g][h][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [e][f][g][h][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       remove e
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [f][g][h][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [f][g][h][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       remove f
-   [a][b][c][d][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [g][h][ ][ ][ ]    unstable, (must have 0, need to have 1, want to have 2, can give 0, need to give 0, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][d][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [g][h][ ][ ][ ]    unstable, (must have 0, need to have 1, should have 2, can give 0, need to give 0, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       balance
-   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [d][g][h][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [d][g][h][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       remove d
-   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [g][h][ ][ ][ ]    unstable, (must have 0, need to have 1, want to have 2, can give 0, need to give 0, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [g][h][ ][ ][ ]    unstable, (must have 0, need to have 1, should have 2, can give 0, need to give 0, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
                       balance
-   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [g][h][i][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [j][k][l][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
+   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [g][h][i][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [j][k][l][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
                       remove g
-   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
-   [h][i][ ][ ][ ]    unstable, (must have 0, need to have 1, want to have 2, can give 0, need to give 0, must give 0) elements
-   [j][k][l][ ][ ]    stable, (must have 0, need to have 0, want to have 1, can give 0, need to give 0, must give 0) elements
+   [a][b][c][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
+   [h][i][ ][ ][ ]    unstable, (must have 0, need to have 1, should have 2, can give 0, need to give 0, must give 0) elements
+   [j][k][l][ ][ ]    stable, (must have 0, need to have 0, should have 1, can give 0, need to give 0, must give 0) elements
                       contract
-   [a][b][c][h][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
-   [i][j][k][l][ ]    stable, (must have 0, need to have 0, want to have 0, can give 1, need to give 0, must give 0) elements
+   [a][b][c][h][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
+   [i][j][k][l][ ]    stable, (must have 0, need to have 0, should have 0, can give 1, need to give 0, must give 0) elements
  ^        ^  ^     ^
  |        |  |     |
  |        |  |     `- capacity

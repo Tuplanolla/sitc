@@ -1,5 +1,5 @@
 /**
-Contains the controllers.
+Contains the controller.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

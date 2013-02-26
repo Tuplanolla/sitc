@@ -1,5 +1,5 @@
 /**
-Contains the models.
+Contains the model.
 
 Everything is in SI units unless stated otherwise.
 

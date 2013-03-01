@@ -363,8 +363,8 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	}
 
 	@Override
-	public java.lang.String toString() {//TODO scientific pitch notation
-		return semitones.toString() + " + " + microtones.toString();
+	public java.lang.String toString() {
+		return "(semitones: " + semitones.toString() + ", microtones: " + microtones.toString() + ")";//TODO pitch notation
 	}
 
 	@Override

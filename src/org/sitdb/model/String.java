@@ -23,7 +23,7 @@ public final class String implements Serializable {
 	/**
 	The maximum tension this string can handle.
 	**/
-	public final double maximumTension;
+	public final Double maximumTension;
 
 	/**
 	Creates a string with a tension limit.
@@ -121,5 +121,10 @@ public final class String implements Serializable {
 		final double velocity = 2 * vibratingLength * frequency,
 				velocitySquared = velocity * velocity;
 		return linearDensity * velocitySquared;
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return "(vibrating length: " + vibratingLength + " cm, linear density: " + linearDensity + " g/m, maximum tension: " + maximumTension + " N)";
 	}
 }

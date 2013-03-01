@@ -2,10 +2,12 @@
 <instruments>
 	<instrument>
 		<name>Soprano Ektara</name>
+		<tension>80</tension>
 		<strings>
 			<string>
-				<density>0.4</density>
 				<length>58.4</length>
+				<density>0.4</density>
+				<tension>120</tension>
 			</string>
 		</strings>
 	</instrument>
@@ -13,20 +15,20 @@
 		<name>Fender American Standard Jazz Bass</name>
 		<strings>
 			<string>
-				<density>6</density>
 				<length>86.4</length>
+				<density>6</density>
 			</string>
 			<string>
-				<density>5</density>
 				<length>86.2</length>
+				<density>5</density>
 			</string>
 			<string>
-				<density>4</density>
 				<length>86.0</length>
+				<density>4</density>
 			</string>
 			<string>
-				<density>3</density>
 				<length>85.8</length>
+				<density>3</density>
 			</string>
 		</strings>
 	</instrument>

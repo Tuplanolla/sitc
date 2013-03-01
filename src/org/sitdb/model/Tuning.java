@@ -100,4 +100,9 @@ public final class Tuning implements Serializable {
 	public boolean monotonous() {
 		return increasing() || decreasing();
 	}
+
+	@Override
+	public java.lang.String toString() {
+		return name + " (notes: " + notes + ")";
+	}
 }

@@ -56,4 +56,9 @@ public final class Sequence implements Serializable {
 	public Sequence(final java.lang.String name, final TuningSystem tuningSystem) {
 		this(name, tuningSystem, null);
 	}
+
+	@Override
+	public java.lang.String toString() {
+		return name + " (instrument: " + instrument + ", tunings: " + tunings + ")";
+	}
 }

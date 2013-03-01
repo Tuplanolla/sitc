@@ -18,50 +18,38 @@ public final class Instrument implements Serializable {
 	public final java.lang.String name;
 
 	/**
-	The notes this instrument has.
-	**/
-	public final List<String> strings;
-
-	/**
-	The minimum tension this instrument can handle.
-	**/
-	public final Double minimumTension;
-
-	/**
 	The maximum tension this instrument can handle.
 	**/
 	public final Double maximumTension;
 
 	/**
-	Creates a instrument with tension limits.
-
-	@param name The name.
-	@param minimumTension The minimum tension.
-	@param maximumTension The maximum tension.
+	The strings this instrument has.
 	**/
-	public Instrument(final java.lang.String name, final Double minimumTension, final Double maximumTension) {
-		this.name = name;
-		strings = new LinkedList<String>();
-		this.minimumTension = minimumTension;
-		this.maximumTension = maximumTension;
-	}
+	public final List<String> strings;
 
 	/**
-	Creates a instrument with a tension limit.
+	Creates an instrument with a tension limit.
 
 	@param name The name.
 	@param maximumTension The maximum tension.
 	**/
 	public Instrument(final java.lang.String name, final Double maximumTension) {
-		this(name, null, maximumTension);
+		this.name = name;
+		this.maximumTension = maximumTension;
+		strings = new LinkedList<String>();
 	}
 
 	/**
-	Creates a instrument without tension limits.
+	Creates an instrument without a tension limit.
 
 	@param name The name.
 	**/
 	public Instrument(final java.lang.String name) {
-		this(name, null, null);
+		this(name, null);
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return name + " (strings: " + strings + ", maximum tension: " + maximumTension + ")";
 	}
 }

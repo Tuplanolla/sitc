@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+		jxb:version="2.0">
+	<xs:complexType name="String">
+		<xs:all>
+			<xs:element name="length" type="xs:decimal" />
+			<xs:element name="density" type="xs:decimal" />
+			<xs:element name="tension" type="xs:decimal" minOccurs="0" />
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="Instrument">
+		<xs:all>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="tension" type="xs:decimal" minOccurs="0" />
+			<xs:element name="strings">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="string" type="String" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:element name="instruments">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="instrument" type="Instrument" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

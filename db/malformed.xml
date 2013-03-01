@@ -4,8 +4,8 @@
 		<name>Plastic Ruler</name>
 		<strings>
 			<string>
-				<density>60</density>
 				<length>10.5</length>
+				<density>60</density>
 			</string>
 		</strings>
 </instruments>

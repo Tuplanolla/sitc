@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+		jxb:version="2.0">
+	<xs:complexType name="Sequence">
+		<xs:all>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="instrument" type="xs:string" minOccurs="0">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="hash" type="xs:string" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tunings">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tuning" type="xs:string" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="hash" type="xs:string" />
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:element name="sequences">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sequence" type="Sequence" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

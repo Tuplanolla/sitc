@@ -23,6 +23,11 @@ public final class Instrument implements Serializable {
 	public final Double maximumTension;
 
 	/**
+	The tuning system this instrument is restricted to or <code>null</code>.
+	**/
+	public final TuningSystem tuningSystem;
+
+	/**
 	The strings this instrument has.
 	**/
 	public final List<String> strings;
@@ -32,20 +37,33 @@ public final class Instrument implements Serializable {
 
 	@param name The name.
 	@param maximumTension The maximum tension.
+	@param tuningSystem The tuning system.
 	**/
-	public Instrument(final java.lang.String name, final Double maximumTension) {
+	public Instrument(final java.lang.String name, final Double maximumTension, final TuningSystem tuningSystem) {
 		this.name = name;
+		this.tuningSystem = tuningSystem;
 		this.maximumTension = maximumTension;
 		strings = new LinkedList<String>();
+	}
+
+	/**
+	Creates an instrument without a tuning system.
+
+	@param name The name.
+	@param maximumTension The maximum tension.
+	**/
+	public Instrument(final java.lang.String name, final Double maximumTension) {
+		this(name, maximumTension, null);
 	}
 
 	/**
 	Creates an instrument without a tension limit.
 
 	@param name The name.
+	@param tuningSystem The tuning system.
 	**/
-	public Instrument(final java.lang.String name) {
-		this(name, null);
+	public Instrument(final java.lang.String name, final TuningSystem tuningSystem) {
+		this(name, null, tuningSystem);
 	}
 
 	@Override

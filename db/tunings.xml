@@ -2,66 +2,99 @@
 <tunings>
 	<tuning>
 		<name>Standard</name>
+		<system hash="">Chromatic Equal Temperament</system>
 		<notes>
-			<note>C4</note>
+			<note>
+				<semitones>48</semitones>
+			</note>
 		</notes>
 	</tuning>
 	<tuning>
 		<name>Standard</name>
+		<system hash="">Chromatic Equal Temperament</system>
 		<notes>
-			<note>E2</note>
-			<note>A2</note>
-			<note>D3</note>
-			<note>G3</note>
+			<note>
+				<semitones>28</semitones>
+			</note>
+			<note>
+				<semitones>33</semitones>
+			</note>
+			<note>
+				<semitones>38</semitones>
+			</note>
+			<note>
+				<semitones>43</semitones>
+			</note>
 		</notes>
 	</tuning>
 	<tuning>
 		<name>Dropped D</name>
+		<system hash="">Chromatic Equal Temperament</system>
 		<notes>
-			<note>D2</note>
-			<note>A2</note>
-			<note>D3</note>
-			<note>G3</note>
+			<note>
+				<semitones>26</semitones>
+			</note>
+			<note>
+				<semitones>33</semitones>
+			</note>
+			<note>
+				<semitones>38</semitones>
+			</note>
+			<note>
+				<semitones>43</semitones>
+			</note>
 		</notes>
 	</tuning>
 	<tuning>
 		<name>Open C</name>
+		<system hash="">Chromatic Equal Temperament</system>
 		<notes>
-			<note>C2</note>
-			<note>G2</note>
-			<note>C3</note>
-			<note>G3</note>
+			<note>
+				<semitones>24</semitones>
+			</note>
+			<note>
+				<semitones>31</semitones>
+			</note>
+			<note>
+				<semitones>36</semitones>
+			</note>
+			<note>
+				<semitones>43</semitones>
+			</note>
 		</notes>
 	</tuning>
 	<tuning>
-		<name>Step Down</name>
+		<name>Step and a Half Down</name>
+		<system hash="">Chromatic Equal Temperament</system>
 		<notes>
-			<note>D2</note>
-			<note>G2</note>
-			<note>C3</note>
-			<note>F3</note>
-		</notes>
-	</tuning>
-	<tuning>
-		<name>Standard</name>
-		<notes>
-			<note>E3</note>
-			<note>A3</note>
-			<note>D4</note>
-			<note>G4</note>
-			<note>B4</note>
-			<note>E5</note>
-		</notes>
-	</tuning>
-	<tuning>
-		<name>Quarter Semitone Raised Nashville</name>
-		<notes>
-			<note>E4+1/4</note>
-			<note>A4+2/8</note>
-			<note>D5+4\1</note>
-			<note>G5 1/4</note>
-			<note>B4+1/+4</note>
-			<note>E5-1/-4</note>
+			<note>
+				<semitones>26</semitones>
+				<microtones>
+					<numerator>-1</numerator>
+					<denominator>2</denominator>
+				</microtones>
+			</note>
+			<note>
+				<semitones>31</semitones>
+				<microtones>
+					<numerator>-1</numerator>
+					<denominator>2</denominator>
+				</microtones>
+			</note>
+			<note>
+				<semitones>36</semitones>
+				<microtones>
+					<numerator>-1</numerator>
+					<denominator>2</denominator>
+				</microtones>
+			</note>
+			<note>
+				<semitones>41</semitones>
+				<microtones>
+					<numerator>-1</numerator>
+					<denominator>2</denominator>
+				</microtones>
+			</note>
 		</notes>
 	</tuning>
 </tunings>

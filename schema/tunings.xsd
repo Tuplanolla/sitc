@@ -2,15 +2,30 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
 		jxb:version="2.0">
+	<xs:complexType name="Microtones">
+		<xs:all>
+			<xs:element name="numerator" type="xs:integer" />
+			<xs:element name="denominator" type="xs:positiveInteger" />
+		</xs:all>
+	</xs:complexType>
 	<xs:complexType name="Note">
 		<xs:all>
 			<xs:element name="semitones" type="xs:decimal" />
-			<xs:element name="microtones" type="xs:decimal" minOccurs="0" />
+			<xs:element name="microtones" type="Microtones" minOccurs="0" />
 		</xs:all>
 	</xs:complexType>
 	<xs:complexType name="Tuning">
 		<xs:all>
 			<xs:element name="name" type="xs:string" />
+			<xs:element name="system" minOccurs="0">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="hash" type="xs:string" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="notes">
 				<xs:complexType>
 					<xs:sequence>

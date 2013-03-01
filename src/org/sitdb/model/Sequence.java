@@ -18,7 +18,7 @@ public final class Sequence implements Serializable {
 	public final java.lang.String name;
 
 	/**
-	The tuning system this sequence uses.
+	The tuning system this sequence prefers or <code>null</code>.
 	**/
 	public final TuningSystem tuningSystem;
 

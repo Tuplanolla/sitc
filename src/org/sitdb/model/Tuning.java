@@ -19,6 +19,11 @@ public final class Tuning implements Serializable {
 	public final java.lang.String name;
 
 	/**
+	The tuning system this tuning uses.
+	**/
+	public final TuningSystem tuningSystem;
+
+	/**
 	The notes this tuning is made of.
 	**/
 	public final List<Note> notes;
@@ -27,9 +32,11 @@ public final class Tuning implements Serializable {
 	Creates a tuning.
 
 	@param name The name.
+	@param tuningSystem The tuning system.
 	**/
-	public Tuning(final java.lang.String name) {
+	public Tuning(final java.lang.String name, final TuningSystem tuningSystem) {
 		this.name = name;
+		this.tuningSystem = tuningSystem;
 		notes = new LinkedList<Note>();
 	}
 

@@ -13,6 +13,8 @@
 	</instrument>
 	<instrument>
 		<name>Fender American Standard Jazz Bass</name>
+		<system hash="">Chromatic Equal Temperament</system>
+		<tension>320</tension>
 		<strings>
 			<string>
 				<length>86.4</length>

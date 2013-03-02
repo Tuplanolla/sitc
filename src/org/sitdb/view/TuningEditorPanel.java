@@ -2,6 +2,7 @@ package org.sitdb.view;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -36,18 +37,32 @@ public final class TuningEditorPanel extends JPanel {
 					soundPanel.add(soundTextField);
 
 				final JPanel titledSoundPanel = new JPanel(new BorderLayout());
-				titledSoundPanel.setBorder(new TitledBorder("Sound"));
+				titledSoundPanel.setBorder(new TitledBorder("Test Sound"));
 				titledSoundPanel.add(soundPanel, BorderLayout.CENTER);
 
-								final JTextField nameTextField = new JTextField();
+									final JTextField nameTextField = new JTextField();
 
-							final JPanel namePanel = new JPanel(new BorderLayout());
-							namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-							namePanel.add(nameTextField);
+								final JPanel namePanel = new JPanel(new BorderLayout());
+								namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+								namePanel.add(nameTextField);
 
-						final JPanel titledNamePanel = new JPanel(new BorderLayout());
-						titledNamePanel.setBorder(new TitledBorder("Name"));
-						titledNamePanel.add(namePanel, BorderLayout.CENTER);
+							final JPanel titledNamePanel = new JPanel(new BorderLayout());
+							titledNamePanel.setBorder(new TitledBorder("Name"));
+							titledNamePanel.add(namePanel, BorderLayout.CENTER);
+
+									final JComboBox<String> systemComboBox = new JComboBox<String>();
+
+								final JPanel systemPanel = new JPanel(new BorderLayout());
+								systemPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+								systemPanel.add(systemComboBox);
+
+							final JPanel titledSystemPanel = new JPanel(new BorderLayout());
+							titledSystemPanel.setBorder(new TitledBorder("Pitch System"));
+							titledSystemPanel.add(systemPanel, BorderLayout.CENTER);
+
+						final JPanel topPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+						topPanel.add(titledNamePanel, BorderLayout.NORTH);
+						topPanel.add(titledSystemPanel, BorderLayout.CENTER);
 
 									magicPanel = new TuningMagicPanel();
 
@@ -67,7 +82,7 @@ public final class TuningEditorPanel extends JPanel {
 
 					final JPanel editorPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 					editorPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-					editorPanel.add(titledNamePanel, BorderLayout.NORTH);
+					editorPanel.add(topPanel, BorderLayout.NORTH);
 					editorPanel.add(titledStringPanel, BorderLayout.CENTER);
 					editorPanel.add(portPanel, BorderLayout.SOUTH);
 

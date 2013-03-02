@@ -7,6 +7,7 @@ import java.util.Collections;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -38,15 +39,25 @@ public final class SequenceEditorPanel extends JPanel {
 
 			interfacePanel = new ExtendedEditorInterfacePanel();
 
-							final JTextField nameTextField = new JTextField();
+								final JTextField nameTextField = new JTextField();
 
-						final JPanel namePanel = new JPanel(new BorderLayout());
-						namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-						namePanel.add(nameTextField);
+							final JPanel namePanel = new JPanel(new BorderLayout());
+							namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+							namePanel.add(nameTextField);
 
-					final JPanel titledNamePanel = new JPanel(new BorderLayout());
-					titledNamePanel.setBorder(new TitledBorder("Name"));
-					titledNamePanel.add(namePanel, BorderLayout.CENTER);
+						final JPanel titledNamePanel = new JPanel(new BorderLayout());
+						titledNamePanel.setBorder(new TitledBorder("Name"));
+						titledNamePanel.add(namePanel, BorderLayout.CENTER);
+
+								final JComboBox<String> systemComboBox = new JComboBox<String>();
+
+							final JPanel systemPanel = new JPanel(new BorderLayout());
+							systemPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+							systemPanel.add(systemComboBox);
+
+						final JPanel titledSystemPanel = new JPanel(new BorderLayout());
+						titledSystemPanel.setBorder(new TitledBorder("Pitch System"));
+						titledSystemPanel.add(systemPanel, BorderLayout.CENTER);
 
 								final JTextField instrumentTextField = new JTextField();
 
@@ -58,19 +69,24 @@ public final class SequenceEditorPanel extends JPanel {
 						titledInstrumentPanel.setBorder(new TitledBorder("Instrument"));
 						titledInstrumentPanel.add(instrumentPanel, BorderLayout.CENTER);
 
+					final JPanel topPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
+					topPanel.add(titledNamePanel, BorderLayout.NORTH);
+					topPanel.add(titledSystemPanel, BorderLayout.CENTER);
+					topPanel.add(titledInstrumentPanel, BorderLayout.SOUTH);
+
 									magicPanel = new SequenceMagicPanel();
 
 								final JScrollPane scrollPane = new JScrollPane(magicPanel);
 								scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 								scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-							final JPanel transitionPanel = new JPanel(new BorderLayout());
-							transitionPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-							transitionPanel.add(scrollPane);
+							final JPanel tuningPanel = new JPanel(new BorderLayout());
+							tuningPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+							tuningPanel.add(scrollPane);
 
-						final JPanel titledTransitionPanel = new JPanel(new BorderLayout());
-						titledTransitionPanel.setBorder(new TitledBorder("Tunings"));
-						titledTransitionPanel.add(transitionPanel, BorderLayout.CENTER);
+						final JPanel titledTuningPanel = new JPanel(new BorderLayout());
+						titledTuningPanel.setBorder(new TitledBorder("Tunings"));
+						titledTuningPanel.add(tuningPanel, BorderLayout.CENTER);
 
 											final JRadioButton nameRadioButton = new JRadioButton("Sort by Name");
 
@@ -177,15 +193,14 @@ public final class SequenceEditorPanel extends JPanel {
 						titledActionPanel.add(actionPanel, BorderLayout.CENTER);
 
 					final JPanel containerPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-					containerPanel.add(titledInstrumentPanel, BorderLayout.NORTH);
-					containerPanel.add(titledTransitionPanel, BorderLayout.CENTER);
+					containerPanel.add(titledTuningPanel, BorderLayout.CENTER);
 					containerPanel.add(titledActionPanel, BorderLayout.SOUTH);
 
 					portPanel = new PortPanel();
 
 				final JPanel editorPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 				editorPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-				editorPanel.add(titledNamePanel, BorderLayout.NORTH);
+				editorPanel.add(topPanel, BorderLayout.NORTH);
 				editorPanel.add(containerPanel, BorderLayout.CENTER);
 				editorPanel.add(portPanel, BorderLayout.SOUTH);
 

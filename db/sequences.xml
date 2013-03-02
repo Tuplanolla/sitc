@@ -2,8 +2,7 @@
 <sequences>
 	<sequence>
 		<name>Guitar Destroyer</name>
-		<span>6</span>
-		<tunings>
+		<tunings span="6">
 			<tuning hash="">Standard</tuning>
 			<tuning hash="">Baritone</tuning>
 			<tuning hash="">Standard</tuning>
@@ -14,10 +13,9 @@
 	</sequence>
 	<sequence>
 		<name>Practice</name>
-		<span>4</span>
 		<system hash="">Chromatic Just Intonation</system>
 		<instrument hash="">Fender American Standard Jazz Bass</instrument>
-		<tunings>
+		<tunings span="4">
 			<tuning hash="">Standard</tuning>
 			<tuning hash="">Open C</tuning>
 			<tuning hash="">Step Down</tuning>

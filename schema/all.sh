@@ -1,3 +1,4 @@
 #! /bin/sh
 
-xjc -npa -p org.sitdb.model -d . .
+xjc -npa -no-header -p org.sitdb.model.db -d . .
+find -name "*.java" -exec sh ./strip.sh {} \;

@@ -65,7 +65,7 @@ public final class InstrumentEditorPanel extends JPanel {
 					topPanel.add(titledSystemPanel, BorderLayout.CENTER);
 					topPanel.add(titledTensionPanel, BorderLayout.SOUTH);
 
-								magicPanel = new InstrumentMagicPanel();
+								magicPanel = new InstrumentMagicPanel(6);
 
 							final JScrollPane scrollPane = new JScrollPane(magicPanel);
 							scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

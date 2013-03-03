@@ -30,11 +30,11 @@ public final class TuningEditorPanel extends JPanel {
 
 			interfacePanel = new EditorInterfacePanel();
 
-						final JTextField soundTextField = new JTextField();
+						final JComboBox<String> soundComboBox = new JComboBox<String>();
 
 					final JPanel soundPanel = new JPanel(new BorderLayout());
 					soundPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-					soundPanel.add(soundTextField);
+					soundPanel.add(soundComboBox);
 
 				final JPanel titledSoundPanel = new JPanel(new BorderLayout());
 				titledSoundPanel.setBorder(new TitledBorder("Test Sound"));
@@ -64,7 +64,7 @@ public final class TuningEditorPanel extends JPanel {
 						topPanel.add(titledNamePanel, BorderLayout.NORTH);
 						topPanel.add(titledSystemPanel, BorderLayout.CENTER);
 
-									magicPanel = new TuningMagicPanel();
+									magicPanel = new TuningMagicPanel(6);
 
 								final JScrollPane scrollPane = new JScrollPane(magicPanel);
 								scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

@@ -112,7 +112,7 @@ public final class InstrumentMagicPanel extends JPanel {
 		}
 
 		/*
-		Tracks the maximum quarter row height.
+		Tracks the maximum row height.
 		*/
 		int strutHeight;
 
@@ -290,13 +290,13 @@ public final class InstrumentMagicPanel extends JPanel {
 		Builds the struts for the half rows.
 		*/
 		{
-			final int quarterStrutHeight = (strutHeight - 1) / 2 + 1//round up
+			final int halfStrutHeight = (strutHeight - 1) / 2 + 1//round up
 					- Constants.SMALL_INSETS.top - Constants.SMALL_INSETS.bottom;
 
 			while (gridy > 1) {
 				gridy--;
 
-					final Component strut = Box.createVerticalStrut(quarterStrutHeight);
+					final Component strut = Box.createVerticalStrut(halfStrutHeight);
 
 					final GridBagConstraints strutConstraints = new GridBagConstraints();
 					strutConstraints.gridx = 8;

@@ -70,6 +70,8 @@ public final class InstrumentEditorPanel extends JPanel {
 							final JScrollPane scrollPane = new JScrollPane(magicPanel);
 							scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 							scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+							scrollPane.getVerticalScrollBar().setUnitIncrement(8);
+							scrollPane.getHorizontalScrollBar().setUnitIncrement(8);
 
 						final JPanel stringPanel = new JPanel(new BorderLayout());
 						stringPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

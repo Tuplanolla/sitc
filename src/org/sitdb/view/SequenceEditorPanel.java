@@ -74,11 +74,13 @@ public final class SequenceEditorPanel extends JPanel {
 					topPanel.add(titledSystemPanel, BorderLayout.CENTER);
 					topPanel.add(titledInstrumentPanel, BorderLayout.SOUTH);
 
-									magicPanel = new SequenceMagicPanel();
+									magicPanel = new SequenceMagicPanel(6, 6);
 
 								final JScrollPane scrollPane = new JScrollPane(magicPanel);
 								scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 								scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+								scrollPane.getVerticalScrollBar().setUnitIncrement(8);
+								scrollPane.getHorizontalScrollBar().setUnitIncrement(8);
 
 							final JPanel tuningPanel = new JPanel(new BorderLayout());
 							tuningPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

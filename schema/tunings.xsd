@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
-		jxb:version="2.0">
-	<xs:complexType name="Microtones">
+		xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+		jaxb:version="2.0">
+	<xs:complexType name="XMLRational">
 		<xs:all>
 			<xs:element name="numerator" type="xs:integer" />
 			<xs:element name="denominator" type="xs:positiveInteger" />
 		</xs:all>
 	</xs:complexType>
-	<xs:complexType name="Note">
+	<xs:complexType name="XMLNote">
 		<xs:all>
 			<xs:element name="semitones" type="xs:decimal" />
-			<xs:element name="microtones" type="Microtones" minOccurs="0" />
+			<xs:element name="microtones" type="XMLRational" minOccurs="0" />
 		</xs:all>
 	</xs:complexType>
-	<xs:complexType name="Tuning">
+	<xs:complexType name="XMLTuning">
 		<xs:all>
 			<xs:element name="name" type="xs:string" />
 			<xs:element name="system" minOccurs="0">
@@ -29,17 +29,16 @@
 			<xs:element name="notes">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="note" type="Note" maxOccurs="unbounded" />
+						<xs:element name="note" type="XMLNote" maxOccurs="unbounded" />
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 		</xs:all>
 	</xs:complexType>
-	<xs:element name="tunings">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="tuning" type="Tuning" maxOccurs="unbounded" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+	<xs:complexType name="XMLTunings">
+		<xs:sequence>
+			<xs:element name="tuning" type="XMLTuning" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="tunings" type="XMLTunings" />
 </xs:schema>

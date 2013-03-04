@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
-		jxb:version="2.0">
-	<xs:complexType name="Sequence">
+		xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+		jaxb:version="2.0">
+	<xs:complexType name="XMLSequence">
 		<xs:all>
 			<xs:element name="name" type="xs:string" />
 			<xs:element name="system" minOccurs="0">
@@ -41,11 +41,10 @@
 			</xs:element>
 		</xs:all>
 	</xs:complexType>
-	<xs:element name="sequences">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="sequence" type="Sequence" maxOccurs="unbounded" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+	<xs:complexType name="XMLSequences">
+		<xs:sequence>
+			<xs:element name="sequence" type="XMLSequence" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="sequences" type="XMLSequences" />
 </xs:schema>

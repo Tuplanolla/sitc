@@ -1,4 +1,4 @@
-package org.sitdb.model.db;
+package org.sitdb.model.xml;
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

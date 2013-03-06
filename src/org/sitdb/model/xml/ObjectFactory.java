@@ -1,4 +1,4 @@
-package org.sitdb.model.db;
+package org.sitdb.model.xml;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;

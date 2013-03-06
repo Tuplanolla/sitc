@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import org.sitdb.math.Integer;
 import org.sitdb.math.Numeric;
 import org.sitdb.math.Rational;
+import org.sitdb.util.StringFormatter;
 
 /**
 Represents an immutable note as a distance from C<sub>0</sub>.
@@ -51,12 +52,12 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	/**
 	The amount of semitones from C<sub>0</sub>.
 	**/
-	public final Integer semitones;
+	private final Integer semitones;
 
 	/**
 	The amount of microtones from the semitone.
 	**/
-	public final Rational microtones;
+	private final Rational microtones;
 
 	/**
 	Creates a note.
@@ -350,6 +351,20 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 		return pitchSystem.frequency(this);
 	}
 
+	/**
+	@return The semitones.
+	**/
+	public Integer getSemitones() {
+		return semitones;
+	}
+
+	/**
+	@return The microtones.
+	**/
+	public Rational getMicrotones() {
+		return microtones;
+	}
+
 	@Override
 	public boolean equals(final Object object) {
 		if (!(object instanceof Note)) return false;
@@ -364,7 +379,12 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 	@Override
 	public java.lang.String toString() {
-		return "(semitones: " + semitones.toString() + ", microtones: " + microtones.toString() + ")";//TODO pitch notation
+		final Object[][] objects = {
+			{"semitones", semitones},
+			{"microtones", microtones}
+		};
+		final java.lang.String fields = StringFormatter.formatFields(objects);
+		return "note (" + fields + ")";//TODO pitch notation
 	}
 
 	@Override

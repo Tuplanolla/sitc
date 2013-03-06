@@ -1,4 +1,4 @@
-package org.sitdb.model.db;
+package org.sitdb.model.xml;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;

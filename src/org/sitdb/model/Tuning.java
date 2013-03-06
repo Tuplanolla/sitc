@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.sitdb.util.StringFormatter;
+
 /**
 Represents a mutable tuning.
 
@@ -16,20 +18,20 @@ public final class Tuning implements Serializable {
 	/**
 	The name of this tuning.
 	**/
-	public final java.lang.String name;
+	private java.lang.String name;
 
 	/**
-	The tuning system this tuning uses.
+	The tuning system this tuning uses or <code>null</code>.
 	**/
-	public final TuningSystem tuningSystem;
+	private TuningSystem tuningSystem;
 
 	/**
 	The notes this tuning is made of.
 	**/
-	public final List<Note> notes;
+	private List<Note> notes;
 
 	/**
-	Creates a tuning.
+	Creates a tuning with a tuning system.
 
 	@param name The name.
 	@param tuningSystem The tuning system.
@@ -38,6 +40,15 @@ public final class Tuning implements Serializable {
 		this.name = name;
 		this.tuningSystem = tuningSystem;
 		notes = new LinkedList<Note>();
+	}
+
+	/**
+	Creates a tuning without a tuning system.
+
+	@param name The name.
+	**/
+	public Tuning(final java.lang.String name) {
+		this(name, null);
 	}
 
 	/**
@@ -102,14 +113,63 @@ public final class Tuning implements Serializable {
 	/**
 	Returns whether this tuning is increasing or decreasing.
 
+	A tuning can be both increasing and decreasing.
+
 	@return Whether this tuning is monotonous.
 	**/
 	public boolean monotonous() {
 		return increasing() || decreasing();
 	}
 
+	/**
+	@return The name.
+	**/
+	public java.lang.String getName() {
+		return name;
+	}
+
+	/**
+	@param name The new name.
+	**/
+	public void setName(final java.lang.String name) {
+		this.name = name;
+	}
+
+	/**
+	@return The tuningSystem.
+	**/
+	public TuningSystem getTuningSystem() {
+		return tuningSystem;
+	}
+
+	/**
+	@param tuningSystem The new tuningSystem.
+	**/
+	public void setTuningSystem(final TuningSystem tuningSystem) {
+		this.tuningSystem = tuningSystem;
+	}
+
+	/**
+	@return The notes.
+	**/
+	public List<Note> getNotes() {
+		return notes;
+	}
+
+	/**
+	@param notes The new notes.
+	**/
+	public void setNotes(final List<Note> notes) {
+		this.notes = notes;
+	}
+
 	@Override
 	public java.lang.String toString() {
-		return name + " (notes: " + notes + ")";
+		final Object[][] objects = {
+			{"tuning system", tuningSystem},
+			{"notes", notes}
+		};
+		final java.lang.String fields = StringFormatter.formatFields(objects);
+		return name + " (" + fields + ")";
 	}
 }

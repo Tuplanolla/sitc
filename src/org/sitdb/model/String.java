@@ -2,6 +2,8 @@ package org.sitdb.model;
 
 import java.io.Serializable;
 
+import org.sitdb.util.StringFormatter;
+
 /**
 Represents an immutable string of an instrument.
 
@@ -13,17 +15,17 @@ public final class String implements Serializable {
 	/**
 	The vibrating length of this string.
 	**/
-	public final double vibratingLength;
+	private double vibratingLength;
 
 	/**
 	The linear density (mass per unit length) of this string.
 	**/
-	public final double linearDensity;
+	private double linearDensity;
 
 	/**
-	The maximum tension this string can handle.
+	The maximum tension this string can handle or <code>null</code>.
 	**/
-	public final Double maximumTension;
+	private Double maximumTension;
 
 	/**
 	Creates a string with a tension limit.
@@ -123,8 +125,56 @@ public final class String implements Serializable {
 		return linearDensity * velocitySquared;
 	}
 
+	/**
+	@return The vibratingLength.
+	**/
+	public double getVibratingLength() {
+		return vibratingLength;
+	}
+
+	/**
+	@param vibratingLength The new vibratingLength.
+	**/
+	public void setVibratingLength(final double vibratingLength) {
+		this.vibratingLength = vibratingLength;
+	}
+
+	/**
+	@return The linearDensity.
+	**/
+	public double getLinearDensity() {
+		return linearDensity;
+	}
+
+	/**
+	@param linearDensity The new linearDensity.
+	**/
+	public void setLinearDensity(final double linearDensity) {
+		this.linearDensity = linearDensity;
+	}
+
+	/**
+	@return The maximumTension.
+	**/
+	public Double getMaximumTension() {
+		return maximumTension;
+	}
+
+	/**
+	@param maximumTension The new maximumTension.
+	**/
+	public void setMaximumTension(final Double maximumTension) {
+		this.maximumTension = maximumTension;
+	}
+
 	@Override
 	public java.lang.String toString() {
-		return "(vibrating length: " + vibratingLength + " cm, linear density: " + linearDensity + " g/m, maximum tension: " + maximumTension + " N)";
+		final Object[][] objects = {
+			{"vibrating length", vibratingLength, " cm"},
+			{"linear density", linearDensity, " g/m"},
+			{"maximum tension", maximumTension, " N"}
+		};
+		final java.lang.String fields = StringFormatter.formatFields(objects);
+		return "string (" + fields + ")";
 	}
 }

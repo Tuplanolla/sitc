@@ -1,4 +1,4 @@
-package org.sitdb.model.db;
+package org.sitdb.model.xml;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;

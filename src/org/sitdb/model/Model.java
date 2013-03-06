@@ -18,7 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.sitdb.Part;
-import org.sitdb.model.db.*;//TODO organize
+import org.sitdb.model.xml.*;
 
 /**
 Represents a mutable model.
@@ -68,10 +68,10 @@ public final class Model implements Part {
 			for (final XMLString xmlString : xmlInstrument.getStrings().getString()) {
 				final double vibratingLength = xmlString.getLength().doubleValue();
 				final double linearDensity = xmlString.getDensity().doubleValue();
-				final BigDecimal xmlStringTension = xmlInstrument.getTension();
+				final BigDecimal xmlStringTension = xmlString.getTension();
 				final Double maximumStringTension = xmlStringTension != null ? xmlStringTension.doubleValue() : null;
 				final String string = new String(vibratingLength, linearDensity, maximumStringTension);
-				instrument.strings.add(string);
+				instrument.getStrings().add(string);
 			}
 			instruments.add(instrument);
 		}
@@ -92,15 +92,15 @@ public final class Model implements Part {
 		final XMLInstruments xmlInstruments = new XMLInstruments();
 		final List<XMLInstrument> xmlInstrumentList = xmlInstruments.getInstrument();
 		for (final Instrument instrument : instruments) {
-			final java.lang.String name = instrument.name;
-			final BigDecimal maximumInstrumentTension = instrument.maximumTension != null ? BigDecimal.valueOf(instrument.maximumTension) : null;
+			final java.lang.String name = instrument.getName();
+			final BigDecimal maximumInstrumentTension = instrument.getMaximumTension() != null ? BigDecimal.valueOf(instrument.getMaximumTension()) : null;
 			final XMLInstrument.System tuningSystem = null;//TODO Formatter.formatTuningSystem(instrument.tuningSystem);
 			final XMLInstrument.Strings strings = new XMLInstrument.Strings();
 			final List<XMLString> stringList = strings.getString();
-			for (final String string : instrument.strings) {
-				final BigDecimal vibratingLength = BigDecimal.valueOf(string.vibratingLength);
-				final BigDecimal linearDensity = BigDecimal.valueOf(string.linearDensity);
-				final BigDecimal maximumStringTension = string.maximumTension != null ? BigDecimal.valueOf(string.maximumTension) : null;
+			for (final String string : instrument.getStrings()) {
+				final BigDecimal vibratingLength = BigDecimal.valueOf(string.getVibratingLength());
+				final BigDecimal linearDensity = BigDecimal.valueOf(string.getLinearDensity());
+				final BigDecimal maximumStringTension = string.getMaximumTension() != null ? BigDecimal.valueOf(string.getMaximumTension()) : null;
 				final XMLString xmlString = new XMLString();
 				xmlString.setLength(vibratingLength);
 				xmlString.setDensity(linearDensity);
@@ -135,10 +135,10 @@ public final class Model implements Part {
 			System.out.println(string);
 		}
 		final Instrument instrument = new Instrument("Test Bass", EqualTemperament.TWELVE_TONE);
-		instrument.strings.add(new org.sitdb.model.String(68, 5));
-		instrument.strings.add(new org.sitdb.model.String(66, 4));
-		instrument.strings.add(new org.sitdb.model.String(64, 3));
-		instrument.strings.add(new org.sitdb.model.String(62, 2));
+		instrument.getStrings().add(new org.sitdb.model.String(68, 5));
+		instrument.getStrings().add(new org.sitdb.model.String(66, 4));
+		instrument.getStrings().add(new org.sitdb.model.String(64, 3));
+		instrument.getStrings().add(new org.sitdb.model.String(62, 2));
 		model.instruments.add(instrument);
 		model.saveInstruments("db/test.xml");
 	}

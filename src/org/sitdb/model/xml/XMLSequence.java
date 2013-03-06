@@ -1,12 +1,10 @@
 package org.sitdb.model.xml;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -95,18 +93,17 @@ public class XMLSequence {
         @XmlElement(required = true)
         protected List<XMLSequence.Tunings.Tuning> tuning;
         @XmlAttribute(name = "span", required = true)
-        @XmlSchemaType(name = "positiveInteger")
-        protected BigInteger span;
+        protected int span;
         public List<XMLSequence.Tunings.Tuning> getTuning() {
             if (tuning == null) {
                 tuning = new ArrayList<XMLSequence.Tunings.Tuning>();
             }
             return this.tuning;
         }
-        public BigInteger getSpan() {
+        public int getSpan() {
             return span;
         }
-        public void setSpan(BigInteger value) {
+        public void setSpan(int value) {
             this.span = value;
         }
         @XmlAccessorType(XmlAccessType.FIELD)

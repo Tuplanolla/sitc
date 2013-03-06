@@ -1,5 +1,5 @@
 package org.sitdb.model.xml;
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -9,12 +9,12 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class XMLNote {
     @XmlElement(required = true)
-    protected BigDecimal semitones;
+    protected BigInteger semitones;
     protected XMLRational microtones;
-    public BigDecimal getSemitones() {
+    public BigInteger getSemitones() {
         return semitones;
     }
-    public void setSemitones(BigDecimal value) {
+    public void setSemitones(BigInteger value) {
         this.semitones = value;
     }
     public XMLRational getMicrotones() {

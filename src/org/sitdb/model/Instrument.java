@@ -1,6 +1,7 @@
 package org.sitdb.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public final class Instrument implements Serializable {
 	/**
 	The maximum tension this instrument can handle or <code>null</code>.
 	**/
-	private Double maximumTension;
+	private BigDecimal maximumTension;
 
 	/**
 	The tuning system this instrument is restricted to or <code>null</code>.
@@ -41,7 +42,7 @@ public final class Instrument implements Serializable {
 	@param maximumTension The maximum tension.
 	@param tuningSystem The tuning system.
 	**/
-	public Instrument(final java.lang.String name, final Double maximumTension, final TuningSystem tuningSystem) {
+	public Instrument(final java.lang.String name, final BigDecimal maximumTension, final TuningSystem tuningSystem) {
 		this.name = name;
 		this.tuningSystem = tuningSystem;
 		this.maximumTension = maximumTension;
@@ -54,7 +55,7 @@ public final class Instrument implements Serializable {
 	@param name The name.
 	@param maximumTension The maximum tension.
 	**/
-	public Instrument(final java.lang.String name, final Double maximumTension) {
+	public Instrument(final java.lang.String name, final BigDecimal maximumTension) {
 		this(name, maximumTension, null);
 	}
 
@@ -94,14 +95,14 @@ public final class Instrument implements Serializable {
 	/**
 	@return The maximumTension.
 	**/
-	public Double getMaximumTension() {
+	public BigDecimal getMaximumTension() {
 		return maximumTension;
 	}
 
 	/**
 	@param maximumTension The new maximumTension.
 	**/
-	public void setMaximumTension(final Double maximumTension) {
+	public void setMaximumTension(final BigDecimal maximumTension) {
 		this.maximumTension = maximumTension;
 	}
 

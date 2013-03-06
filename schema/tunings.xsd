@@ -10,7 +10,7 @@
 	</xs:complexType>
 	<xs:complexType name="XMLNote">
 		<xs:all>
-			<xs:element name="semitones" type="xs:decimal" />
+			<xs:element name="semitones" type="xs:integer" />
 			<xs:element name="microtones" type="XMLRational" minOccurs="0" />
 		</xs:all>
 	</xs:complexType>

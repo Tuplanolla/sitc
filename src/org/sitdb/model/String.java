@@ -1,6 +1,7 @@
 package org.sitdb.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import org.sitdb.util.StringFormatter;
 
@@ -15,17 +16,17 @@ public final class String implements Serializable {
 	/**
 	The vibrating length of this string.
 	**/
-	private double vibratingLength;
+	private BigDecimal vibratingLength;
 
 	/**
 	The linear density (mass per unit length) of this string.
 	**/
-	private double linearDensity;
+	private BigDecimal linearDensity;
 
 	/**
 	The maximum tension this string can handle or <code>null</code>.
 	**/
-	private Double maximumTension;
+	private BigDecimal maximumTension;
 
 	/**
 	Creates a string with a tension limit.
@@ -34,9 +35,9 @@ public final class String implements Serializable {
 	@param linearDensity The linear density.
 	@param maximumTension The maximum tension.
 	**/
-	public String(final double vibratingLength,
-			final double linearDensity,
-			final Double maximumTension) {
+	public String(final BigDecimal vibratingLength,
+			final BigDecimal linearDensity,
+			final BigDecimal maximumTension) {
 		this.vibratingLength = vibratingLength;
 		this.linearDensity = linearDensity;
 		this.maximumTension = maximumTension;
@@ -48,8 +49,8 @@ public final class String implements Serializable {
 	@param vibratingLength The vibrating length.
 	@param linearDensity The linear density.
 	**/
-	public String(final double vibratingLength,
-			final double linearDensity) {
+	public String(final BigDecimal vibratingLength,
+			final BigDecimal linearDensity) {
 		this(vibratingLength, linearDensity, null);
 	}
 
@@ -61,11 +62,12 @@ public final class String implements Serializable {
 	@param length The total length.
 	@param maximumTension The maximum tension.
 	**/
-	public String(final double vibratingLength,
+	@Deprecated//TODO separate calculator
+	public String(final BigDecimal vibratingLength,
 			final double mass,
 			final double length,
-			final Double maximumTension) {
-		this(vibratingLength, mass / length, maximumTension);
+			final BigDecimal maximumTension) {
+		this(vibratingLength, BigDecimal.valueOf(mass / length), maximumTension);
 	}
 
 	/**
@@ -75,7 +77,8 @@ public final class String implements Serializable {
 	@param mass The total mass.
 	@param length The total length.
 	**/
-	public String(final double vibratingLength,
+	@Deprecated//TODO separate calculator
+	public String(final BigDecimal vibratingLength,
 			final double mass,
 			final double length) {
 		this(vibratingLength, mass, length, null);
@@ -90,12 +93,13 @@ public final class String implements Serializable {
 	@param diameter The mean diameter.
 	@param maximumTension The maximum tension.
 	**/
-	public String(final double vibratingLength,
+	@Deprecated//TODO separate calculator
+	public String(final BigDecimal vibratingLength,
 			final double density,
 			final double length,
 			final double diameter,
-			final Double maximumTension) {
-		this(vibratingLength, Math.PI * density * length * (diameter * diameter));
+			final BigDecimal maximumTension) {
+		this(vibratingLength, BigDecimal.valueOf(Math.PI * density * length * (diameter * diameter)));
 	}
 
 	/**
@@ -106,7 +110,8 @@ public final class String implements Serializable {
 	@param length The total length.
 	@param diameter The mean diameter.
 	**/
-	public String(final double vibratingLength,
+	@Deprecated//TODO separate calculator
+	public String(final BigDecimal vibratingLength,
 			final double density,
 			final double length,
 			final double diameter) {
@@ -120,50 +125,50 @@ public final class String implements Serializable {
 	@return The tension.
 	**/
 	public double tension(final double frequency) {
-		final double velocity = 2 * vibratingLength * frequency,
+		final double velocity = 2 * vibratingLength.doubleValue() * frequency,
 				velocitySquared = velocity * velocity;
-		return linearDensity * velocitySquared;
+		return linearDensity.doubleValue() * velocitySquared;
 	}
 
 	/**
 	@return The vibratingLength.
 	**/
-	public double getVibratingLength() {
+	public BigDecimal getVibratingLength() {
 		return vibratingLength;
 	}
 
 	/**
 	@param vibratingLength The new vibratingLength.
 	**/
-	public void setVibratingLength(final double vibratingLength) {
+	public void setVibratingLength(final BigDecimal vibratingLength) {
 		this.vibratingLength = vibratingLength;
 	}
 
 	/**
 	@return The linearDensity.
 	**/
-	public double getLinearDensity() {
+	public BigDecimal getLinearDensity() {
 		return linearDensity;
 	}
 
 	/**
 	@param linearDensity The new linearDensity.
 	**/
-	public void setLinearDensity(final double linearDensity) {
+	public void setLinearDensity(final BigDecimal linearDensity) {
 		this.linearDensity = linearDensity;
 	}
 
 	/**
 	@return The maximumTension.
 	**/
-	public Double getMaximumTension() {
+	public BigDecimal getMaximumTension() {
 		return maximumTension;
 	}
 
 	/**
 	@param maximumTension The new maximumTension.
 	**/
-	public void setMaximumTension(final Double maximumTension) {
+	public void setMaximumTension(final BigDecimal maximumTension) {
 		this.maximumTension = maximumTension;
 	}
 

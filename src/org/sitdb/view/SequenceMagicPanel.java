@@ -24,7 +24,8 @@ It's magical.
 public final class SequenceMagicPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	private final int rows,
+	private final GridBagLayout layout;
+	private int rows,
 			columns;
 	private final List<JLabel> tuningLabels;
 	private final List<List<JLabel>> transpositionLabelLists,
@@ -45,6 +46,7 @@ public final class SequenceMagicPanel extends JPanel {
 	**/
 	public SequenceMagicPanel(final int rows, final int columns) {
 		super(new GridBagLayout());
+		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 
 		this.rows = rows;
 		this.columns = columns;
@@ -548,10 +550,32 @@ public final class SequenceMagicPanel extends JPanel {
 	}
 
 	/**
+	@param rows The amount of rows.
+	**/
+	public void setRows(final int rows) {
+		this.rows = rows;
+		for (final Component component : getComponents()) {//TODO wrangle
+			final GridBagConstraints constraints = layout.getConstraints(component);
+			layout.setConstraints(component, constraints);
+		}
+	}
+
+	/**
 	@return The amount of columns.
 	**/
 	public int getColumns() {
 		return columns;
+	}
+
+	/**
+	@param columns The amount of columns.
+	**/
+	public void setColumns(final int columns) {
+		this.columns = columns;
+		for (final Component component : getComponents()) {//TODO wrangle
+			final GridBagConstraints constraints = layout.getConstraints(component);
+			layout.setConstraints(component, constraints);
+		}
 	}
 
 	/**

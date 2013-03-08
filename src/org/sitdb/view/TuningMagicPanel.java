@@ -26,7 +26,8 @@ It's magical.
 public final class TuningMagicPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	private final int rows;
+	private final GridBagLayout layout;
+	private int rows;
 	private final JButton playAllButton;
 	private final List<JButton> playButtons;
 	private final List<JTextField> noteTextFields,
@@ -46,6 +47,7 @@ public final class TuningMagicPanel extends JPanel {
 	**/
 	public TuningMagicPanel(final int rows) {
 		super(new GridBagLayout());
+		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 
 		this.rows = rows;
 		playButtons = new ArrayList<JButton>();
@@ -422,6 +424,17 @@ public final class TuningMagicPanel extends JPanel {
 	**/
 	public int getRows() {
 		return rows;
+	}
+
+	/**
+	@param rows The amount of rows.
+	**/
+	public void setRows(final int rows) {
+		this.rows = rows;
+		for (final Component component : getComponents()) {//TODO wrangle
+			final GridBagConstraints constraints = layout.getConstraints(component);
+			layout.setConstraints(component, constraints);
+		}
 	}
 
 	/**

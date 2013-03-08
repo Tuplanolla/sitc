@@ -23,4 +23,6 @@ public final class Constants {
 			ORIGINAL_SCALE = 1,
 			LARGE_SCALE = 1.25,
 			VERY_LARGE_SCALE = 1.5;
+	public static final int TERMINAL_COLUMNS = 80,
+			TERMINAL_ROWS = 20;
 }

@@ -25,7 +25,8 @@ It's magical.
 public final class InstrumentMagicPanel extends JPanel {
 	private static final long serialVersionUID = 1l;
 
-	private final int rows;
+	private final GridBagLayout layout;
+	private int rows;
 	private final List<JTextField> lengthTextFields,
 			densityTextFields,
 			tensionTextFields;
@@ -40,6 +41,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	**/
 	public InstrumentMagicPanel(final int rows) {
 		super(new GridBagLayout());
+		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 
 		this.rows = rows;
 		lengthTextFields = new ArrayList<JTextField>();
@@ -321,6 +323,17 @@ public final class InstrumentMagicPanel extends JPanel {
 	**/
 	public int getRows() {
 		return rows;
+	}
+
+	/**
+	@param rows The amount of rows.
+	**/
+	public void setRows(final int rows) {
+		this.rows = rows;
+		for (final Component component : getComponents()) {//TODO wrangle
+			final GridBagConstraints constraints = layout.getConstraints(component);
+			layout.setConstraints(component, constraints);
+		}
 	}
 
 	/**

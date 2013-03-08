@@ -14,7 +14,7 @@ Represents a main window.
 public final class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1l;
 
-	private final OptionBar extraMenuBar;
+	private final MenuBar menuBar;
 	private final MainPane mainPane;
 	private final StatusPanel statusPanel;
 
@@ -22,17 +22,17 @@ public final class MainFrame extends JFrame {
 	Creates and initializes a main window.
 	**/
 	public MainFrame() {
-				extraMenuBar = new OptionBar();
+			menuBar = new MenuBar();
 
 				mainPane = new MainPane();
 
 				statusPanel = new StatusPanel();
 
 			final Container contentPane = getContentPane();
-			contentPane.add(extraMenuBar, BorderLayout.NORTH);
 			contentPane.add(mainPane, BorderLayout.CENTER);
 			contentPane.add(statusPanel, BorderLayout.SOUTH);
 
+		setJMenuBar(menuBar);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("String Instrument Tuning Database");
 		setIconImages(Resources.ICON_IMAGES);
@@ -43,10 +43,26 @@ public final class MainFrame extends JFrame {
 	}
 
 	/**
-	@return The menu bar.
+	Returns the actual menu bar.
+
+	Relies on return type covariance.
+
+	@return The actual menu bar.
 	**/
-	public OptionBar getExtraMenuBar() {
-		return extraMenuBar;
+	@Override
+	public MenuBar getJMenuBar() {
+		return menuBar;
+	}
+
+	/**
+	Doesn't return the actual menu bar.
+
+	@return Not the actual menu bar.
+	@see #getJMenuBar()
+	**/
+	@Override
+	public java.awt.MenuBar getMenuBar() {
+		return super.getMenuBar();
 	}
 
 	/**

@@ -10,10 +10,11 @@ Represents a menu bar.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class OptionBar extends JMenuBar {
+public final class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = 1l;
 
 	private final JMenuItem exitMenuItem;
+	private final JMenuItem tensionMenuItem;
 	private final JCheckBoxMenuItem microtonalMenuCheckbox;
 	private final JCheckBoxMenuItem notationMenuCheckbox;
 	private final JMenuItem manualMenuItem;
@@ -22,11 +23,16 @@ public final class OptionBar extends JMenuBar {
 	/**
 	Creates a menu bar.
 	**/
-	public OptionBar() {
+	public MenuBar() {
 				exitMenuItem = new JMenuItem("Exit");
 
 			final JMenu fileMenu = new JMenu("File");
 			fileMenu.add(exitMenuItem);
+
+				tensionMenuItem = new JMenuItem("Tension Calculator");
+
+			final JMenu toolsMenu = new JMenu("Tools");
+			toolsMenu.add(tensionMenuItem);
 
 				microtonalMenuCheckbox = new JCheckBoxMenuItem("Hide Microtonals");
 
@@ -46,6 +52,7 @@ public final class OptionBar extends JMenuBar {
 
 		setBorderPainted(false);
 		add(fileMenu);
+		//add(toolsMenu);//TODO tools
 		add(settingsMenu);
 		add(helpMenu);
 	}

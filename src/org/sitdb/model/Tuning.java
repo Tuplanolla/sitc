@@ -37,6 +37,7 @@ public final class Tuning implements Serializable {
 	@param tuningSystem The tuning system.
 	**/
 	public Tuning(final java.lang.String name, final TuningSystem tuningSystem) {
+		if (name == null) throw new IllegalArgumentException();
 		this.name = name;
 		this.tuningSystem = tuningSystem;
 		notes = new LinkedList<Note>();
@@ -132,6 +133,7 @@ public final class Tuning implements Serializable {
 	@param name The new name.
 	**/
 	public void setName(final java.lang.String name) {
+		if (name == null) throw new IllegalArgumentException();
 		this.name = name;
 	}
 

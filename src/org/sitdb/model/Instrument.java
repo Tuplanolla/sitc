@@ -43,6 +43,7 @@ public final class Instrument implements Serializable {
 	@param tuningSystem The tuning system.
 	**/
 	public Instrument(final java.lang.String name, final BigDecimal maximumTension, final TuningSystem tuningSystem) {
+		if (name == null) throw new IllegalArgumentException();
 		this.name = name;
 		this.tuningSystem = tuningSystem;
 		this.maximumTension = maximumTension;
@@ -89,6 +90,7 @@ public final class Instrument implements Serializable {
 	@param name The new name.
 	**/
 	public void setName(final java.lang.String name) {
+		if (name == null) throw new IllegalArgumentException();
 		this.name = name;
 	}
 

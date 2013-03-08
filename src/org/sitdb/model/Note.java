@@ -1,12 +1,11 @@
 package org.sitdb.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.sitdb.math.Integer;
-import org.sitdb.math.Numeric;
-import org.sitdb.math.Rational;
+import org.apache.commons.math3.fraction.BigFraction;
 import org.sitdb.util.StringFormatter;
 
 /**
@@ -14,7 +13,7 @@ Represents an immutable note as a distance from C<sub>0</sub>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Note implements Numeric, Comparable<Note>, Serializable {
+public final class Note implements Comparable<Note>, Serializable {
 	private static final long serialVersionUID = 1l;
 
 	/**
@@ -47,17 +46,24 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	/**
 	The note C<sub>0</sub>.
 	**/
-	public static final Note C0 = new Note(Integer.ZERO);
+	public static final Note C0 = new Note(BigInteger.ZERO);
 
 	/**
 	The amount of semitones from C<sub>0</sub>.
 	**/
-	private final Integer semitones;
+	private final BigInteger semitones;
 
 	/**
 	The amount of microtones from the semitone.
 	**/
-	private final Rational microtones;
+	private final BigFraction microtones;
+
+	/**
+	The amount of semitones and microtones from C<sub>0</sub> or <code>null</code>.
+
+	Not calculated until needed.
+	**/
+	private BigFraction tones;
 
 	/**
 	Creates a note.
@@ -65,17 +71,18 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	@param semitones The distance in semitones.
 	@param microtones The distance in microtones.
 	**/
-	public Note(Integer semitones, Rational microtones) {
-		while (microtones.compareTo(Rational.MINUS_ONE) <= 0) {
-			semitones = semitones.subtract(Integer.ONE);
-			microtones = microtones.add(Rational.ONE);
+	public Note(BigInteger semitones, BigFraction microtones) {
+		while (microtones.compareTo(BigFraction.MINUS_ONE) <= 0) {
+			semitones = semitones.subtract(BigInteger.ONE);
+			microtones = microtones.add(BigFraction.ONE);
 		}
-		while (microtones.compareTo(Rational.ONE) >= 0) {
-			semitones = semitones.add(Integer.ONE);
-			microtones = microtones.subtract(Rational.ONE);
+		while (microtones.compareTo(BigFraction.ONE) >= 0) {
+			semitones = semitones.add(BigInteger.ONE);
+			microtones = microtones.subtract(BigFraction.ONE);
 		}
 		this.semitones = semitones;
 		this.microtones = microtones;
+		tones = null;
 	}
 
 	/**
@@ -83,17 +90,10 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 	@param semitones The distance in semitones.
 	**/
-	public Note(final Integer semitones) {
-		this(semitones, Rational.ZERO);
-	}
-
-	/**
-	Creates a note.
-
-	@param semitones The distance in semitones.
-	**/
-	public Note(final int semitones) {
-		this(Integer.valueOf(semitones), Rational.ZERO);
+	public Note(final BigInteger semitones) {
+		this.semitones = semitones;
+		microtones = null;
+		tones = null;
 	}
 
 	/**
@@ -271,7 +271,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 		final int octave = octaveSign * parseSubscripts(matcher.group(4));
 
-		final Integer semitones = Integer.valueOf(letter + accidental + 12 * octave);//TODO notes in octave
+		final BigInteger semitones = BigInteger.valueOf(letter + accidental + 12 * octave);//TODO notes in octave
 
 		if (matcher.group(6) == null || matcher.group(6).isEmpty()) return new Note(semitones);
 
@@ -281,7 +281,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 		final int dividend = dividendSign * parseSubscripts(matcher.group(6));
 
-		Rational microtones = Rational.valueOf(dividend);
+		BigFraction microtones = new BigFraction(dividend);
 
 		if (matcher.group(9) == null || matcher.group(9).isEmpty()) return new Note(semitones, microtones);
 
@@ -293,7 +293,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 
 		final int divisor = divisorSign * parseSuperscripts(matcher.group(9));
 
-		microtones = Rational.valueOf(dividend, divisor);
+		microtones = new BigFraction(dividend, divisor);
 
 		if (!division) microtones = microtones.reciprocal();
 
@@ -311,28 +311,38 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	}
 
 	/**
-	Returns the transposition of this note.
+	Returns a transposition of this note.
 
 	@param semitones The amount of semitones to transpose.
 	@param microtones The amount of microtones to transpose.
 	@return The transposition.
 	**/
-	public Note transpose(final Integer semitones, final Rational microtones) {
+	public Note transpose(final BigInteger semitones, final BigFraction microtones) {
 		return new Note(this.semitones.add(semitones), this.microtones.add(microtones));
 	}
 
 	/**
-	Returns the transposition of this note.
+	Returns a transposition of this note.
 
 	@param semitones The amount of semitones to transpose.
 	@return The transposition.
 	**/
-	public Note transpose(final Integer semitones) {
-		return transpose(semitones, Rational.ZERO);
+	public Note transpose(final BigInteger semitones) {
+		return new Note(this.semitones.add(semitones), microtones);
 	}
 
 	/**
-	Returns the transposition of this note.
+	Returns a transposition of this note.
+
+	@param microtones The amount of microtones to transpose.
+	@return The transposition.
+	**/
+	public Note transpose(final BigFraction microtones) {
+		return new Note(semitones, this.microtones.add(microtones));
+	}
+
+	/**
+	Returns a transposition of this note.
 
 	@param note The note to transpose by.
 	@return The transposition.
@@ -354,15 +364,23 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 	/**
 	@return The semitones.
 	**/
-	public Integer getSemitones() {
+	public BigInteger getSemitones() {
 		return semitones;
 	}
 
 	/**
 	@return The microtones.
 	**/
-	public Rational getMicrotones() {
+	public BigFraction getMicrotones() {
 		return microtones;
+	}
+
+	/**
+	@return The semitones and microtones together.
+	**/
+	public BigFraction getTones() {
+		if (tones == null) tones = new BigFraction(semitones).add(microtones);
+		return tones;
 	}
 
 	@Override
@@ -384,7 +402,7 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 			{"microtones", microtones}
 		};
 		final java.lang.String fields = StringFormatter.formatFields(objects);
-		return "note (" + fields + ")";//TODO pitch notation
+		return "note (" + fields + ")";
 	}
 
 	@Override
@@ -394,35 +412,5 @@ public final class Note implements Numeric, Comparable<Note>, Serializable {
 			return microtones.compareTo(note.microtones);
 		}
 		return semitones.compareTo(note.semitones);
-	}
-
-	@Override
-	public double doubleValue() {
-		return semitones.doubleValue() + microtones.doubleValue();
-	}
-
-	@Override
-	public long longValue() {
-		return (long )doubleValue();
-	}
-
-	@Override
-	public int intValue() {
-		return (int )doubleValue();
-	}
-
-	@Override
-	public short shortValue() {
-		return (short )doubleValue();
-	}
-
-	@Override
-	public byte byteValue() {
-		return (byte )doubleValue();
-	}
-
-	@Override
-	public float floatValue() {
-		return (float )doubleValue();
 	}
 }

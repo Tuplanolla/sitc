@@ -1,8 +1,7 @@
 package org.sitdb.model;
 
 import java.io.Serializable;
-
-import org.sitdb.math.Integer;
+import java.math.BigInteger;
 
 /**
 Represents an immutable pitch system.
@@ -16,14 +15,14 @@ public final class PitchSystem implements Serializable {
 	Represents the twelve-tone scientific pitch system where C<sub>4</sub> is tuned to 256 Hz.
 	**/
 	public static final PitchSystem SCIENTIFIC = new PitchSystem(256,
-			new Note(Integer.valueOf(4 * 12)),
+			new Note(BigInteger.valueOf(4 * 12)),
 			EqualTemperament.TWELVE_TONE);
 
 	/**
 	Represents the twelve-tone concert pitch system where A<sub>4</sub> is tuned to 440 Hz.
 	**/
 	public static final PitchSystem STANDARD = new PitchSystem(440,
-			new Note(Integer.valueOf(4 * 12 + 9)),
+			new Note(BigInteger.valueOf(4 * 12 + 9)),
 			EqualTemperament.TWELVE_TONE);
 
 	/**

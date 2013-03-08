@@ -32,6 +32,6 @@ public class EqualTemperament implements TuningSystem {
 	@Override
 	public double frequency(final PitchSystem pitchSystem, final Note note) {
 		final Note distance = note.distance(pitchSystem.baseNote);
-		return pitchSystem.baseFrequency * Math.pow(2, distance.doubleValue() / semitonesInOctave);
+		return pitchSystem.baseFrequency * Math.pow(2, distance.getTones().doubleValue() / semitonesInOctave);
 	}
 }

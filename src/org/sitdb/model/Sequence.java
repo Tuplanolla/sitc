@@ -89,6 +89,7 @@ public final class Sequence implements Serializable {
 	@param name The new name.
 	**/
 	public void setName(final java.lang.String name) {
+		if (name == null) throw new IllegalArgumentException();
 		this.name = name;
 	}
 

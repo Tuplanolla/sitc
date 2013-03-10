@@ -14,7 +14,7 @@ Represents a port panel that
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class PortPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final JButton importButton,
 			exportButton;

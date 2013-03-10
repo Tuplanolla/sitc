@@ -12,8 +12,8 @@ Represents a mutable tuning.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Tuning implements Serializable {
-	private static final long serialVersionUID = 1l;
+public final class Tuning implements Comparable<Tuning>, Serializable {
+	private static final long serialVersionUID = 1;
 
 	/**
 	The name of this tuning.
@@ -165,13 +165,22 @@ public final class Tuning implements Serializable {
 		this.notes = notes;
 	}
 
-	@Override
-	public java.lang.String toString() {
+	public java.lang.String toFullString() {
 		final Object[][] objects = {
 			{"tuning system", tuningSystem},
 			{"notes", notes}
 		};
 		final java.lang.String fields = StringFormatter.formatFields(objects);
 		return name + " (" + fields + ")";
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return name;
+	}
+
+	@Override
+	public int compareTo(final Tuning tuning) {
+		return getName().compareTo(tuning.getName());
 	}
 }

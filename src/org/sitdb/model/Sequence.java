@@ -11,8 +11,8 @@ Represents a mutable sequence of tunings.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Sequence implements Serializable {
-	private static final long serialVersionUID = 1l;
+public final class Sequence implements Comparable<Sequence>, Serializable {
+	private static final long serialVersionUID = 1;
 
 	/**
 	The name of this sequence.
@@ -135,13 +135,22 @@ public final class Sequence implements Serializable {
 		this.tunings = tunings;
 	}
 
-	@Override
-	public java.lang.String toString() {
+	public java.lang.String toFullString() {
 		final Object[][] objects = {
 			{"instrument", instrument},
 			{"tunings", tunings}
 		};
 		final java.lang.String fields = StringFormatter.formatFields(objects);
 		return name + " (" + fields + ")";
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return name;
+	}
+
+	@Override
+	public int compareTo(final Sequence sequence) {
+		return getName().compareTo(sequence.getName());
 	}
 }

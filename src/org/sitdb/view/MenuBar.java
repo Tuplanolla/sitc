@@ -11,7 +11,7 @@ Represents a menu bar.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final JMenuItem exitMenuItem;
 	private final JMenuItem tensionMenuItem;

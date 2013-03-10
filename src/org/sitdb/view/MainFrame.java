@@ -12,7 +12,7 @@ Represents a main window.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class MainFrame extends JFrame {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final MenuBar menuBar;
 	private final MainPane mainPane;

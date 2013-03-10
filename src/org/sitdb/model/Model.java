@@ -3,8 +3,8 @@ package org.sitdb.model;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -20,7 +20,15 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.math3.fraction.BigFraction;
 import org.sitdb.Part;
-import org.sitdb.model.xml.*;
+import org.sitdb.model.xml.XMLInstrument;
+import org.sitdb.model.xml.XMLInstruments;
+import org.sitdb.model.xml.XMLNote;
+import org.sitdb.model.xml.XMLRational;
+import org.sitdb.model.xml.XMLSequence;
+import org.sitdb.model.xml.XMLSequences;
+import org.sitdb.model.xml.XMLString;
+import org.sitdb.model.xml.XMLTuning;
+import org.sitdb.model.xml.XMLTunings;
 
 /**
 Represents a mutable model.
@@ -28,9 +36,9 @@ Represents a mutable model.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Model implements Part {
-	private List<Instrument> instruments;
-	private List<Tuning> tunings;
-	private List<Sequence> sequences;
+	private final List<Instrument> instruments;
+	private final List<Tuning> tunings;
+	private final List<Sequence> sequences;
 	private Instrument currentInstrument;
 	private Tuning currentTuning;
 	private Sequence currentSequence;
@@ -48,6 +56,9 @@ public final class Model implements Part {
 	@param arguments The command-line arguments.
 	**/
 	public Model(final List<java.lang.String> arguments) {
+		instruments = new LinkedList<Instrument>();
+		tunings = new LinkedList<Tuning>();
+		sequences = new LinkedList<Sequence>();
 		instrumentContext = null;
 		tuningContext = null;
 		sequenceContext = null;
@@ -55,6 +66,27 @@ public final class Model implements Part {
 
 	@Override
 	public void activate() {}
+
+	/**
+	Sorts the instruments alphabetically.
+	**/
+	public void sortInstruments() {
+		Collections.sort(instruments);
+	}
+
+	/**
+	Sorts the tunings alphabetically.
+	**/
+	public void sortTunings() {
+		Collections.sort(tunings);
+	}
+
+	/**
+	Sorts the sequences alphabetically.
+	**/
+	public void sortSequences() {
+		Collections.sort(sequences);
+	}
 
 	/**
 	Loads the instruments from a file.
@@ -70,8 +102,8 @@ public final class Model implements Part {
 		final JAXBElement<XMLInstruments> jaxbElement = unmarshaller.unmarshal(source, XMLInstruments.class);
 		final XMLInstruments xmlInstruments = jaxbElement.getValue();
 
+		instruments.clear();
 		final List<XMLInstrument> xmlInstrumentList = xmlInstruments.getInstrument();
-		instruments = new ArrayList<Instrument>(xmlInstrumentList.size());
 		for (final XMLInstrument xmlInstrument : xmlInstrumentList) {
 			final java.lang.String name = xmlInstrument.getName();
 			final BigDecimal maximumInstrumentTension = xmlInstrument.getTension();
@@ -87,6 +119,8 @@ public final class Model implements Part {
 			}
 			instruments.add(instrument);
 		}
+
+		sortInstruments();
 	}
 
 	/**
@@ -145,8 +179,8 @@ public final class Model implements Part {
 		final JAXBElement<XMLTunings> jaxbElement = unmarshaller.unmarshal(source, XMLTunings.class);
 		final XMLTunings xmlTunings = jaxbElement.getValue();
 
+		tunings.clear();
 		final List<XMLTuning> xmlTuningList = xmlTunings.getTuning();
-		tunings = new ArrayList<Tuning>(xmlTuningList.size());
 		for (final XMLTuning xmlTuning : xmlTuningList) {
 			final java.lang.String name = xmlTuning.getName();
 			final TuningSystem tuningSystem = null;//TODO Parser.parseTuningSystem(xmlTuning.getSystem());
@@ -165,6 +199,8 @@ public final class Model implements Part {
 			}
 			tunings.add(tuning);
 		}
+
+		sortTunings();
 	}
 
 	/**
@@ -224,8 +260,8 @@ public final class Model implements Part {
 		final JAXBElement<XMLSequences> jaxbElement = unmarshaller.unmarshal(source, XMLSequences.class);
 		final XMLSequences xmlSequences = jaxbElement.getValue();
 
+		sequences.clear();
 		final List<XMLSequence> xmlSequenceList = xmlSequences.getSequence();
-		sequences = new ArrayList<Sequence>(xmlSequenceList.size());
 		for (final XMLSequence xmlSequence : xmlSequenceList) {
 			final java.lang.String name = xmlSequence.getName();
 			final TuningSystem tuningSystem = null;//TODO Parser.parseTuningSystem(xmlSequence.getSystem());
@@ -238,6 +274,8 @@ public final class Model implements Part {
 			}
 			sequences.add(sequence);
 		}
+
+		sortSequences();
 	}
 
 	/**
@@ -307,5 +345,68 @@ public final class Model implements Part {
 			System.out.println(sequence);
 		}
 		model.saveSequences("db/test.xml");
+	}
+
+	/**
+	@return The instruments.
+	**/
+	public List<Instrument> getInstruments() {
+		return instruments;
+	}
+
+	/**
+	@return The tunings.
+	**/
+	public List<Tuning> getTunings() {
+		return tunings;
+	}
+
+	/**
+	@return The sequences.
+	**/
+	public List<Sequence> getSequences() {
+		return sequences;
+	}
+
+	/**
+	@return The current instrument.
+	**/
+	public Instrument getCurrentInstrument() {
+		return currentInstrument;
+	}
+
+	/**
+	@param currentInstrument The new current instrument.
+	**/
+	public void setCurrentInstrument(final Instrument currentInstrument) {
+		this.currentInstrument = currentInstrument;
+	}
+
+	/**
+	@return The current tuning.
+	**/
+	public Tuning getCurrentTuning() {
+		return currentTuning;
+	}
+
+	/**
+	@param currentTuning The new current tuning.
+	**/
+	public void setCurrentTuning(final Tuning currentTuning) {
+		this.currentTuning = currentTuning;
+	}
+
+	/**
+	@return The current sequence.
+	**/
+	public Sequence getCurrentSequence() {
+		return currentSequence;
+	}
+
+	/**
+	@param currentSequence The new current sequence.
+	**/
+	public void setCurrentSequence(final Sequence currentSequence) {
+		this.currentSequence = currentSequence;
 	}
 }

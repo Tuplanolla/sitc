@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,13 +24,15 @@ Represents a local (list) panel that
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class LocalPanel<Type> extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final LocalInterfacePanel interfacePanel;
 	private final TitledBorder titledBorder;
 	private final JTextField searchTextField;
 	private final JButton searchButton;
+	private final JLabel searchLabel;
 	private final DefaultListModel<Type> listModel;
+	private final JList<Type> list;
 	private final JButton newButton,
 			deleteButton;
 
@@ -48,13 +51,16 @@ public final class LocalPanel<Type> extends JPanel {
 						searchButton = new JButton("Search");
 						Utilities.setScaledIcon(searchButton, Resources.SEARCH_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
+						searchLabel = new JLabel("Use Regular Expressions");
+
 					final JPanel searchPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 					searchPanel.add(searchTextField, BorderLayout.CENTER);
 					searchPanel.add(searchButton, BorderLayout.EAST);
+					searchPanel.add(searchLabel, BorderLayout.SOUTH);
 
 							listModel = new DefaultListModel<Type>();
 
-						final JList<Type> list = new JList<Type>(listModel);
+						list = new JList<Type>(listModel);
 						list.setLayoutOrientation(JList.VERTICAL);
 						list.setVisibleRowCount(2);
 						list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -120,6 +126,20 @@ public final class LocalPanel<Type> extends JPanel {
 	**/
 	public JButton getSearchButton() {
 		return searchButton;
+	}
+
+	/**
+	@return The search label.
+	**/
+	public JLabel getSearchLabel() {
+		return searchLabel;
+	}
+
+	/**
+	@return The list.
+	**/
+	public JList<Type> getList() {
+		return list;
 	}
 
 	/**

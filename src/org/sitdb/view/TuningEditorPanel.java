@@ -16,7 +16,7 @@ Represents a tuning editor panel.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class TuningEditorPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final EditorInterfacePanel interfacePanel;
 	private final TuningMagicPanel magicPanel;

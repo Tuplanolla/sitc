@@ -14,7 +14,7 @@ Represents an immutable note as a distance from C<sub>0</sub>.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Note implements Comparable<Note>, Serializable {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	/**
 	The string pattern for the parser that doesn't allow spaces.
@@ -395,14 +395,18 @@ public final class Note implements Comparable<Note>, Serializable {
 		return semitones.hashCode() ^ microtones.hashCode();
 	}
 
-	@Override
-	public java.lang.String toString() {
+	public java.lang.String toFullString() {
 		final Object[][] objects = {
 			{"semitones", semitones},
 			{"microtones", microtones}
 		};
 		final java.lang.String fields = StringFormatter.formatFields(objects);
 		return "note (" + fields + ")";
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return "note";//TODO Formatter.format(this);
 	}
 
 	@Override

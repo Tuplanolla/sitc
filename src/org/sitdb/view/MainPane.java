@@ -12,6 +12,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.sitdb.model.Instrument;
+import org.sitdb.model.Sequence;
+import org.sitdb.model.Tuning;
+
 /**
 Represents a main pane that
  combines manager panels and editor panels.
@@ -19,11 +23,11 @@ Represents a main pane that
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class MainPane extends JSplitPane {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
-	private final ManagerPanel<String> instrumentManagerPanel;
-	private final ManagerPanel<String> tuningManagerPanel;
-	private final ManagerPanel<String> sequenceManagerPanel;
+	private final ManagerPanel<Instrument> instrumentManagerPanel;
+	private final ManagerPanel<Tuning> tuningManagerPanel;
+	private final ManagerPanel<Sequence> sequenceManagerPanel;
 	private final InstrumentEditorPanel instrumentEditorPanel;
 	private final TuningEditorPanel tuningEditorPanel;
 	private final SequenceEditorPanel sequenceEditorPanel;
@@ -34,17 +38,17 @@ public final class MainPane extends JSplitPane {
 	public MainPane() {
 		super(JSplitPane.HORIZONTAL_SPLIT);
 
-				instrumentManagerPanel = new ManagerPanel<String>();
+				instrumentManagerPanel = new ManagerPanel<Instrument>();
 				instrumentManagerPanel.setTitle("Instruments");
 				instrumentManagerPanel.getRemotePanel().setTitle("Instrument File");
 				instrumentManagerPanel.getLocalPanel().setTitle("Instrument List");
 
-				tuningManagerPanel = new ManagerPanel<String>();
+				tuningManagerPanel = new ManagerPanel<Tuning>();
 				tuningManagerPanel.setTitle("Tunings");
 				tuningManagerPanel.getRemotePanel().setTitle("Tuning File");
 				tuningManagerPanel.getLocalPanel().setTitle("Tuning List");
 
-				sequenceManagerPanel = new ManagerPanel<String>();
+				sequenceManagerPanel = new ManagerPanel<Sequence>();
 				sequenceManagerPanel.setTitle("Sequences");
 				sequenceManagerPanel.getRemotePanel().setTitle("Sequence File");
 				sequenceManagerPanel.getLocalPanel().setTitle("Sequence List");
@@ -105,21 +109,21 @@ public final class MainPane extends JSplitPane {
 	/**
 	@return The instrument manager panel.
 	**/
-	public ManagerPanel<String> getInstrumentManagerPanel() {
+	public ManagerPanel<Instrument> getInstrumentManagerPanel() {
 		return instrumentManagerPanel;
 	}
 
 	/**
 	@return The tuning manager panel.
 	**/
-	public ManagerPanel<String> getTuningManagerPanel() {
+	public ManagerPanel<Tuning> getTuningManagerPanel() {
 		return tuningManagerPanel;
 	}
 
 	/**
 	@return The sequence manager panel.
 	**/
-	public ManagerPanel<String> getSequenceManagerPanel() {
+	public ManagerPanel<Sequence> getSequenceManagerPanel() {
 		return sequenceManagerPanel;
 	}
 

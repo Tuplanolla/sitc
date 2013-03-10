@@ -12,7 +12,7 @@ Represents a status panel.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class StatusPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final JProgressBar progressBar;
 

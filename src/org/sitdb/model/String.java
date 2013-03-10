@@ -11,7 +11,7 @@ Represents an immutable string of an instrument.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class String implements Serializable {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	/**
 	The vibrating length of this string.

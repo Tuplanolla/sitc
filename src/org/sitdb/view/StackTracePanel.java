@@ -25,7 +25,7 @@ Represents an stack trace panel used in error message dialogs.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class StackTracePanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	/**
 	Creates a new stack trace panel.

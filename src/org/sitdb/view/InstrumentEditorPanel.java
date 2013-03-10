@@ -10,15 +10,20 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import org.sitdb.model.TuningSystem;
+
 /**
 Represents an instrument editor panel.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class InstrumentEditorPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final EditorInterfacePanel interfacePanel;
+	private final JTextField nameTextField;
+	private final JComboBox<TuningSystem> systemComboBox;
+	private final JTextField tensionTextField;
 	private final InstrumentMagicPanel magicPanel;
 	private final PortPanel portPanel;
 
@@ -30,7 +35,7 @@ public final class InstrumentEditorPanel extends JPanel {
 
 			interfacePanel = new EditorInterfacePanel();
 
-								final JTextField nameTextField = new JTextField();
+								nameTextField = new JTextField();
 
 							final JPanel namePanel = new JPanel(new BorderLayout());
 							namePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
@@ -40,7 +45,7 @@ public final class InstrumentEditorPanel extends JPanel {
 						titledNamePanel.setBorder(new TitledBorder("Name"));
 						titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-								final JComboBox<String> systemComboBox = new JComboBox<String>();
+								systemComboBox = new JComboBox<TuningSystem>();
 
 							final JPanel systemPanel = new JPanel(new BorderLayout());
 							systemPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
@@ -50,7 +55,7 @@ public final class InstrumentEditorPanel extends JPanel {
 						titledSystemPanel.setBorder(new TitledBorder("Pitch System"));
 						titledSystemPanel.add(systemPanel, BorderLayout.CENTER);
 
-								final JTextField tensionTextField = new JTextField();
+								tensionTextField = new JTextField();
 
 							final JPanel tensionPanel = new JPanel(new BorderLayout());
 							tensionPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
@@ -103,6 +108,27 @@ public final class InstrumentEditorPanel extends JPanel {
 	**/
 	public EditorInterfacePanel getInterfacePanel() {
 		return interfacePanel;
+	}
+
+	/**
+	@return The name text field.
+	**/
+	public JTextField getNameTextField() {
+		return nameTextField;
+	}
+
+	/**
+	@return The tuning system combo box.
+	**/
+	public JComboBox<TuningSystem> getSystemComboBox() {
+		return systemComboBox;
+	}
+
+	/**
+	@return The tension text field.
+	**/
+	public JTextField getTensionTextField() {
+		return tensionTextField;
 	}
 
 	/**

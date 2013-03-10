@@ -6,20 +6,32 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingWorker;
+import javax.xml.bind.JAXBException;
 
 import org.sitdb.Part;
+import org.sitdb.model.Instrument;
 import org.sitdb.model.Model;
+import org.sitdb.model.String;
+import org.sitdb.view.EditorInterfacePanel;
+import org.sitdb.view.InstrumentEditorPanel;
+import org.sitdb.view.InstrumentMagicPanel;
+import org.sitdb.view.LocalInterfacePanel;
+import org.sitdb.view.LocalPanel;
 import org.sitdb.view.MainFrame;
 import org.sitdb.view.MainPane;
+import org.sitdb.view.ManagerPanel;
 import org.sitdb.view.MenuBar;
 import org.sitdb.view.RemotePanel;
 import org.sitdb.view.StackTracePanel;
@@ -80,32 +92,177 @@ public final class Controller implements Part {//TODO split
 		final MainFrame mainFrame = view.getMainFrame();
 		final MainPane mainPane = mainFrame.getMainPane();
 
-		final JFileChooser fileChooser = new JFileChooser();
-
 		final RemotePanel remoteInstrumentPanel = mainPane.getInstrumentManagerPanel().getRemotePanel();
-		remoteInstrumentPanel.getBrowseButton().addActionListener(new ActionListener() {
+		final ActionListener remoteInstrumentActionListener = new BrowseActionListener(mainFrame, remoteInstrumentPanel.getPathTextField());
+		remoteInstrumentPanel.getBrowseButton().addActionListener(remoteInstrumentActionListener);
+
+		final RemotePanel remoteTuningPanel = mainPane.getTuningManagerPanel().getRemotePanel();
+		final ActionListener remoteTuningActionListener = new BrowseActionListener(mainFrame, remoteTuningPanel.getPathTextField());
+		remoteTuningPanel.getBrowseButton().addActionListener(remoteTuningActionListener);
+
+		final RemotePanel remoteSequencePanel = mainPane.getSequenceManagerPanel().getRemotePanel();
+		final ActionListener remoteSequenceActionListener = new BrowseActionListener(mainFrame, remoteSequencePanel.getPathTextField());
+		remoteSequencePanel.getBrowseButton().addActionListener(remoteSequenceActionListener);
+	}
+
+	/**
+	Rebuilds the instrument list from the model.
+
+	Triggered manually to avoid sequential operations from causing
+	 redundant calls and
+	 slowness.
+
+	@param interactive Whether an incorrect search pattern is reported.
+	**/
+	public void updateInstrumentList(final boolean interactive) {
+		final List<Instrument> instruments = model.getInstruments();
+
+		final MainFrame mainFrame = view.getMainFrame();
+		final LocalPanel<Instrument> localInstrumentPanel = mainFrame.getMainPane().getInstrumentManagerPanel().getLocalPanel();
+		final DefaultListModel<Instrument> listModel = localInstrumentPanel.getListModel();
+		try {
+			final java.lang.String regex = localInstrumentPanel.getSearchTextField().getText();
+			final Pattern pattern = Pattern.compile(regex);
+			listModel.clear();
+			for (final Instrument instrument : instruments) {
+				final Matcher matcher = pattern.matcher(instrument.getName());
+				if (matcher.find()) listModel.addElement(instrument);
+			}
+		}
+		catch (final PatternSyntaxException exception) {
+			if (interactive) {
+				StackTracePanel.showErrorDialog(mainFrame, new StackTracePanel(exception,
+						"Compiling the search pattern failed. Make sure your regular expression is correct."));
+			}
+			else {
+				listModel.clear();
+				for (final Instrument instrument : instruments) {
+					listModel.addElement(instrument);
+				}
+			}
+		}
+
+		final int existing = instruments.size(),
+				showing = listModel.size();
+		final StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Showing ");
+		stringBuilder.append(showing);
+		if (showing != existing) {
+			stringBuilder.append(" of ");
+			stringBuilder.append(existing);
+		}
+		if (showing == 1 && existing == 1) stringBuilder.append(" Instrument");
+		else stringBuilder.append(" Instruments");
+		localInstrumentPanel.getSearchLabel().setText(stringBuilder.toString());
+	}
+
+	/**
+	Activates the local panels.
+	**/
+	private void activateLocalPanels() {
+		final MainFrame mainFrame = view.getMainFrame();
+		final MainPane mainPane = mainFrame.getMainPane();
+
+		final ManagerPanel<Instrument> instrumentManagerPanel = mainPane.getInstrumentManagerPanel();
+		final RemotePanel remoteInstrumentPanel = instrumentManagerPanel.getRemotePanel();
+		final JTextField instrumentPathTextField = remoteInstrumentPanel.getPathTextField();
+		final LocalPanel<Instrument> localInstrumentPanel = instrumentManagerPanel.getLocalPanel();
+		final LocalInterfacePanel instrumentInterfacePanel = localInstrumentPanel.getInterfacePanel();
+		instrumentInterfacePanel.getLoadButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
-				int result = fileChooser.showOpenDialog(mainFrame);
-				if (result == JFileChooser.APPROVE_OPTION) {
-					final File file = fileChooser.getSelectedFile();
-					try {
-						final String path = file.getCanonicalPath();
-						remoteInstrumentPanel.getPathTextField().setText(path);
-					}
-					catch (final IOException exception) {
-						StackTracePanel.showErrorDialog(mainFrame, new StackTracePanel(exception, "Resolving the file failed. Make sure your file system is working properly."));
-					}
-					catch (final SecurityException exception) {
-						StackTracePanel.showErrorDialog(mainFrame, new StackTracePanel(exception, "Accessing the file failed. Make sure your permissions are sufficient."));
-					}
+				try {
+					model.loadInstruments(instrumentPathTextField.getText());
+					updateInstrumentList(false);
+				}
+				catch (final JAXBException exception) {
+					StackTracePanel.showErrorDialog(mainFrame, new StackTracePanel(exception,
+							"Parsing the file failed. Make sure your data is well-formed and conforms to the appropriate schema."));
+				}
+			}
+		});
+
+		instrumentInterfacePanel.getSaveButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				try {
+					model.saveInstruments(instrumentPathTextField.getText());
+				}
+				catch (final JAXBException exception) {
+					StackTracePanel.showErrorDialog(mainFrame, new StackTracePanel(exception,
+							"Formatting the file failed. Make sure your data is sensible."));
+				}
+			}
+		});
+
+		localInstrumentPanel.getSearchButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				updateInstrumentList(true);
+			}
+		});
+
+		localInstrumentPanel.getNewButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				model.getInstruments().add(new Instrument("New Instrument"));
+				model.sortInstruments();
+				updateInstrumentList(false);
+			}
+		});
+
+		localInstrumentPanel.getDeleteButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				final JList<Instrument> list = localInstrumentPanel.getList();
+				final Instrument value = list.getSelectedValue();
+				if (value != null) {
+					model.getInstruments().remove(value);
+					updateInstrumentList(false);
 				}
 			}
 		});
 	}
 
+	/**
+	Activates the editor panels.
+	**/
+	private void activateEditorPanels() {
+		final MainFrame mainFrame = view.getMainFrame();
+		final MainPane mainPane = mainFrame.getMainPane();
+
+		final LocalPanel<Instrument> localInstrumentPanel = mainPane.getInstrumentManagerPanel().getLocalPanel();
+		final InstrumentEditorPanel instrumentEditorPanel = mainPane.getInstrumentEditorPanel();
+		final EditorInterfacePanel instrumentInterfacePanel = instrumentEditorPanel.getInterfacePanel();
+
+		instrumentInterfacePanel.getRevertButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				final JList<Instrument> list = localInstrumentPanel.getList();
+				final Instrument value = list.getSelectedValue();
+				if (value != null) {
+					instrumentEditorPanel.getNameTextField().setText(value.getName());
+					instrumentEditorPanel.getSystemComboBox().setSelectedItem(value.getTuningSystem());
+					instrumentEditorPanel.getTensionTextField().setText(value.getMaximumTension().toString());
+					final InstrumentMagicPanel instrumentMagicPanel = instrumentEditorPanel.getMagicPanel();
+					final List<String> strings = value.getStrings();
+					final int rows = strings.size();
+					instrumentMagicPanel.setRows(rows);
+					for (int row = 0; row < rows; row++) {
+						instrumentMagicPanel.getLengthTextField(row).setText(strings.get(row).getVibratingLength().toString());
+						instrumentMagicPanel.getDensityTextField(row).setText(strings.get(row).getLinearDensity().toString());
+						final BigDecimal maximumTension = strings.get(row).getMaximumTension();
+						if (maximumTension != null) instrumentMagicPanel.getTensionTextField(row).setText(maximumTension.toString());
+					}
+				}
+			}
+		});
+
+		instrumentInterfacePanel.getApplyButton();//TODO save into local
+	}
+
 	@Deprecated
-	private void addTestActions() {
+	private void addTestActions() {//TODO move away
 		final SwingWorker<Integer, Integer> worker = new SwingWorker<Integer, Integer>() {
 			private final Random random = new Random();
 			private int progress = 0;
@@ -146,21 +303,6 @@ public final class Controller implements Part {//TODO split
 		worker.execute();
 	}
 
-	@Deprecated
-	private void addTestData() {
-		final DefaultListModel<String> instrumentListModel = view.getMainFrame().getMainPane().getInstrumentManagerPanel().getLocalPanel().getListModel();
-		instrumentListModel.addElement("Instrument");
-
-		final DefaultListModel<String> tuningListModel = view.getMainFrame().getMainPane().getTuningManagerPanel().getLocalPanel().getListModel();
-		tuningListModel.addElement("Tuning");
-		tuningListModel.addElement("Another Tuning");
-
-		final DefaultListModel<String> sequenceListModel = view.getMainFrame().getMainPane().getSequenceManagerPanel().getLocalPanel().getListModel();
-		sequenceListModel.addElement("Sequence");
-		sequenceListModel.addElement("Another Sequence");
-		sequenceListModel.addElement("Yet Another Sequence");
-	}
-
 	/**
 	Activates some optimizations.
 	**/
@@ -176,10 +318,12 @@ public final class Controller implements Part {//TODO split
 
 	@Override
 	public void activate() {
-		activateMenuBar();
 		addTestActions();
-		addTestData();
+
+		activateMenuBar();
 		activateRemotePanels();
+		activateLocalPanels();
+		activateEditorPanels();
 		activateOptimizations();
 	}
 }

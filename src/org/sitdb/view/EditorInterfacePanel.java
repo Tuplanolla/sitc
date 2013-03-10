@@ -14,7 +14,7 @@ Represents an editor interface panel that
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public class EditorInterfacePanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final JButton revertButton,
 			applyButton;

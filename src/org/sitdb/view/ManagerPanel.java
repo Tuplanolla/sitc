@@ -14,7 +14,7 @@ Represents a manager panel that
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class ManagerPanel<Type> extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final TitledBorder titledBorder;
 	private final RemotePanel remotePanel;

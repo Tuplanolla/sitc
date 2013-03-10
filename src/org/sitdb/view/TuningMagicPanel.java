@@ -24,7 +24,7 @@ It's magical.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class TuningMagicPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final GridBagLayout layout;
 	private int rows;

@@ -25,7 +25,7 @@ Represents a sequence editor panel.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class SequenceEditorPanel extends JPanel {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private final ExtendedEditorInterfacePanel interfacePanel;
 	private final SequenceMagicPanel magicPanel;

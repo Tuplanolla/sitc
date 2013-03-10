@@ -12,8 +12,8 @@ Represents a mutable instrument.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Instrument implements Serializable {
-	private static final long serialVersionUID = 1l;
+public final class Instrument implements Comparable<Instrument>, Serializable {
+	private static final long serialVersionUID = 1;
 
 	/**
 	The name of this instrument.
@@ -109,14 +109,14 @@ public final class Instrument implements Serializable {
 	}
 
 	/**
-	@return The tuningSystem.
+	@return The tuning system.
 	**/
 	public TuningSystem getTuningSystem() {
 		return tuningSystem;
 	}
 
 	/**
-	@param tuningSystem The new tuningSystem.
+	@param tuningSystem The new tuning system.
 	**/
 	public void setTuningSystem(final TuningSystem tuningSystem) {
 		this.tuningSystem = tuningSystem;
@@ -136,8 +136,7 @@ public final class Instrument implements Serializable {
 		this.strings = strings;
 	}
 
-	@Override
-	public java.lang.String toString() {
+	public java.lang.String toFullString() {
 		final Object[][] objects = {
 			{"strings", strings},
 			{"maximum tension", maximumTension, " N"},
@@ -145,5 +144,15 @@ public final class Instrument implements Serializable {
 		};
 		final java.lang.String fields = StringFormatter.formatFields(objects);
 		return name + " (" + fields + ")";
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return name;
+	}
+
+	@Override
+	public int compareTo(final Instrument instrument) {
+		return getName().compareTo(instrument.getName());
 	}
 }

@@ -9,7 +9,7 @@ Represents an immutable pitch system.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class PitchSystem implements Serializable {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	/**
 	Represents the twelve-tone scientific pitch system where C<sub>4</sub> is tuned to 256 Hz.

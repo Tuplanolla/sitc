@@ -2,7 +2,6 @@
 *.class
 *.dll
 *.exe
-*.jar
 *.o
 *.so
 

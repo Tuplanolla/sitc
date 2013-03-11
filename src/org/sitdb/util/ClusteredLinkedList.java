@@ -43,32 +43,21 @@ A full cluster in a list with
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>, Cloneable, Serializable {
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1;
 
 	private static final int DEFAULT_CLUSTER_CAPACITY = 16;
 	private static final double DEFAULT_LOAD_FACTOR = 0.75;
 	private static final double DEFAULT_STABILITY_FACTOR = 0.25;
 
 	private final int clusterCapacity;
-	private final double loadFactor;
-	private final double stabilityFactor;
-	private final double lowClusterCapacity,
-			highClusterCapacity;
+	private final double loadFactor,
+			stabilityFactor;
+	private final int upperBound,
+			lowerBound;
 
 	private Cluster first,
 			last;
 	private int count;
-
-	/**
-	Lists the states of a cluster.
-	**/
-	private enum State {
-		STABLE,
-		EMPTY,
-		FULL,
-		ALMOST_EMPTY,
-		ALMOST_FULL
-	}
 
 	/**
 	Represents a mutable cluster.
@@ -82,160 +71,209 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 		private Cluster next,
 				previous;
 		private int count;
-		private State state;
-		private boolean valid;
 
 		/**
-		Constructs an empty cluster with a specific capacity.
-
-		@param clusterCapacity The capacity.
+		Creates an empty cluster.
 		**/
-		public Cluster(final int clusterCapacity) {
+		public Cluster() {
 			elements = new Object[clusterCapacity];
 
 			next = null;
 			previous = null;
 			count = 0;
-			state = State.EMPTY;
-			valid = true;
 		}
 
 		/**
-		Validates the state of this cluster.
+		Attempts to merge this cluster with its neighbors.
 		**/
-		private void validate() {
-			if (count <= 0) state = State.EMPTY;
-			else if (count >= clusterCapacity) state = State.FULL;
-			else if (count < lowClusterCapacity) state = State.ALMOST_EMPTY;
-			else if (count > highClusterCapacity) state = State.ALMOST_FULL;
-			else state = State.STABLE;
-			valid = true;
+		public void merge() {
+			if (count < lowerBound) {
+				if (next != null) {
+					if (previous != null) {
+						final int mergedCount = count + next.count + previous.count;
+						if (mergedCount >= 2 * lowerBound && mergedCount <= 2 * upperBound) {
+							//TODO merge all into two
+						}
+						else if (mergedCount >= lowerBound && mergedCount <= upperBound) {
+							//TODO merge all into one
+						}
+					}
+					else {
+						final int mergedCount = count + next.count;
+						if (mergedCount >= lowerBound && mergedCount <= upperBound) {
+							//TODO merge two into one
+						}
+					}
+				}
+				else if (previous != null) {
+					final int mergedCount = count + previous.count;
+					if (mergedCount >= lowerBound && mergedCount <= upperBound) {
+						//TODO merge two into one
+					}
+				}
+			}
 		}
 
 		/**
-		Invalidates the state of this cluster.
+		Attempts to balance this cluster with its neighbors.
 		**/
-		private void invalidate() {
-			valid = false;
+		public void balance() {
+			if (count < lowerBound) {
+				if (previous != null) {
+					if (previous.count > upperBound) {
+						//TODO balance from previous
+					}
+				}
+				if (next != null) {
+					if (next.count > upperBound) {
+						//TODO balance from next
+					}
+				}
+				if (previous != null) {
+					if (previous.count > lowerBound) {
+						//TODO balance from previous
+					}
+				}
+				if (next != null) {
+					if (next.count > lowerBound) {
+						//TODO balance from next
+					}
+				}
+			}
+			else if (count > upperBound) {
+				if (next != null) {
+					if (next.count < lowerBound) {
+						//TODO balance from next
+					}
+				}
+				if (previous != null) {
+					if (previous.count < lowerBound) {
+						//TODO balance from previous
+					}
+				}
+				if (next != null) {
+					if (next.count < upperBound) {
+						//TODO balance from next
+					}
+				}
+				if (previous != null) {
+					if (previous.count < upperBound) {
+						//TODO balance from previous
+					}
+				}
+			}
 		}
 
 		/**
-		Returns the next cluster.
-
-		@return The next cluster.
+		Attempts to split this cluster.
 		**/
-		public Cluster getNext() {
-			return next;
+		public void split() {
+			if (count > upperBound) {
+				if (count >= 2 * lowerBound && count <= 2 * upperBound) {
+					//TODO split into two
+				}
+			}
 		}
 
 		/**
-		Sets the next cluster.
+		Attempts to stabilize (merge, balance and split) this cluster.
 
-		@param next The next cluster.
+		No changes are guaranteed to happen.
 		**/
-		public void setNext(final Cluster next) {
-			this.next = next;
+		public void stabilize() {
+			merge();
+			balance();
+			split();
 		}
 
 		/**
-		Returns the previous cluster.
-
-		@return The previous cluster.
-		**/
-		public Cluster getPrevious() {
-			return previous;
-		}
-
-		/**
-		Sets the previous cluster.
-
-		@param previous The previous cluster.
-		**/
-		public void setPrevious(final Cluster previous) {
-			this.previous = previous;
-		}
-
-		/**
-		Returns the amount of elements in this cluster.
-
-		@return The amount of elements.
-		**/
-		public int size() {
-			return count;
-		}
-
-		/**
-		Returns the state of this cluster.
-
-		@return The state.
-		**/
-		public State getState() {
-			if (!valid) validate();
-			return state;
-		}
-
-		/**
-		Returns whether this cluster is empty.
-
-		@return Whether this cluster is empty.
-		**/
-		public boolean isEmpty() {
-			return count <= 0;
-		}
-
-		/**
-		Adds an element to the end of this cluster and
-		 returns whether the operation was successful.
+		Adds an element
+		 to the end of this cluster or
+		 to the beginning of a new cluster and
+		  returns whether the operation was successful.
 
 		@param element The element.
-		@return Whether the element was added. 
+		@return Whether the element was added.
 		**/
 		public boolean add(final Type element) {
-			if (count >= elements.length) return false;
-
-			elements[count] = element;
-			count++;
-
-			invalidate();
+			if (count >= clusterCapacity) {
+				final Cluster cluster = new Cluster();
+				cluster.previous = this;
+				if (next != null) {
+					cluster.next = next;
+					next.previous = cluster;
+				}
+				else {
+					last = cluster;
+				}
+				next = cluster;
+				cluster.add(element);
+			}
+			else {
+				elements[count] = element;
+				count++;
+			}
 			return true;
 		}
 
 		/**
-		Adds an element to a certain position in this cluster and
-		 returns whether the operation was successful.
+		Adds an element to a certain position
+		 in this cluster or
+		 in a new cluster.
 
 		@param index The position.
 		@param element The element.
 		**/
 		public void add(final int index, final Type element) {
+			checkBounds(index, count);
+
+			if (count >= clusterCapacity) {
+				final Cluster cluster = new Cluster();
+				cluster.previous = this;
+				if (next != null) {
+					cluster.next = next;
+					next.previous = cluster;
+				}
+				else {
+					last = cluster;
+				}
+				next = cluster;
+				cluster.add((Type )elements[count - 1]);
+			}
 			final int displaced = count - index;
 			if (displaced >= 1) System.arraycopy(elements, index, elements, index + 1, count - index);
 			elements[index] = element;
 			count++;
-
-			invalidate();
 		}
 
 		/**
-		Removes an element from a certain position in this cluster and
+		Removes an element from a certain position in this cluster,
+		 possibly deletes this cluster and
 		 returns it.
 
 		@param index The position.
 		@return The element.
 		**/
 		public Type remove(final int index) {
-			final Type element = (Type )elements[index];
-			count--;
-			final int displaced = count - index;
-			if (displaced >= 1) System.arraycopy(elements, index + 1, elements, index, displaced);
-			elements[count] = null;
+			checkBounds(index, count);
 
-			invalidate();
+			final Type element = (Type )elements[index];
+			if (count <= 1) {
+				if (next != null) next.previous = previous;
+				if (previous != null) previous.next = next;
+			}
+			else {
+				count--;
+				final int displaced = count - index;
+				if (displaced >= 1) System.arraycopy(elements, index + 1, elements, index, displaced);
+				elements[count] = null;
+			}
 			return element;
 		}
 
 		/**
-		Removes a certain element from this cluster and
+		Removes a certain element from this cluster,
+		 possibly deletes this cluster and
 		 returns whether the operation was successful.
 
 		@param element The element.
@@ -244,12 +282,16 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 		public boolean remove(final Type element) {
 			for (int index = 0; index < count; index++) {
 				if (elements[index] == element) {
-					count--;
-					final int displaced = count - index;
-					if (displaced >= 1) System.arraycopy(elements, index + 1, elements, index, displaced);
-					elements[count] = null;
-
-					invalidate();
+					if (count <= 1) {
+						if (next != null) next.previous = previous;
+						if (previous != null) previous.next = next;
+					}
+					else {
+						count--;
+						final int displaced = count - index;
+						if (displaced >= 1) System.arraycopy(elements, index + 1, elements, index, displaced);
+						elements[count] = null;
+					}
 					return true;
 				}
 			}
@@ -272,18 +314,18 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 		@Override
 		public String toString() {
 			final StringBuilder stringBuilder = new StringBuilder(16 * count);
-			stringBuilder.append('(');
+			stringBuilder.append('[');
 			for (int index = 0; index < count; index++) {
 				if (index != 0) stringBuilder.append(", ");
 				stringBuilder.append(elements[index].toString());
 			}
-			stringBuilder.append(')');
+			stringBuilder.append(']');
 			return stringBuilder.toString();
 		}
 	}
 
 	/**
-	Constructs an empty list with the specified cluster capacity, load factor and stability factor.
+	Creates an empty list with the specified cluster capacity, load factor and stability factor.
 
 	@param clusterCapacity The capacity of the clusters.
 	@param loadFactor The load factor of the clusters.
@@ -296,8 +338,8 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 		this.clusterCapacity = clusterCapacity;
 		this.loadFactor = loadFactor;
 		this.stabilityFactor = stabilityFactor;
-		lowClusterCapacity = (loadFactor - stabilityFactor) * clusterCapacity;
-		highClusterCapacity = (loadFactor + stabilityFactor) * clusterCapacity;
+		upperBound = (int )(loadFactor * clusterCapacity);
+		lowerBound = (int )((loadFactor - stabilityFactor) * clusterCapacity);
 
 		first = null;
 		last = null;
@@ -305,7 +347,7 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 	}
 
 	/**
-	Constructs an empty list with the specified cluster capacity and load factor.
+	Creates an empty list with the specified cluster capacity and load factor.
 
 	@param clusterCapacity The capacity of the clusters.
 	@param loadFactor The load factor of the clusters.
@@ -315,7 +357,7 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 	}
 
 	/**
-	Constructs an empty list with the specified cluster capacity.
+	Creates an empty list with the specified cluster capacity.
 
 	@param clusterCapacity The capacity of the clusters.
 	**/
@@ -324,7 +366,7 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 	}
 
 	/**
-	Constructs an empty list.
+	Creates an empty list.
 	**/
 	public ClusteredLinkedList() {
 		this(DEFAULT_CLUSTER_CAPACITY);
@@ -360,54 +402,55 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 		if (count <= 0) {//empty
 			checkBounds(index, 1);
 
-			final Cluster current = new Cluster(clusterCapacity);
+			final Cluster current = new Cluster();
 			first = current;
 			last = current;
+			count++;
 			current.add(element);
 		}
 		else {//not empty
 			checkBounds(index, count);
 
-			Cluster current;
-			int superIndex;
+			Cluster cluster;
+			int clusterIndex;
 			if (index < count / 2) {//probably in the first half
-				current = first;
-				superIndex = 0;
-				while (current != null) {
-					final int nextElementIndex = superIndex + current.size();
+				cluster = first;
+				clusterIndex = 0;
+				while (cluster != null) {
+					final int nextElementIndex = clusterIndex + cluster.count;
 					if (nextElementIndex > index) break;
-					superIndex = nextElementIndex;
-					current = current.getNext();
+					clusterIndex = nextElementIndex;
+					cluster = cluster.next;
 				}
 			}
 			else {//probably in the last half
-				current = last;
-				superIndex = count;
-				while (current != null) {
-					superIndex -= current.size();
-					if (superIndex <= index) break;
-					current = current.getPrevious();
+				cluster = last;
+				clusterIndex = count;
+				while (cluster != null) {
+					clusterIndex -= cluster.count;
+					if (clusterIndex <= index) break;
+					cluster = cluster.previous;
 				}
 			}
-			final int subIndex = index - superIndex;
+			final int elementIndex = index - clusterIndex;
 
-			final State state = current.getState();
-			switch (state) {}//TODO state management
-			current.add(subIndex, element);
+			count++;
+			cluster.add(elementIndex, element);
+			cluster.stabilize();
 		}
 	}
 
-	@Override//TODO implement
+	@Override
 	public boolean add(final Type element) {
 		if (count <= 0) {//empty
-			final Cluster current = new Cluster(clusterCapacity);
-			first = current;
-			last = current;
-			return current.add(element);
+			final Cluster cluster = new Cluster();
+			first = cluster;
+			last = cluster;
+			count++;
+			return cluster.add(element);
 		}
 		else {//not empty
-			final State state = last.getState();
-			switch (state) {}//TODO state management
+			count++;
 			return last.add(element);
 		}
 	}
@@ -437,7 +480,7 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 		Cluster current = first;
 		while (current != null) {
 			if (current.contains(object)) return true;
-			current = current.getNext();
+			current = current.next;
 		}
 		return false;
 	}
@@ -564,12 +607,12 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 	}
 
 	@Override//TODO implement
-	public boolean removeFirstOccurrence(Object o) {
+	public boolean removeFirstOccurrence(final Object object) {
 		return false;
 	}
 
 	@Override//TODO implement
-	public boolean removeLastOccurrence(Object o) {
+	public boolean removeLastOccurrence(final Object object) {
 		return false;
 	}
 
@@ -615,15 +658,23 @@ public final class ClusteredLinkedList<Type> implements List<Type>, Deque<Type>,
 	public String toString() {
 		Cluster current = first;
 		final StringBuilder stringBuilder = new StringBuilder(16 * clusterCapacity * count);
-		stringBuilder.append('(');
+		stringBuilder.append('[');
 		boolean separate = false;
 		while (current != null) {
 			if (separate) stringBuilder.append(", ");
 			else separate = true;
 			stringBuilder.append(current.toString());
-			current = current.getNext();
+			current = current.next;
 		}
-		stringBuilder.append(')');
+		stringBuilder.append(']');
 		return stringBuilder.toString();
+	}
+
+	public static void main(String[] args) {
+		ClusteredLinkedList<Integer> cll = new ClusteredLinkedList<>(8);
+		for (int index = 1; index <= 24; index++) {
+			cll.add(index);
+			System.out.println(cll);
+		}
 	}
 }

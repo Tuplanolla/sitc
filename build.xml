@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="sitdb" basedir="." default="all">
+	<description>Automatic for the people.</description>
+
+	<property name="src.rel-dir" value="src" />
+	<property name="bin.rel-dir" value="bin" />
+	<property name="jar.rel-dir" value="jar" />
+	<property name="lib.rel-dir" value="lib" />
+	<property name="res.rel-dir" value="res" />
+	<property name="javadoc.rel-dir" value="javadoc" />
+	<property name="etc.rel-dir" value="etc" />
+	<property name="xsd.rel-dir" value="xsd" />
+
+	<property name="source.version" value="1.7" />
+	<property name="javadoc.version" value="1.7" />
+
+	<property name="debug.flag" value="true" />
+	<property name="debuglevel.flag" value="lines, vars, source" />
+
+	<path id="classes.path">
+		<pathelement location="${bin.rel-dir}" />
+		<fileset dir="${lib.rel-dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean-bin">
+		<delete dir="${bin.rel-dir}" quiet="true" deleteonexit="true" />
+	</target>
+
+	<target name="clean-javadoc">
+		<delete dir="${javadoc.rel-dir}" quiet="true" deleteonexit="true" />
+	</target>
+
+	<target name="clean" depends="clean-bin, clean-javadoc">
+		<delete dir="${jar.rel-dir}" quiet="true" deleteonexit="true" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="${bin.rel-dir}" />
+		<mkdir dir="${jar.rel-dir}" />
+		<mkdir dir="${javadoc.rel-dir}" />
+	</target>
+
+	<target name="copy" depends="init">
+		<copy todir="${bin.rel-dir}" overwrite="true">
+			<fileset dir="${res.rel-dir}" />
+		</copy>
+	</target>
+
+	<target name="compile" depends="init, copy">
+		<javac srcdir="${src.rel-dir}"
+				destdir="${bin.rel-dir}"
+				source="${source.version}"
+				debug="${debug.flag}"
+				debuglevel="${debuglevel.flag}"
+				includeantruntime="false">
+			<classpath refid="classes.path" />
+			<compilerarg line="-Xlint:all" />
+		</javac>
+	</target>
+
+	<target name="archive" depends="compile">
+		<jar destfile="${jar.rel-dir}/${ant.project.name}">
+			<zipfileset dir="${bin.rel-dir}" />
+		</jar>
+	</target>
+
+	<target name="document" depends="clean-javadoc">
+		<javadoc sourcepath="${src.rel-dir}"
+				destdir="${javadoc.rel-dir}" 
+				source="${javadoc.version}">
+			<classpath refid="classes.path" />
+		</javadoc>
+	</target>
+
+	<target name="test">
+		<junit haltonfailure="no" fork="true">
+			<classpath refid="classes.path" />
+			<formatter type="plain" usefile="false" />
+			<batchtest>
+				<fileset dir="${src.rel-dir}" includes="**/*Test.java" />
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="all" depends="compile, test, archive, document" />
+</project>

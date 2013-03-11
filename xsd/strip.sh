@@ -2,7 +2,7 @@
 
 if [ -z "$1" ]
 then
-	echo "clean.sh filename"
+	echo "strip.sh filename"
 	exit 1
 fi
 

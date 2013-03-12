@@ -83,6 +83,8 @@ Example data files can be found in the `xml` directory and
 
 Click the File menu and select the Exit option.
 
+See the Screenshots section at the bottom.
+
 More about that later.
 
 ## Development
@@ -105,3 +107,9 @@ Files are named and organized in a typical manner. The directories are
 * `/xml` for databases,
 * `/xsd` for schemas and
 * `/etc` for other files.
+
+## Attachments
+
+### Screenshots
+
+![](https://raw.github.com/Tuplanolla/sitc/master/etc/screenshot.png)

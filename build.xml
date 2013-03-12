@@ -59,8 +59,12 @@
 	</target>
 
 	<target name="archive" depends="compile">
-		<jar destfile="${jar.rel-dir}/${ant.project.name}">
-			<zipfileset dir="${bin.rel-dir}" />
+		<jar destfile="${jar.rel-dir}/${ant.project.name}.jar" filesetmanifest="mergewithoutmain">
+			<manifest>
+				<attribute name="Class-Path" value="." />
+				<attribute name="Main-Class" value="org.sitc.Main" />
+			</manifest>
+			<fileset dir="${bin.rel-dir}" />
 		</jar>
 	</target>
 

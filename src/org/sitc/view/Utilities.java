@@ -27,6 +27,24 @@ public final class Utilities {
 	}
 
 	/**
+	Gets all the components in a container recursively.
+
+	@param container The container.
+	@return The components.
+	**/
+	public static List<Component> getAllComponents(final Container container) {
+		final Component[] components = container.getComponents();
+		final List<Component> result = new ArrayList<>();
+		for (final Component component : components) {
+			result.add(component);
+			if (component instanceof Container) {
+				result.addAll(getAllComponents((Container )component));
+			}
+		}
+		return result;
+	}
+
+	/**
 	Sets the button's default icon,
 	 scales it to a given factor of the button's preferred size and
 	 aligns it to the given orientation.
@@ -89,21 +107,27 @@ Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), Swin
 	}
 
 	/**
-	Gets all the components in a container recursively.
+	Enables (or disables) all the buttons in a button group.
 
-	@param container The container.
-	@return The components.
+	@param buttonGroup The button group.
+	@param enabled Whether the button should be enabled.
 	**/
-	public static List<Component> getAllComponents(final Container container) {
-		final Component[] components = container.getComponents();
-		final List<Component> result = new ArrayList<>();
-		for (final Component component : components) {
-			result.add(component);
-			if (component instanceof Container) {
-				result.addAll(getAllComponents((Container )component));
-			}
+	public static void setAllEnabled(final ButtonGroup buttonGroup, final boolean enabled) {
+		for (final AbstractButton button : Collections.list(buttonGroup.getElements())) {
+			button.setEnabled(enabled);
 		}
-		return result;
+	}
+
+	/**
+	Sets the minimum, maximum and preferred size of a component.
+
+	@param component The component.
+	@param size The sizes.
+	**/
+	public static void setAllSizes(final Component component, final Dimension size) {
+		component.setMinimumSize(size);
+		component.setMaximumSize(size);
+		component.setPreferredSize(size);
 	}
 
 	/**
@@ -116,18 +140,6 @@ Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), Swin
 			for (final ChangeListener listener : component.getListeners(ChangeListener.class)) {
 				listener.stateChanged(new ChangeEvent(component));
 			}
-		}
-	}
-
-	/**
-	Enables (or disables) all the buttons in a button group.
-
-	@param buttonGroup The button group.
-	@param enabled Whether the button should be enabled.
-	**/
-	public static void setAllEnabled(final ButtonGroup buttonGroup, final boolean enabled) {
-		for (final AbstractButton button : Collections.list(buttonGroup.getElements())) {
-			button.setEnabled(enabled);
 		}
 	}
 }

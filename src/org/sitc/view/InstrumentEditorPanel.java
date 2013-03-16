@@ -45,7 +45,7 @@ public final class InstrumentEditorPanel extends JPanel {
 						titledNamePanel.setBorder(new TitledBorder("Name"));
 						titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-								systemComboBox = new JComboBox<TuningSystem>();
+								systemComboBox = new JComboBox<>();
 
 							final JPanel systemPanel = new JPanel(new BorderLayout());
 							systemPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

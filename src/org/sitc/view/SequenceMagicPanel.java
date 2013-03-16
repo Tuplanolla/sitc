@@ -46,20 +46,20 @@ public final class SequenceMagicPanel extends JPanel {
 	**/
 	public SequenceMagicPanel(final int rows, final int columns) {
 		super(new GridBagLayout());
-		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 
+		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 		this.rows = rows;
 		this.columns = columns;
-		tuningLabels = new ArrayList<JLabel>();
-		transpositionLabelLists = new ArrayList<List<JLabel>>();
-		tensionLabelLists = new ArrayList<List<JLabel>>();
-		transpositionChangeLabelLists = new ArrayList<List<JLabel>>();
-		tensionChangeLabelLists = new ArrayList<List<JLabel>>();
-		transpositionSumLabels = new ArrayList<JLabel>();
-		transpositionAbsoluteSumLabels = new ArrayList<JLabel>();
-		tensionSumLabels = new ArrayList<JLabel>();
-		tensionAbsoluteSumLabels = new ArrayList<JLabel>();
-		swapButtons = new ArrayList<JButton>();
+		tuningLabels = new ArrayList<>(rows);
+		transpositionLabelLists = new ArrayList<>(rows);
+		tensionLabelLists = new ArrayList<>(rows);
+		transpositionChangeLabelLists = new ArrayList<>(rows);
+		tensionChangeLabelLists = new ArrayList<>(rows);
+		transpositionSumLabels = new ArrayList<>(rows);
+		transpositionAbsoluteSumLabels = new ArrayList<>(rows);
+		tensionSumLabels = new ArrayList<>(rows);
+		tensionAbsoluteSumLabels = new ArrayList<>(rows);
+		swapButtons = new ArrayList<>(rows - 1);
 
 		/*
 		Tracks the position.
@@ -283,7 +283,7 @@ public final class SequenceMagicPanel extends JPanel {
 
 			gridx++;
 
-			final List<JLabel> transpositionLabels = new ArrayList<JLabel>();
+			final List<JLabel> transpositionLabels = new ArrayList<>();
 
 			for (int column = 1; column <= columns; column++) {
 					final JLabel transpositionLabel = new JLabel();
@@ -311,7 +311,7 @@ public final class SequenceMagicPanel extends JPanel {
 
 			gridx += 2;
 
-			final List<JLabel> tensionLabels = new ArrayList<JLabel>();
+			final List<JLabel> tensionLabels = new ArrayList<>();
 
 			for (int column = 1; column <= columns; column++) {
 					final JLabel tensionLabel = new JLabel();
@@ -364,7 +364,7 @@ public final class SequenceMagicPanel extends JPanel {
 
 				gridx = 2;
 
-				final List<JLabel> transpositionChangeLabels = new ArrayList<JLabel>();
+				final List<JLabel> transpositionChangeLabels = new ArrayList<>();
 
 				for (int column = 1; column <= columns; column++) {
 						final JLabel transpositionChangeLabel = new JLabel();
@@ -427,7 +427,7 @@ public final class SequenceMagicPanel extends JPanel {
 
 				gridx++;
 
-				final List<JLabel> tensionChangeLabels = new ArrayList<JLabel>();
+				final List<JLabel> tensionChangeLabels = new ArrayList<>();
 
 				for (int column = 1; column <= columns; column++) {
 						final JLabel tensionChangeLabel = new JLabel();

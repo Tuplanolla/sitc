@@ -96,7 +96,7 @@ Helpers.setScaledIcon(new JButton("Example"), new ImageIcon("example.png"), Swin
 	**/
 	public static List<Component> getAllComponents(final Container container) {
 		final Component[] components = container.getComponents();
-		final List<Component> result = new ArrayList<Component>();
+		final List<Component> result = new ArrayList<>();
 		for (final Component component : components) {
 			result.add(component);
 			if (component instanceof Container) {

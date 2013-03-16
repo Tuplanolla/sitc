@@ -46,7 +46,7 @@ public final class Sequence implements Comparable<Sequence>, Serializable {
 		this.name = name;
 		this.tuningSystem = tuningSystem;
 		this.instrument = instrument;
-		tunings = new LinkedList<Tuning>();
+		tunings = new LinkedList<>();
 	}
 
 	/**

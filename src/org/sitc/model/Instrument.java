@@ -47,7 +47,7 @@ public final class Instrument implements Comparable<Instrument>, Serializable {
 		this.name = name;
 		this.tuningSystem = tuningSystem;
 		this.maximumTension = maximumTension;
-		strings = new LinkedList<String>();
+		strings = new LinkedList<>();
 	}
 
 	/**

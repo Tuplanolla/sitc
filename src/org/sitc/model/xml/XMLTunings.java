@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "XMLTunings", propOrder = {
     "tuning"
 })
+@SuppressWarnings("all")
 public class XMLTunings {
     @XmlElement(required = true)
     protected List<XMLTuning> tuning;

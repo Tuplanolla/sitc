@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "XMLString", propOrder = {
 })
+@SuppressWarnings("all")
 public class XMLString {
     @XmlElement(required = true)
     protected BigDecimal length;

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "XMLSequences", propOrder = {
     "sequence"
 })
+@SuppressWarnings("all")
 public class XMLSequences {
     @XmlElement(required = true)
     protected List<XMLSequence> sequence;

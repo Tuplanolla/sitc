@@ -49,7 +49,7 @@ public final class SequenceEditorPanel extends JPanel {
 						titledNamePanel.setBorder(new TitledBorder("Name"));
 						titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-								final JComboBox<String> systemComboBox = new JComboBox<String>();
+								final JComboBox<String> systemComboBox = new JComboBox<>();
 
 							final JPanel systemPanel = new JPanel(new BorderLayout());
 							systemPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

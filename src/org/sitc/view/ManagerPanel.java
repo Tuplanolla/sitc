@@ -30,7 +30,7 @@ public final class ManagerPanel<Type> extends JPanel {
 
 				remotePanel = new RemotePanel();
 
-				localPanel = new LocalPanel<Type>();
+				localPanel = new LocalPanel<>();
 
 			final JPanel managerPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 			managerPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

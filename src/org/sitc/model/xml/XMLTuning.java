@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "XMLTuning", propOrder = {
 })
+@SuppressWarnings("all")
 public class XMLTuning {
     @XmlElement(required = true)
     protected String name;
@@ -38,6 +39,7 @@ public class XMLTuning {
     @XmlType(name = "", propOrder = {
         "note"
     })
+    @SuppressWarnings("all")
     public static class Notes {
         @XmlElement(required = true)
         protected List<XMLNote> note;
@@ -52,6 +54,7 @@ public class XMLTuning {
     @XmlType(name = "", propOrder = {
         "value"
     })
+    @SuppressWarnings("all")
     public static class System {
         @XmlValue
         protected String value;

@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "XMLRational", propOrder = {
 })
+@SuppressWarnings("all")
 public class XMLRational {
     @XmlElement(required = true)
     protected BigInteger numerator;

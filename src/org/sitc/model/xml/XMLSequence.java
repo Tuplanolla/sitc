@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "XMLSequence", propOrder = {
 })
+@SuppressWarnings("all")
 public class XMLSequence {
     @XmlElement(required = true)
     protected String name;
@@ -45,6 +46,7 @@ public class XMLSequence {
     @XmlType(name = "", propOrder = {
         "value"
     })
+    @SuppressWarnings("all")
     public static class Instrument {
         @XmlValue
         protected String value;
@@ -67,6 +69,7 @@ public class XMLSequence {
     @XmlType(name = "", propOrder = {
         "value"
     })
+    @SuppressWarnings("all")
     public static class System {
         @XmlValue
         protected String value;
@@ -89,6 +92,7 @@ public class XMLSequence {
     @XmlType(name = "", propOrder = {
         "tuning"
     })
+    @SuppressWarnings("all")
     public static class Tunings {
         @XmlElement(required = true)
         protected List<XMLSequence.Tunings.Tuning> tuning;
@@ -110,6 +114,7 @@ public class XMLSequence {
         @XmlType(name = "", propOrder = {
             "value"
         })
+        @SuppressWarnings("all")
         public static class Tuning {
             @XmlValue
             protected String value;

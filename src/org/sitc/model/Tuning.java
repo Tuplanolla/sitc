@@ -40,7 +40,7 @@ public final class Tuning implements Comparable<Tuning>, Serializable {
 		if (name == null) throw new IllegalArgumentException();
 		this.name = name;
 		this.tuningSystem = tuningSystem;
-		notes = new LinkedList<Note>();
+		notes = new LinkedList<>();
 	}
 
 	/**

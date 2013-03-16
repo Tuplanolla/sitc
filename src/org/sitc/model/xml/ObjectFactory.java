@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 @XmlRegistry
+@SuppressWarnings("all")
 public class ObjectFactory {
     private final static QName _Sequences_QNAME = new QName("", "sequences");
     private final static QName _Tunings_QNAME = new QName("", "tunings");

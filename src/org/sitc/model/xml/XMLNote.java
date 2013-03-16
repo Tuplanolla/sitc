@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "XMLNote", propOrder = {
 })
+@SuppressWarnings("all")
 public class XMLNote {
     @XmlElement(required = true)
     protected BigInteger semitones;

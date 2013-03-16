@@ -6,5 +6,5 @@ then
 	exit 1
 fi
 
-cpp -P -fpreprocessed "$1" | grep -v "^\s*$" > "$1.tmp"
+cpp -P -fpreprocessed "$1" | grep -v "^\s*$" >"$1.tmp"
 mv -f "$1.tmp" "$1"

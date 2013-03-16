@@ -38,17 +38,17 @@ public final class MainPane extends JSplitPane {
 	public MainPane() {
 		super(JSplitPane.HORIZONTAL_SPLIT);
 
-				instrumentManagerPanel = new ManagerPanel<Instrument>();
+				instrumentManagerPanel = new ManagerPanel<>();
 				instrumentManagerPanel.setTitle("Instruments");
 				instrumentManagerPanel.getRemotePanel().setTitle("Instrument File");
 				instrumentManagerPanel.getLocalPanel().setTitle("Instrument List");
 
-				tuningManagerPanel = new ManagerPanel<Tuning>();
+				tuningManagerPanel = new ManagerPanel<>();
 				tuningManagerPanel.setTitle("Tunings");
 				tuningManagerPanel.getRemotePanel().setTitle("Tuning File");
 				tuningManagerPanel.getLocalPanel().setTitle("Tuning List");
 
-				sequenceManagerPanel = new ManagerPanel<Sequence>();
+				sequenceManagerPanel = new ManagerPanel<>();
 				sequenceManagerPanel.setTitle("Sequences");
 				sequenceManagerPanel.getRemotePanel().setTitle("Sequence File");
 				sequenceManagerPanel.getLocalPanel().setTitle("Sequence List");
@@ -77,19 +77,19 @@ public final class MainPane extends JSplitPane {
 					public void stateChanged(final ChangeEvent event) {
 						final Component selectedComponent = tabbedPane.getSelectedComponent();
 						sidePanel.removeAll();
-						if (selectedComponent == instrumentEditorPanel) {
+						if (selectedComponent == getInstrumentEditorPanel()) {
 							sidePanelLayout.setRows(1);
-							sidePanel.add(instrumentManagerPanel);
+							sidePanel.add(getInstrumentManagerPanel());
 						}
-						else if (selectedComponent == tuningEditorPanel) {
+						else if (selectedComponent == getTuningEditorPanel()) {
 							sidePanelLayout.setRows(1);
-							sidePanel.add(tuningManagerPanel);
+							sidePanel.add(getTuningManagerPanel());
 						}
-						else if (selectedComponent == sequenceEditorPanel) {
+						else if (selectedComponent == getSequenceEditorPanel()) {
 							sidePanelLayout.setRows(3);
-							sidePanel.add(instrumentManagerPanel);
-							sidePanel.add(tuningManagerPanel);
-							sidePanel.add(sequenceManagerPanel);
+							sidePanel.add(getInstrumentManagerPanel());
+							sidePanel.add(getTuningManagerPanel());
+							sidePanel.add(getSequenceManagerPanel());
 						}
 						sidePanel.revalidate();
 						sidePanel.repaint();

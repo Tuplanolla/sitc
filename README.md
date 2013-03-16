@@ -112,4 +112,4 @@ Files are named and organized in a typical manner. The directories are
 
 ### Screenshots
 
-![](https://raw.github.com/Tuplanolla/sitc/master/etc/screenshot.png)
+![Main Window](https://raw.github.com/Tuplanolla/sitc/master/etc/screenshot.png)

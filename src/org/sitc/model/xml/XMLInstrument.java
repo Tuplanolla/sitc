@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "XMLInstrument", propOrder = {
 })
+@SuppressWarnings("all")
 public class XMLInstrument {
     @XmlElement(required = true)
     protected String name;
@@ -46,6 +47,7 @@ public class XMLInstrument {
     @XmlType(name = "", propOrder = {
         "string"
     })
+    @SuppressWarnings("all")
     public static class Strings {
         @XmlElement(required = true)
         protected List<XMLString> string;
@@ -60,6 +62,7 @@ public class XMLInstrument {
     @XmlType(name = "", propOrder = {
         "value"
     })
+    @SuppressWarnings("all")
     public static class System {
         @XmlValue
         protected String value;

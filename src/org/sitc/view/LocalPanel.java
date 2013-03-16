@@ -58,9 +58,9 @@ public final class LocalPanel<Type> extends JPanel {
 					searchPanel.add(searchButton, BorderLayout.EAST);
 					searchPanel.add(searchLabel, BorderLayout.SOUTH);
 
-							listModel = new DefaultListModel<Type>();
+							listModel = new DefaultListModel<>();
 
-						list = new JList<Type>(listModel);
+						list = new JList<>(listModel);
 						list.setLayoutOrientation(JList.VERTICAL);
 						list.setVisibleRowCount(2);
 						list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "XMLInstruments", propOrder = {
     "instrument"
 })
+@SuppressWarnings("all")
 public class XMLInstruments {
     @XmlElement(required = true)
     protected List<XMLInstrument> instrument;

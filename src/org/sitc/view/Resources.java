@@ -16,7 +16,7 @@ Manages persistent resources with high performance.
 public final class Resources {
 	public static final List<Image> ICON_IMAGES;
 	static {
-		final List<Image> images = new ArrayList<Image>();
+		final List<Image> images = new ArrayList<>();
 		for (int size = 1; size <= 1 << 10; size <<= 1) {
 			final URL url = Resources.class.getResource("/icon" + size + ".png");
 			if (url != null) images.add(new ImageIcon(url).getImage());

@@ -47,17 +47,17 @@ public final class TuningMagicPanel extends JPanel {
 	**/
 	public TuningMagicPanel(final int rows) {
 		super(new GridBagLayout());
-		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 
+		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 		this.rows = rows;
-		playButtons = new ArrayList<JButton>();
-		noteTextFields = new ArrayList<JTextField>();
-		frequencyTextFields = new ArrayList<JTextField>();
-		upButtons = new ArrayList<JButton>();
-		downButtons = new ArrayList<JButton>();
-		insertButtons = new ArrayList<JButton>();
-		deleteButtons = new ArrayList<JButton>();
-		swapButtons = new ArrayList<JButton>();
+		playButtons = new ArrayList<>(rows);
+		noteTextFields = new ArrayList<>(rows);
+		frequencyTextFields = new ArrayList<>(rows);
+		upButtons = new ArrayList<>(rows);
+		downButtons = new ArrayList<>(rows);
+		insertButtons = new ArrayList<>(rows + 1);
+		deleteButtons = new ArrayList<>(rows);
+		swapButtons = new ArrayList<>(rows - 1);
 
 		/*
 		Tracks the position.

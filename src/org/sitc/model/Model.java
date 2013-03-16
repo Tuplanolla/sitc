@@ -56,9 +56,9 @@ public final class Model implements Part {
 	@param arguments The command-line arguments.
 	**/
 	public Model(final List<java.lang.String> arguments) {
-		instruments = new LinkedList<Instrument>();
-		tunings = new LinkedList<Tuning>();
-		sequences = new LinkedList<Sequence>();
+		instruments = new LinkedList<>();
+		tunings = new LinkedList<>();
+		sequences = new LinkedList<>();
 		instrumentContext = null;
 		tuningContext = null;
 		sequenceContext = null;
@@ -161,7 +161,7 @@ public final class Model implements Part {
 			xmlInstrumentList.add(xmlInstrument);
 		}
 
-		final JAXBElement<XMLInstruments> jaxbElement = new JAXBElement<XMLInstruments>(new QName("instruments"), XMLInstruments.class, xmlInstruments);
+		final JAXBElement<XMLInstruments> jaxbElement = new JAXBElement<>(new QName("instruments"), XMLInstruments.class, xmlInstruments);
 		marshaller.marshal(jaxbElement, result);
 	}
 
@@ -242,7 +242,7 @@ public final class Model implements Part {
 			xmlTuningList.add(xmlTuning);
 		}
 
-		final JAXBElement<XMLTunings> jaxbElement = new JAXBElement<XMLTunings>(new QName("tunings"), XMLTunings.class, xmlTunings);
+		final JAXBElement<XMLTunings> jaxbElement = new JAXBElement<>(new QName("tunings"), XMLTunings.class, xmlTunings);
 		marshaller.marshal(jaxbElement, result);
 	}
 
@@ -314,7 +314,7 @@ public final class Model implements Part {
 			xmlSequenceList.add(xmlSequence);
 		}
 
-		final JAXBElement<XMLSequences> jaxbElement = new JAXBElement<XMLSequences>(new QName("sequences"), XMLSequences.class, xmlSequences);
+		final JAXBElement<XMLSequences> jaxbElement = new JAXBElement<>(new QName("sequences"), XMLSequences.class, xmlSequences);
 		marshaller.marshal(jaxbElement, result);
 	}
 

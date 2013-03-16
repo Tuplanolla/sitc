@@ -41,15 +41,15 @@ public final class InstrumentMagicPanel extends JPanel {
 	**/
 	public InstrumentMagicPanel(final int rows) {
 		super(new GridBagLayout());
-		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 
+		layout = (GridBagLayout )getLayout();//avoids creating a disposable FlowLayout
 		this.rows = rows;
-		lengthTextFields = new ArrayList<JTextField>();
-		densityTextFields = new ArrayList<JTextField>();
-		tensionTextFields = new ArrayList<JTextField>();
-		insertButtons = new ArrayList<JButton>();
-		deleteButtons = new ArrayList<JButton>();
-		swapButtons = new ArrayList<JButton>();
+		lengthTextFields = new ArrayList<>(rows);
+		densityTextFields = new ArrayList<>(rows);
+		tensionTextFields = new ArrayList<>(rows);
+		insertButtons = new ArrayList<>(rows + 1);
+		deleteButtons = new ArrayList<>(rows);
+		swapButtons = new ArrayList<>(rows - 1);
 
 		/*
 		Tracks the position.

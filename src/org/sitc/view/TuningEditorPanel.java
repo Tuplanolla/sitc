@@ -30,7 +30,7 @@ public final class TuningEditorPanel extends JPanel {
 
 			interfacePanel = new EditorInterfacePanel();
 
-						final JComboBox<String> soundComboBox = new JComboBox<String>();
+						final JComboBox<String> soundComboBox = new JComboBox<>();
 
 					final JPanel soundPanel = new JPanel(new BorderLayout());
 					soundPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
@@ -50,7 +50,7 @@ public final class TuningEditorPanel extends JPanel {
 							titledNamePanel.setBorder(new TitledBorder("Name"));
 							titledNamePanel.add(namePanel, BorderLayout.CENTER);
 
-									final JComboBox<String> systemComboBox = new JComboBox<String>();
+									final JComboBox<String> systemComboBox = new JComboBox<>();
 
 								final JPanel systemPanel = new JPanel(new BorderLayout());
 								systemPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

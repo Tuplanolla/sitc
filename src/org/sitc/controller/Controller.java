@@ -24,6 +24,7 @@ import org.sitc.Part;
 import org.sitc.model.Instrument;
 import org.sitc.model.Model;
 import org.sitc.model.String;
+import org.sitc.model.TuningSystem;
 import org.sitc.view.EditorInterfacePanel;
 import org.sitc.view.InstrumentEditorPanel;
 import org.sitc.view.InstrumentMagicPanel;
@@ -43,8 +44,8 @@ Represents an immutable controller.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Controller implements Part {//TODO split
-	private final Model model;
-	private final View view;
+	protected final Model model;
+	protected final View view;
 
 	/**
 	Creates a view and links it with a model and a view.
@@ -239,13 +240,15 @@ public final class Controller implements Part {//TODO split
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				final JList<Instrument> list = localInstrumentPanel.getList();
-				final Instrument value = list.getSelectedValue();
-				if (value != null) {
-					instrumentEditorPanel.getNameTextField().setText(value.getName());
-					instrumentEditorPanel.getSystemComboBox().setSelectedItem(value.getTuningSystem());
-					instrumentEditorPanel.getTensionTextField().setText(value.getMaximumTension().toString());
+				final Instrument currentInstrument = list.getSelectedValue();
+				if (currentInstrument != null) {
+					model.setCurrentInstrument(currentInstrument);
+					instrumentEditorPanel.getNameTextField().setText(currentInstrument.getName());
+					instrumentEditorPanel.getSystemComboBox().setSelectedItem(currentInstrument.getTuningSystem());
+					instrumentEditorPanel.getTensionTextField().setText(currentInstrument.getMaximumTension().toString());
 					final InstrumentMagicPanel instrumentMagicPanel = instrumentEditorPanel.getMagicPanel();
-					final List<String> strings = value.getStrings();
+					//TODO rethink
+					final List<String> strings = currentInstrument.getStrings();
 					final int rows = strings.size();
 					instrumentMagicPanel.setRows(rows);
 					for (int row = 0; row < rows; row++) {
@@ -258,7 +261,16 @@ public final class Controller implements Part {//TODO split
 			}
 		});
 
-		instrumentInterfacePanel.getApplyButton();//TODO save into local
+		instrumentInterfacePanel.getApplyButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(final ActionEvent event) {
+				final Instrument currentInstrument = model.getCurrentInstrument();
+				currentInstrument.setName(instrumentEditorPanel.getNameTextField().getText());
+				currentInstrument.setTuningSystem((TuningSystem )instrumentEditorPanel.getSystemComboBox().getSelectedItem());
+				currentInstrument.setMaximumTension(new BigDecimal(instrumentEditorPanel.getTensionTextField().getText()));
+				//TODO the rest
+			}
+		});
 	}
 
 	@Deprecated

@@ -14,7 +14,7 @@ Represents an immutable view.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class View implements Part {
-	private final Model model;
+	protected final Model model;
 
 	private final MainFrame mainFrame;
 

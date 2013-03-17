@@ -176,7 +176,7 @@ public final class Tuning implements Comparable<Tuning>, Serializable {
 
 	@Override
 	public java.lang.String toString() {
-		return name;
+		return name + " (" + notes.size() + ")";
 	}
 
 	@Override

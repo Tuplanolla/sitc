@@ -37,7 +37,6 @@ public final class MainFrame extends JFrame {
 		setTitle("String Instrument Tuning Calculator");
 		setIconImages(Resources.ICON_IMAGES);
 		pack();
-		setMinimumSize(getSize());
 
 		Utilities.allStatesChanged(this);
 	}

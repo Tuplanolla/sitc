@@ -33,13 +33,14 @@ public final class View implements Part {
 				| InstantiationException
 				| IllegalAccessException
 				| UnsupportedLookAndFeelException exception) {
-			exception.printStackTrace();
+			//nothing can save us now
 		}
 		mainFrame = new MainFrame();
 	}
 
 	@Override
 	public void activate() {
+		mainFrame.setMinimumSize(mainFrame.getSize());
 		mainFrame.setSize(new Dimension(800, 800));
 		mainFrame.setVisible(true);
 	}

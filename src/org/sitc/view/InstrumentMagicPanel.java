@@ -6,7 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.Box;
@@ -80,7 +79,7 @@ public final class InstrumentMagicPanel extends JPanel {
 		}
 	}
 
-	private static final class BodyPart implements Iterable<Component> {
+	private static final class BodyPart {
 		private boolean last;
 		private final JLabel numberLabel;
 		private final JTextField lengthTextField,
@@ -91,7 +90,6 @@ public final class InstrumentMagicPanel extends JPanel {
 				swapButton;
 		private final Component topStrut,
 				bottomStrut;
-		private final List<Component> components;
 
 		public BodyPart(final int row) {
 			last = true;
@@ -120,17 +118,6 @@ public final class InstrumentMagicPanel extends JPanel {
 			topStrut = Box.createVerticalStrut(0);
 
 			bottomStrut = Box.createVerticalStrut(0);
-
-			components = new ArrayList<>();
-			components.add(numberLabel);
-			components.add(lengthTextField);
-			components.add(densityTextField);
-			components.add(tensionTextField);
-			components.add(insertButton);
-			components.add(deleteButton);
-			components.add(swapButton);
-			components.add(topStrut);
-			components.add(bottomStrut);
 		}
 
 		public boolean getLast() {
@@ -176,11 +163,6 @@ public final class InstrumentMagicPanel extends JPanel {
 		public Component getBottomStrut() {
 			return bottomStrut;
 		}
-
-		@Override
-		public Iterator<Component> iterator() {
-			return components.iterator();
-		}
 	}
 
 	private static final class Footer {
@@ -203,7 +185,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	}
 
 	private final Header header;
-	private final List<BodyPart> body;
+	private final List<BodyPart> bodyParts;
 	private final Footer footer;
 	private int rows;
 
@@ -213,7 +195,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	private void adjustStruts() {
 		final List<Integer> componentHeights = new ArrayList<>();
 		componentHeights.add(header.getInsertButton().getPreferredSize().height);
-		for (final BodyPart bodyPart : body) {
+		for (final BodyPart bodyPart : bodyParts) {
 			componentHeights.add(bodyPart.getNumberLabel().getPreferredSize().height);
 			componentHeights.add(bodyPart.getLengthTextField().getPreferredSize().height);
 			componentHeights.add(bodyPart.getDensityTextField().getPreferredSize().height);
@@ -222,11 +204,11 @@ public final class InstrumentMagicPanel extends JPanel {
 		}
 		final int rowHeight = Collections.max(componentHeights);
 		final int halfRowHeight = rowHeight / 2,
-				leftoverRowHeight = rowHeight % 2;//no pixel is left behind
+				leftoverRowHeight = rowHeight % 2;//no pixel left behind
 		final Dimension topStrutSize = new Dimension(0, halfRowHeight),
 				bottomStrutSize = new Dimension(0, halfRowHeight + leftoverRowHeight);
 		Utilities.setAllSizes(header.getBottomStrut(), bottomStrutSize);
-		for (final BodyPart bodyPart : body) {
+		for (final BodyPart bodyPart : bodyParts) {
 			Utilities.setAllSizes(bodyPart.getTopStrut(), topStrutSize);
 			Utilities.setAllSizes(bodyPart.getBottomStrut(), bottomStrutSize);
 		}
@@ -243,7 +225,7 @@ public final class InstrumentMagicPanel extends JPanel {
 
 		int gridy = 0;
 
-		{
+		/*header: */{
 				final GridBagConstraints lengthConstraints = new GridBagConstraints();
 				lengthConstraints.gridx = 1;
 				lengthConstraints.gridy = gridy;
@@ -272,12 +254,14 @@ public final class InstrumentMagicPanel extends JPanel {
 				editConstraints.gridx = 4;
 				editConstraints.gridy = gridy;
 				editConstraints.gridwidth = 3;
+				editConstraints.gridheight = 1;
 				editConstraints.fill = GridBagConstraints.BOTH;
 				editConstraints.insets = Constants.SMALL_INSETS;
 
 				final GridBagConstraints insertConstraints = new GridBagConstraints();
 				insertConstraints.gridx = 4;
 				insertConstraints.gridy = gridy + 1;
+				insertConstraints.gridwidth = 1;
 				insertConstraints.gridheight = 2;
 				insertConstraints.fill = GridBagConstraints.BOTH;
 				insertConstraints.insets = Constants.SMALL_INSETS;
@@ -297,87 +281,96 @@ public final class InstrumentMagicPanel extends JPanel {
 			gridy += 2;
 		}
 
-		for (int row = 0; row < rows; row++) {
-				final GridBagConstraints numberConstraints = new GridBagConstraints();
-				numberConstraints.gridx = 0;
-				numberConstraints.gridy = gridy;
-				numberConstraints.gridheight = 2;
-				numberConstraints.fill = GridBagConstraints.BOTH;
-				numberConstraints.insets = Constants.SMALL_INSETS;
+		/*body: */{
+			for (int row = 0; row < rows; row++) {
+					final GridBagConstraints numberConstraints = new GridBagConstraints();
+					numberConstraints.gridx = 0;
+					numberConstraints.gridy = gridy;
+					numberConstraints.gridwidth = 1;
+					numberConstraints.gridheight = 2;
+					numberConstraints.fill = GridBagConstraints.BOTH;
+					numberConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints lengthConstraints = new GridBagConstraints();
-				lengthConstraints.gridx = 1;
-				lengthConstraints.gridy = gridy;
-				lengthConstraints.gridheight = 2;
-				lengthConstraints.weightx = 1;
-				lengthConstraints.weighty = 0;
-				lengthConstraints.fill = GridBagConstraints.BOTH;
-				lengthConstraints.insets = Constants.SMALL_INSETS;
+					final GridBagConstraints lengthConstraints = new GridBagConstraints();
+					lengthConstraints.gridx = 1;
+					lengthConstraints.gridy = gridy;
+					lengthConstraints.gridwidth = 1;
+					lengthConstraints.gridheight = 2;
+					lengthConstraints.weightx = 1;
+					lengthConstraints.weighty = 0;
+					lengthConstraints.fill = GridBagConstraints.BOTH;
+					lengthConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints densityConstraints = new GridBagConstraints();
-				densityConstraints.gridx = 2;
-				densityConstraints.gridy = gridy;
-				densityConstraints.gridheight = 2;
-				densityConstraints.weightx = 1;
-				densityConstraints.weighty = 0;
-				densityConstraints.fill = GridBagConstraints.BOTH;
-				densityConstraints.insets = Constants.SMALL_INSETS;
+					final GridBagConstraints densityConstraints = new GridBagConstraints();
+					densityConstraints.gridx = 2;
+					densityConstraints.gridy = gridy;
+					densityConstraints.gridwidth = 1;
+					densityConstraints.gridheight = 2;
+					densityConstraints.weightx = 1;
+					densityConstraints.weighty = 0;
+					densityConstraints.fill = GridBagConstraints.BOTH;
+					densityConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints tensionConstraints = new GridBagConstraints();
-				tensionConstraints.gridx = 3;
-				tensionConstraints.gridy = gridy;
-				tensionConstraints.gridheight = 2;
-				tensionConstraints.weightx = 1;
-				tensionConstraints.weighty = 0;
-				tensionConstraints.fill = GridBagConstraints.BOTH;
-				tensionConstraints.insets = Constants.SMALL_INSETS;
+					final GridBagConstraints tensionConstraints = new GridBagConstraints();
+					tensionConstraints.gridx = 3;
+					tensionConstraints.gridy = gridy;
+					tensionConstraints.gridwidth = 1;
+					tensionConstraints.gridheight = 2;
+					tensionConstraints.weightx = 1;
+					tensionConstraints.weighty = 0;
+					tensionConstraints.fill = GridBagConstraints.BOTH;
+					tensionConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints insertConstraints = new GridBagConstraints();
-				insertConstraints.gridx = 4;
-				insertConstraints.gridy = gridy + 1;
-				insertConstraints.gridheight = 2;
-				insertConstraints.fill = GridBagConstraints.BOTH;
-				insertConstraints.insets = Constants.SMALL_INSETS;
+					final GridBagConstraints insertConstraints = new GridBagConstraints();
+					insertConstraints.gridx = 4;
+					insertConstraints.gridy = gridy + 1;
+					insertConstraints.gridwidth = 1;
+					insertConstraints.gridheight = 2;
+					insertConstraints.fill = GridBagConstraints.BOTH;
+					insertConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints deleteConstraints = new GridBagConstraints();
-				deleteConstraints.gridx = 5;
-				deleteConstraints.gridy = gridy;
-				deleteConstraints.gridheight = 2;
-				deleteConstraints.fill = GridBagConstraints.BOTH;
-				deleteConstraints.insets = Constants.SMALL_INSETS;
+					final GridBagConstraints deleteConstraints = new GridBagConstraints();
+					deleteConstraints.gridx = 5;
+					deleteConstraints.gridy = gridy;
+					deleteConstraints.gridwidth = 1;
+					deleteConstraints.gridheight = 2;
+					deleteConstraints.fill = GridBagConstraints.BOTH;
+					deleteConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints swapConstraints = new GridBagConstraints();
-				swapConstraints.gridx = 6;
-				swapConstraints.gridy = gridy + 1;
-				swapConstraints.gridheight = 2;
-				swapConstraints.fill = GridBagConstraints.BOTH;
-				swapConstraints.insets = Constants.SMALL_INSETS;
+					final GridBagConstraints swapConstraints = new GridBagConstraints();
+					swapConstraints.gridx = 6;
+					swapConstraints.gridy = gridy + 1;
+					swapConstraints.gridwidth = 1;
+					swapConstraints.gridheight = 2;
+					swapConstraints.fill = GridBagConstraints.BOTH;
+					swapConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints topConstraints = new GridBagConstraints();
-				topConstraints.gridx = 7;
-				topConstraints.gridy = gridy;
-				topConstraints.fill = GridBagConstraints.VERTICAL;
+					final GridBagConstraints topConstraints = new GridBagConstraints();
+					topConstraints.gridx = 7;
+					topConstraints.gridy = gridy;
+					topConstraints.fill = GridBagConstraints.VERTICAL;
 
-				final GridBagConstraints bottomConstraints = new GridBagConstraints();
-				bottomConstraints.gridx = 7;
-				bottomConstraints.gridy = gridy + 1;
-				bottomConstraints.fill = GridBagConstraints.VERTICAL;
+					final GridBagConstraints bottomConstraints = new GridBagConstraints();
+					bottomConstraints.gridx = 7;
+					bottomConstraints.gridy = gridy + 1;
+					bottomConstraints.fill = GridBagConstraints.VERTICAL;
 
-			final BodyPart bodyPart = body.get(row);
-			add(bodyPart.getNumberLabel(), numberConstraints);
-			add(bodyPart.getLengthTextField(), lengthConstraints);
-			add(bodyPart.getDensityTextField(), densityConstraints);
-			add(bodyPart.getTensionTextField(), tensionConstraints);
-			add(bodyPart.getInsertButton(), insertConstraints);
-			add(bodyPart.getDeleteButton(), deleteConstraints);
-			if (!bodyPart.getLast()) add(bodyPart.getSwapButton(), swapConstraints);
-			add(bodyPart.getTopStrut(), topConstraints);
-			add(bodyPart.getBottomStrut(), bottomConstraints);
+				final BodyPart bodyPart = bodyParts.get(row);
+				add(bodyPart.getNumberLabel(), numberConstraints);
+				add(bodyPart.getLengthTextField(), lengthConstraints);
+				add(bodyPart.getDensityTextField(), densityConstraints);
+				add(bodyPart.getTensionTextField(), tensionConstraints);
+				add(bodyPart.getInsertButton(), insertConstraints);
+				add(bodyPart.getDeleteButton(), deleteConstraints);
+				if (!bodyPart.getLast()) add(bodyPart.getSwapButton(), swapConstraints);
+				add(bodyPart.getTopStrut(), topConstraints);
+				add(bodyPart.getBottomStrut(), bottomConstraints);
 
-			gridy += 2;
+				gridy += 2;
+			}
 		}
 
-		{
+		/*footer: */{
 				final GridBagConstraints topConstraints = new GridBagConstraints();
 				topConstraints.gridx = 7;
 				topConstraints.gridy = gridy;
@@ -404,11 +397,11 @@ public final class InstrumentMagicPanel extends JPanel {
 		final int nextRows = rows + 1;
 		switch (rows) {
 		default:
-			final BodyPart secondLastBodyPart = body.get(rows - 1);
+			final BodyPart secondLastBodyPart = bodyParts.get(rows - 1);
 			secondLastBodyPart.setLast(false);
 		case 0:
 			final BodyPart lastBodyPart = new BodyPart(nextRows);
-			body.add(lastBodyPart);
+			bodyParts.add(lastBodyPart);
 			lastBodyPart.setLast(true);
 		}
 		rows = nextRows;
@@ -421,8 +414,8 @@ public final class InstrumentMagicPanel extends JPanel {
 		final int nextRows = rows - 1;
 		switch (rows) {
 		default:
-			body.remove(nextRows);
-			final BodyPart lastBodyPart = body.get(nextRows - 1);
+			bodyParts.remove(nextRows);
+			final BodyPart lastBodyPart = bodyParts.get(nextRows - 1);
 			lastBodyPart.setLast(true);
 			rows = nextRows;
 		case 1:
@@ -441,8 +434,8 @@ public final class InstrumentMagicPanel extends JPanel {
 	**/
 	public void setRows(final int rows) {
 		if (rows == this.rows) return;
-		while (this.rows > rows) removeRow();
 		while (this.rows < rows) addRow();
+		while (this.rows > rows) removeRow();
 		build();
 	}
 
@@ -453,7 +446,7 @@ public final class InstrumentMagicPanel extends JPanel {
 		super(new GridBagLayout());
 
 		footer = new Footer();
-		body = new ArrayList<>();
+		bodyParts = new ArrayList<>();
 		header = new Header();
 		rows = 0;
 
@@ -466,7 +459,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	@return The length text field.
 	**/
 	public JTextField getLengthTextField(final int row) {
-		return body.get(row + 1).getLengthTextField();
+		return bodyParts.get(row + 1).getLengthTextField();
 	}
 
 	/**
@@ -474,7 +467,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	@return The density text field.
 	**/
 	public JTextField getDensityTextField(final int row) {
-		return body.get(row + 1).getDensityTextField();
+		return bodyParts.get(row + 1).getDensityTextField();
 	}
 
 	/**
@@ -482,7 +475,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	@return The tension text field.
 	**/
 	public JTextField getTensionTextField(final int row) {
-		return body.get(row + 1).getTensionTextField();
+		return bodyParts.get(row + 1).getTensionTextField();
 	}
 
 	/**
@@ -495,7 +488,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	public JButton getInsertButton(final int firstRow, final int secondRow) {
 		final int row = firstRow + secondRow >>> 1;
 		if (row == 1) return header.getInsertButton();
-		return body.get(row - 1).getInsertButton();
+		return bodyParts.get(row - 1).getInsertButton();
 	}
 
 	/**
@@ -503,7 +496,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	@return The delete button.
 	**/
 	public JButton getDeleteButton(final int row) {
-		return body.get(row).getDeleteButton();
+		return bodyParts.get(row).getDeleteButton();
 	}
 
 	/**
@@ -515,6 +508,6 @@ public final class InstrumentMagicPanel extends JPanel {
 	**/
 	public JButton getSwapButton(final int firstRow, final int secondRow) {
 		final int row = firstRow + secondRow >>> 1;
-		return body.get(row - 1).getSwapButton();
+		return bodyParts.get(row - 1).getSwapButton();
 	}
 }

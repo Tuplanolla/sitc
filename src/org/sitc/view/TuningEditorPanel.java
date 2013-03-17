@@ -64,7 +64,8 @@ public final class TuningEditorPanel extends JPanel {
 						topPanel.add(titledNamePanel, BorderLayout.NORTH);
 						topPanel.add(titledSystemPanel, BorderLayout.CENTER);
 
-									magicPanel = new TuningMagicPanel(6);
+									magicPanel = new TuningMagicPanel();
+									magicPanel.setRows(1);
 
 								final JScrollPane scrollPane = new JScrollPane(magicPanel);
 								scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

@@ -146,7 +146,7 @@ public final class Sequence implements Comparable<Sequence>, Serializable {
 
 	@Override
 	public java.lang.String toString() {
-		return name;
+		return name + " (" + tunings.size() + ")";
 	}
 
 	@Override

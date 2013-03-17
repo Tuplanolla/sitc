@@ -148,7 +148,7 @@ public final class Instrument implements Comparable<Instrument>, Serializable {
 
 	@Override
 	public java.lang.String toString() {
-		return name;
+		return name + " (" + strings.size() + ")";
 	}
 
 	@Override

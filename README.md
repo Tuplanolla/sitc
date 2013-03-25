@@ -2,7 +2,7 @@
 
 SITC stands for String Instrument Tuning Calculator.
 Its purpose is to calculate the optimal transitions in sequences of tunings to lessen the effort required to carry out the transitions and minimize the stress subjected to the instrument in question.
-I can be also used to store such sequences, individual tunings and tuning-related information of stringed instruments.
+It can be also used to store such sequences, individual tunings and tuning-related information of stringed instruments.
 The name is not very descriptive since it's built around an acronym.
 
 ## Schedule

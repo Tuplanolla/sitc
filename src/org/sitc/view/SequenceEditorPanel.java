@@ -74,7 +74,9 @@ public final class SequenceEditorPanel extends JPanel {
 					topPanel.add(titledSystemPanel, BorderLayout.CENTER);
 					topPanel.add(titledInstrumentPanel, BorderLayout.SOUTH);
 
-									magicPanel = new SequenceMagicPanel(6, 6);
+									magicPanel = new SequenceMagicPanel();
+									magicPanel.setRows(2);
+									magicPanel.setColumns(1);
 
 								final JScrollPane scrollPane = new JScrollPane(magicPanel);
 								scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

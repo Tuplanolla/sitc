@@ -33,7 +33,6 @@ public final class InstrumentMagicPanel extends JPanel {
 				tensionLabel,
 				editLabel;
 		private final JButton insertButton;
-		private final Component bottomStrut;
 
 		public Header() {
 			lengthLabel = new JLabel("Length (cm)");
@@ -50,8 +49,6 @@ public final class InstrumentMagicPanel extends JPanel {
 
 			insertButton = new JButton("Insert");
 			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
-
-			bottomStrut = Box.createVerticalStrut(0);
 		}
 
 		public JLabel getLengthLabel() {
@@ -72,6 +69,21 @@ public final class InstrumentMagicPanel extends JPanel {
 
 		public JButton getInsertButton() {
 			return insertButton;
+		}
+	}
+
+	private static final class Body {
+		private final Component topStrut,
+				bottomStrut;
+
+		public Body() {
+			topStrut = Box.createVerticalStrut(0);
+
+			bottomStrut = Box.createVerticalStrut(0);
+		}
+
+		public Component getTopStrut() {
+			return topStrut;
 		}
 
 		public Component getBottomStrut() {
@@ -167,27 +179,21 @@ public final class InstrumentMagicPanel extends JPanel {
 
 	private static final class Footer {
 		private final Component glue;
-		private final Component topStrut;
 
 		public Footer() {
 			glue = Box.createGlue();
-
-			topStrut = Box.createVerticalStrut(0);
 		}
 
 		public Component getGlue() {
 			return glue;
 		}
-
-		public Component getTopStrut() {
-			return topStrut;
-		}
 	}
 
 	private final Header header;
+	private int rows;
+	private final Body body;
 	private final List<BodyPart> bodyParts;
 	private final Footer footer;
-	private int rows;
 
 	/**
 	Adjusts the row heights.
@@ -207,12 +213,12 @@ public final class InstrumentMagicPanel extends JPanel {
 				leftoverRowHeight = rowHeight % 2;//no pixel left behind
 		final Dimension topStrutSize = new Dimension(0, halfRowHeight),
 				bottomStrutSize = new Dimension(0, halfRowHeight + leftoverRowHeight);
-		Utilities.setAllSizes(header.getBottomStrut(), bottomStrutSize);
+		Utilities.setAllSizes(body.getTopStrut(), bottomStrutSize);//intentionally mixed
 		for (final BodyPart bodyPart : bodyParts) {
 			Utilities.setAllSizes(bodyPart.getTopStrut(), topStrutSize);
 			Utilities.setAllSizes(bodyPart.getBottomStrut(), bottomStrutSize);
 		}
-		Utilities.setAllSizes(footer.getTopStrut(), topStrutSize);
+		Utilities.setAllSizes(body.getBottomStrut(), topStrutSize);
 	}
 
 	/**
@@ -258,31 +264,37 @@ public final class InstrumentMagicPanel extends JPanel {
 				editConstraints.fill = GridBagConstraints.BOTH;
 				editConstraints.insets = Constants.SMALL_INSETS;
 
+			add(header.getLengthLabel(), lengthConstraints);
+			add(header.getDensityLabel(), densityConstraints);
+			add(header.getTensionLabel(), tensionConstraints);
+			add(header.getEditLabel(), editConstraints);
+
+			gridy++;
+
 				final GridBagConstraints insertConstraints = new GridBagConstraints();
 				insertConstraints.gridx = 4;
-				insertConstraints.gridy = gridy + 1;
+				insertConstraints.gridy = gridy;
 				insertConstraints.gridwidth = 1;
 				insertConstraints.gridheight = 2;
 				insertConstraints.fill = GridBagConstraints.BOTH;
 				insertConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints bottomConstraints = new GridBagConstraints();
-				bottomConstraints.gridx = 7;
-				bottomConstraints.gridy = gridy + 1;
-				bottomConstraints.fill = GridBagConstraints.VERTICAL;
-
-			add(header.getLengthLabel(), lengthConstraints);
-			add(header.getDensityLabel(), densityConstraints);
-			add(header.getTensionLabel(), tensionConstraints);
-			add(header.getEditLabel(), editConstraints);
 			add(header.getInsertButton(), insertConstraints);
-			add(header.getBottomStrut(), bottomConstraints);
-
-			gridy += 2;
 		}
 
 		/*body: */{
+				final GridBagConstraints topmostConstraints = new GridBagConstraints();
+				topmostConstraints.gridx = 7;
+				topmostConstraints.gridy = gridy;
+				topmostConstraints.fill = GridBagConstraints.VERTICAL;
+
+			add(body.getTopStrut(), topmostConstraints);
+
+			gridy++;
+
 			for (int row = 0; row < rows; row++) {
+				final BodyPart bodyPart = bodyParts.get(row);
+
 					final GridBagConstraints numberConstraints = new GridBagConstraints();
 					numberConstraints.gridx = 0;
 					numberConstraints.gridy = gridy;
@@ -321,14 +333,6 @@ public final class InstrumentMagicPanel extends JPanel {
 					tensionConstraints.fill = GridBagConstraints.BOTH;
 					tensionConstraints.insets = Constants.SMALL_INSETS;
 
-					final GridBagConstraints insertConstraints = new GridBagConstraints();
-					insertConstraints.gridx = 4;
-					insertConstraints.gridy = gridy + 1;
-					insertConstraints.gridwidth = 1;
-					insertConstraints.gridheight = 2;
-					insertConstraints.fill = GridBagConstraints.BOTH;
-					insertConstraints.insets = Constants.SMALL_INSETS;
-
 					final GridBagConstraints deleteConstraints = new GridBagConstraints();
 					deleteConstraints.gridx = 5;
 					deleteConstraints.gridy = gridy;
@@ -337,57 +341,89 @@ public final class InstrumentMagicPanel extends JPanel {
 					deleteConstraints.fill = GridBagConstraints.BOTH;
 					deleteConstraints.insets = Constants.SMALL_INSETS;
 
-					final GridBagConstraints swapConstraints = new GridBagConstraints();
-					swapConstraints.gridx = 6;
-					swapConstraints.gridy = gridy + 1;
-					swapConstraints.gridwidth = 1;
-					swapConstraints.gridheight = 2;
-					swapConstraints.fill = GridBagConstraints.BOTH;
-					swapConstraints.insets = Constants.SMALL_INSETS;
-
 					final GridBagConstraints topConstraints = new GridBagConstraints();
 					topConstraints.gridx = 7;
 					topConstraints.gridy = gridy;
 					topConstraints.fill = GridBagConstraints.VERTICAL;
 
-					final GridBagConstraints bottomConstraints = new GridBagConstraints();
-					bottomConstraints.gridx = 7;
-					bottomConstraints.gridy = gridy + 1;
-					bottomConstraints.fill = GridBagConstraints.VERTICAL;
-
-				final BodyPart bodyPart = bodyParts.get(row);
 				add(bodyPart.getNumberLabel(), numberConstraints);
 				add(bodyPart.getLengthTextField(), lengthConstraints);
 				add(bodyPart.getDensityTextField(), densityConstraints);
 				add(bodyPart.getTensionTextField(), tensionConstraints);
-				add(bodyPart.getInsertButton(), insertConstraints);
 				add(bodyPart.getDeleteButton(), deleteConstraints);
-				if (!bodyPart.getLast()) add(bodyPart.getSwapButton(), swapConstraints);
 				add(bodyPart.getTopStrut(), topConstraints);
+
+				gridy++;
+
+				if (!bodyPart.getLast()) {
+						final GridBagConstraints swapConstraints = new GridBagConstraints();
+						swapConstraints.gridx = 6;
+						swapConstraints.gridy = gridy;
+						swapConstraints.gridwidth = 1;
+						swapConstraints.gridheight = 2;
+						swapConstraints.fill = GridBagConstraints.BOTH;
+						swapConstraints.insets = Constants.SMALL_INSETS;
+
+					add(bodyPart.getSwapButton(), swapConstraints);
+				}
+
+					final GridBagConstraints insertConstraints = new GridBagConstraints();
+					insertConstraints.gridx = 4;
+					insertConstraints.gridy = gridy;
+					insertConstraints.gridwidth = 1;
+					insertConstraints.gridheight = 2;
+					insertConstraints.fill = GridBagConstraints.BOTH;
+					insertConstraints.insets = Constants.SMALL_INSETS;
+
+					final GridBagConstraints bottomConstraints = new GridBagConstraints();
+					bottomConstraints.gridx = 7;
+					bottomConstraints.gridy = gridy;
+					bottomConstraints.fill = GridBagConstraints.VERTICAL;
+
+				add(bodyPart.getInsertButton(), insertConstraints);
 				add(bodyPart.getBottomStrut(), bottomConstraints);
 
-				gridy += 2;
+				gridy++;
 			}
+
+				final GridBagConstraints bottommostConstraints = new GridBagConstraints();
+				bottommostConstraints.gridx = 7;
+				bottommostConstraints.gridy = gridy;
+				bottommostConstraints.fill = GridBagConstraints.VERTICAL;
+
+			add(body.getBottomStrut(), bottommostConstraints);
+
+			gridy++;
 		}
 
 		/*footer: */{
-				final GridBagConstraints topConstraints = new GridBagConstraints();
-				topConstraints.gridx = 7;
-				topConstraints.gridy = gridy;
-				topConstraints.fill = GridBagConstraints.VERTICAL;
-
 				final GridBagConstraints glueConstraints = new GridBagConstraints();
 				glueConstraints.gridx = 7;
-				glueConstraints.gridy = gridy + 1;
+				glueConstraints.gridy = gridy;
 				glueConstraints.weightx = 0;
 				glueConstraints.weighty = 1;
 				glueConstraints.fill = GridBagConstraints.VERTICAL;
 
-			add(footer.getTopStrut(), topConstraints);
 			add(footer.getGlue(), glueConstraints);
-
-			gridy += 2;
 		}
+	}
+
+	/**
+	Creates an instrument magic panel.
+	**/
+	public InstrumentMagicPanel() {
+		super(new GridBagLayout());
+
+		footer = new Footer();
+
+		rows = 0;
+		body = new Body();
+		bodyParts = new ArrayList<>();
+
+		header = new Header();
+
+		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+		build();
 	}
 
 	/**
@@ -418,7 +454,7 @@ public final class InstrumentMagicPanel extends JPanel {
 			final BodyPart lastBodyPart = bodyParts.get(nextRows - 1);
 			lastBodyPart.setLast(true);
 			rows = nextRows;
-		case 1:
+		case 0:
 		}
 	}
 
@@ -440,26 +476,11 @@ public final class InstrumentMagicPanel extends JPanel {
 	}
 
 	/**
-	Creates an instrument magic panel.
-	**/
-	public InstrumentMagicPanel() {
-		super(new GridBagLayout());
-
-		footer = new Footer();
-		bodyParts = new ArrayList<>();
-		header = new Header();
-		rows = 0;
-
-		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
-		build();
-	}
-
-	/**
 	@param row The row.
 	@return The length text field.
 	**/
 	public JTextField getLengthTextField(final int row) {
-		return bodyParts.get(row + 1).getLengthTextField();
+		return bodyParts.get(row - 1).getLengthTextField();
 	}
 
 	/**
@@ -467,7 +488,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	@return The density text field.
 	**/
 	public JTextField getDensityTextField(final int row) {
-		return bodyParts.get(row + 1).getDensityTextField();
+		return bodyParts.get(row - 1).getDensityTextField();
 	}
 
 	/**
@@ -475,7 +496,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	@return The tension text field.
 	**/
 	public JTextField getTensionTextField(final int row) {
-		return bodyParts.get(row + 1).getTensionTextField();
+		return bodyParts.get(row - 1).getTensionTextField();
 	}
 
 	/**
@@ -496,7 +517,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	@return The delete button.
 	**/
 	public JButton getDeleteButton(final int row) {
-		return bodyParts.get(row).getDeleteButton();
+		return bodyParts.get(row - 1).getDeleteButton();
 	}
 
 	/**

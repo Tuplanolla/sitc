@@ -35,7 +35,6 @@ public final class TuningMagicPanel extends JPanel {
 				transposeLabel,
 				editLabel;
 		private final JButton insertButton;
-		private final Component bottomStrut;
 
 		public Header() {
 			playLabel = new JLabel("Play");
@@ -55,8 +54,6 @@ public final class TuningMagicPanel extends JPanel {
 
 			insertButton = new JButton("Insert");
 			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
-
-			bottomStrut = Box.createVerticalStrut(0);
 		}
 
 		public JLabel getPlayLabel() {
@@ -82,16 +79,14 @@ public final class TuningMagicPanel extends JPanel {
 		public JButton getInsertButton() {
 			return insertButton;
 		}
-
-		public Component getBottomStrut() {
-			return bottomStrut;
-		}
 	}
 
 	private static final class Body {
 		private final JButton playAllButton,
 				allUpButton,
 				allDownButton;
+		private final Component topStrut,
+				bottomStrut;
 
 		public Body() {
 			playAllButton = new JButton("Play");
@@ -102,6 +97,10 @@ public final class TuningMagicPanel extends JPanel {
 
 			allDownButton = new JButton("Down");
 			Utilities.setScaledIcon(allDownButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+
+			topStrut = Box.createVerticalStrut(0);
+
+			bottomStrut = Box.createVerticalStrut(0);
 		}
 
 		public JButton getPlayAllButton() {
@@ -114,6 +113,14 @@ public final class TuningMagicPanel extends JPanel {
 
 		public JButton getAllDownButton() {
 			return allDownButton;
+		}
+
+		public Component getTopStrut() {
+			return topStrut;
+		}
+
+		public Component getBottomStrut() {
+			return bottomStrut;
 		}
 	}
 
@@ -221,28 +228,21 @@ public final class TuningMagicPanel extends JPanel {
 
 	private static final class Footer {
 		private final Component glue;
-		private final Component topStrut;
 
 		public Footer() {
 			glue = Box.createGlue();
-
-			topStrut = Box.createVerticalStrut(0);
 		}
 
 		public Component getGlue() {
 			return glue;
 		}
-
-		public Component getTopStrut() {
-			return topStrut;
-		}
 	}
 
 	private final Header header;
+	private int rows;
 	private final Body body;
 	private final List<BodyPart> bodyParts;
 	private final Footer footer;
-	private int rows;
 
 	/**
 	Adjusts the row heights.
@@ -264,12 +264,12 @@ public final class TuningMagicPanel extends JPanel {
 				leftoverRowHeight = rowHeight % 2;//no pixel left behind
 		final Dimension topStrutSize = new Dimension(0, halfRowHeight),
 				bottomStrutSize = new Dimension(0, halfRowHeight + leftoverRowHeight);
-		Utilities.setAllSizes(header.getBottomStrut(), bottomStrutSize);
+		Utilities.setAllSizes(body.getTopStrut(), bottomStrutSize);//intentionally mixed
 		for (final BodyPart bodyPart : bodyParts) {
 			Utilities.setAllSizes(bodyPart.getTopStrut(), topStrutSize);
 			Utilities.setAllSizes(bodyPart.getBottomStrut(), bottomStrutSize);
 		}
-		Utilities.setAllSizes(footer.getTopStrut(), topStrutSize);
+		Utilities.setAllSizes(body.getBottomStrut(), topStrutSize);
 	}
 
 	/**
@@ -323,31 +323,38 @@ public final class TuningMagicPanel extends JPanel {
 				editConstraints.fill = GridBagConstraints.BOTH;
 				editConstraints.insets = Constants.SMALL_INSETS;
 
-				final GridBagConstraints insertConstraints = new GridBagConstraints();
-				insertConstraints.gridx = 7;
-				insertConstraints.gridy = gridy + 1;
-				insertConstraints.gridwidth = 1;
-				insertConstraints.gridheight = 2;
-				insertConstraints.fill = GridBagConstraints.BOTH;
-				insertConstraints.insets = Constants.SMALL_INSETS;
-
-				final GridBagConstraints bottomConstraints = new GridBagConstraints();
-				bottomConstraints.gridx = 10;
-				bottomConstraints.gridy = gridy + 1;
-				bottomConstraints.fill = GridBagConstraints.VERTICAL;
-
 			add(header.getPlayLabel(), playConstraints);
 			add(header.getNoteLabel(), noteConstraints);
 			add(header.getFrequencyLabel(), frequencyConstraints);
 			add(header.getTransposeLabel(), transposeConstraints);
 			add(header.getEditLabel(), editConstraints);
-			add(header.getInsertButton(), insertConstraints);
-			add(header.getBottomStrut(), bottomConstraints);
 
-			gridy += 2;
+			gridy++;
+
+				final GridBagConstraints insertConstraints = new GridBagConstraints();
+				insertConstraints.gridx = 7;
+				insertConstraints.gridy = gridy;
+				insertConstraints.gridwidth = 1;
+				insertConstraints.gridheight = 2;
+				insertConstraints.fill = GridBagConstraints.BOTH;
+				insertConstraints.insets = Constants.SMALL_INSETS;
+
+			add(header.getInsertButton(), insertConstraints);
 		}
 
 		/*body: */{
+				final GridBagConstraints topmostConstraints = new GridBagConstraints();
+				topmostConstraints.gridx = 10;
+				topmostConstraints.gridy = gridy;
+				topmostConstraints.fill = GridBagConstraints.VERTICAL;
+
+			add(body.getTopStrut(), topmostConstraints);
+
+			gridy++;
+
+				final Insets upInsets = new Insets(Constants.SMALL_INSET, Constants.SMALL_INSET, 0, Constants.SMALL_INSET),
+						downInsets = new Insets(0, Constants.SMALL_INSET, Constants.SMALL_INSET, Constants.SMALL_INSET);
+
 				final GridBagConstraints playAllConstraints = new GridBagConstraints();
 				playAllConstraints.gridx = 1;
 				playAllConstraints.gridy = gridy;
@@ -362,7 +369,7 @@ public final class TuningMagicPanel extends JPanel {
 				allUpConstraints.gridwidth = 1;
 				allUpConstraints.gridheight = rows;
 				allUpConstraints.fill = GridBagConstraints.BOTH;
-				allUpConstraints.insets = Constants.SMALL_INSETS;
+				allUpConstraints.insets = upInsets;
 
 				final GridBagConstraints allDownConstraints = new GridBagConstraints();
 				allDownConstraints.gridx = 6;
@@ -370,16 +377,15 @@ public final class TuningMagicPanel extends JPanel {
 				allDownConstraints.gridwidth = 1;
 				allDownConstraints.gridheight = rows;
 				allDownConstraints.fill = GridBagConstraints.BOTH;
-				allDownConstraints.insets = Constants.SMALL_INSETS;
+				allDownConstraints.insets = downInsets;
 
 			add(body.getPlayAllButton(), playAllConstraints);
 			add(body.getAllUpButton(), allUpConstraints);
 			add(body.getAllDownButton(), allDownConstraints);
 
-				final Insets upInsets = new Insets(Constants.SMALL_INSET, Constants.SMALL_INSET, 0, Constants.SMALL_INSET),
-						downInsets = new Insets(0, Constants.SMALL_INSET, Constants.SMALL_INSET, Constants.SMALL_INSET);
-
 			for (int row = 0; row < rows; row++) {
+				final BodyPart bodyPart = bodyParts.get(row);
+
 					final GridBagConstraints numberConstraints = new GridBagConstraints();
 					numberConstraints.gridx = 0;
 					numberConstraints.gridy = gridy;
@@ -422,20 +428,6 @@ public final class TuningMagicPanel extends JPanel {
 					upConstraints.fill = GridBagConstraints.BOTH;
 					upConstraints.insets = upInsets;
 
-					final GridBagConstraints downConstraints = new GridBagConstraints();
-					downConstraints.gridx = 5;
-					downConstraints.gridy = gridy + 1;
-					downConstraints.fill = GridBagConstraints.BOTH;
-					downConstraints.insets = downInsets;
-
-					final GridBagConstraints insertConstraints = new GridBagConstraints();
-					insertConstraints.gridx = 7;
-					insertConstraints.gridy = gridy + 1;
-					insertConstraints.gridwidth = 1;
-					insertConstraints.gridheight = 2;
-					insertConstraints.fill = GridBagConstraints.BOTH;
-					insertConstraints.insets = Constants.SMALL_INSETS;
-
 					final GridBagConstraints deleteConstraints = new GridBagConstraints();
 					deleteConstraints.gridx = 8;
 					deleteConstraints.gridy = gridy;
@@ -444,59 +436,97 @@ public final class TuningMagicPanel extends JPanel {
 					deleteConstraints.fill = GridBagConstraints.BOTH;
 					deleteConstraints.insets = Constants.SMALL_INSETS;
 
-					final GridBagConstraints swapConstraints = new GridBagConstraints();
-					swapConstraints.gridx = 9;
-					swapConstraints.gridy = gridy + 1;
-					swapConstraints.gridwidth = 1;
-					swapConstraints.gridheight = 2;
-					swapConstraints.fill = GridBagConstraints.BOTH;
-					swapConstraints.insets = Constants.SMALL_INSETS;
-
 					final GridBagConstraints topConstraints = new GridBagConstraints();
 					topConstraints.gridx = 10;
 					topConstraints.gridy = gridy;
 					topConstraints.fill = GridBagConstraints.VERTICAL;
 
-					final GridBagConstraints bottomConstraints = new GridBagConstraints();
-					bottomConstraints.gridx = 10;
-					bottomConstraints.gridy = gridy + 1;
-					bottomConstraints.fill = GridBagConstraints.VERTICAL;
-
-				final BodyPart bodyPart = bodyParts.get(row);
 				add(bodyPart.getNumberLabel(), numberConstraints);
 				add(bodyPart.getPlayButton(), playConstraints);
 				add(bodyPart.getNoteTextField(), noteConstraints);
 				add(bodyPart.getFrequencyTextField(), frequencyConstraints);
 				add(bodyPart.getUpButton(), upConstraints);
+				add(bodyPart.getDeleteButton(), deleteConstraints);
+				add(bodyPart.getTopStrut(), topConstraints);
+
+				gridy++;
+
+					final GridBagConstraints downConstraints = new GridBagConstraints();
+					downConstraints.gridx = 5;
+					downConstraints.gridy = gridy;
+					downConstraints.fill = GridBagConstraints.BOTH;
+					downConstraints.insets = downInsets;
+
+					final GridBagConstraints insertConstraints = new GridBagConstraints();
+					insertConstraints.gridx = 7;
+					insertConstraints.gridy = gridy;
+					insertConstraints.gridwidth = 1;
+					insertConstraints.gridheight = 2;
+					insertConstraints.fill = GridBagConstraints.BOTH;
+					insertConstraints.insets = Constants.SMALL_INSETS;
+
+					final GridBagConstraints bottomConstraints = new GridBagConstraints();
+					bottomConstraints.gridx = 10;
+					bottomConstraints.gridy = gridy;
+					bottomConstraints.fill = GridBagConstraints.VERTICAL;
+
 				add(bodyPart.getDownButton(), downConstraints);
 				add(bodyPart.getInsertButton(), insertConstraints);
-				add(bodyPart.getDeleteButton(), deleteConstraints);
-				if (!bodyPart.getLast()) add(bodyPart.getSwapButton(), swapConstraints);
-				add(bodyPart.getTopStrut(), topConstraints);
 				add(bodyPart.getBottomStrut(), bottomConstraints);
 
-				gridy += 2;
+				if (!bodyPart.getLast()) {
+						final GridBagConstraints swapConstraints = new GridBagConstraints();
+						swapConstraints.gridx = 9;
+						swapConstraints.gridy = gridy;
+						swapConstraints.gridwidth = 1;
+						swapConstraints.gridheight = 2;
+						swapConstraints.fill = GridBagConstraints.BOTH;
+						swapConstraints.insets = Constants.SMALL_INSETS;
+
+					add(bodyPart.getSwapButton(), swapConstraints);
+				}
+
+				gridy++;
 			}
+
+				final GridBagConstraints bottommostConstraints = new GridBagConstraints();
+				bottommostConstraints.gridx = 10;
+				bottommostConstraints.gridy = gridy;
+				bottommostConstraints.fill = GridBagConstraints.VERTICAL;
+
+			add(body.getBottomStrut(), bottommostConstraints);
+
+			gridy++;
 		}
 
 		/*footer: */{
-				final GridBagConstraints topConstraints = new GridBagConstraints();
-				topConstraints.gridx = 10;
-				topConstraints.gridy = gridy;
-				topConstraints.fill = GridBagConstraints.VERTICAL;
-
 				final GridBagConstraints glueConstraints = new GridBagConstraints();
 				glueConstraints.gridx = 10;
-				glueConstraints.gridy = gridy + 1;
+				glueConstraints.gridy = gridy;
 				glueConstraints.weightx = 0;
 				glueConstraints.weighty = 1;
 				glueConstraints.fill = GridBagConstraints.VERTICAL;
 
-			add(footer.getTopStrut(), topConstraints);
 			add(footer.getGlue(), glueConstraints);
-
-			gridy += 2;
 		}
+	}
+
+	/**
+	Creates a tuning magic panel.
+	**/
+	public TuningMagicPanel() {
+		super(new GridBagLayout());
+
+		footer = new Footer();
+
+		rows = 0;
+		body = new Body();
+		bodyParts = new ArrayList<>();
+
+		header = new Header();
+
+		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
+		build();
 	}
 
 	/**
@@ -527,7 +557,7 @@ public final class TuningMagicPanel extends JPanel {
 			final BodyPart lastBodyPart = bodyParts.get(nextRows - 1);
 			lastBodyPart.setLast(true);
 			rows = nextRows;
-		case 1:
+		case 0:
 		}
 	}
 
@@ -545,22 +575,6 @@ public final class TuningMagicPanel extends JPanel {
 		if (rows == this.rows) return;
 		while (this.rows < rows) addRow();
 		while (this.rows > rows) removeRow();
-		build();
-	}
-
-	/**
-	Creates a tuning magic panel.
-	**/
-	public TuningMagicPanel() {
-		super(new GridBagLayout());
-
-		footer = new Footer();
-		body = new Body();
-		bodyParts = new ArrayList<>();
-		header = new Header();
-		rows = 0;
-
-		setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));
 		build();
 	}
 
@@ -584,7 +598,7 @@ public final class TuningMagicPanel extends JPanel {
 	@return The note text field.
 	**/
 	public JTextField getNoteTextField(final int row) {
-		return bodyParts.get(row + 1).getNoteTextField();
+		return bodyParts.get(row - 1).getNoteTextField();
 	}
 
 	/**
@@ -592,7 +606,7 @@ public final class TuningMagicPanel extends JPanel {
 	@return The frequency text field.
 	**/
 	public JTextField getFrequencyTextField(final int row) {
-		return bodyParts.get(row + 1).getFrequencyTextField();
+		return bodyParts.get(row - 1).getFrequencyTextField();
 	}
 
 	/**
@@ -643,7 +657,7 @@ public final class TuningMagicPanel extends JPanel {
 	@return The delete button.
 	**/
 	public JButton getDeleteButton(final int row) {
-		return bodyParts.get(row).getDeleteButton();
+		return bodyParts.get(row - 1).getDeleteButton();
 	}
 
 	/**

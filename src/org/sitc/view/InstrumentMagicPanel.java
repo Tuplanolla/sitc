@@ -406,6 +406,9 @@ public final class InstrumentMagicPanel extends JPanel {
 
 			add(footer.getGlue(), glueConstraints);
 		}
+
+		revalidate();
+		repaint();
 	}
 
 	/**
@@ -450,9 +453,10 @@ public final class InstrumentMagicPanel extends JPanel {
 		final int nextRows = rows - 1;
 		switch (rows) {
 		default:
-			bodyParts.remove(nextRows);
 			final BodyPart lastBodyPart = bodyParts.get(nextRows - 1);
 			lastBodyPart.setLast(true);
+		case 1:
+			bodyParts.remove(nextRows);
 			rows = nextRows;
 		case 0:
 		}
@@ -508,7 +512,7 @@ public final class InstrumentMagicPanel extends JPanel {
 	**/
 	public JButton getInsertButton(final int firstRow, final int secondRow) {
 		final int row = firstRow + secondRow >>> 1;
-		if (row == 1) return header.getInsertButton();
+		if (row == 0) return header.getInsertButton();
 		return bodyParts.get(row - 1).getInsertButton();
 	}
 

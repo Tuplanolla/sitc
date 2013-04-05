@@ -35,7 +35,7 @@ public final class View implements Part {
 				| UnsupportedLookAndFeelException exception) {
 			//nothing can save us now
 		}
-		mainFrame = new MainFrame();
+		mainFrame = new MainFrame();//TODO rename Revert to Edit
 	}
 
 	@Override

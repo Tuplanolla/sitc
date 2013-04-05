@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -67,56 +66,5 @@ public final class StackTracePanel extends JPanel {
 
 		add(messageLabel, BorderLayout.NORTH);
 		add(showButton, BorderLayout.CENTER);
-	}
-
-	/**
-	Brings up an error dialog.
-
-	@param parentComponent The parent of the dialog.
-	@param message The object to display.
-	**/
-	public static void showErrorDialog(final Component parentComponent, final Object message) {
-		JOptionPane.showOptionDialog(parentComponent,
-				message,
-				"Error",
-				JOptionPane.OK_OPTION,
-				JOptionPane.ERROR_MESSAGE,
-				null,
-				new String[] {"Dismiss"},
-				null);
-	}
-
-	/**
-	Brings up a warning dialog.
-
-	@param parentComponent The parent of the dialog.
-	@param message The object to display.
-	**/
-	public static void showWarningDialog(final Component parentComponent, final Object message) {
-		JOptionPane.showOptionDialog(parentComponent,
-				message,
-				"Warning",
-				JOptionPane.OK_OPTION,
-				JOptionPane.WARNING_MESSAGE,
-				null,
-				new String[] {"Ignore"},
-				null);
-	}
-
-	/**
-	Brings up an information dialog.
-
-	@param parentComponent The parent of the dialog.
-	@param message The object to display.
-	**/
-	public static void showInformationDialog(final Component parentComponent, final Object message) {
-		JOptionPane.showOptionDialog(parentComponent,
-				message,
-				"Information",
-				JOptionPane.OK_OPTION,
-				JOptionPane.INFORMATION_MESSAGE,
-				null,
-				new String[] {"Acknowledge"},
-				null);
 	}
 }

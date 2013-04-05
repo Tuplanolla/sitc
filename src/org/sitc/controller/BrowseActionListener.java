@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.text.JTextComponent;
 
+import org.sitc.view.Dialogs;
 import org.sitc.view.StackTracePanel;
 
 /**
@@ -44,10 +45,12 @@ public final class BrowseActionListener implements ActionListener {
 				textComponent.setText(file.getCanonicalPath());
 			}
 			catch (final IOException exception) {
-				StackTracePanel.showErrorDialog(parentComponent, new StackTracePanel(exception, "Resolving the file failed. Make sure your file system is working properly."));
+				Dialogs.showErrorDialog(parentComponent, new StackTracePanel(exception,
+						"Resolving the file failed. Make sure your file system is working properly."));
 			}
 			catch (final SecurityException exception) {
-				StackTracePanel.showErrorDialog(parentComponent, new StackTracePanel(exception, "Accessing the file failed. Make sure your permissions are sufficient."));
+				Dialogs.showErrorDialog(parentComponent, new StackTracePanel(exception,
+						"Accessing the file failed. Make sure your permissions are sufficient."));
 			}
 		}
 	}

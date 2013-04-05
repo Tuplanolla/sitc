@@ -678,6 +678,9 @@ public final class SequenceMagicPanel extends JPanel {
 
 			add(footer.getGlue(), glueConstraints);
 		}
+
+		revalidate();
+		repaint();
 	}
 
 	/**

@@ -42,6 +42,7 @@ public final class Model implements Part {
 	private Instrument currentInstrument;
 	private Tuning currentTuning;
 	private Sequence currentSequence;
+	private List<TuningSystem> tuningSystems;
 
 	/**
 	Caches a heavy context.
@@ -57,10 +58,27 @@ public final class Model implements Part {
 	**/
 	public Model(final List<java.lang.String> arguments) {
 		instruments = new LinkedList<>();
+
 		tunings = new LinkedList<>();
+
 		sequences = new LinkedList<>();
+
+		tuningSystems = new LinkedList<>();
+		tuningSystems.add(EqualTemperament.TWELVE_TONE);
+		tuningSystems.add(new EqualTemperament(41));
+		tuningSystems.add(new EqualTemperament(53));
+		tuningSystems.add(new EqualTemperament(72));
+
+		currentInstrument = null;
+
+		currentTuning = null;
+
+		currentSequence = null;
+
 		instrumentContext = null;
+
 		tuningContext = null;
+
 		sequenceContext = null;
 	}
 
@@ -408,5 +426,19 @@ public final class Model implements Part {
 	**/
 	public void setCurrentSequence(final Sequence currentSequence) {
 		this.currentSequence = currentSequence;
+	}
+
+	/**
+	@return The tuning systems.
+	**/
+	public List<TuningSystem> getTuningSystems() {
+		return tuningSystems;
+	}
+
+	/**
+	@param tuningSystems The new tuning systems.
+	**/
+	public void setTuningSystems(final List<TuningSystem> tuningSystems) {
+		this.tuningSystems = tuningSystems;
 	}
 }

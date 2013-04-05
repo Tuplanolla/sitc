@@ -34,4 +34,9 @@ public class EqualTemperament implements TuningSystem {
 		final Note distance = note.distance(pitchSystem.baseNote);
 		return pitchSystem.baseFrequency * Math.pow(2, distance.getTones().doubleValue() / semitonesInOctave);
 	}
+
+	@Override
+	public java.lang.String toString() {
+		return semitonesInOctave + "-Tone Equal Temperament";
+	}
 }

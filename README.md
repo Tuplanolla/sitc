@@ -13,7 +13,8 @@ This project is in active development and
 
 ## Motivation
 
-When I played more guitar, I always forgot how to change tunings sensibly, which ruined many recordings, sometimes broke strings and once even collapsed a bridge (of the guitar kind). This program aims to solve such problems.
+When I played more guitar, I always forgot how to change tunings sensibly, which ruined many recordings, sometimes broke strings and once even collapsed a bridge (of the guitar kind).
+This program aims to solve such problems.
 
 ## Installation
 
@@ -70,7 +71,7 @@ The project can be run
 
 	[user@arch sitc]$ java -cp bin org.sitc.Main
 
-or the executable archive.
+ or the executable archive.
 
 	[user@arch sitc]$ java -jar jar/sitc.jar
 
@@ -94,7 +95,8 @@ Please help.
 
 ### Directory Structure
 
-Files are named and organized in a typical manner. The directories are
+Files are named and organized in a typical manner.
+The directories are
 
 * `/` for the most important files,
 * `/src` for sources,

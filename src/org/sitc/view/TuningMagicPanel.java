@@ -509,6 +509,9 @@ public final class TuningMagicPanel extends JPanel {
 
 			add(footer.getGlue(), glueConstraints);
 		}
+
+		revalidate();
+		repaint();
 	}
 
 	/**

@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -156,8 +157,7 @@ public final class Controller implements Part {//TODO split
 			stringBuilder.append(" of ");
 			stringBuilder.append(existing);
 		}
-		if (showing == 1 && existing == 1) stringBuilder.append(" Instrument");
-		else stringBuilder.append(" Instruments");
+		stringBuilder.append(" List Items");
 		localInstrumentPanel.getSearchLabel().setText(stringBuilder.toString());
 	}
 
@@ -178,7 +178,7 @@ public final class Controller implements Part {//TODO split
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				try {
-					model.loadInstruments(instrumentPathTextField.getText());
+					model.loadInstruments(new File(instrumentPathTextField.getText()));
 					updateInstrumentList(false);
 				}
 				catch (final JAXBException exception) {
@@ -199,7 +199,7 @@ public final class Controller implements Part {//TODO split
 								"The file already exists. Do you want to overwrite it?");
 					}
 					if (option == JOptionPane.YES_OPTION) {
-						model.saveInstruments(path);
+						model.saveInstruments(new File(path));
 					}
 				}
 				catch (final JAXBException exception) {
@@ -221,6 +221,7 @@ public final class Controller implements Part {//TODO split
 			public void actionPerformed(final ActionEvent event) {
 				model.getInstruments().add(new Instrument("New Instrument"));
 				model.sortInstruments();
+
 				updateInstrumentList(false);
 			}
 		});
@@ -232,6 +233,7 @@ public final class Controller implements Part {//TODO split
 				final Instrument value = list.getSelectedValue();
 				if (value != null) {
 					model.getInstruments().remove(value);
+
 					updateInstrumentList(false);
 				}
 			}
@@ -337,48 +339,56 @@ public final class Controller implements Part {//TODO split
 		final EditorInterfacePanel instrumentInterfacePanel = instrumentEditorPanel.getInterfacePanel();
 		final InstrumentMagicPanel instrumentMagicPanel = instrumentEditorPanel.getMagicPanel();
 
+		final DefaultComboBoxModel<TuningSystem> systemComboBoxModel = instrumentEditorPanel.getSystemComboBoxModel();
+		systemComboBoxModel.addElement(null);
 		for (final TuningSystem system : model.getTuningSystems()) {
-			instrumentEditorPanel.getSystemComboBoxModel().addElement(system);
+			systemComboBoxModel.addElement(system);
 		}
+		systemComboBoxModel.setSelectedItem(null);
 
-		instrumentInterfacePanel.getRevertButton().addActionListener(new ActionListener() {
+		instrumentInterfacePanel.getEditButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				final JList<Instrument> list = localInstrumentPanel.getList();
 				final Instrument currentInstrument = list.getSelectedValue();
-				if (currentInstrument != null) {
-					model.setCurrentInstrument(currentInstrument);
 
-					instrumentEditorPanel.getNameTextField().setText(currentInstrument.getName());
+				if (currentInstrument == null) return;
 
-					instrumentEditorPanel.getSystemComboBox().setSelectedItem(currentInstrument.getTuningSystem());
+				model.setCurrentInstrument(currentInstrument);
 
-					final BigDecimal maximumInstrumentTension = currentInstrument.getMaximumTension();
-					if (maximumInstrumentTension != null) instrumentEditorPanel.getTensionTextField().setText(maximumInstrumentTension.toString());
+				instrumentEditorPanel.getNameTextField().setText(currentInstrument.getName());
 
-					final List<String> strings = currentInstrument.getStrings();
-					final int rows = strings.size();
-					instrumentMagicPanel.setRows(rows);
-					for (int row = 1; row <= rows; row++) {
-						final int index = row - 1;
-						final String string = strings.get(index);
+				instrumentEditorPanel.getSystemComboBox().setSelectedItem(currentInstrument.getTuningSystem());
 
-						instrumentMagicPanel.getLengthTextField(row).setText(string.getVibratingLength().toString());
+				final BigDecimal maximumInstrumentTension = currentInstrument.getMaximumTension();
+				if (maximumInstrumentTension != null) instrumentEditorPanel.getTensionTextField().setText(maximumInstrumentTension.toString());
 
-						instrumentMagicPanel.getDensityTextField(row).setText(string.getLinearDensity().toString());
+				final List<String> strings = currentInstrument.getStrings();
+				final int rows = strings.size();
+				instrumentMagicPanel.setRows(rows);
+				for (int row = 1; row <= rows; row++) {
+					final int index = row - 1;
+					final String string = strings.get(index);
 
-						final BigDecimal maximumStringTension = string.getMaximumTension();
-						if (maximumStringTension != null) instrumentMagicPanel.getTensionTextField(row).setText(maximumStringTension.toString());
-					}
+					instrumentMagicPanel.getLengthTextField(row).setText(string.getVibratingLength().toString());
 
-					reactivateInstrumentMagicPanel();
+					instrumentMagicPanel.getDensityTextField(row).setText(string.getLinearDensity().toString());
+
+					final BigDecimal maximumStringTension = string.getMaximumTension();
+					if (maximumStringTension != null) instrumentMagicPanel.getTensionTextField(row).setText(maximumStringTension.toString());
 				}
+
+				reactivateInstrumentMagicPanel();
 			}
 		});
 
 		instrumentInterfacePanel.getApplyButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
+				final Instrument currentInstrument = model.getCurrentInstrument();
+
+				if (currentInstrument == null) return;
+
 				try {
 					final java.lang.String name;
 					try {
@@ -456,13 +466,12 @@ public final class Controller implements Part {//TODO split
 						strings.add(string);
 					}
 
-					final Instrument currentInstrument = model.getCurrentInstrument();
 					currentInstrument.setName(name);
 					currentInstrument.setTuningSystem(tuningSystem);
 					currentInstrument.setMaximumTension(maximumInstrumentTension);
 					currentInstrument.setStrings(strings);
-
 					model.sortInstruments();
+
 					updateInstrumentList(false);
 				}
 				catch (final IllegalArgumentException exception) {}//previously caught

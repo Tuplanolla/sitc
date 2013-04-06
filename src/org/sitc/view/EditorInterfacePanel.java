@@ -16,7 +16,7 @@ Represents an editor interface panel that
 public class EditorInterfacePanel extends JPanel {
 	private static final long serialVersionUID = 1;
 
-	private final JButton revertButton,
+	private final JButton editButton,
 			applyButton;
 
 	/**
@@ -25,24 +25,24 @@ public class EditorInterfacePanel extends JPanel {
 	public EditorInterfacePanel() {
 		super(new GridBagLayout());
 
-				revertButton = new JButton("Revert");
-				Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				editButton = new JButton("Edit");
+				Utilities.setScaledIcon(editButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 				applyButton = new JButton("Apply");
 				Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 			final JPanel buttonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-			buttonPanel.add(revertButton);
+			buttonPanel.add(editButton);
 			buttonPanel.add(applyButton);
 
 		add(buttonPanel);
 	}
 
 	/**
-	@return The revert button.
+	@return The edit button.
 	**/
-	public JButton getRevertButton() {
-		return revertButton;
+	public JButton getEditButton() {
+		return editButton;
 	}
 
 	/**

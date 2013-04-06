@@ -56,7 +56,7 @@ public final class SequenceEditorPanel extends JPanel {
 							systemPanel.add(systemComboBox);
 
 						final JPanel titledSystemPanel = new JPanel(new BorderLayout());
-						titledSystemPanel.setBorder(new TitledBorder("Pitch System"));
+						titledSystemPanel.setBorder(new TitledBorder("Tuning System"));
 						titledSystemPanel.add(systemPanel, BorderLayout.CENTER);
 
 								final JTextField instrumentTextField = new JTextField();

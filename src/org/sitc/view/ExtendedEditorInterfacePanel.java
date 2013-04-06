@@ -22,7 +22,7 @@ public final class ExtendedEditorInterfacePanel extends JPanel {
 			discardButton;
 	private final JButton addButton,
 			removeButton;
-	private final JButton revertButton,
+	private final JButton editButton,
 			applyButton;
 
 	/**
@@ -51,14 +51,14 @@ public final class ExtendedEditorInterfacePanel extends JPanel {
 			tuningButtonPanel.add(addButton);
 			tuningButtonPanel.add(removeButton);
 
-				revertButton = new JButton("Revert");//"Revert Sequence"
-				Utilities.setScaledIcon(revertButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				editButton = new JButton("Edit");//"Edit Sequence"
+				Utilities.setScaledIcon(editButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 				applyButton = new JButton("Apply");//"Apply Sequence"
 				Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 			final JPanel sequenceButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
-			sequenceButtonPanel.add(revertButton);
+			sequenceButtonPanel.add(editButton);
 			sequenceButtonPanel.add(applyButton);
 
 			final GridBagConstraints nothingInstrumentConstraints = new GridBagConstraints();
@@ -148,10 +148,10 @@ public final class ExtendedEditorInterfacePanel extends JPanel {
 	}
 
 	/**
-	@return The revert button.
+	@return The edit button.
 	**/
-	public JButton getRevertButton() {
-		return revertButton;
+	public JButton getEditButton() {
+		return editButton;
 	}
 
 	/**

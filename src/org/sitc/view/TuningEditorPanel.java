@@ -57,7 +57,7 @@ public final class TuningEditorPanel extends JPanel {
 								systemPanel.add(systemComboBox);
 
 							final JPanel titledSystemPanel = new JPanel(new BorderLayout());
-							titledSystemPanel.setBorder(new TitledBorder("Pitch System"));
+							titledSystemPanel.setBorder(new TitledBorder("Tuning System"));
 							titledSystemPanel.add(systemPanel, BorderLayout.CENTER);
 
 						final JPanel topPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));

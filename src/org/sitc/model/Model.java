@@ -109,11 +109,11 @@ public final class Model implements Part {
 	/**
 	Loads the instruments from a file.
 
-	@param path The path to the file.
+	@param file The file.
 	@throws JAXBException If the file can't be parsed.
 	**/
-	public void loadInstruments(final java.lang.String path) throws JAXBException {
-		final Source source = new StreamSource(new File(path));
+	public void loadInstruments(final File file) throws JAXBException {
+		final Source source = new StreamSource(file);
 		if (instrumentContext == null) instrumentContext = JAXBContext.newInstance(XMLInstruments.class);
 		final Unmarshaller unmarshaller = instrumentContext.createUnmarshaller();
 
@@ -144,11 +144,11 @@ public final class Model implements Part {
 	/**
 	Saves the instruments to a file.
 
-	@param path The path to the file.
+	@param file The file.
 	@throws JAXBException If the file can't be formatted.
 	**/
-	public void saveInstruments(final java.lang.String path) throws JAXBException {
-		final Result result = new StreamResult(new File(path));
+	public void saveInstruments(final File file) throws JAXBException {
+		final Result result = new StreamResult(file);
 		if (instrumentContext == null) instrumentContext = JAXBContext.newInstance(XMLInstruments.class);
 		final Marshaller marshaller = instrumentContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -186,11 +186,11 @@ public final class Model implements Part {
 	/**
 	Loads the tunings from a file.
 
-	@param path The path to the file.
+	@param file The file.
 	@throws JAXBException If the file can't be parsed.
 	**/
-	public void loadTunings(final java.lang.String path) throws JAXBException {
-		final Source source = new StreamSource(new File(path));
+	public void loadTunings(final File file) throws JAXBException {
+		final Source source = new StreamSource(file);
 		if (tuningContext == null) tuningContext = JAXBContext.newInstance(XMLTunings.class);
 		final Unmarshaller unmarshaller = tuningContext.createUnmarshaller();
 
@@ -224,11 +224,11 @@ public final class Model implements Part {
 	/**
 	Saves the tunings to a file.
 
-	@param path The path to the file.
+	@param file The file.
 	@throws JAXBException If the file can't be formatted.
 	**/
-	public void saveTunings(final java.lang.String path) throws JAXBException {
-		final Result result = new StreamResult(new File(path));
+	public void saveTunings(final File file) throws JAXBException {
+		final Result result = new StreamResult(file);
 		if (tuningContext == null) tuningContext = JAXBContext.newInstance(XMLTunings.class);
 		final Marshaller marshaller = tuningContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -267,11 +267,11 @@ public final class Model implements Part {
 	/**
 	Loads the sequences from a file.
 
-	@param path The path to the file.
+	@param file The file.
 	@throws JAXBException If the file can't be parsed.
 	**/
-	public void loadSequences(final java.lang.String path) throws JAXBException {
-		final Source source = new StreamSource(new File(path));
+	public void loadSequences(final File file) throws JAXBException {
+		final Source source = new StreamSource(file);
 		if (sequenceContext == null) sequenceContext = JAXBContext.newInstance(XMLSequences.class);
 		final Unmarshaller unmarshaller = sequenceContext.createUnmarshaller();
 
@@ -299,11 +299,11 @@ public final class Model implements Part {
 	/**
 	Saves the sequences to a file.
 
-	@param path The path to the file.
+	@param file The file.
 	@throws JAXBException If the file can't be formatted.
 	**/
-	public void saveSequences(final java.lang.String path) throws JAXBException {
-		final Result result = new StreamResult(new File(path));
+	public void saveSequences(final File file) throws JAXBException {
+		final Result result = new StreamResult(file);
 		if (sequenceContext == null) sequenceContext = JAXBContext.newInstance(XMLSequences.class);
 		final Marshaller marshaller = sequenceContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -334,35 +334,6 @@ public final class Model implements Part {
 
 		final JAXBElement<XMLSequences> jaxbElement = new JAXBElement<>(new QName("sequences"), XMLSequences.class, xmlSequences);
 		marshaller.marshal(jaxbElement, result);
-	}
-
-	@Deprecated
-	public static void main(final java.lang.String[] arguments) throws Exception {
-		final Model model = new Model(Collections.<java.lang.String>emptyList());
-
-		model.loadInstruments("db/instruments.xml");
-		for (final Instrument instrument : model.instruments) {
-			System.out.println(instrument);
-		}
-		final Instrument instrument = new Instrument("Test Bass", EqualTemperament.TWELVE_TONE);
-		instrument.getStrings().add(new String(BigDecimal.valueOf(68), BigDecimal.valueOf(5)));
-		instrument.getStrings().add(new String(BigDecimal.valueOf(66), BigDecimal.valueOf(4)));
-		instrument.getStrings().add(new String(BigDecimal.valueOf(64), BigDecimal.valueOf(3)));
-		instrument.getStrings().add(new String(BigDecimal.valueOf(62), BigDecimal.valueOf(2)));
-		model.instruments.add(instrument);
-		model.saveInstruments("db/test.xml");
-
-		model.loadTunings("db/tunings.xml");
-		for (final Tuning tuning : model.tunings) {
-			System.out.println(tuning);
-		}
-		model.saveTunings("db/test.xml");
-
-		model.loadSequences("db/sequences.xml");
-		for (final Sequence sequence : model.sequences) {
-			System.out.println(sequence);
-		}
-		model.saveSequences("db/test.xml");
 	}
 
 	/**

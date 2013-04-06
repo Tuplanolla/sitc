@@ -3,7 +3,7 @@ package org.sitc.view;
 import java.awt.Insets;
 
 /**
-Represents a collection of constants, much like <code>SwingConstants</code>.
+Contains constants, much like <code>SwingConstants</code>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

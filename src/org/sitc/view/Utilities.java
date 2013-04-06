@@ -17,7 +17,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
-Represents a collection of utility methods for Swing, much like <code>SwingUtilities</code>.
+Contains utility methods for Swing, much like <code>SwingUtilities</code>.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

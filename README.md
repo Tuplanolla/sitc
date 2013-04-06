@@ -8,13 +8,23 @@ The name is not very descriptive since it's built around an acronym.
 ## Schedule
 
 This project is in active development and
- is supposed to be finished by 2013-04-01, but
+ was supposed to be finished by 2013-04-01, but
  is most likely finished by 2013-06-01.
 
 ## Motivation
 
 When I played more guitar, I always forgot how to change tunings sensibly, which ruined many recordings, sometimes broke strings and once even collapsed a bridge (of the guitar kind).
 This program aims to solve such problems.
+
+## License
+
+SITC is licensed under
+ the Creative Commons attribution-noncommercial-sharealike license.
+Copies and derivative works are permitted as long as
+ all the original authors are attributed and
+ a compatible license is used.
+
+The note and clef graphics are based on Denelson83's work on Wikimedia Commons.
 
 ## Installation
 

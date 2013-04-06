@@ -23,7 +23,8 @@ public final class Resources {
 		}
 		ICON_IMAGES = Collections.unmodifiableList(images);
 	}
-	public static final ImageIcon LEFT_ICON,
+	public static final ImageIcon ICON,
+			LEFT_ICON,
 			RIGHT_ICON,
 			UP_ICON,
 			DOWN_ICON,
@@ -37,6 +38,9 @@ public final class Resources {
 			BROWSE_ICON;
 	static {
 		URL url;
+
+		url = Resources.class.getResource("/icon256.png");
+		ICON = url != null ? new ImageIcon(url) : null;
 
 		url = Resources.class.getResource("/arrow_left.png");
 		LEFT_ICON = url != null ? new ImageIcon(url) : null;

@@ -1,7 +1,6 @@
 package org.sitc.view;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -24,20 +23,18 @@ public final class MainFrame extends JFrame {
 	public MainFrame() {
 			menuBar = new MenuBar();
 
-				mainPane = new MainPane();
+			mainPane = new MainPane();
 
-				statusPanel = new StatusPanel();
+			statusPanel = new StatusPanel();
 
-			final Container contentPane = getContentPane();
-			contentPane.add(mainPane, BorderLayout.CENTER);
-			contentPane.add(statusPanel, BorderLayout.SOUTH);
-
-		setJMenuBar(menuBar);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle("String Instrument Tuning Calculator");
+		setTitle("SITC");
 		setIconImages(Resources.ICON_IMAGES);
-		pack();
+		setJMenuBar(menuBar);
+		add(mainPane, BorderLayout.CENTER);
+		add(statusPanel, BorderLayout.SOUTH);
 
+		pack();
 		Utilities.allStatesChanged(this);
 	}
 

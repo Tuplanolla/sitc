@@ -18,6 +18,7 @@ import java.util.regex.PatternSyntaxException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -29,6 +30,7 @@ import org.sitc.model.Instrument;
 import org.sitc.model.Model;
 import org.sitc.model.String;
 import org.sitc.model.TuningSystem;
+import org.sitc.view.AboutDialog;
 import org.sitc.view.Dialogs;
 import org.sitc.view.EditorInterfacePanel;
 import org.sitc.view.InstrumentEditorPanel;
@@ -67,7 +69,8 @@ public final class Controller implements Part {//TODO split
 	Activates the menu bar.
 	**/
 	private void activateMenuBar() {
-		final MenuBar menuBar = view.getMainFrame().getJMenuBar();
+		final MainFrame mainFrame = view.getMainFrame();
+		final MenuBar menuBar = mainFrame.getJMenuBar();
 
 		menuBar.getExitMenuItem().addActionListener(new ActionListener() {
 			@Override
@@ -86,7 +89,8 @@ public final class Controller implements Part {//TODO split
 		menuBar.getAboutMenuItem().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(view.getMainFrame(), "This program is the best thing since sliced bread.", "About", JOptionPane.PLAIN_MESSAGE);
+				final JDialog dialog = new AboutDialog(mainFrame);
+				dialog.setVisible(true);
 			}
 		});
 	}

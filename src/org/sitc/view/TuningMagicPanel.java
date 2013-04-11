@@ -36,7 +36,6 @@ public final class TuningMagicPanel extends JPanel {
 				frequencyLabel,
 				transposeLabel,
 				editLabel;
-		private final JButton insertButton;
 
 		public Header() {
 			useLabel = new JLabel("Use");
@@ -56,9 +55,6 @@ public final class TuningMagicPanel extends JPanel {
 
 			editLabel = new JLabel("Edit");
 			editLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			insertButton = new JButton("Insert");
-			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 		}
 
 		public JLabel getUseLabel() {
@@ -84,16 +80,13 @@ public final class TuningMagicPanel extends JPanel {
 		public JLabel getEditLabel() {
 			return editLabel;
 		}
-
-		public JButton getInsertButton() {
-			return insertButton;
-		}
 	}
 
 	private static final class Body {
 		private final JButton playAllButton,
 				allUpButton,
-				allDownButton;
+				allDownButton,
+				insertButton;
 		private final Component topStrut,
 				bottomStrut;
 
@@ -106,6 +99,9 @@ public final class TuningMagicPanel extends JPanel {
 
 			allDownButton = new JButton("Down");
 			Utilities.setScaledIcon(allDownButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+
+			insertButton = new JButton("Insert");
+			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			topStrut = Box.createVerticalStrut(0);
 
@@ -122,6 +118,10 @@ public final class TuningMagicPanel extends JPanel {
 
 		public JButton getAllDownButton() {
 			return allDownButton;
+		}
+
+		public JButton getInsertButton() {
+			return insertButton;
 		}
 
 		public Component getTopStrut() {
@@ -266,7 +266,7 @@ public final class TuningMagicPanel extends JPanel {
 	**/
 	private void adjustStruts() {
 		final List<Integer> componentHeights = new ArrayList<>();
-		componentHeights.add(header.getInsertButton().getPreferredSize().height);
+		componentHeights.add(body.getInsertButton().getPreferredSize().height);
 		for (final BodyPart bodyPart : bodyParts) {
 			componentHeights.add(bodyPart.getNumberLabel().getPreferredSize().height);
 			componentHeights.add(bodyPart.getUseCheckBox().getPreferredSize().height);
@@ -355,24 +355,23 @@ public final class TuningMagicPanel extends JPanel {
 			add(header.getEditLabel(), editConstraints);
 
 			gridy++;
-
-				final GridBagConstraints insertConstraints = new GridBagConstraints();
-				insertConstraints.gridx = 8;
-				insertConstraints.gridy = gridy;
-				insertConstraints.gridwidth = 1;
-				insertConstraints.gridheight = 2;
-				insertConstraints.fill = GridBagConstraints.BOTH;
-				insertConstraints.insets = Constants.SMALL_INSETS;
-
-			add(header.getInsertButton(), insertConstraints);
 		}
 
 		/*body: */{
+				final GridBagConstraints firstInsertConstraints = new GridBagConstraints();
+				firstInsertConstraints.gridx = 8;
+				firstInsertConstraints.gridy = gridy;
+				firstInsertConstraints.gridwidth = 1;
+				firstInsertConstraints.gridheight = 2;
+				firstInsertConstraints.fill = GridBagConstraints.BOTH;
+				firstInsertConstraints.insets = Constants.SMALL_INSETS;
+
 				final GridBagConstraints topmostConstraints = new GridBagConstraints();
 				topmostConstraints.gridx = 11;
 				topmostConstraints.gridy = gridy;
 				topmostConstraints.fill = GridBagConstraints.VERTICAL;
 
+			add(body.getInsertButton(), firstInsertConstraints);
 			add(body.getTopStrut(), topmostConstraints);
 
 			gridy++;
@@ -693,7 +692,7 @@ public final class TuningMagicPanel extends JPanel {
 	**/
 	public JButton getInsertButton(final int firstRow, final int secondRow) {
 		final int row = firstRow + secondRow >>> 1;
-		if (row == 1) return header.getInsertButton();
+		if (row == 1) return body.getInsertButton();
 		return bodyParts.get(row - 1).getInsertButton();
 	}
 

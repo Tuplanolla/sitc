@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -29,7 +30,8 @@ public final class TuningMagicPanel extends JPanel {
 	private static final long serialVersionUID = 1;
 
 	private static final class Header {
-		private final JLabel playLabel,
+		private final JLabel useLabel,
+				playLabel,
 				noteLabel,
 				frequencyLabel,
 				transposeLabel,
@@ -37,6 +39,9 @@ public final class TuningMagicPanel extends JPanel {
 		private final JButton insertButton;
 
 		public Header() {
+			useLabel = new JLabel("Use");
+			useLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
 			playLabel = new JLabel("Play");
 			playLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -54,6 +59,10 @@ public final class TuningMagicPanel extends JPanel {
 
 			insertButton = new JButton("Insert");
 			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+		}
+
+		public JLabel getUseLabel() {
+			return useLabel;
 		}
 
 		public JLabel getPlayLabel() {
@@ -127,6 +136,7 @@ public final class TuningMagicPanel extends JPanel {
 	private static final class BodyPart {
 		private boolean last;
 		private final JLabel numberLabel;
+		private final JCheckBox useCheckBox;
 		private final JButton playButton;
 		private final JTextField noteTextField,
 				frequencyTextField;
@@ -143,6 +153,9 @@ public final class TuningMagicPanel extends JPanel {
 
 			numberLabel = new JLabel("#" + row);
 			numberLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			useCheckBox = new JCheckBox();
+			useCheckBox.setSelected(true);
 
 			playButton = new JButton("Play");
 			Utilities.setScaledIcon(playButton, Resources.PLAY_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
@@ -183,6 +196,10 @@ public final class TuningMagicPanel extends JPanel {
 
 		public JLabel getNumberLabel() {
 			return numberLabel;
+		}
+
+		public JCheckBox getUseCheckBox() {
+			return useCheckBox;
 		}
 
 		public JButton getPlayButton() {
@@ -252,6 +269,7 @@ public final class TuningMagicPanel extends JPanel {
 		componentHeights.add(header.getInsertButton().getPreferredSize().height);
 		for (final BodyPart bodyPart : bodyParts) {
 			componentHeights.add(bodyPart.getNumberLabel().getPreferredSize().height);
+			componentHeights.add(bodyPart.getUseCheckBox().getPreferredSize().height);
 			componentHeights.add(bodyPart.getPlayButton().getPreferredSize().height);
 			componentHeights.add(bodyPart.getNoteTextField().getPreferredSize().height);
 			componentHeights.add(bodyPart.getFrequencyTextField().getPreferredSize().height);
@@ -283,8 +301,14 @@ public final class TuningMagicPanel extends JPanel {
 		int gridy = 0;
 
 		/*header: */{
+				final GridBagConstraints useConstraints = new GridBagConstraints();
+				useConstraints.gridx = 1;
+				useConstraints.gridy = gridy;
+				useConstraints.fill = GridBagConstraints.BOTH;
+				useConstraints.insets = Constants.SMALL_INSETS;
+
 				final GridBagConstraints playConstraints = new GridBagConstraints();
-				playConstraints.gridx = 1;
+				playConstraints.gridx = 2;
 				playConstraints.gridy = gridy;
 				playConstraints.gridwidth = 2;
 				playConstraints.gridheight = 1;
@@ -292,7 +316,7 @@ public final class TuningMagicPanel extends JPanel {
 				playConstraints.insets = Constants.SMALL_INSETS;
 
 				final GridBagConstraints noteConstraints = new GridBagConstraints();
-				noteConstraints.gridx = 3;
+				noteConstraints.gridx = 4;
 				noteConstraints.gridy = gridy;
 				noteConstraints.weightx = 1;
 				noteConstraints.weighty = 0;
@@ -300,7 +324,7 @@ public final class TuningMagicPanel extends JPanel {
 				noteConstraints.insets = Constants.SMALL_INSETS;
 
 				final GridBagConstraints frequencyConstraints = new GridBagConstraints();
-				frequencyConstraints.gridx = 4;
+				frequencyConstraints.gridx = 5;
 				frequencyConstraints.gridy = gridy;
 				frequencyConstraints.weightx = 1;
 				frequencyConstraints.weighty = 0;
@@ -308,7 +332,7 @@ public final class TuningMagicPanel extends JPanel {
 				frequencyConstraints.insets = Constants.SMALL_INSETS;
 
 				final GridBagConstraints transposeConstraints = new GridBagConstraints();
-				transposeConstraints.gridx = 5;
+				transposeConstraints.gridx = 6;
 				transposeConstraints.gridy = gridy;
 				transposeConstraints.gridwidth = 2;
 				transposeConstraints.gridheight = 1;
@@ -316,13 +340,14 @@ public final class TuningMagicPanel extends JPanel {
 				transposeConstraints.insets = Constants.SMALL_INSETS;
 
 				final GridBagConstraints editConstraints = new GridBagConstraints();
-				editConstraints.gridx = 7;
+				editConstraints.gridx = 8;
 				editConstraints.gridy = gridy;
 				editConstraints.gridwidth = 3;
 				editConstraints.gridheight = 1;
 				editConstraints.fill = GridBagConstraints.BOTH;
 				editConstraints.insets = Constants.SMALL_INSETS;
 
+			add(header.getUseLabel(), useConstraints);
 			add(header.getPlayLabel(), playConstraints);
 			add(header.getNoteLabel(), noteConstraints);
 			add(header.getFrequencyLabel(), frequencyConstraints);
@@ -332,7 +357,7 @@ public final class TuningMagicPanel extends JPanel {
 			gridy++;
 
 				final GridBagConstraints insertConstraints = new GridBagConstraints();
-				insertConstraints.gridx = 7;
+				insertConstraints.gridx = 8;
 				insertConstraints.gridy = gridy;
 				insertConstraints.gridwidth = 1;
 				insertConstraints.gridheight = 2;
@@ -344,7 +369,7 @@ public final class TuningMagicPanel extends JPanel {
 
 		/*body: */{
 				final GridBagConstraints topmostConstraints = new GridBagConstraints();
-				topmostConstraints.gridx = 10;
+				topmostConstraints.gridx = 11;
 				topmostConstraints.gridy = gridy;
 				topmostConstraints.fill = GridBagConstraints.VERTICAL;
 
@@ -356,7 +381,7 @@ public final class TuningMagicPanel extends JPanel {
 						downInsets = new Insets(0, Constants.SMALL_INSET, Constants.SMALL_INSET, Constants.SMALL_INSET);
 
 				final GridBagConstraints playAllConstraints = new GridBagConstraints();
-				playAllConstraints.gridx = 1;
+				playAllConstraints.gridx = 2;
 				playAllConstraints.gridy = gridy;
 				playAllConstraints.gridwidth = 1;
 				playAllConstraints.gridheight = 2 * rows;
@@ -364,7 +389,7 @@ public final class TuningMagicPanel extends JPanel {
 				playAllConstraints.insets = Constants.SMALL_INSETS;
 
 				final GridBagConstraints allUpConstraints = new GridBagConstraints();
-				allUpConstraints.gridx = 6;
+				allUpConstraints.gridx = 7;
 				allUpConstraints.gridy = gridy;
 				allUpConstraints.gridwidth = 1;
 				allUpConstraints.gridheight = rows;
@@ -372,7 +397,7 @@ public final class TuningMagicPanel extends JPanel {
 				allUpConstraints.insets = upInsets;
 
 				final GridBagConstraints allDownConstraints = new GridBagConstraints();
-				allDownConstraints.gridx = 6;
+				allDownConstraints.gridx = 7;
 				allDownConstraints.gridy = gridy + rows;
 				allDownConstraints.gridwidth = 1;
 				allDownConstraints.gridheight = rows;
@@ -394,8 +419,16 @@ public final class TuningMagicPanel extends JPanel {
 					numberConstraints.fill = GridBagConstraints.BOTH;
 					numberConstraints.insets = Constants.SMALL_INSETS;
 
+					final GridBagConstraints useConstraints = new GridBagConstraints();
+					useConstraints.gridx = 1;
+					useConstraints.gridy = gridy;
+					useConstraints.gridwidth = 1;
+					useConstraints.gridheight = 2 * rows;
+					useConstraints.fill = GridBagConstraints.BOTH;
+					useConstraints.insets = Constants.SMALL_INSETS;
+
 					final GridBagConstraints playConstraints = new GridBagConstraints();
-					playConstraints.gridx = 2;
+					playConstraints.gridx = 3;
 					playConstraints.gridy = gridy;
 					playConstraints.gridwidth = 1;
 					playConstraints.gridheight = 2;
@@ -403,7 +436,7 @@ public final class TuningMagicPanel extends JPanel {
 					playConstraints.insets = Constants.SMALL_INSETS;
 
 					final GridBagConstraints noteConstraints = new GridBagConstraints();
-					noteConstraints.gridx = 3;
+					noteConstraints.gridx = 4;
 					noteConstraints.gridy = gridy;
 					noteConstraints.gridwidth = 1;
 					noteConstraints.gridheight = 2;
@@ -413,7 +446,7 @@ public final class TuningMagicPanel extends JPanel {
 					noteConstraints.insets = Constants.SMALL_INSETS;
 
 					final GridBagConstraints frequencyConstraints = new GridBagConstraints();
-					frequencyConstraints.gridx = 4;
+					frequencyConstraints.gridx = 5;
 					frequencyConstraints.gridy = gridy;
 					frequencyConstraints.gridwidth = 1;
 					frequencyConstraints.gridheight = 2;
@@ -423,13 +456,13 @@ public final class TuningMagicPanel extends JPanel {
 					frequencyConstraints.insets = Constants.SMALL_INSETS;
 
 					final GridBagConstraints upConstraints = new GridBagConstraints();
-					upConstraints.gridx = 5;
+					upConstraints.gridx = 6;
 					upConstraints.gridy = gridy;
 					upConstraints.fill = GridBagConstraints.BOTH;
 					upConstraints.insets = upInsets;
 
 					final GridBagConstraints deleteConstraints = new GridBagConstraints();
-					deleteConstraints.gridx = 8;
+					deleteConstraints.gridx = 9;
 					deleteConstraints.gridy = gridy;
 					deleteConstraints.gridwidth = 1;
 					deleteConstraints.gridheight = 2;
@@ -437,11 +470,12 @@ public final class TuningMagicPanel extends JPanel {
 					deleteConstraints.insets = Constants.SMALL_INSETS;
 
 					final GridBagConstraints topConstraints = new GridBagConstraints();
-					topConstraints.gridx = 10;
+					topConstraints.gridx = 11;
 					topConstraints.gridy = gridy;
 					topConstraints.fill = GridBagConstraints.VERTICAL;
 
 				add(bodyPart.getNumberLabel(), numberConstraints);
+				add(bodyPart.getUseCheckBox(), useConstraints);
 				add(bodyPart.getPlayButton(), playConstraints);
 				add(bodyPart.getNoteTextField(), noteConstraints);
 				add(bodyPart.getFrequencyTextField(), frequencyConstraints);
@@ -452,13 +486,13 @@ public final class TuningMagicPanel extends JPanel {
 				gridy++;
 
 					final GridBagConstraints downConstraints = new GridBagConstraints();
-					downConstraints.gridx = 5;
+					downConstraints.gridx = 6;
 					downConstraints.gridy = gridy;
 					downConstraints.fill = GridBagConstraints.BOTH;
 					downConstraints.insets = downInsets;
 
 					final GridBagConstraints insertConstraints = new GridBagConstraints();
-					insertConstraints.gridx = 7;
+					insertConstraints.gridx = 8;
 					insertConstraints.gridy = gridy;
 					insertConstraints.gridwidth = 1;
 					insertConstraints.gridheight = 2;
@@ -466,7 +500,7 @@ public final class TuningMagicPanel extends JPanel {
 					insertConstraints.insets = Constants.SMALL_INSETS;
 
 					final GridBagConstraints bottomConstraints = new GridBagConstraints();
-					bottomConstraints.gridx = 10;
+					bottomConstraints.gridx = 11;
 					bottomConstraints.gridy = gridy;
 					bottomConstraints.fill = GridBagConstraints.VERTICAL;
 
@@ -476,7 +510,7 @@ public final class TuningMagicPanel extends JPanel {
 
 				if (!bodyPart.getLast()) {
 						final GridBagConstraints swapConstraints = new GridBagConstraints();
-						swapConstraints.gridx = 9;
+						swapConstraints.gridx = 10;
 						swapConstraints.gridy = gridy;
 						swapConstraints.gridwidth = 1;
 						swapConstraints.gridheight = 2;
@@ -490,7 +524,7 @@ public final class TuningMagicPanel extends JPanel {
 			}
 
 				final GridBagConstraints bottommostConstraints = new GridBagConstraints();
-				bottommostConstraints.gridx = 10;
+				bottommostConstraints.gridx = 11;
 				bottommostConstraints.gridy = gridy;
 				bottommostConstraints.fill = GridBagConstraints.VERTICAL;
 
@@ -501,7 +535,7 @@ public final class TuningMagicPanel extends JPanel {
 
 		/*footer: */{
 				final GridBagConstraints glueConstraints = new GridBagConstraints();
-				glueConstraints.gridx = 10;
+				glueConstraints.gridx = 11;
 				glueConstraints.gridy = gridy;
 				glueConstraints.weightx = 0;
 				glueConstraints.weighty = 1;
@@ -579,6 +613,14 @@ public final class TuningMagicPanel extends JPanel {
 		while (this.rows < rows) addRow();
 		while (this.rows > rows) removeRow();
 		build();
+	}
+
+	/**
+	@param row The row.
+	@return The use check box.
+	**/
+	public JCheckBox getUseCheckBox(final int row) {
+		return bodyParts.get(row).getUseCheckBox();
 	}
 
 	/**

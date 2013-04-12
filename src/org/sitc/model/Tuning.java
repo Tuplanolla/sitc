@@ -12,7 +12,7 @@ Represents a mutable tuning.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Tuning implements Comparable<Tuning>, Serializable {
+public final class Tuning implements Named, Comparable<Tuning>, Serializable {
 	private static final long serialVersionUID = 1;
 
 	/**
@@ -125,6 +125,7 @@ public final class Tuning implements Comparable<Tuning>, Serializable {
 	/**
 	@return The name.
 	**/
+	@Override
 	public java.lang.String getName() {
 		return name;
 	}

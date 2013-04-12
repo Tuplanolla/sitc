@@ -1,6 +1,7 @@
 package org.sitc.view;
 
 import java.awt.Image;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,7 @@ public final class Resources {
 		}
 		ICON_IMAGES = Collections.unmodifiableList(images);
 	}
+
 	public static final ImageIcon ICON,
 			LEFT_ICON,
 			RIGHT_ICON,
@@ -77,6 +79,13 @@ public final class Resources {
 
 		url = Resources.class.getResource("/folder.png");
 		BROWSE_ICON = url != null ? new ImageIcon(url) : null;
+	}
+
+	public static final File DEVELOPER_MANUAL,
+			USER_MANUAL;
+	static {
+		DEVELOPER_MANUAL = new File("doc", "developer.pdf");
+		USER_MANUAL = new File("doc", "user.pdf");
 	}
 
 	private Resources() {

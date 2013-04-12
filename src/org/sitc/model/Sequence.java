@@ -11,7 +11,7 @@ Represents a mutable sequence of tunings.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Sequence implements Comparable<Sequence>, Serializable {
+public final class Sequence implements Named, Comparable<Sequence>, Serializable {
 	private static final long serialVersionUID = 1;
 
 	/**
@@ -81,6 +81,7 @@ public final class Sequence implements Comparable<Sequence>, Serializable {
 	/**
 	@return The name.
 	**/
+	@Override
 	public java.lang.String getName() {
 		return name;
 	}

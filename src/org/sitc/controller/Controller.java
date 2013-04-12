@@ -1,5 +1,6 @@
 package org.sitc.controller;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -18,7 +19,6 @@ import java.util.regex.PatternSyntaxException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -28,9 +28,11 @@ import javax.xml.bind.JAXBException;
 import org.sitc.Part;
 import org.sitc.model.Instrument;
 import org.sitc.model.Model;
+import org.sitc.model.Named;
+import org.sitc.model.Sequence;
 import org.sitc.model.String;
+import org.sitc.model.Tuning;
 import org.sitc.model.TuningSystem;
-import org.sitc.view.AboutDialog;
 import org.sitc.view.Dialogs;
 import org.sitc.view.EditorInterfacePanel;
 import org.sitc.view.InstrumentEditorPanel;
@@ -68,37 +70,21 @@ public final class Controller implements Part {//TODO split
 	/**
 	Activates the menu bar.
 	**/
-	private void activateMenuBar() {
+	protected void activateMenuBar() {
 		final MainFrame mainFrame = view.getMainFrame();
 		final MenuBar menuBar = mainFrame.getJMenuBar();
 
-		menuBar.getExitMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				view.getMainFrame().dispose();
-			}
-		});
+		menuBar.getExitMenuItem().addActionListener(new CloseActionListener(mainFrame));
 
-		menuBar.getManualMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				JOptionPane.showMessageDialog(view.getMainFrame(), "Push buttons.", "Manual", JOptionPane.PLAIN_MESSAGE);
-			}
-		});
+		menuBar.getManualMenuItem().addActionListener(new ManualActionListener(mainFrame));
 
-		menuBar.getAboutMenuItem().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent event) {
-				final JDialog dialog = new AboutDialog(mainFrame);
-				dialog.setVisible(true);
-			}
-		});
+		menuBar.getAboutMenuItem().addActionListener(new AboutActionListener(mainFrame));
 	}
 
 	/**
 	Activates the remote panels.
 	**/
-	private void activateRemotePanels() {
+	protected void activateRemotePanels() {
 		final MainFrame mainFrame = view.getMainFrame();
 		final MainPane mainPane = mainFrame.getMainPane();
 
@@ -116,43 +102,46 @@ public final class Controller implements Part {//TODO split
 	}
 
 	/**
-	Rebuilds the instrument list from the model.
+	Rebuilds a list from the model.
 
 	Triggered manually to avoid sequential operations from causing
 	 redundant calls and
 	 slowness.
 
+	@param <Type> The type of the list.
+	@param parentComponent The parent component.
+	@param localPanel The local panel.
 	@param interactive Whether an incorrect search pattern is reported.
 	**/
-	protected void updateInstrumentList(final boolean interactive) {
-		final List<Instrument> instruments = model.getInstruments();
+	private static <Type extends Named> void updateList(final Component parentComponent,
+			final LocalPanel<Type> localPanel,
+			final List<Type> list,
+			final boolean interactive) {//TODO something
+		final DefaultListModel<Type> listModel = localPanel.getListModel();
 
-		final MainFrame mainFrame = view.getMainFrame();
-		final LocalPanel<Instrument> localInstrumentPanel = mainFrame.getMainPane().getInstrumentManagerPanel().getLocalPanel();
-		final DefaultListModel<Instrument> listModel = localInstrumentPanel.getListModel();
 		try {
-			final java.lang.String regex = localInstrumentPanel.getSearchTextField().getText();
+			final java.lang.String regex = localPanel.getSearchTextField().getText();
 			final Pattern pattern = Pattern.compile(regex);
 			listModel.clear();
-			for (final Instrument instrument : instruments) {
-				final Matcher matcher = pattern.matcher(instrument.getName());
-				if (matcher.find()) listModel.addElement(instrument);
+			for (final Type item : list) {
+				final Matcher matcher = pattern.matcher(item.getName());
+				if (matcher.find()) listModel.addElement(item);
 			}
 		}
 		catch (final PatternSyntaxException exception) {
 			if (interactive) {
-				Dialogs.showErrorDialog(mainFrame, new StackTracePanel(exception,
+				Dialogs.showErrorDialog(parentComponent, new StackTracePanel(exception,
 						"Compiling the search pattern failed. Make sure your regular expression is correct."));
 			}
 			else {
 				listModel.clear();
-				for (final Instrument instrument : instruments) {
-					listModel.addElement(instrument);
+				for (final Type item : list) {
+					listModel.addElement(item);
 				}
 			}
 		}
 
-		final int existing = instruments.size(),
+		final int existing = list.size(),
 				showing = listModel.size();
 		final StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("Showing ");
@@ -161,14 +150,48 @@ public final class Controller implements Part {//TODO split
 			stringBuilder.append(" of ");
 			stringBuilder.append(existing);
 		}
-		stringBuilder.append(" List Items");
-		localInstrumentPanel.getSearchLabel().setText(stringBuilder.toString());
+		stringBuilder.append(" List Item");
+		if (existing != 1) stringBuilder.append("s");
+		localPanel.getSearchLabel().setText(stringBuilder.toString());
+	}
+
+	/**
+	Rebuilds the instrument list from the model.
+
+	@param interactive Whether an incorrect search pattern is reported.
+	**/
+	protected void updateInstrumentList(final boolean interactive) {
+		final MainFrame mainFrame = view.getMainFrame();
+		final LocalPanel<Instrument> localPanel = mainFrame.getMainPane().getInstrumentManagerPanel().getLocalPanel();
+		updateList(mainFrame, localPanel, model.getInstruments(), interactive);
+	}
+
+	/**
+	Rebuilds the tuning list from the model.
+
+	@param interactive Whether an incorrect search pattern is reported.
+	**/
+	protected void updateTuningList(final boolean interactive) {
+		final MainFrame mainFrame = view.getMainFrame();
+		final LocalPanel<Tuning> localPanel = mainFrame.getMainPane().getTuningManagerPanel().getLocalPanel();
+		updateList(mainFrame, localPanel, model.getTunings(), interactive);
+	}
+
+	/**
+	Rebuilds the sequence list from the model.
+
+	@param interactive Whether an incorrect search pattern is reported.
+	**/
+	protected void updateSequenceList(final boolean interactive) {
+		final MainFrame mainFrame = view.getMainFrame();
+		final LocalPanel<Sequence> localPanel = mainFrame.getMainPane().getSequenceManagerPanel().getLocalPanel();
+		updateList(mainFrame, localPanel, model.getSequences(), interactive);
 	}
 
 	/**
 	Activates the local panels.
 	**/
-	private void activateLocalPanels() {
+	protected void activateLocalPanels() {
 		final MainFrame mainFrame = view.getMainFrame();
 		final MainPane mainPane = mainFrame.getMainPane();
 
@@ -183,6 +206,7 @@ public final class Controller implements Part {//TODO split
 			public void actionPerformed(final ActionEvent event) {
 				try {
 					model.loadInstruments(new File(instrumentPathTextField.getText()));
+
 					updateInstrumentList(false);
 				}
 				catch (final JAXBException exception) {
@@ -334,7 +358,7 @@ public final class Controller implements Part {//TODO split
 	/**
 	Activates the editor panels.
 	**/
-	private void activateEditorPanels() {
+	protected void activateEditorPanels() {
 		final MainFrame mainFrame = view.getMainFrame();
 		final MainPane mainPane = mainFrame.getMainPane();
 
@@ -486,7 +510,7 @@ public final class Controller implements Part {//TODO split
 	}
 
 	@Deprecated
-	private void addTestActions() {//TODO move away
+	protected void addTestActions() {//TODO move away
 		final SwingWorker<Integer, Integer> worker = new SwingWorker<Integer, Integer>() {
 			private final Random random = new Random();
 			private int progress = 0;
@@ -531,7 +555,7 @@ public final class Controller implements Part {//TODO split
 	/**
 	Activates some optimizations.
 	**/
-	private void activateOptimizations() {
+	protected void activateOptimizations() {
 		final MainFrame mainFrame = view.getMainFrame();
 		mainFrame.addWindowListener(new WindowAdapter() {
 			@Override

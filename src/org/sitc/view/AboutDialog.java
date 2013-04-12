@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -39,6 +37,20 @@ public class AboutDialog extends JDialog {
 				iconPanel.setIcon(Resources.ICON);
 				iconPanel.setBorder(new EmptyBorder(Constants.BIG_INSETS));
 
+						/*
+						final JTextPane textPane = new JTextPane();
+						textPane.setContentType("text/html");
+						textPane.setText("<html>"
+								+ "<b>" + Assembly.NAME + "<b><br />"
+								+ "Version: " + Assembly.VERSION + "<br />"
+								+ "Author: " + Assembly.AUTHOR + "<br />"
+								+ "License: " + Assembly.LICENSE
+								+ "</html>");
+						textPane.setEditable(false);
+						textPane.setBackground(null);
+						textPane.setBorder(null);
+						*/
+
 						final JLabel nameLabel = new JLabel(Assembly.NAME);
 						final Font font = nameLabel.getFont().deriveFont(Font.BOLD);
 						nameLabel.setFont(font);
@@ -60,12 +72,6 @@ public class AboutDialog extends JDialog {
 				containerPanel.add(labelPanel);
 
 				closeButton = new JButton("Close");
-				closeButton.addActionListener(new ActionListener() {//TODO consider moving
-					@Override
-					public void actionPerformed(final ActionEvent event) {
-						dispose();
-					}
-				});
 
 			final JPanel borderPanel = new JPanel(new BorderLayout(Constants.BIG_INSET, Constants.BIG_INSET));
 			borderPanel.setBorder(new EmptyBorder(Constants.BIG_INSETS));

@@ -12,7 +12,7 @@ Represents a mutable instrument.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Instrument implements Comparable<Instrument>, Serializable {
+public final class Instrument implements Named, Comparable<Instrument>, Serializable {
 	private static final long serialVersionUID = 1;
 
 	/**
@@ -82,6 +82,7 @@ public final class Instrument implements Comparable<Instrument>, Serializable {
 	/**
 	@return The name.
 	**/
+	@Override
 	public java.lang.String getName() {
 		return name;
 	}

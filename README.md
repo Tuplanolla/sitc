@@ -19,7 +19,7 @@ This program aims to solve such problems.
 ## License
 
 SITC is licensed under
- the Creative Commons attribution-noncommercial-sharealike license.
+ the Creative Commons license attribution-noncommercial-sharealike.
 Copies and derivative works are permitted as long as
  all the original authors are attributed and
  a compatible license is used.

@@ -25,12 +25,12 @@ Represents a main pane that
 public final class MainPane extends JSplitPane {
 	private static final long serialVersionUID = 1;
 
-	private final ManagerPanel<Instrument> instrumentManagerPanel;
-	private final ManagerPanel<Tuning> tuningManagerPanel;
-	private final ManagerPanel<Sequence> sequenceManagerPanel;
-	private final InstrumentEditorPanel instrumentEditorPanel;
-	private final TuningEditorPanel tuningEditorPanel;
-	private final SequenceEditorPanel sequenceEditorPanel;
+	protected final ManagerPanel<Instrument> instrumentManagerPanel;
+	protected final ManagerPanel<Tuning> tuningManagerPanel;
+	protected final ManagerPanel<Sequence> sequenceManagerPanel;
+	protected final InstrumentEditorPanel instrumentEditorPanel;
+	protected final TuningEditorPanel tuningEditorPanel;
+	protected final SequenceEditorPanel sequenceEditorPanel;
 
 	/**
 	Creates a main pane.
@@ -77,19 +77,19 @@ public final class MainPane extends JSplitPane {
 					public void stateChanged(final ChangeEvent event) {
 						final Component selectedComponent = tabbedPane.getSelectedComponent();
 						sidePanel.removeAll();
-						if (selectedComponent == getInstrumentEditorPanel()) {
+						if (selectedComponent == instrumentEditorPanel) {
 							sidePanelLayout.setRows(1);
-							sidePanel.add(getInstrumentManagerPanel());
+							sidePanel.add(instrumentManagerPanel);
 						}
-						else if (selectedComponent == getTuningEditorPanel()) {
+						else if (selectedComponent == tuningEditorPanel) {
 							sidePanelLayout.setRows(1);
-							sidePanel.add(getTuningManagerPanel());
+							sidePanel.add(tuningManagerPanel);
 						}
-						else if (selectedComponent == getSequenceEditorPanel()) {
+						else if (selectedComponent == sequenceEditorPanel) {
 							sidePanelLayout.setRows(3);
-							sidePanel.add(getInstrumentManagerPanel());
-							sidePanel.add(getTuningManagerPanel());
-							sidePanel.add(getSequenceManagerPanel());
+							sidePanel.add(instrumentManagerPanel);
+							sidePanel.add(tuningManagerPanel);
+							sidePanel.add(sequenceManagerPanel);
 						}
 						sidePanel.revalidate();
 						sidePanel.repaint();

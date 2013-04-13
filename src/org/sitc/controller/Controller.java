@@ -52,7 +52,7 @@ Represents an immutable controller.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Controller implements Part {//TODO split
+public final class Controller implements Part {//TODO move ActionListener callbacks into the view
 	protected final Model model;
 	protected final View view;
 
@@ -220,14 +220,14 @@ public final class Controller implements Part {//TODO split
 			@Override
 			public void actionPerformed(final ActionEvent event) {
 				try {
-					final java.lang.String path = instrumentPathTextField.getText();
+					final File file = new File(instrumentPathTextField.getText());
 					int option = JOptionPane.YES_OPTION;
-					if (new File(path).exists()) {//TODO track changes
+					if (file.exists()) {//TODO track changes
 						option = Dialogs.showOverwriteDialog(mainFrame,
 								"The file already exists. Do you want to overwrite it?");
 					}
 					if (option == JOptionPane.YES_OPTION) {
-						model.saveInstruments(new File(path));
+						model.saveInstruments(file);
 					}
 				}
 				catch (final JAXBException exception) {

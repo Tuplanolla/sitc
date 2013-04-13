@@ -22,14 +22,15 @@ public final class Dialogs {
 	@return The option chosen by the user.
 	**/
 	public static int showErrorDialog(final Component parentComponent, final Object message) {
+		final Object[] options = {"Dismiss"};
 		return JOptionPane.showOptionDialog(parentComponent,
 				message,
 				"Error",
 				JOptionPane.OK_OPTION,
 				JOptionPane.ERROR_MESSAGE,
 				null,
-				new String[] {"Dismiss"},
-				null);
+				options,
+				options[0]);
 	}
 
 	/**
@@ -40,14 +41,15 @@ public final class Dialogs {
 	@return The option chosen by the user.
 	**/
 	public static int showWarningDialog(final Component parentComponent, final Object message) {
+		final Object[] options = {"Ignore"};
 		return JOptionPane.showOptionDialog(parentComponent,
 				message,
 				"Warning",
 				JOptionPane.OK_OPTION,
 				JOptionPane.WARNING_MESSAGE,
 				null,
-				new String[] {"Ignore"},
-				null);
+				options,
+				options[0]);
 	}
 
 	/**
@@ -58,14 +60,15 @@ public final class Dialogs {
 	@return The option chosen by the user.
 	**/
 	public static int showInformationDialog(final Component parentComponent, final Object message) {
+		final Object[] options = {"Acknowledge"};
 		return JOptionPane.showOptionDialog(parentComponent,
 				message,
 				"Information",
 				JOptionPane.OK_OPTION,
 				JOptionPane.INFORMATION_MESSAGE,
 				null,
-				new String[] {"Acknowledge"},
-				null);
+				options,
+				options[0]);
 	}
 
 	/**
@@ -76,13 +79,14 @@ public final class Dialogs {
 	@return The option chosen by the user.
 	**/
 	public static int showOverwriteDialog(final Component parentComponent, final Object message) {
+		final Object[] options = {"Overwrite", "Cancel"};
 		return JOptionPane.showOptionDialog(parentComponent,
 				message,
 				"Warning",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE,
 				null,
-				new java.lang.String[] {"Overwrite", "Cancel"},
-				null);
+				options,
+				options[0]);
 	}
 }

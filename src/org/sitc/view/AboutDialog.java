@@ -37,20 +37,6 @@ public class AboutDialog extends JDialog {
 				iconPanel.setIcon(Resources.ICON);
 				iconPanel.setBorder(new EmptyBorder(Constants.BIG_INSETS));
 
-						/*
-						final JTextPane textPane = new JTextPane();
-						textPane.setContentType("text/html");
-						textPane.setText("<html>"
-								+ "<b>" + Assembly.NAME + "<b><br />"
-								+ "Version: " + Assembly.VERSION + "<br />"
-								+ "Author: " + Assembly.AUTHOR + "<br />"
-								+ "License: " + Assembly.LICENSE
-								+ "</html>");
-						textPane.setEditable(false);
-						textPane.setBackground(null);
-						textPane.setBorder(null);
-						*/
-
 						final JLabel nameLabel = new JLabel(Assembly.NAME);
 						final Font font = nameLabel.getFont().deriveFont(Font.BOLD);
 						nameLabel.setFont(font);

@@ -157,7 +157,7 @@ public final class SequenceEditorPanel extends JPanel {
 								optionButtonGroup.add(tuningRadioButton);
 								optionButtonGroup.add(currentOrderRadioButton);
 
-								for (final AbstractButton button : Collections.list(optionButtonGroup.getElements())) {
+								for (final AbstractButton button : Collections.list(optionButtonGroup.getElements())) {//TODO move to the controller
 									button.addChangeListener(new ChangeListener() {
 										@Override
 										public void stateChanged(final ChangeEvent event) {

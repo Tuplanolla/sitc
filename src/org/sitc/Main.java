@@ -1,15 +1,12 @@
 package org.sitc;
 
-import java.awt.EventQueue;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.SwingUtilities;
-
-import org.sitc.controller.Controller;
-import org.sitc.model.Model;
-import org.sitc.view.View;
+import org.sitc.models.AbstractModel;
+import org.sitc.models.standardmodel.StandardModel;
+import org.sitc.views.swingview.SwingView;
 
 /**
 Serves as the main entry point.
@@ -17,6 +14,7 @@ Serves as the main entry point.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Main implements Runnable {
+	@SuppressWarnings("unused")
 	private final List<String> arguments;
 
 	/**
@@ -30,47 +28,28 @@ public final class Main implements Runnable {
 		this.arguments = Collections.unmodifiableList(Arrays.asList(array));
 	}
 
-	@Override
-	public void run() {
-		/*
-		Where I deadlocked, I softer thread ---
-		I sow sweet synch block --- From standard read ---
-		I pause above that line ahead
-			And assert.
-		*/
-		assert SwingUtilities.isEventDispatchThread();
-		/*
-		Whom I deadlocked, I cryptic bard
-		From syntax harsh, or ill keyword ---
-		Feeling as if their anger seared,
-			Though vain!
-		*/
-		final Model model = new Model(arguments);
-		final View view = new View(model);
-		final Controller controller = new Controller(model, view);
-		/*
-		When I deadlock, you'll know by this ---
-		A buffer black --- Flickers amiss ---
-		A static tremor as a hiss
-			Like piss!
-		*/
-		model.activate();
-		controller.activate();
-		view.activate();
-		/*
-		Why, I deadlocked, the people know
-		Who thought this program isn't slow
-		Went home a century ago
-			Next Bliss!
-		*/
-	}
-
 	/**
-	Creates a main class and schedules it to be ran in the event dispatch thread.
+	Creates a main class and runs it.
 
 	@param arguments The command line arguments.
 	**/
 	public static void main(final String[] arguments) {
-		EventQueue.invokeLater(new Main(arguments));
+		new Main(arguments).run();
+	}
+
+	/*
+	The rest of the class is for the implementation.
+	*/
+
+	@Override
+	public void run() {
+		final AbstractModel model = new StandardModel();
+
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new SwingView(model).run();
+			}
+		});
 	}
 }

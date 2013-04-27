@@ -1,5 +1,5 @@
 /**
-Contains entry points and interfaces to packages.
+Contains entry points and project information.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

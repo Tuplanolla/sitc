@@ -12,7 +12,7 @@ public final class Assembly {
 
 	public static final String NAME = "String Instrument Tuning Calculator",
 			ABBREVIATION = "SITC",
-			VERSION = "0.1.0",
+			VERSION = "0.2.0",
 			AUTHOR = "Sampsa \"Tuplanolla\" Kiiskinen",
 			LICENSE = "CC by-nc-sa";
 }

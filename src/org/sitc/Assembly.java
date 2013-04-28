@@ -1,7 +1,7 @@
 package org.sitc;
 
 /**
-Contains project information.
+Provides project information.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/

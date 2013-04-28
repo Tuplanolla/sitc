@@ -5,8 +5,7 @@ import java.awt.Dimension;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.sitc.models.AbstractModel;
-import org.sitc.models.standardmodel.StandardModel;
+import org.sitc.model.Model;
 import org.sitc.views.AbstractView;
 
 /**
@@ -22,7 +21,7 @@ public final class SwingView extends AbstractView {
 
 	@param model The model.
 	**/
-	public SwingView(final AbstractModel model) {
+	public SwingView(final Model model) {
 		super(model);
 
 		try {
@@ -36,7 +35,7 @@ public final class SwingView extends AbstractView {
 		}
 
 		mainFrame = new MainFrame();
-		new Controller((StandardModel )model, this).activate();//TODO remove
+		new Controller((Model )model, this).activate();//TODO remove
 		mainFrame.setMinimumSize(mainFrame.getSize());
 		mainFrame.setSize(new Dimension(800, 800));
 		mainFrame.setVisible(true);

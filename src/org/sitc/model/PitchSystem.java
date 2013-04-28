@@ -1,4 +1,4 @@
-package org.sitc.models.standardmodel;
+package org.sitc.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;

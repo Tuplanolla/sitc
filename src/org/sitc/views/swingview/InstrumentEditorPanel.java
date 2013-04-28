@@ -11,7 +11,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import org.sitc.models.standardmodel.TuningSystem;
+import org.sitc.model.TuningSystem;
 
 /**
 Represents an instrument editor panel.

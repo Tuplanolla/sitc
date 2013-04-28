@@ -12,9 +12,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.sitc.models.standardmodel.Instrument;
-import org.sitc.models.standardmodel.Sequence;
-import org.sitc.models.standardmodel.Tuning;
+import org.sitc.model.Instrument;
+import org.sitc.model.Sequence;
+import org.sitc.model.Tuning;
 
 /**
 Represents a main pane that

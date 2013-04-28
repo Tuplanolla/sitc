@@ -185,7 +185,7 @@ public final class SequenceEditorPanel extends JPanel {
 								groupPanel.add(minimizeGroupPanel, BorderLayout.SOUTH);
 
 								final JButton actionButton = new JButton("Run");
-								Utilities.setScaledIcon(actionButton, Resources.CALCULATE_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+								Utilities.setScaledIcon(actionButton, Resources.loadCalculateIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 							final JPanel actionPanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 							actionPanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

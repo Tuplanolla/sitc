@@ -1,4 +1,4 @@
-package org.sitc.models.standardmodel;
+package org.sitc.model;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -19,23 +20,22 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.math3.fraction.BigFraction;
-import org.sitc.models.AbstractModel;
-import org.sitc.models.standardmodel.xml.XMLInstrument;
-import org.sitc.models.standardmodel.xml.XMLInstruments;
-import org.sitc.models.standardmodel.xml.XMLNote;
-import org.sitc.models.standardmodel.xml.XMLRational;
-import org.sitc.models.standardmodel.xml.XMLSequence;
-import org.sitc.models.standardmodel.xml.XMLSequences;
-import org.sitc.models.standardmodel.xml.XMLString;
-import org.sitc.models.standardmodel.xml.XMLTuning;
-import org.sitc.models.standardmodel.xml.XMLTunings;
+import org.sitc.model.xml.XMLInstrument;
+import org.sitc.model.xml.XMLInstruments;
+import org.sitc.model.xml.XMLNote;
+import org.sitc.model.xml.XMLRational;
+import org.sitc.model.xml.XMLSequence;
+import org.sitc.model.xml.XMLSequences;
+import org.sitc.model.xml.XMLString;
+import org.sitc.model.xml.XMLTuning;
+import org.sitc.model.xml.XMLTunings;
 
 /**
-Represents a mutable model.
+Represents a model.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class StandardModel extends AbstractModel {
+public class Model extends Observable implements Runnable {
 	private final List<Instrument> instruments;
 	private final List<Tuning> tunings;
 	private final List<Sequence> sequences;
@@ -54,7 +54,7 @@ public final class StandardModel extends AbstractModel {
 	/**
 	Creates a model.
 	**/
-	public StandardModel() {
+	public Model() {
 		instruments = new LinkedList<>();
 
 		tunings = new LinkedList<>();
@@ -79,6 +79,9 @@ public final class StandardModel extends AbstractModel {
 
 		sequenceContext = null;
 	}
+
+	@Override
+	public void run() {}
 
 	/**
 	Sorts the instruments alphabetically.

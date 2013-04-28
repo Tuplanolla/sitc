@@ -1,5 +1,4 @@
-package org.sitc.models.standardmodel.xml;
-import java.math.BigDecimal;
+package org.sitc.model.xml;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,53 +8,46 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "XMLInstrument", propOrder = {
+@XmlType(name = "XMLTuning", propOrder = {
 })
 @SuppressWarnings("all")
-public class XMLInstrument {
+public class XMLTuning {
     @XmlElement(required = true)
     protected String name;
-    protected BigDecimal tension;
-    protected XMLInstrument.System system;
+    protected XMLTuning.System system;
     @XmlElement(required = true)
-    protected XMLInstrument.Strings strings;
+    protected XMLTuning.Notes notes;
     public String getName() {
         return name;
     }
     public void setName(String value) {
         this.name = value;
     }
-    public BigDecimal getTension() {
-        return tension;
-    }
-    public void setTension(BigDecimal value) {
-        this.tension = value;
-    }
-    public XMLInstrument.System getSystem() {
+    public XMLTuning.System getSystem() {
         return system;
     }
-    public void setSystem(XMLInstrument.System value) {
+    public void setSystem(XMLTuning.System value) {
         this.system = value;
     }
-    public XMLInstrument.Strings getStrings() {
-        return strings;
+    public XMLTuning.Notes getNotes() {
+        return notes;
     }
-    public void setStrings(XMLInstrument.Strings value) {
-        this.strings = value;
+    public void setNotes(XMLTuning.Notes value) {
+        this.notes = value;
     }
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "string"
+        "note"
     })
     @SuppressWarnings("all")
-    public static class Strings {
+    public static class Notes {
         @XmlElement(required = true)
-        protected List<XMLString> string;
-        public List<XMLString> getString() {
-            if (string == null) {
-                string = new ArrayList<XMLString>();
+        protected List<XMLNote> note;
+        public List<XMLNote> getNote() {
+            if (note == null) {
+                note = new ArrayList<XMLNote>();
             }
-            return this.string;
+            return this.note;
         }
     }
     @XmlAccessorType(XmlAccessType.FIELD)

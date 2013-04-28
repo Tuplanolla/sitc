@@ -1,4 +1,4 @@
-package org.sitc.models.standardmodel;
+package org.sitc.model;
 
 /**
 Outlines an object that has a name.

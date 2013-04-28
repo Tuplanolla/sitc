@@ -33,7 +33,7 @@ public final class RemotePanel extends JPanel {
 				pathTextField = new JTextField();
 
 				browseButton = new JButton("Browse");
-				Utilities.setScaledIcon(browseButton, Resources.BROWSE_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(browseButton, Resources.loadBrowseIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			final JPanel filePanel = new JPanel(new BorderLayout(Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 			filePanel.setBorder(new EmptyBorder(Constants.MEDIUM_INSETS));

@@ -1,4 +1,4 @@
-package org.sitc.views.swingview;
+package org.sitc.util;
 
 /**
 Represents a specific illegal argument exception.

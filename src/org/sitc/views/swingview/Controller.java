@@ -5,13 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -22,16 +19,16 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SwingWorker;
 import javax.xml.bind.JAXBException;
 
-import org.sitc.models.standardmodel.Instrument;
-import org.sitc.models.standardmodel.StandardModel;
-import org.sitc.models.standardmodel.Named;
-import org.sitc.models.standardmodel.Sequence;
-import org.sitc.models.standardmodel.String;
-import org.sitc.models.standardmodel.Tuning;
-import org.sitc.models.standardmodel.TuningSystem;
+import org.sitc.model.Instrument;
+import org.sitc.model.Named;
+import org.sitc.model.Sequence;
+import org.sitc.model.Model;
+import org.sitc.model.String;
+import org.sitc.model.Tuning;
+import org.sitc.model.TuningSystem;
+import org.sitc.util.StringFormatException;
 
 /**
 Represents an immutable controller.
@@ -39,7 +36,7 @@ Represents an immutable controller.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public final class Controller {//TODO remove
-	protected final StandardModel model;
+	protected final Model model;
 	protected final SwingView view;
 
 	/**
@@ -48,7 +45,7 @@ public final class Controller {//TODO remove
 	@param model The model.
 	@param view The view.
 	**/
-	public Controller(final StandardModel model, final SwingView view) {
+	public Controller(final Model model, final SwingView view) {
 		this.model = model;
 		this.view = view;
 	}
@@ -495,49 +492,6 @@ public final class Controller {//TODO remove
 		reactivateInstrumentMagicPanel();
 	}
 
-	@Deprecated
-	protected void addTestActions() {//TODO move away
-		final SwingWorker<Integer, Integer> worker = new SwingWorker<Integer, Integer>() {
-			private final Random random = new Random();
-			private int progress = 0;
-
-			@SuppressWarnings("unused")
-			@Override
-			protected void process(final List<Integer> chunks) {
-				for (final Integer chunk : chunks) {
-					//System.out.println("Processed " + chunk + "...");
-				}
-			}
-
-			@Override
-			protected void done() {
-				//System.out.println(isCancelled() ? "...cancelled!" : "...finished!");
-			}
-
-			@Override
-			public Integer doInBackground() throws InterruptedException {
-				while (!isCancelled()) {
-					final int result = random.nextInt(Byte.MAX_VALUE);
-					if (result < 1) cancel(false);
-					publish(result);
-					setProgress(++progress);
-					Thread.sleep(42);
-				}
-				return 0;
-			}
-		};
-		worker.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(final PropertyChangeEvent event) {
-				if (event.getPropertyName().equals("progress")) {
-					view.getMainFrame().getStatusPanel().getProgressBar().setValue((Integer )event.getNewValue());
-				}
-			}
-		});
-		worker.execute();
-		//view.getMainFrame().getStatusPanel().getProgressBar().setStringPainted(false);
-	}
-
 	/**
 	Activates some optimizations.
 	**/
@@ -552,8 +506,6 @@ public final class Controller {//TODO remove
 	}
 
 	public void activate() {
-		addTestActions();
-
 		activateMenuBar();
 		activateRemotePanels();
 		activateLocalPanels();

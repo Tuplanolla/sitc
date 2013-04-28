@@ -26,10 +26,10 @@ public class EditorInterfacePanel extends JPanel {
 		super(new GridBagLayout());
 
 				editButton = new JButton("Edit");
-				Utilities.setScaledIcon(editButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(editButton, Resources.loadRightIcon(), SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 				applyButton = new JButton("Apply");
-				Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(applyButton, Resources.loadLeftIcon(), SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 			final JPanel buttonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 			buttonPanel.add(editButton);

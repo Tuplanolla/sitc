@@ -1,4 +1,4 @@
-package org.sitc.models.standardmodel;
+package org.sitc.model;
 
 /**
 Represents a string parser that follows unusually complicated rules.

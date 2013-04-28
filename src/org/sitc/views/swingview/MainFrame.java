@@ -31,7 +31,7 @@ public final class MainFrame extends JFrame {
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle(Assembly.ABBREVIATION);
-		setIconImages(Resources.ICON_IMAGES);
+		setIconImages(Resources.loadProjectIcons());
 		setJMenuBar(menuBar);
 		add(mainPane, BorderLayout.CENTER);
 		add(statusPanel, BorderLayout.SOUTH);

@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.sitc.models.AbstractModel;
-import org.sitc.models.standardmodel.StandardModel;
+import org.sitc.model.Model;
 import org.sitc.views.swingview.SwingView;
 
 /**
@@ -43,7 +42,7 @@ public final class Main implements Runnable {
 
 	@Override
 	public void run() {
-		final AbstractModel model = new StandardModel();
+		final Model model = new Model();
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			@Override

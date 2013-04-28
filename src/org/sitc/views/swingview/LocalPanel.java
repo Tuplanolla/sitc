@@ -49,7 +49,7 @@ public final class LocalPanel<Type> extends JPanel {
 						searchTextField = new JTextField();
 
 						searchButton = new JButton("Search");
-						Utilities.setScaledIcon(searchButton, Resources.SEARCH_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+						Utilities.setScaledIcon(searchButton, Resources.loadSearchIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 						searchLabel = new JLabel("Use Regular Expressions");
 
@@ -70,10 +70,10 @@ public final class LocalPanel<Type> extends JPanel {
 					scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 						newButton = new JButton("New");
-						Utilities.setScaledIcon(newButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+						Utilities.setScaledIcon(newButton, Resources.loadAddIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 						deleteButton = new JButton("Delete");
-						Utilities.setScaledIcon(deleteButton, Resources.MINUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+						Utilities.setScaledIcon(deleteButton, Resources.loadRemoveIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 					final JPanel existencePanel = new JPanel(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 					existencePanel.add(newButton);

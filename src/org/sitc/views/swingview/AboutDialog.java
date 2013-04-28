@@ -34,7 +34,7 @@ public class AboutDialog extends JDialog {
 		super(owner);
 
 				final JLabel iconPanel = new JLabel();
-				iconPanel.setIcon(Resources.ICON);
+				iconPanel.setIcon(Resources.loadProjectIcon());
 				iconPanel.setBorder(new EmptyBorder(Constants.BIG_INSETS));
 
 						final JLabel nameLabel = new JLabel(Assembly.NAME);
@@ -67,7 +67,7 @@ public class AboutDialog extends JDialog {
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("About " + Assembly.ABBREVIATION);
-		setIconImages(Resources.ICON_IMAGES);
+		setIconImages(Resources.loadProjectIcons());
 		setLayout(new BorderLayout());
 		add(borderPanel, BorderLayout.CENTER);
 

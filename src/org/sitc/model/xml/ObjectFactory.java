@@ -1,4 +1,4 @@
-package org.sitc.models.standardmodel.xml;
+package org.sitc.model.xml;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;

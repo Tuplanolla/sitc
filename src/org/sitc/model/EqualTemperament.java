@@ -1,4 +1,4 @@
-package org.sitc.models.standardmodel;
+package org.sitc.model;
 
 /**
 Represents the equal temperament tuning system in which

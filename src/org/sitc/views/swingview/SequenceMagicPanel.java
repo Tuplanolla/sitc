@@ -165,7 +165,7 @@ public final class SequenceMagicPanel extends JPanel {
 			tensionChangeRow = new ChangeRow();
 
 			swapButton = new JButton("Swap");
-			Utilities.setScaledIcon(swapButton, Resources.UP_DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(swapButton, Resources.loadUpDownIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			topStrut = Box.createVerticalStrut(0);
 

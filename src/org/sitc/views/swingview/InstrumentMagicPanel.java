@@ -71,7 +71,7 @@ public final class InstrumentMagicPanel extends JPanel {
 
 		public Body() {
 			insertButton = new JButton("Insert");
-			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(insertButton, Resources.loadAddIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			topStrut = Box.createVerticalStrut(0);
 
@@ -119,13 +119,13 @@ public final class InstrumentMagicPanel extends JPanel {
 			tensionTextField.setHorizontalAlignment(SwingConstants.CENTER);
 
 			insertButton = new JButton("Insert");
-			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(insertButton, Resources.loadAddIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			deleteButton = new JButton("Delete");
-			Utilities.setScaledIcon(deleteButton, Resources.MINUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(deleteButton, Resources.loadRemoveIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			swapButton = new JButton("Swap");
-			Utilities.setScaledIcon(swapButton, Resources.UP_DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(swapButton, Resources.loadUpDownIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			topStrut = Box.createVerticalStrut(0);
 

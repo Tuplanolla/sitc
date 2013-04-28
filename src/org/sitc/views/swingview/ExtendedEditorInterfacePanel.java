@@ -32,30 +32,30 @@ public final class ExtendedEditorInterfacePanel extends JPanel {
 		super(new GridBagLayout());
 
 				useButton = new JButton("Use");//"Use Instrument"
-				Utilities.setScaledIcon(useButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(useButton, Resources.loadRightIcon(), SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 				discardButton = new JButton("Discard");//"Discard Instrument"
-				Utilities.setScaledIcon(discardButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(discardButton, Resources.loadLeftIcon(), SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 			final JPanel instrumentButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 			instrumentButtonPanel.add(useButton);
 			instrumentButtonPanel.add(discardButton);
 
 				addButton = new JButton("Add");//"Add Tuning"
-				Utilities.setScaledIcon(addButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(addButton, Resources.loadRightIcon(), SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 				removeButton = new JButton("Remove");//"Remove Tuning"
-				Utilities.setScaledIcon(removeButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(removeButton, Resources.loadLeftIcon(), SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 			final JPanel tuningButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 			tuningButtonPanel.add(addButton);
 			tuningButtonPanel.add(removeButton);
 
 				editButton = new JButton("Edit");//"Edit Sequence"
-				Utilities.setScaledIcon(editButton, Resources.RIGHT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(editButton, Resources.loadRightIcon(), SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 				applyButton = new JButton("Apply");//"Apply Sequence"
-				Utilities.setScaledIcon(applyButton, Resources.LEFT_ICON, SwingConstants.VERTICAL, Constants.SMALL_SCALE);
+				Utilities.setScaledIcon(applyButton, Resources.loadLeftIcon(), SwingConstants.VERTICAL, Constants.SMALL_SCALE);
 
 			final JPanel sequenceButtonPanel = new JPanel(new GridLayout(2, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 			sequenceButtonPanel.add(editButton);

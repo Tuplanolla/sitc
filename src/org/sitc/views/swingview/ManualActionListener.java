@@ -29,7 +29,7 @@ public final class ManualActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent event) {
 		try {
-			Desktop.getDesktop().open(Resources.USER_MANUAL);
+			Desktop.getDesktop().open(Resources.loadUserManual());
 		}
 		catch (final UnsupportedOperationException exception) {
 			Dialogs.showErrorDialog(parentComponent, new StackTracePanel(exception,

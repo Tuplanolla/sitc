@@ -1,4 +1,4 @@
-package org.sitc.models.standardmodel.xml;
+package org.sitc.model.xml;
 import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

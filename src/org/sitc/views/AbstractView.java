@@ -3,7 +3,7 @@ package org.sitc.views;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.sitc.models.AbstractModel;
+import org.sitc.model.Model;
 
 /**
 Represents a view.
@@ -11,14 +11,14 @@ Represents a view.
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
 public abstract class AbstractView implements Observer, Runnable {
-	private final AbstractModel model;
+	private final Model model;
 
 	/**
 	Creates a view and links it with a model.
 
 	@param model The model.
 	**/
-	public AbstractView(final AbstractModel model) {
+	public AbstractView(final Model model) {
 		this.model = model;
 
 		model.addObserver(this);
@@ -29,7 +29,7 @@ public abstract class AbstractView implements Observer, Runnable {
 
 	@return The model.
 	**/
-	public AbstractModel getModel() {
+	public Model getModel() {
 		return model;
 	}
 

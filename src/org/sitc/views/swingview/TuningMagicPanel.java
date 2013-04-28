@@ -92,16 +92,16 @@ public final class TuningMagicPanel extends JPanel {
 
 		public Body() {
 			playAllButton = new JButton("Play");
-			Utilities.setScaledIcon(playAllButton, Resources.PLAY_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(playAllButton, Resources.loadPlayIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			allUpButton = new JButton("Up");
-			Utilities.setScaledIcon(allUpButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(allUpButton, Resources.loadUpIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			allDownButton = new JButton("Down");
-			Utilities.setScaledIcon(allDownButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(allDownButton, Resources.loadDownIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			insertButton = new JButton("Insert");
-			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(insertButton, Resources.loadAddIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			topStrut = Box.createVerticalStrut(0);
 
@@ -158,7 +158,7 @@ public final class TuningMagicPanel extends JPanel {
 			useCheckBox.setSelected(true);
 
 			playButton = new JButton("Play");
-			Utilities.setScaledIcon(playButton, Resources.PLAY_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(playButton, Resources.loadPlayIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			noteTextField = new JTextField();
 			noteTextField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -167,19 +167,19 @@ public final class TuningMagicPanel extends JPanel {
 			frequencyTextField.setHorizontalAlignment(SwingConstants.CENTER);
 
 			upButton = new JButton("Up");
-			Utilities.setScaledIcon(upButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(upButton, Resources.loadUpIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			downButton = new JButton("Down");
-			Utilities.setScaledIcon(downButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(downButton, Resources.loadDownIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			insertButton = new JButton("Insert");
-			Utilities.setScaledIcon(insertButton, Resources.PLUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(insertButton, Resources.loadAddIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			deleteButton = new JButton("Delete");
-			Utilities.setScaledIcon(deleteButton, Resources.MINUS_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(deleteButton, Resources.loadRemoveIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			swapButton = new JButton("Swap");
-			Utilities.setScaledIcon(swapButton, Resources.UP_DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(swapButton, Resources.loadUpDownIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			topStrut = Box.createVerticalStrut(0);
 

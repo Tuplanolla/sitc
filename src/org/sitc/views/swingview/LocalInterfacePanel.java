@@ -25,10 +25,10 @@ public final class LocalInterfacePanel extends JPanel {
 		super(new GridLayout(1, 2, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 
 			loadButton = new JButton("Load");
-			Utilities.setScaledIcon(loadButton, Resources.DOWN_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(loadButton, Resources.loadDownIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 			saveButton = new JButton("Save");
-			Utilities.setScaledIcon(saveButton, Resources.UP_ICON, SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
+			Utilities.setScaledIcon(saveButton, Resources.loadUpIcon(), SwingConstants.HORIZONTAL, Constants.SMALL_SCALE);
 
 		add(loadButton);
 		add(saveButton);

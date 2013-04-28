@@ -1,4 +1,4 @@
-package org.sitc.models.standardmodel.xml;
+package org.sitc.model.xml;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;

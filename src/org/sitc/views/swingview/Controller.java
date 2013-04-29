@@ -31,11 +31,11 @@ import org.sitc.model.TuningSystem;
 import org.sitc.util.StringFormatException;
 
 /**
-Represents an immutable controller.
+Represents a controller.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Controller {//TODO remove
+public final class Controller {
 	protected final Model model;
 	protected final SwingView view;
 

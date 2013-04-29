@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import org.sitc.Assembly;
+import org.sitc.Project;
 
 /**
 Represents an about dialog.
@@ -37,15 +37,15 @@ public class AboutDialog extends JDialog {
 				iconPanel.setIcon(Resources.loadProjectIcon());
 				iconPanel.setBorder(new EmptyBorder(Constants.BIG_INSETS));
 
-						final JLabel nameLabel = new JLabel(Assembly.NAME);
+						final JLabel nameLabel = new JLabel(Project.NAME);
 						final Font font = nameLabel.getFont().deriveFont(Font.BOLD);
 						nameLabel.setFont(font);
 
-						final JLabel versionLabel = new JLabel("Version: " + Assembly.VERSION);
+						final JLabel versionLabel = new JLabel("Version: " + Project.VERSION);
 
-						final JLabel authorLabel = new JLabel("Author: " + Assembly.AUTHOR);
+						final JLabel authorLabel = new JLabel("Author: " + Project.AUTHOR);
 
-						final JLabel licenseLabel = new JLabel("License: " + Assembly.LICENSE);
+						final JLabel licenseLabel = new JLabel("License: " + Project.LICENSE);
 
 					final JPanel labelPanel = new JPanel(new GridLayout(4, 1, Constants.MEDIUM_INSET, Constants.MEDIUM_INSET));
 					labelPanel.add(nameLabel);
@@ -66,7 +66,7 @@ public class AboutDialog extends JDialog {
 			borderPanel.add(closeButton, BorderLayout.SOUTH);
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle("About " + Assembly.ABBREVIATION);
+		setTitle("About " + Project.ABBREVIATION);
 		setIconImages(Resources.loadProjectIcons());
 		setLayout(new BorderLayout());
 		add(borderPanel, BorderLayout.CENTER);

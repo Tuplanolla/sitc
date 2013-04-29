@@ -5,8 +5,8 @@ Provides project information.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Assembly {
-	private Assembly() {
+public final class Project {
+	private Project() {
 		throw new InstantiationError();
 	}
 

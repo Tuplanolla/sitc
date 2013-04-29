@@ -24,6 +24,8 @@ public final class SwingView extends AbstractView {
 	public SwingView(final Model model) {
 		super(model);
 
+		new Controller(getModel(), this).activate();
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
@@ -35,7 +37,6 @@ public final class SwingView extends AbstractView {
 		}
 
 		mainFrame = new MainFrame();
-		new Controller((Model )model, this).activate();//TODO remove
 		mainFrame.setMinimumSize(mainFrame.getSize());
 		mainFrame.setSize(new Dimension(800, 800));
 		mainFrame.setVisible(true);

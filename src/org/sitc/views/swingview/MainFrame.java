@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import org.sitc.Assembly;
+import org.sitc.Project;
 
 /**
 Represents a main window.
@@ -30,7 +30,7 @@ public final class MainFrame extends JFrame {
 			statusPanel = new StatusPanel();
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle(Assembly.ABBREVIATION);
+		setTitle(Project.ABBREVIATION);
 		setIconImages(Resources.loadProjectIcons());
 		setJMenuBar(menuBar);
 		add(mainPane, BorderLayout.CENTER);

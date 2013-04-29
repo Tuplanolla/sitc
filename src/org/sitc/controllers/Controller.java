@@ -1,4 +1,4 @@
-package org.sitc.views.swingview;
+package org.sitc.controllers;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -29,13 +29,27 @@ import org.sitc.model.String;
 import org.sitc.model.Tuning;
 import org.sitc.model.TuningSystem;
 import org.sitc.util.StringFormatException;
+import org.sitc.views.AbstractView;
+import org.sitc.views.swingview.Dialogs;
+import org.sitc.views.swingview.EditorInterfacePanel;
+import org.sitc.views.swingview.InstrumentEditorPanel;
+import org.sitc.views.swingview.InstrumentMagicPanel;
+import org.sitc.views.swingview.LocalInterfacePanel;
+import org.sitc.views.swingview.LocalPanel;
+import org.sitc.views.swingview.MainFrame;
+import org.sitc.views.swingview.MainPane;
+import org.sitc.views.swingview.ManagerPanel;
+import org.sitc.views.swingview.MenuBar;
+import org.sitc.views.swingview.RemotePanel;
+import org.sitc.views.swingview.StackTracePanel;
+import org.sitc.views.swingview.SwingView;
 
 /**
 Represents a controller.
 
 @author Sampsa "Tuplanolla" Kiiskinen
 **/
-public final class Controller {
+public final class Controller implements Runnable {
 	protected final Model model;
 	protected final SwingView view;
 
@@ -45,10 +59,13 @@ public final class Controller {
 	@param model The model.
 	@param view The view.
 	**/
-	public Controller(final Model model, final SwingView view) {
+	public Controller(final Model model, final AbstractView view) {
 		this.model = model;
-		this.view = view;
+		this.view = (SwingView )view;
 	}
+
+	@Override
+	public void run() {}
 
 	/**
 	Activates the menu bar.

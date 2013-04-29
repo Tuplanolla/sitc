@@ -1,10 +1,14 @@
-package org.sitc.views.swingview;
+package org.sitc.controllers;
 
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+
+import org.sitc.views.swingview.Dialogs;
+import org.sitc.views.swingview.Resources;
+import org.sitc.views.swingview.StackTracePanel;
 
 
 /**

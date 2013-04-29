@@ -1,4 +1,4 @@
-package org.sitc.views.swingview;
+package org.sitc.controllers;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -8,6 +8,9 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.text.JTextComponent;
+
+import org.sitc.views.swingview.Dialogs;
+import org.sitc.views.swingview.StackTracePanel;
 
 
 /**

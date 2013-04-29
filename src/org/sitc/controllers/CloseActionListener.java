@@ -1,4 +1,4 @@
-package org.sitc.views.swingview;
+package org.sitc.controllers;
 
 import java.awt.Window;
 import java.awt.event.ActionEvent;

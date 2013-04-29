@@ -24,8 +24,6 @@ public final class SwingView extends AbstractView {
 	public SwingView(final Model model) {
 		super(model);
 
-		new Controller(getModel(), this).activate();
-
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}

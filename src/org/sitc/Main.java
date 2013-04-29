@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.sitc.controllers.Controller;
 import org.sitc.model.Model;
+import org.sitc.views.AbstractView;
 import org.sitc.views.swingview.SwingView;
 
 /**
@@ -47,7 +49,9 @@ public final class Main implements Runnable {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new SwingView(model).run();
+				final AbstractView view = new SwingView(model);
+				new Controller(model, view).run();
+				view.run();
 			}
 		});
 	}

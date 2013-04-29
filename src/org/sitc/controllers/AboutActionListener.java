@@ -1,8 +1,10 @@
-package org.sitc.views.swingview;
+package org.sitc.controllers;
 
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import org.sitc.views.swingview.AboutDialog;
 
 
 /**

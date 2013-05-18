@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.sitc.controllers.Controller;
+import org.sitc.controllers.swingcontroller.Controller;
 import org.sitc.model.Model;
 import org.sitc.views.AbstractView;
 import org.sitc.views.swingview.SwingView;

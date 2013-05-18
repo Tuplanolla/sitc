@@ -1,4 +1,4 @@
-package org.sitc.controllers;
+package org.sitc.controllers.swingcontroller;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;

@@ -42,6 +42,9 @@ public class Model extends Observable implements Runnable {
 	private Instrument currentInstrument;
 	private Tuning currentTuning;
 	private Sequence currentSequence;
+	private Instrument currentInstrumentCopy;
+	private Tuning currentTuningCopy;
+	private Sequence currentSequenceCopy;
 	private List<TuningSystem> tuningSystems;
 
 	/**

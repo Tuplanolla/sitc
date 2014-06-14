@@ -7,14 +7,17 @@ The name is not very descriptive since it's built around an acronym.
 
 ## Schedule
 
-This project is in active development and
- was supposed to be finished by 2013-04-01, but
- is most likely finished by 2013-06-01.
+This project was supposed to be finished by 2013-04-01, but
+ was **cancelled** instead.
+It might be resurrected one day, but
+ not in the form it is now.
 
 ## Motivation
 
 When I played more guitar, I always forgot how to change tunings sensibly, which ruined many recordings, sometimes broke strings and once even collapsed a bridge (of the guitar kind).
 This program aims to solve such problems.
+
+This project was started as a mandatory work for a programming course.
 
 ## License
 

@@ -27,6 +27,11 @@ Copies and derivative works are permitted as long as
  all the original authors are attributed and
  a compatible license is used.
 
+It is not free software since
+ the code is terrible and no one should use it.
+If relicensing of some parts is wanted, then
+ it can be requested.
+
 The note and clef graphics are based on Denelson83's work on Wikimedia Commons.
 
 ## Installation
